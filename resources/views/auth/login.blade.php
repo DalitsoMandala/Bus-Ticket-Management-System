@@ -2,7 +2,59 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
+
+    <!-- Validation Errors -->
+    <x-auth-validation-errors :errors="$errors" class="mb-4" />
+
+    <form action="{{ route('login') }}" method="POST">
+        @csrf
+        <div class="mb-3 text-start">
+            <x-input-label class="form-label" for="email">Email address</x-label>
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fa-regular fa-envelope"></i></span>
+                    <x-text-input :value="old('email')" class="form-control form-icon-input" id="email" name="email"
+                        placeholder="name@gmail.com" required type="email" />
+
+                    <!-- <span class="fas fa-user text-900 fs--1 form-icon"></span> Font Awesome fontawesome.com -->
+                </div>
+        </div>
+        <!-- Email Address -->
+
+        <div class="mb-3 text-start"><label class="form-label" for="password">Password</label>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="addon-wrapping"><i class="fa-solid fa-unlock"></i></span>
+                <x-text-input autocomplete="current-password" class="form-control form-icon-input" id="password"
+                    name="password" placeholder="password" required type="password" />
+
+                <!-- <span class="fas fa-user text-900 fs--1 form-icon"></span> Font Awesome fontawesome.com -->
+            </div>
+        </div>
+
+        <!-- Remember Me -->
+
+        <div class="row d-flex justify-content-between mb-7">
+
+            <div class="col-auto">
+                @if (Route::has('password.request'))
+                    <a class="fs--1 fw-semi-bold" href="{{ route('password.request') }}">
+                        {{ __('Forgot your password?') }}</a>
+                @endif
+            </div>
+            <div class="col-auto">
+                <a class="fs--1 fw-semi-bold" href="{{ route('register') }}">
+                    {{ __('Create a student account?') }}</a>
+            </div>
+        </div>
+
+        <div class="justify-content-center d-flex mt-4 flex">
+
+            <x-button class="ml-3">
+                {{ __('Log in') }}
+            </x-button>
+        </div>
+    </form>
+
+    {{-- <form method="POST" action="{{ route('login') }}">
         @csrf
 
         <!-- Email Address -->
@@ -43,5 +95,5 @@
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
-    </form>
+    </form> --}}
 </x-guest-layout>
