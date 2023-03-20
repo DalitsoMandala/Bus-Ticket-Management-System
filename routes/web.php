@@ -1,6 +1,13 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\Admin\ManageBookings;
+use App\Http\Livewire\Admin\ManageBuses;
+use App\Http\Livewire\Admin\ManagePayments;
+use App\Http\Livewire\Admin\ManageRoutes;
+use App\Http\Livewire\Admin\ManageSeats;
+use App\Http\Livewire\Admin\Overview;
+use App\Http\Livewire\Admin\Profile;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,4 +35,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', Overview::class)->name('admin-dashboard');
+    Route::get('/profile', Profile::class)->name('admin-profile');
+    Route::get('/routes', ManageRoutes::class)->name('admin-routes');
+    Route::get('/buses', ManageBuses::class)->name('admin-buses');
+    Route::get('/bookings', ManageBookings::class)->name('admin-bookings');
+    Route::get('/seats', ManageSeats::class)->name('admin-seats');
+    Route::get('/payments', ManagePayments::class)->name('admin-payments');
+});
+
+Route::middleware(['auth', 'role:customer'])->prefix('customer')->group(function () {
+    Route::get('/dashboard', Overview::class)->name('customer-dashboard');
+});
+
+require __DIR__ . '/auth.php';

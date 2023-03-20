@@ -122,9 +122,9 @@
     <main class="main" id="top">
         <div class="container-fluid px-0" data-layout="container">
 
-
-            @include('layouts.admin-layout')
-
+            @role('admin')
+                @include('layouts.admin-layout')
+            @endrole
 
 
             <div class="content">

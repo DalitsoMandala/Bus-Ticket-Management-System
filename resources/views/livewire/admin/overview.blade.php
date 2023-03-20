@@ -1,6 +1,6 @@
 <div>
   <div>
-    @section('title', ' | ')
+    @section('title', 'Dashboard | '.config('app.name'))
 
     <div class="mb-3">
         <h2 class="fs-2 fw-black mb-2"></h2>

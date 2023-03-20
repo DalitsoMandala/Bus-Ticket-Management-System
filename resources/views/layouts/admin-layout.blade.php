@@ -12,15 +12,17 @@
                         </div>
                     </a>
                     <ul class="nav collapse parent show" id="dashboard">
-                        <li class="nav-item"><a aria-expanded="false" class="nav-link " data-bs-toggle=""
-                                href="">
+                        <li class="nav-item"><a aria-expanded="false"
+                                class="nav-link {{ request()->routeIs('admin-dashboard') ? 'active' : '' }}"
+                                data-bs-toggle="" href="{{ route('admin-dashboard') }}">
 
                                 <div class="d-flex align-items-center"><span class="nav-link-text">Overview</span>
                                 </div>
                             </a><!-- more inner pages-->
                         </li>
-                        <li class="nav-item"><a aria-expanded="false" class="nav-link " data-bs-toggle=""
-                                href="">
+                        <li class="nav-item"><a aria-expanded="false"
+                                class="nav-link {{ request()->routeIs('admin-profile') ? 'active' : '' }}"
+                                data-bs-toggle="" href="{{ route('admin-profile') }}">
 
                                 <div class="d-flex align-items-center"><span class="nav-link-text">Profile
                                         Settings</span></div>
@@ -29,7 +31,7 @@
 
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item d-none">
                     <!-- label-->
                     <p class="navbar-vertical-label">PAGES</p><!-- parent pages--><a aria-controls="e-commerce"
                         aria-expanded="false" class="nav-link dropdown-indicator" data-bs-toggle="collapse"
@@ -63,67 +65,59 @@
 
                     </ul>
 
-                <li class="nav-item"><a aria-expanded="false" class="nav-link " data-bs-toggle="" href="">
+                <li class="nav-item"><a aria-expanded="false"
+                        class="nav-link {{ request()->routeIs('admin-routes') ? 'active' : '' }}" data-bs-toggle=""
+                        href="{{ route('admin-routes') }}">
                         <div class="d-flex align-items-center"><span class="nav-link-text"> <i aria-hidden="true"
-                                    class="fa fa-folder-open me-2"></i> Student List</span></div>
+                                    class="fa fa-folder-open me-2"></i> Manage Routes</span></div>
                     </a>
 
                 </li>
 
-                <li class="nav-item"><a aria-expanded="false" class="nav-link " data-bs-toggle="" href="">
+                <li class="nav-item"><a aria-expanded="false"
+                        class="nav-link {{ request()->routeIs('admin-buses') ? 'active' : '' }}" data-bs-toggle=""
+                        href="{{ route('admin-buses') }}">
                         <div class="d-flex align-items-center"><span class="nav-link-text"> <i aria-hidden="true"
                                     class="fa fa-folder-open me-2"></i>
-                                Programmes List</span></div>
+                                Manage Buses</span></div>
                     </a><!-- more inner pages-->
                 </li>
 
-                <li class="nav-item"><a aria-expanded="false" class="nav-link " data-bs-toggle="" href="">
+                <li class="nav-item"><a aria-expanded="false"
+                        class="nav-link {{ request()->routeIs('admin-seats') ? 'active' : '' }}" data-bs-toggle=""
+                        href="{{ route('admin-seats') }}">
                         <div class="d-flex align-items-center"><span class="nav-link-text"> <i aria-hidden="true"
                                     class="fa fa-folder-open me-2"></i>
-                                Courses List</span></div>
+                                Manage Seats</span></div>
                     </a><!-- more inner pages-->
                 </li>
 
-                <li class="nav-item"><a aria-expanded="false" class="nav-link" data-bs-toggle=""
-                        href="dashboard/project-management.html">
+                <li class="nav-item"><a aria-expanded="false"
+                        class="nav-link {{ request()->routeIs('admin-bookings') ? 'active' : '' }}" data-bs-toggle=""
+                        href="{{ route('admin-bookings') }}">
                         <div class="d-flex align-items-center"><span class="nav-link-text"> <i aria-hidden="true"
-                                    class="fa fa-bell me-2"></i> Notifications </span>
-                        </div>
+                                    class="fa fa-folder-open me-2"></i>
+                                Manage Bookings</span></div>
                     </a><!-- more inner pages-->
                 </li>
-                <!-- parent pages--><a aria-controls="project-management" aria-expanded="false"
-                    class="nav-link dropdown-indicator" data-bs-toggle="collapse" href="#project-management"
-                    role="button">
-                    <div class="d-flex align-items-center">
-                        <div class="dropdown-indicator-icon d-flex flex-center"><span
-                                class="fas fa-caret-right fs-0"></span>
-                        </div><span class="nav-link-icon"><span data-feather="clipboard"></span></span><span
-                            class="nav-link-text">Reports</span>
-                    </div>
-                </a>
-                <ul class="nav collapse parent" id="project-management">
-                    <li class="nav-item"><a aria-expanded="false" class="nav-link" data-bs-toggle=""
-                            href="apps/project-management/create-new.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text">Student
-                                    Reports</span></div>
-                        </a><!-- more inner pages-->
-                    </li>
-                    <li class="nav-item"><a aria-expanded="false" class="nav-link" data-bs-toggle=""
-                            href="apps/project-management/project-list-view.html">
-                            <div class="d-flex align-items-center"><span class="nav-link-text">Performance
-                                    Charts </span>
-                            </div>
-                        </a><!-- more inner pages-->
-                    </li>
-
-                </ul>
+                <li class="nav-item"><a aria-expanded="false"
+                        class="nav-link {{ request()->routeIs('admin-payments') ? 'active' : '' }}" data-bs-toggle=""
+                        href="{{ route('admin-payments') }}">
+                        <div class="d-flex align-items-center"><span class="nav-link-text"> <i aria-hidden="true"
+                                    class="fa fa-folder-open me-2"></i>
+                                Manage Payments</span></div>
+                    </a><!-- more inner pages-->
                 </li>
+
+
 
             </ul>
         </div>
         <div class="navbar-vertical-footer"><a class="btn btn-link fw-semi-bold d-flex ps-0 border-0"
-                href="pages/authentication/simple/sign-out.html"><span class="navbar-vertical-footer-icon"
-                    data-feather="log-out"></span><span>Sign out</span></a></div>
+                href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();"><span
+                    class="navbar-vertical-footer-icon" data-feather="log-out"></span><span>Sign out</span></a></div>
     </div>
 </nav>
 <nav class="navbar navbar-light navbar-top navbar-expand vertical-navbar">
@@ -144,7 +138,7 @@
         </a>
     </div>
     <div class="collapse navbar-collapse">
-        <div class="search-box d-none d-lg-block" style="width:25rem;">
+        <div class="search-box d-none d-lg-none" style="width:25rem;">
             <form class="position-relative" data-bs-display="static" data-bs-toggle="search">
                 <x-input aria-label="Search" placeholder="Search..." type="search" />
 
@@ -152,7 +146,7 @@
         </div>
         <ul class="navbar-nav navbar-nav-icons ms-auto flex-row">
 
-            <li class="nav-item dropdown"><a aria-expanded="false" aria-haspopup="true"
+            <li class="nav-item dropdown d-none"><a aria-expanded="false" aria-haspopup="true"
                     class="nav-link lh-1 ms-5 px-0" data-bs-toggle="dropdown" href="#!" id="navbarDropdownUser"
                     role="button">
                     <span class="text-700" data-feather="bell" style="height:20px;width:20px;"></span>
@@ -228,9 +222,9 @@
                         </div>
                         <div class="scrollbar overflow-auto" style="height: 5rem;">
                             <ul class="nav d-flex flex-column mb-2 pb-1">
-                                <li class="nav-item"><a class="nav-link px-3" href="">
+                                <li class="nav-item"><a class="nav-link px-3" href="{{ route('admin-profile') }}">
                                         <span class="me-2 text-900" data-feather="user"></span>Profile</a></li>
-                                <li class="nav-item"><a class="nav-link px-3" href="">
+                                <li class="nav-item"><a class="nav-link px-3" href="{{ route('admin-dashboard') }}">
                                         <span class="me-2 text-900" data-feather="pie-chart"></span>Dashboard</a></li>
 
                             </ul>
