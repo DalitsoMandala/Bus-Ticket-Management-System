@@ -16,7 +16,7 @@
 
         </div>
         <div class="card-body">
-
+            <livewire:admin.seats-table />
         </div>
 
     </div>

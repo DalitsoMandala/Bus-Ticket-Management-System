@@ -1,6 +1,6 @@
 <div>
     <div>
-        @section('title', 'Bookings | ' . config('app.name'))
+        @section('title', 'Bus Schedule | ' . config('app.name'))
 
         <div class="mb-3">
             <h2 class="fs-2 fw-black mb-2"></h2>
@@ -16,7 +16,7 @@
 
             </div>
             <div class="card-body">
-                <livewire:admin.bookings-table />
+                <livewire:admin.schedules-table />
             </div>
 
         </div>

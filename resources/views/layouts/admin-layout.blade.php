@@ -64,7 +64,17 @@
                         </li>
 
                     </ul>
+                </li>
 
+
+                <li class="nav-item"><a aria-expanded="false"
+                        class="nav-link {{ request()->routeIs('admin-schedules') ? 'active' : '' }}" data-bs-toggle=""
+                        href="{{ route('admin-schedules') }}">
+                        <div class="d-flex align-items-center"><span class="nav-link-text"> <i aria-hidden="true"
+                                    class="fa fa-folder-open me-2"></i> Manage Schedules</span></div>
+                    </a>
+
+                </li>
                 <li class="nav-item"><a aria-expanded="false"
                         class="nav-link {{ request()->routeIs('admin-routes') ? 'active' : '' }}" data-bs-toggle=""
                         href="{{ route('admin-routes') }}">

@@ -16,7 +16,7 @@
 
         </div>
         <div class="card-body">
-
+            <livewire:admin.payments-table />
         </div>
 
     </div>
