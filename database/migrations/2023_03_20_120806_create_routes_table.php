@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('from_destination');
             $table->string('to_destination');
-            $table->unsignedFloat('price');
+            $table->unsignedFloat('price', 8, 2);
             $table->foreignId('schedule_id')->constrained('schedules')->onUpdate('cascade')->onDelete('cascade');
         });
     }

@@ -12,6 +12,8 @@
             <div class="card-header d-flex justify-content-end">
 
 
+                <livewire:admin.add-routes />
+                <livewire:admin.delete-routes />
 
 
             </div>

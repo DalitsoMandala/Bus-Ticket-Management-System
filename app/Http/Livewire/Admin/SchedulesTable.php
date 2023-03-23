@@ -127,7 +127,7 @@ final class SchedulesTable extends PowerGridComponent
             Column::make('ID', 'rn')
                 ->sortable(),
 
-                Column::make('ID', 'id')
+            Column::make('ID', 'id')
                 ->hidden(),
 
             Column::make('TITLE', 'title')
@@ -157,16 +157,7 @@ final class SchedulesTable extends PowerGridComponent
     }
 
 
-    protected function getListeners(): array
-    {
-        return array_merge(
-            parent::getListeners(),
-            [
-                'refresh'   => '$refresh',
 
-            ]
-        );
-    }
     /*
     |--------------------------------------------------------------------------
     | Actions Method
@@ -181,7 +172,16 @@ final class SchedulesTable extends PowerGridComponent
      * @return array<int, Button>
      */
 
+    protected function getListeners(): array
+    {
+        return array_merge(
+            parent::getListeners(),
+            [
+                'refresh'   => '$refresh',
 
+            ]
+        );
+    }
     public function actions(): array
     {
         return [

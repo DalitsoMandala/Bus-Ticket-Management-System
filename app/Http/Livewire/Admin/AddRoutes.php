@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\BusRoute;
+use App\Models\Schedule;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
@@ -11,21 +13,21 @@ class AddRoutes extends Component
     use LivewireAlert;
 
 
-# ---------------------------------------------------------------------------- #
-#                       Livewire properties / models here                      #
-# ---------------------------------------------------------------------------- #
-public $name;
-public $edit; // id of table
-public $showingModalAddRoutes;
-public $button = "SUBMIT";
-public $status;
+    # ---------------------------------------------------------------------------- #
+    #                       Livewire properties / models here                      #
+    # ---------------------------------------------------------------------------- #
+    public $name;
+    public $edit; // id of table
+    public $showingModalAddRoutes;
+    public $button = "SUBMIT";
+    public $status, $depart_from, $depart_for, $price, $schedule;
 
 
-# ---------------------------------------------------------------------------- #
-#                            Livewire listeners here                           #
-# ---------------------------------------------------------------------------- #
+    # ---------------------------------------------------------------------------- #
+    #                            Livewire listeners here                           #
+    # ---------------------------------------------------------------------------- #
 
-protected $listeners = [
+    protected $listeners = [
 
         'resetdata' => 'resetdata',
         'edit' => 'edit',
@@ -42,16 +44,19 @@ protected $listeners = [
         'deleteMultiple' => 'deleteMultiple',
         'changeMessage' => 'changeMessage',
 
-        ];
+    ];
 
-# ---------------------------------------------------------------------------- #
-#                              Livewire rules here                             #
-# ---------------------------------------------------------------------------- #
+    # ---------------------------------------------------------------------------- #
+    #                              Livewire rules here                             #
+    # ---------------------------------------------------------------------------- #
 
 
-protected $rules = [
-    'name' => 'required',
-];
+    protected $rules = [
+        'depart_from' => 'required',
+        'depart_for' => 'required',
+        'price' => 'required|numeric|min:0',
+        'schedule' => 'required'
+    ];
 
 
     public function updated($fields)
@@ -62,15 +67,14 @@ protected $rules = [
 
 
 
-# ---------------------------------------------------------------------------- #
-#                       Livewire Modals & Reset Data here                      #
-# ---------------------------------------------------------------------------- #
+    # ---------------------------------------------------------------------------- #
+    #                       Livewire Modals & Reset Data here                      #
+    # ---------------------------------------------------------------------------- #
     public function resetdata()
     {
 
         $this->reset();
         $this->resetValidation();
-
     }
 
 
@@ -78,12 +82,11 @@ protected $rules = [
     {
 
         $this->showingModalAddRoutes = true;
-          if ($this->edit) {
+        if ($this->edit) {
             $this->button = 'UPDATE';
         } else {
             $this->button = 'SUBMIT';
         }
-
     }
 
 
@@ -93,19 +96,26 @@ protected $rules = [
         $this->showingModalAddRoutes = false;
     }
 
-# ---------------------------------------------------------------------------- #
-#                              Livewire CRUD here                              #
-# ---------------------------------------------------------------------------- #
+    # ---------------------------------------------------------------------------- #
+    #                              Livewire CRUD here                              #
+    # ---------------------------------------------------------------------------- #
 
-   public function save()
+    public function save()
     {
 
         if ($this->edit == '') {
-    $validatedData = $this->validate();
+            $validatedData = $this->validate();
             if ($validatedData) {
 
 
 
+                $route = new  BusRoute();
+                $schedule = Schedule::find($this->schedule);
+                $route->schedule()->associate($schedule);
+                $route->from_destination = $this->depart_from;
+                $route->to_destination = $this->depart_for;
+                $route->price = $this->price;
+                $route->save();
 
 
 
@@ -115,10 +125,9 @@ protected $rules = [
                     'Created successfully'
                 );
 
-                $this->emitTo('component', 'refresh');
-                 $this->emitSelf('hideModal');
-                 $this->emitSelf('resetdata');
-
+                $this->emitTo('admin.bus-routes-table', 'refresh');
+                $this->emitSelf('hideModal');
+                $this->emitSelf('resetdata');
             }
         } else {
 
@@ -126,12 +135,16 @@ protected $rules = [
             $validatedData = $this->validate();
 
 
-                 if ($validatedData) {
+            if ($validatedData) {
 
 
-
-
-
+                $route = BusRoute::find($this->edit);
+                $schedule = Schedule::find($this->schedule);
+                $route->schedule()->associate($schedule);
+                $route->from_destination = $this->depart_from;
+                $route->to_destination = $this->depart_for;
+                $route->price = $this->price;
+                $route->save();
 
 
 
@@ -141,18 +154,17 @@ protected $rules = [
                     'Updated successfully'
                 );
 
-                $this->emitTo('component', 'refresh');
-                 $this->emitSelf('hideModal');
-                 $this->emitSelf('resetdata');
-
+                $this->emitTo('admin.bus-routes-table', 'refresh');
+                $this->emitSelf('hideModal');
+                $this->emitSelf('resetdata');
             }
         }
     } // End SAVE
 
 
-# ---------------------------------------------------------------------------- #
-#                         ALL OTHER LIVEWIRE FUNCTIONS                         #
-# ---------------------------------------------------------------------------- #
+    # ---------------------------------------------------------------------------- #
+    #                         ALL OTHER LIVEWIRE FUNCTIONS                         #
+    # ---------------------------------------------------------------------------- #
 
     // Edit modal open with fields inserted
 
@@ -161,8 +173,11 @@ protected $rules = [
 
 
         $this->edit = $data['key'];
-
-
+        $route = BusRoute::find($this->edit);
+        $this->depart_from = $route->from_destination;
+        $this->depart_for = $route->to_destination;
+        $this->price = $route->price;
+        $this->schedule = $route->schedule_id;
         $this->emitSelf('showModal');
     }
 
@@ -177,7 +192,7 @@ protected $rules = [
         $this->edit = $data['key'];
     }
 
-// Delete data here
+    // Delete data here
 
     public function destroy()
     {
@@ -237,7 +252,7 @@ protected $rules = [
     #                        Livewire Delete Functions here                        #
     # ---------------------------------------------------------------------------- #
 
-/*
+    /*
  public $message = " Are you sure you want delete this programme?";
     public $count = 0;
     public $data = [];
@@ -286,12 +301,14 @@ protected $rules = [
 
 */
 
-# ---------------------------------------------------------------------------- #
-#                             Livewire Render here                             #
-# ---------------------------------------------------------------------------- #
+    # ---------------------------------------------------------------------------- #
+    #                             Livewire Render here                             #
+    # ---------------------------------------------------------------------------- #
 
     public function render()
     {
-        return view('livewire.admin.add-routes');
+        return view('livewire.admin.add-routes', [
+            'schedules' => Schedule::all()
+        ]);
     }
 }

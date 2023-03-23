@@ -3,10 +3,12 @@
 namespace App\Http\Livewire\admin;
 
 use App\Models\BusRoute;
+use App\Models\Schedule;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
-use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
+use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
 final class BusRoutesTable extends PowerGridComponent
@@ -44,13 +46,16 @@ final class BusRoutesTable extends PowerGridComponent
     */
 
     /**
-    * PowerGrid datasource.
-    *
-    * @return Builder<\App\Models\BusRoute>
-    */
+     * PowerGrid datasource.
+     *
+     * @return Builder<\App\Models\BusRoute>
+     */
     public function datasource(): Builder
     {
-        return BusRoute::query();
+        return BusRoute::query()->select([
+            'routes.*',
+            DB::Raw('ROW_NUMBER() OVER (ORDER BY routes.id) AS rn'),
+        ]);
     }
 
     /*
@@ -68,7 +73,13 @@ final class BusRoutesTable extends PowerGridComponent
      */
     public function relationSearch(): array
     {
-        return [];
+        return [
+            'schedule' => [ // relationship on dishes model
+                'title', // column enabled to search
+                'depart_time'
+            ],
+            //...
+        ];
     }
 
     /*
@@ -86,6 +97,18 @@ final class BusRoutesTable extends PowerGridComponent
     {
         return PowerGrid::eloquent()
             ->addColumn('id')
+            ->addColumn('from_destination')
+            ->addColumn('to_destination')
+            ->addColumn('price', function ($model) {
+
+                //    dd($model->price);
+                return 'MWK ' . number_format($model->price, 2);
+            })
+            ->addColumn('schedule', function ($model) {
+                $schedule = Schedule::find($model->schedule_id);
+
+                return $schedule->title . ' (' .     Carbon::parse($schedule->depart_time)->format('H:i A') . ')';
+            })
             ->addColumn('created_at_formatted', fn (BusRoute $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
             ->addColumn('updated_at_formatted', fn (BusRoute $model) => Carbon::parse($model->updated_at)->format('d/m/Y H:i:s'));
     }
@@ -99,7 +122,7 @@ final class BusRoutesTable extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid Columns.
      *
      * @return array<int, Column>
@@ -107,22 +130,43 @@ final class BusRoutesTable extends PowerGridComponent
     public function columns(): array
     {
         return [
+            Column::make('ID', 'rn')
+                ->sortable(),
+
             Column::make('ID', 'id')
-                ->makeInputRange(),
+                ->hidden(),
 
-            Column::make('CREATED AT', 'created_at_formatted', 'created_at')
-                ->searchable()
+            Column::make('DEPART FROM', 'from_destination')
                 ->sortable()
-                ->makeInputDatePicker(),
+                ->searchable(),
 
-            Column::make('UPDATED AT', 'updated_at_formatted', 'updated_at')
-                ->searchable()
+            Column::make('DEPART FOR', 'to_destination')
                 ->sortable()
-                ->makeInputDatePicker(),
+                ->searchable(),
 
-        ]
-;
+
+            Column::make('SCHEDULE', 'schedule')
+                ->sortable()
+                ->searchable(),
+
+            Column::make('PRICE', 'price')
+                ->sortable()
+                ->searchable(),
+
+            // Column::make('CREATED AT', 'created_at_formatted', 'created_at')
+            //     ->searchable()
+            //     ->sortable()
+            //     ->makeInputDatePicker(),
+
+            // Column::make('UPDATED AT', 'updated_at_formatted', 'updated_at')
+            //     ->searchable()
+            //     ->sortable()
+            //     ->makeInputDatePicker(),
+
+        ];
     }
+
+
 
     /*
     |--------------------------------------------------------------------------
@@ -132,27 +176,42 @@ final class BusRoutesTable extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid BusRoute Action Buttons.
      *
      * @return array<int, Button>
      */
 
-    /*
+
+    protected function getListeners(): array
+    {
+        return array_merge(
+            parent::getListeners(),
+            [
+                'refresh'   => '$refresh',
+
+            ]
+        );
+    }
     public function actions(): array
     {
-       return [
-           Button::make('edit', 'Edit')
-               ->class('bg-indigo-500 cursor-pointer text-white px-3 py-2.5 m-1 rounded text-sm')
-               ->route('bus-route.edit', ['bus-route' => 'id']),
+        return [
+            Button::make('edit', 'Edit')
+                ->class('btn btn-secondary')
+                ->emitTo('admin.add-routes', 'edit', [
+                    'key' => 'id'
+                ]),
 
-           Button::make('destroy', 'Delete')
-               ->class('bg-red-500 cursor-pointer text-white px-3 py-2 m-1 rounded text-sm')
-               ->route('bus-route.destroy', ['bus-route' => 'id'])
-               ->method('delete')
+            Button::make('destroy', 'Delete')
+                ->class('btn btn-danger')
+                ->emitTo('admin.delete-routes', 'delete', [
+                    'key' => 'id'
+                ]),
+
+
         ];
     }
-    */
+
 
     /*
     |--------------------------------------------------------------------------
@@ -162,7 +221,7 @@ final class BusRoutesTable extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid BusRoute Action Rules.
      *
      * @return array<int, RuleActions>

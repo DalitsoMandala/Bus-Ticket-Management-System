@@ -41,7 +41,7 @@ protected $listeners = [
         'change' => 'change',
         'deleteMultiple' => 'deleteMultiple',
         'changeMessage' => 'changeMessage',
-
+        'confirm_request' => 'confirm_request',
         ];
 
 # ---------------------------------------------------------------------------- #
