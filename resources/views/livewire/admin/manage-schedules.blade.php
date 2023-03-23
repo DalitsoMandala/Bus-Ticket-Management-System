@@ -12,7 +12,8 @@
             <div class="card-header d-flex justify-content-end">
 
 
-
+                <livewire:admin.add-schedule />
+                <livewire:admin.delete-schedule />
 
             </div>
             <div class="card-body">

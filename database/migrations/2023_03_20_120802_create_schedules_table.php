@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('title');
+            $table->time('check_in_time');
             $table->time('depart_time');
-            $table->string('hours');
+  ;
         });
     }
 
