@@ -2,7 +2,10 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\User;
 use Livewire\Component;
+use App\Models\Customer;
+use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class AddCustomer extends Component
@@ -11,21 +14,21 @@ class AddCustomer extends Component
     use LivewireAlert;
 
 
-# ---------------------------------------------------------------------------- #
-#                       Livewire properties / models here                      #
-# ---------------------------------------------------------------------------- #
-public $name;
-public $edit; // id of table
-public $showingModalAddCustomer;
-public $button = "SUBMIT";
-public $status;
+    # ---------------------------------------------------------------------------- #
+    #                       Livewire properties / models here                      #
+    # ---------------------------------------------------------------------------- #
+    public $name;
+    public $edit; // id of table
+    public $showingModalAddCustomer;
+    public $button = "SUBMIT";
+    public $status, $first_name, $last_name, $phone_number, $email;
 
 
-# ---------------------------------------------------------------------------- #
-#                            Livewire listeners here                           #
-# ---------------------------------------------------------------------------- #
+    # ---------------------------------------------------------------------------- #
+    #                            Livewire listeners here                           #
+    # ---------------------------------------------------------------------------- #
 
-protected $listeners = [
+    protected $listeners = [
 
         'resetdata' => 'resetdata',
         'edit' => 'edit',
@@ -42,16 +45,19 @@ protected $listeners = [
         'deleteMultiple' => 'deleteMultiple',
         'changeMessage' => 'changeMessage',
         'confirm_request' => 'confirm_request',
-        ];
+    ];
 
-# ---------------------------------------------------------------------------- #
-#                              Livewire rules here                             #
-# ---------------------------------------------------------------------------- #
+    # ---------------------------------------------------------------------------- #
+    #                              Livewire rules here                             #
+    # ---------------------------------------------------------------------------- #
 
 
-protected $rules = [
-    'name' => 'required',
-];
+    protected $rules = [
+        'email' => 'required|email',
+        'first_name' => 'required',
+        'last_name' => 'required',
+        'phone_number' => 'required',
+    ];
 
 
     public function updated($fields)
@@ -62,15 +68,14 @@ protected $rules = [
 
 
 
-# ---------------------------------------------------------------------------- #
-#                       Livewire Modals & Reset Data here                      #
-# ---------------------------------------------------------------------------- #
+    # ---------------------------------------------------------------------------- #
+    #                       Livewire Modals & Reset Data here                      #
+    # ---------------------------------------------------------------------------- #
     public function resetdata()
     {
 
         $this->reset();
         $this->resetValidation();
-
     }
 
 
@@ -78,12 +83,11 @@ protected $rules = [
     {
 
         $this->showingModalAddCustomer = true;
-          if ($this->edit) {
+        if ($this->edit) {
             $this->button = 'UPDATE';
         } else {
             $this->button = 'SUBMIT';
         }
-
     }
 
 
@@ -93,18 +97,37 @@ protected $rules = [
         $this->showingModalAddCustomer = false;
     }
 
-# ---------------------------------------------------------------------------- #
-#                              Livewire CRUD here                              #
-# ---------------------------------------------------------------------------- #
+    # ---------------------------------------------------------------------------- #
+    #                              Livewire CRUD here                              #
+    # ---------------------------------------------------------------------------- #
 
-   public function save()
+    public function save()
     {
 
         if ($this->edit == '') {
-    $validatedData = $this->validate();
+            $validatedData = $this->validate();
             if ($validatedData) {
 
 
+                $user =  User::create([
+                    'email' => $this->email,
+                    'name' => $this->first_name . ' ' . $this->last_name,
+                    'email_verified_at' => now(),
+                    'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                    'remember_token' => Str::random(10),
+                ]);
+
+
+                $customer = [
+                    new Customer([
+                        'first_name' => $this->first_name,
+                        'last_name' => $this->last_name,
+                        'phone_number' => $this->phone_number
+                    ]),
+
+                ];
+
+                $user->customers()->saveMany($customer);
 
 
 
@@ -115,10 +138,9 @@ protected $rules = [
                     'Created successfully'
                 );
 
-                $this->emitTo('component', 'refresh');
-                 $this->emitSelf('hideModal');
-                 $this->emitSelf('resetdata');
-
+                $this->emitTo('admin.customer-table', 'refresh');
+                $this->emitSelf('hideModal');
+                $this->emitSelf('resetdata');
             }
         } else {
 
@@ -126,9 +148,17 @@ protected $rules = [
             $validatedData = $this->validate();
 
 
-                 if ($validatedData) {
+            if ($validatedData) {
 
 
+                $customer = Customer::find($this->edit);
+                $user = $customer->user;
+                $user->email = $this->email;
+                $user->save();
+                $customer->first_name = $this->first_name;
+                $customer->last_name = $this->last_name;
+                $customer->phone_number = $this->phone_number;
+                $customer->save();
 
 
 
@@ -141,18 +171,17 @@ protected $rules = [
                     'Updated successfully'
                 );
 
-                $this->emitTo('component', 'refresh');
-                 $this->emitSelf('hideModal');
-                 $this->emitSelf('resetdata');
-
+                $this->emitTo('admin.customer-table', 'refresh');
+                $this->emitSelf('hideModal');
+                $this->emitSelf('resetdata');
             }
         }
     } // End SAVE
 
 
-# ---------------------------------------------------------------------------- #
-#                         ALL OTHER LIVEWIRE FUNCTIONS                         #
-# ---------------------------------------------------------------------------- #
+    # ---------------------------------------------------------------------------- #
+    #                         ALL OTHER LIVEWIRE FUNCTIONS                         #
+    # ---------------------------------------------------------------------------- #
 
     // Edit modal open with fields inserted
 
@@ -161,8 +190,13 @@ protected $rules = [
 
 
         $this->edit = $data['key'];
-
-
+        $customer = Customer::find($this->edit);
+        $this->fill([
+            'first_name' => $customer->first_name,
+            'last_name' => $customer->last_name,
+            'phone_number' => $customer->phone_number,
+            'email' => $customer->user->email
+        ]);
         $this->emitSelf('showModal');
     }
 
@@ -177,7 +211,7 @@ protected $rules = [
         $this->edit = $data['key'];
     }
 
-// Delete data here
+    // Delete data here
 
     public function destroy()
     {
@@ -237,7 +271,7 @@ protected $rules = [
     #                        Livewire Delete Functions here                        #
     # ---------------------------------------------------------------------------- #
 
-/*
+    /*
  public $message = " Are you sure you want delete this programme?";
     public $count = 0;
     public $data = [];
@@ -286,9 +320,9 @@ protected $rules = [
 
 */
 
-# ---------------------------------------------------------------------------- #
-#                             Livewire Render here                             #
-# ---------------------------------------------------------------------------- #
+    # ---------------------------------------------------------------------------- #
+    #                             Livewire Render here                             #
+    # ---------------------------------------------------------------------------- #
 
     public function render()
     {
