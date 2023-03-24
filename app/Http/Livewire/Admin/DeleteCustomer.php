@@ -2,32 +2,30 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\Bus;
-use App\Models\Seat;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
-class AddBus extends Component
+class DeleteCustomer extends Component
 {
 
     use LivewireAlert;
 
 
-    # ---------------------------------------------------------------------------- #
-    #                       Livewire properties / models here                      #
-    # ---------------------------------------------------------------------------- #
-    public $name;
-    public $edit; // id of table
-    public $showingModalAddBus;
-    public $button = "SUBMIT";
-    public $status, $model, $brand, $serial_number, $seats;
+# ---------------------------------------------------------------------------- #
+#                       Livewire properties / models here                      #
+# ---------------------------------------------------------------------------- #
+public $name;
+public $edit; // id of table
+public $showingModalDeleteCustomer;
+public $button = "SUBMIT";
+public $status;
 
 
-    # ---------------------------------------------------------------------------- #
-    #                            Livewire listeners here                           #
-    # ---------------------------------------------------------------------------- #
+# ---------------------------------------------------------------------------- #
+#                            Livewire listeners here                           #
+# ---------------------------------------------------------------------------- #
 
-    protected $listeners = [
+protected $listeners = [
 
         'resetdata' => 'resetdata',
         'edit' => 'edit',
@@ -43,20 +41,17 @@ class AddBus extends Component
         'change' => 'change',
         'deleteMultiple' => 'deleteMultiple',
         'changeMessage' => 'changeMessage',
+        'confirm_request' => 'confirm_request',
+        ];
 
-    ];
-
-    # ---------------------------------------------------------------------------- #
-    #                              Livewire rules here                             #
-    # ---------------------------------------------------------------------------- #
+# ---------------------------------------------------------------------------- #
+#                              Livewire rules here                             #
+# ---------------------------------------------------------------------------- #
 
 
-    protected $rules = [
-        'seats' => 'required|numeric|min:0',
-        'brand' => 'required',
-        'model' => 'required',
-        'serial_number' => 'required'
-    ];
+protected $rules = [
+    'name' => 'required',
+];
 
 
     public function updated($fields)
@@ -67,61 +62,48 @@ class AddBus extends Component
 
 
 
-    # ---------------------------------------------------------------------------- #
-    #                       Livewire Modals & Reset Data here                      #
-    # ---------------------------------------------------------------------------- #
+# ---------------------------------------------------------------------------- #
+#                       Livewire Modals & Reset Data here                      #
+# ---------------------------------------------------------------------------- #
     public function resetdata()
     {
 
         $this->reset();
         $this->resetValidation();
+
     }
 
 
     public function showModal()
     {
 
-        $this->showingModalAddBus = true;
-        if ($this->edit) {
+        $this->showingModalDeleteCustomer = true;
+          if ($this->edit) {
             $this->button = 'UPDATE';
         } else {
             $this->button = 'SUBMIT';
         }
+
     }
 
 
 
     public function hideModal()
     {
-        $this->showingModalAddBus = false;
+        $this->showingModalDeleteCustomer = false;
     }
 
-    # ---------------------------------------------------------------------------- #
-    #                              Livewire CRUD here                              #
-    # ---------------------------------------------------------------------------- #
+# ---------------------------------------------------------------------------- #
+#                              Livewire CRUD here                              #
+# ---------------------------------------------------------------------------- #
 
-    public function save()
+   public function save()
     {
 
         if ($this->edit == '') {
-            $validatedData = $this->validate();
+    $validatedData = $this->validate();
             if ($validatedData) {
 
-
-                $bus =   Bus::create([
-                    'model' => $this->model,
-                    'brand' => $this->brand,
-                    'serial_number' => $this->serial_number,
-                    'seats' => $this->seats
-                ]);
-                for ($i = 1; $i <= $this->seats; $i++) {
-                    $seats = [
-                        new Seat(['seat_no' => $i, 'is_taken' => false]),
-
-                    ];
-
-                    $bus->number_of_seats()->saveMany($seats);
-                }
 
 
 
@@ -133,10 +115,10 @@ class AddBus extends Component
                     'Created successfully'
                 );
 
+                $this->emitTo('component', 'refresh');
+                 $this->emitSelf('hideModal');
+                 $this->emitSelf('resetdata');
 
-                $this->emitTo('admin.buses-table', 'refresh');
-                $this->emitSelf('hideModal');
-                $this->emitSelf('resetdata');
             }
         } else {
 
@@ -144,18 +126,10 @@ class AddBus extends Component
             $validatedData = $this->validate();
 
 
-            if ($validatedData) {
+                 if ($validatedData) {
 
 
 
-
-
-                Bus::find($this->edit)->update([
-                    'model' => $this->model,
-                    'brand' => $this->brand,
-                    'serial_number' => $this->serial_number,
-                    'seats' => $this->seats
-                ]);
 
 
 
@@ -167,17 +141,18 @@ class AddBus extends Component
                     'Updated successfully'
                 );
 
-                $this->emitTo('admin.buses-table', 'refresh');
-                $this->emitSelf('hideModal');
-                $this->emitSelf('resetdata');
+                $this->emitTo('component', 'refresh');
+                 $this->emitSelf('hideModal');
+                 $this->emitSelf('resetdata');
+
             }
         }
     } // End SAVE
 
 
-    # ---------------------------------------------------------------------------- #
-    #                         ALL OTHER LIVEWIRE FUNCTIONS                         #
-    # ---------------------------------------------------------------------------- #
+# ---------------------------------------------------------------------------- #
+#                         ALL OTHER LIVEWIRE FUNCTIONS                         #
+# ---------------------------------------------------------------------------- #
 
     // Edit modal open with fields inserted
 
@@ -186,13 +161,7 @@ class AddBus extends Component
 
 
         $this->edit = $data['key'];
-        $bus = Bus::find($this->edit);
-        $this->fill([
-            'model' => $bus->model,
-            'brand' => $bus->brand,
-            'serial_number' => $bus->serial_number,
-            'seats' => $bus->seats
-        ]);
+
 
         $this->emitSelf('showModal');
     }
@@ -208,7 +177,7 @@ class AddBus extends Component
         $this->edit = $data['key'];
     }
 
-    // Delete data here
+// Delete data here
 
     public function destroy()
     {
@@ -268,7 +237,7 @@ class AddBus extends Component
     #                        Livewire Delete Functions here                        #
     # ---------------------------------------------------------------------------- #
 
-    /*
+/*
  public $message = " Are you sure you want delete this programme?";
     public $count = 0;
     public $data = [];
@@ -317,12 +286,12 @@ class AddBus extends Component
 
 */
 
-    # ---------------------------------------------------------------------------- #
-    #                             Livewire Render here                             #
-    # ---------------------------------------------------------------------------- #
+# ---------------------------------------------------------------------------- #
+#                             Livewire Render here                             #
+# ---------------------------------------------------------------------------- #
 
     public function render()
     {
-        return view('livewire.admin.add-bus');
+        return view('livewire.admin.delete-customer');
     }
 }

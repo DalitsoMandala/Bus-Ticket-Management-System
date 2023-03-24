@@ -4,9 +4,10 @@ namespace App\Http\Livewire\admin;
 
 use App\Models\Bus;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
-use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
+use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
 final class BusesTable extends PowerGridComponent
@@ -44,13 +45,16 @@ final class BusesTable extends PowerGridComponent
     */
 
     /**
-    * PowerGrid datasource.
-    *
-    * @return Builder<\App\Models\Bus>
-    */
+     * PowerGrid datasource.
+     *
+     * @return Builder<\App\Models\Bus>
+     */
     public function datasource(): Builder
     {
-        return Bus::query();
+        return Bus::query()->select([
+            'buses.*',
+            DB::Raw('ROW_NUMBER() OVER (ORDER BY buses.id) AS rn'),
+        ]);
     }
 
     /*
@@ -86,6 +90,10 @@ final class BusesTable extends PowerGridComponent
     {
         return PowerGrid::eloquent()
             ->addColumn('id')
+            ->addColumn('model')
+            ->addColumn('brand')
+            ->addColumn('serial_number')
+            ->addColumn('seats')
             ->addColumn('created_at_formatted', fn (Bus $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
             ->addColumn('updated_at_formatted', fn (Bus $model) => Carbon::parse($model->updated_at)->format('d/m/Y H:i:s'));
     }
@@ -99,7 +107,7 @@ final class BusesTable extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid Columns.
      *
      * @return array<int, Column>
@@ -108,20 +116,32 @@ final class BusesTable extends PowerGridComponent
     {
         return [
             Column::make('ID', 'id')
-                ->makeInputRange(),
+                ->hidden(),
 
-            Column::make('CREATED AT', 'created_at_formatted', 'created_at')
+            Column::make('ID', 'rn')
+                ->sortable(),
+
+
+            Column::make('SERIAL NUMBER', 'serial_number')
                 ->searchable()
-                ->sortable()
-                ->makeInputDatePicker(),
+                ->sortable(),
 
-            Column::make('UPDATED AT', 'updated_at_formatted', 'updated_at')
+
+            Column::make('MODEL', 'model')
                 ->searchable()
-                ->sortable()
-                ->makeInputDatePicker(),
+                ->sortable(),
 
-        ]
-;
+            Column::make('BRAND', 'brand')
+                ->searchable()
+                ->sortable(),
+
+            Column::make('SEATS', 'seats')
+                ->searchable()
+                ->sortable(),
+
+
+
+        ];
     }
 
     /*
@@ -132,7 +152,7 @@ final class BusesTable extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid Bus Action Buttons.
      *
      * @return array<int, Button>
@@ -154,7 +174,42 @@ final class BusesTable extends PowerGridComponent
     }
     */
 
+
+
+
+    protected function getListeners(): array
+    {
+        return array_merge(
+            parent::getListeners(),
+            [
+                'refresh'   => '$refresh',
+
+            ]
+        );
+    }
+    public function actions(): array
+    {
+        return [
+            Button::make('edit', 'Edit')
+                ->class('btn btn-secondary')
+                ->emitTo('admin.add-bus', 'edit', [
+                    'key' => 'id'
+                ]),
+
+            Button::make('destroy', 'Delete')
+                ->class('btn btn-danger')
+                ->emitTo('admin.delete-bus', 'delete', [
+                    'key' => 'id'
+                ]),
+
+
+        ];
+    }
+
     /*
+
+
+
     |--------------------------------------------------------------------------
     | Actions Rules
     |--------------------------------------------------------------------------
@@ -162,7 +217,7 @@ final class BusesTable extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid Bus Action Rules.
      *
      * @return array<int, RuleActions>

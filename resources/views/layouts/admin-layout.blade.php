@@ -103,6 +103,15 @@
                 </li>
 
                 <li class="nav-item"><a aria-expanded="false"
+                        class="nav-link {{ request()->routeIs('admin-customers') ? 'active' : '' }}" data-bs-toggle=""
+                        href="{{ route('admin-customers') }}">
+                        <div class="d-flex align-items-center"><span class="nav-link-text"> <i aria-hidden="true"
+                                    class="fa fa-folder-open me-2"></i>
+                                Manage Customers</span></div>
+                    </a><!-- more inner pages-->
+                </li>
+
+                <li class="nav-item"><a aria-expanded="false"
                         class="nav-link {{ request()->routeIs('admin-bookings') ? 'active' : '' }}" data-bs-toggle=""
                         href="{{ route('admin-bookings') }}">
                         <div class="d-flex align-items-center"><span class="nav-link-text"> <i aria-hidden="true"

@@ -2,11 +2,13 @@
 
 namespace App\Http\Livewire\admin;
 
+use App\Models\Bus;
 use App\Models\Seat;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
-use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
+use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
 final class SeatsTable extends PowerGridComponent
@@ -44,13 +46,16 @@ final class SeatsTable extends PowerGridComponent
     */
 
     /**
-    * PowerGrid datasource.
-    *
-    * @return Builder<\App\Models\Seat>
-    */
+     * PowerGrid datasource.
+     *
+     * @return Builder<\App\Models\Seat>
+     */
     public function datasource(): Builder
     {
-        return Seat::query();
+        return Seat::query()->select([
+            'seats.*',
+            DB::Raw('ROW_NUMBER() OVER (ORDER BY seats.id) AS rn'),
+        ]);
     }
 
     /*
@@ -68,7 +73,11 @@ final class SeatsTable extends PowerGridComponent
      */
     public function relationSearch(): array
     {
-        return [];
+        return [
+            'bus' => [
+                'brand', 'model', 'serial_number'
+            ]
+        ];
     }
 
     /*
@@ -86,8 +95,32 @@ final class SeatsTable extends PowerGridComponent
     {
         return PowerGrid::eloquent()
             ->addColumn('id')
-            ->addColumn('created_at_formatted', fn (Seat $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
-            ->addColumn('updated_at_formatted', fn (Seat $model) => Carbon::parse($model->updated_at)->format('d/m/Y H:i:s'));
+            ->addColumn('rn')
+            ->addColumn('model', function ($model) {
+                $bus = Bus::find($model->bus_id);
+
+                return $bus->model;
+            })
+            ->addColumn('brand', function ($model) {
+                $bus = Seat::find($model->id)->bus->brand;
+
+                return $bus;
+            })
+            ->addColumn('serial_number', function ($model) {
+                $bus = Seat::find($model->id)->bus->serial_number;
+
+                return $bus;
+            })
+
+            ->addColumn('is_taken', function ($model) {
+                if ($model->is_taken == false) {
+                    return '<span class="text-warning">Pending</span>';
+                } else {
+                    return '<span class="text-success"><i class="fa-solid fa-check"></i>Booked</span>';
+                }
+            })
+            ->addColumn('created_at_formatted', fn ($model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
+            ->addColumn('updated_at_formatted', fn ($model) => Carbon::parse($model->updated_at)->format('d/m/Y H:i:s'));
     }
 
     /*
@@ -99,7 +132,7 @@ final class SeatsTable extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid Columns.
      *
      * @return array<int, Column>
@@ -108,21 +141,67 @@ final class SeatsTable extends PowerGridComponent
     {
         return [
             Column::make('ID', 'id')
-                ->makeInputRange(),
+                ->hidden(),
 
-            Column::make('CREATED AT', 'created_at_formatted', 'created_at')
+            Column::make('ID', 'rn')
+                ->sortable(),
+
+            Column::make('SERIAL NUMBER', 'serial_number')
                 ->searchable()
-                ->sortable()
-                ->makeInputDatePicker(),
+                ->sortable(),
 
-            Column::make('UPDATED AT', 'updated_at_formatted', 'updated_at')
+
+            Column::make('MODEL', 'model')
                 ->searchable()
-                ->sortable()
-                ->makeInputDatePicker(),
+                ->sortable(),
 
-        ]
-;
+            Column::make('BRAND', 'brand')
+                ->searchable()
+                ->sortable(),
+
+
+            Column::make('SEAT #', 'seat_no')
+                ->searchable()
+                ->sortable(),
+
+
+            Column::make('STATUS', 'is_taken')
+                ->searchable()
+                ->sortable(),
+
+
+        ];
     }
+
+    protected function getListeners(): array
+    {
+        return array_merge(
+            parent::getListeners(),
+            [
+                'refresh'   => '$refresh',
+
+            ]
+        );
+    }
+    public function actions(): array
+    {
+        return [
+            // Button::make('edit', 'Edit')
+            //     ->class('btn btn-secondary')
+            //     ->emitTo('admin.add-customer', 'edit', [
+            //         'id' => 'id'
+            //     ]),
+
+            // Button::make('destroy', 'Delete')
+            //     ->class('btn btn-danger')
+            //     ->emitTo('admin.delete-customer', 'delete', [
+            //         'id' => 'id'
+            //     ]),
+
+
+        ];
+    }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -132,7 +211,7 @@ final class SeatsTable extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid Seat Action Buttons.
      *
      * @return array<int, Button>
@@ -162,7 +241,7 @@ final class SeatsTable extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid Seat Action Rules.
      *
      * @return array<int, RuleActions>

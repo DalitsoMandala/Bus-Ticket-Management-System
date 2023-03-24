@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\Admin\ManageBookings;
 use App\Http\Livewire\Admin\ManageBuses;
+use App\Http\Livewire\Admin\ManageCustomers;
 use App\Http\Livewire\Admin\ManagePayments;
 use App\Http\Livewire\Admin\ManageRoutes;
 use App\Http\Livewire\Admin\ManageSchedules;
@@ -45,6 +46,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/seats', ManageSeats::class)->name('admin-seats');
     Route::get('/payments', ManagePayments::class)->name('admin-payments');
     Route::get('/bus-schedule', ManageSchedules::class)->name('admin-schedules');
+    Route::get('/customers', ManageCustomers::class)->name('admin-customers');
 });
 
 Route::middleware(['auth', 'role:customer'])->prefix('customer')->group(function () {
