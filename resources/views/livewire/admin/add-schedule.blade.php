@@ -16,7 +16,7 @@
                         <div>
                             <x-input-label class="form-label" for="inputName">Title</x-input-label>
 
-                            <x-input placeholder="Title" wire:model.defer="title" />
+                            <x-text-input placeholder="Title" wire:model.defer="title" />
                         </div>
                         <div>
                             @error('title')

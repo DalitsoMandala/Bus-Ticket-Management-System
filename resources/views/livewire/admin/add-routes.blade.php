@@ -109,7 +109,8 @@
                                 <option value="">choose one</option>
                                 @foreach ($schedules as $schedule)
                                     <option value="{{ $schedule->id }}">{{ $schedule->title }}
-                                        ({{ \Carbon\Carbon::parse($schedule->depart_time)->format('H:i A') }})</option>
+                                        ({{ \Carbon\Carbon::parse($schedule->depart_time)->format('H:i A') }})
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -124,7 +125,7 @@
                         <div>
                             <x-input-label class="form-label" for="inputName">PRICE (MWK)</x-input-label>
 
-                            <x-input type="text" placeholder="price" wire:model.defer="price" />
+                            <x-text-inputtype="text" placeholder="price" wire:model.defer="price" />
 
 
 

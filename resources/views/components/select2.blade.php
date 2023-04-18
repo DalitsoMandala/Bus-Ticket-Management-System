@@ -1,41 +1,23 @@
-<div wire:ignore x-data="{
+<div x-data="{
     model: @entangle($attributes->wire('model')),
-}" x-init="select2 = new Choices($refs.select, {
-    position: 'bottom',
-    searchPlaceholderValue: '{{ __('Search...') }}',
-    shouldSort: true,
-    itemSelectText: '',
-    removeItems: true,
-    removeItemButton: true,
-})
+}" x-init="select2 = $($refs.select)
+    .not('.select2-hidden-accessible')
+    .select2({
 
-$refs.select.addEventListener('addItem', (event) => {
-    if (event.target.hasAttribute('multiple')) {
-        model = Array.from(event.target.options).filter(option => option.selected).map(option => option.value);
-    } else {
-        model = event.target.value;
-    }
+        dropdownAutoWidth: true,
+        width: '100%',
+
+    });
+select2.on('select2:select', (event) => {
+    model = Array.from(event.target.options).filter(option => option.selected).map(option => option.value);
 });
-
-$refs.select.addEventListener('removeItem', (event) => {
-    if (event.target.hasAttribute('multiple')) {
-        model = Array.from(event.target.options).filter(option => option.selected).map(option => option.value);
-    } else {
-        model = event.target.value;
-    }
+select2.on('select2:unselect', (event) => {
+    model = Array.from(event.target.options).filter(option => option.selected).map(option => option.value);
 });
-window.addEventListener('edit-choices', event => {
-    val = event.detail.newValues;
-    select2.setChoiceByValue(val);
-})
-
-window.addEventListener('reset-choices', event => {
-
-
-    select2.removeActiveItems();
-})">
-
-    <select {{ $attributes->merge(['class' => 'form-select']) }} x-ref="select">
+$watch('model', (value) => {
+    select2.val(value).trigger('change');
+});" wire:ignore>
+    <select x-ref="select" {{ $attributes->merge(['class' => 'form-control']) }}>
         {{ $slot }}
     </select>
 </div>

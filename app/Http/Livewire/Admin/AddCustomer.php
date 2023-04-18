@@ -45,6 +45,7 @@ class AddCustomer extends Component
         'deleteMultiple' => 'deleteMultiple',
         'changeMessage' => 'changeMessage',
         'confirm_request' => 'confirm_request',
+      
     ];
 
     # ---------------------------------------------------------------------------- #
@@ -122,7 +123,8 @@ class AddCustomer extends Component
                     new Customer([
                         'first_name' => $this->first_name,
                         'last_name' => $this->last_name,
-                        'phone_number' => $this->phone_number
+                        'phone_number' => $this->phone_number,
+                        'customer_uuid' => Str::upper(Str::random(6)) . $user->id
                     ]),
 
                 ];

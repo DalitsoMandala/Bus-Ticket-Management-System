@@ -4,9 +4,10 @@ namespace App\Http\Livewire\admin;
 
 use App\Models\Customer;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
-use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
+use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
 final class CustomerTable extends PowerGridComponent
@@ -50,7 +51,10 @@ final class CustomerTable extends PowerGridComponent
      */
     public function datasource(): Builder
     {
-        return Customer::query();
+        return Customer::query()->select([
+            'customers.*',
+            DB::Raw('ROW_NUMBER() OVER (ORDER BY customers.id) AS rn'),
+        ]);
     }
 
     /*
@@ -121,6 +125,9 @@ final class CustomerTable extends PowerGridComponent
             Column::make('ID', 'rn')
                 ->sortable(),
 
+
+            Column::make('CUSTOMER ID', 'customer_uuid')
+                ->sortable(),
             Column::make('ID', 'id')
                 ->hidden(),
 

@@ -103,8 +103,8 @@
                 </li>
 
                 <li class="nav-item"><a aria-expanded="false"
-                        class="nav-link {{ request()->routeIs('admin-customers') ? 'active' : '' }}" data-bs-toggle=""
-                        href="{{ route('admin-customers') }}">
+                        class="nav-link {{ request()->routeIs('admin-customers') ? 'active' : '' }}"
+                        data-bs-toggle="" href="{{ route('admin-customers') }}">
                         <div class="d-flex align-items-center"><span class="nav-link-text"> <i aria-hidden="true"
                                     class="fa fa-folder-open me-2"></i>
                                 Manage Customers</span></div>
@@ -159,7 +159,7 @@
     <div class="collapse navbar-collapse">
         <div class="search-box d-none d-lg-none" style="width:25rem;">
             <form class="position-relative" data-bs-display="static" data-bs-toggle="search">
-                <x-input aria-label="Search" placeholder="Search..." type="search" />
+                <x-text-inputaria-label="Search" placeholder="Search..." type="search" />
 
             </form>
         </div>

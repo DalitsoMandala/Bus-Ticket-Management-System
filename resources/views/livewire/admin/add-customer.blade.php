@@ -16,7 +16,7 @@
                         <div>
                             <x-input-label class="form-label" for="inputName">First Name</x-input-label>
 
-                            <x-input placeholder="first name" wire:model.defer="first_name" />
+                            <x-text-input placeholder="first name" wire:model.defer="first_name" />
                         </div>
                         <div>
                             @error('first_name')
@@ -29,7 +29,7 @@
                         <div>
                             <x-input-label class="form-label" for="inputName">Last Name</x-input-label>
 
-                            <x-input placeholder="last name" wire:model.defer="last_name" />
+                            <x-text-input placeholder="last name" wire:model.defer="last_name" />
                         </div>
                         <div>
                             @error('last_name')
@@ -42,7 +42,7 @@
                         <div>
                             <x-input-label class="form-label" for="inputName">Email</x-input-label>
 
-                            <x-input placeholder="email" type="email" wire:model.defer="email" />
+                            <x-text-input placeholder="email" type="email" wire:model.defer="email" />
                         </div>
                         <div>
                             @error('email')

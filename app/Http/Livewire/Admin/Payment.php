@@ -2,15 +2,19 @@
 
 namespace App\Http\Livewire\Admin;
 
+use Exception;
+use Throwable;
 use Livewire\Component;
-use App\Models\BusRoute;
-use App\Models\Customer;
-use App\Models\Schedule;
+use App\Models\ExchangeRate;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Crypt;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Contracts\Encryption\EncryptException;
 
-class AddBooking extends Component
+class Payment extends Component
 {
+
 
     use LivewireAlert;
 
@@ -20,11 +24,13 @@ class AddBooking extends Component
     # ---------------------------------------------------------------------------- #
     public $name;
     public $edit; // id of table
-    public $showingModalAddBooking;
+    public $showingModalPayment;
     public $button = "SUBMIT";
-    public $status, $customer, $price, $route, $schedule;
-
-
+    public $status;
+    public $payment_data;
+    public $amount;
+    public $exchange_rate;
+    public $data;
     # ---------------------------------------------------------------------------- #
     #                            Livewire listeners here                           #
     # ---------------------------------------------------------------------------- #
@@ -45,7 +51,13 @@ class AddBooking extends Component
         'change' => 'change',
         'deleteMultiple' => 'deleteMultiple',
         'changeMessage' => 'changeMessage',
-
+        'confirm_request' => 'confirm_request',
+        'check_exchange_rate' => 'check_exchange_rate',
+        'save_exchange_rate' => 'save_exchange_rate',
+        'check' => 'check',
+        'callButton' => 'callButton',
+        'fetchData' => 'fetchData',
+        'approved' => 'approved',
     ];
 
     # ---------------------------------------------------------------------------- #
@@ -54,10 +66,7 @@ class AddBooking extends Component
 
 
     protected $rules = [
-        'schedule' => 'required',
-        'route' => 'required',
-        'customer' => 'required',
-        'price' => 'required',
+        'name' => 'required',
     ];
 
 
@@ -83,7 +92,7 @@ class AddBooking extends Component
     public function showModal()
     {
 
-        $this->showingModalAddBooking = true;
+        $this->showingModalPayment = true;
         if ($this->edit) {
             $this->button = 'UPDATE';
         } else {
@@ -95,7 +104,7 @@ class AddBooking extends Component
 
     public function hideModal()
     {
-        $this->showingModalAddBooking = false;
+        $this->showingModalPayment = false;
     }
 
     # ---------------------------------------------------------------------------- #
@@ -108,34 +117,21 @@ class AddBooking extends Component
         if ($this->edit == '') {
             $validatedData = $this->validate();
             if ($validatedData) {
-                $data = [
-                    'full_name' => Customer::find($this->customer)->first_name . ' ' . Customer::find($this->customer)->last_name,
-                    'email' => Customer::find($this->customer)->user->email,
-                    'phone' => Customer::find($this->customer)->phone_number,
-                    'route' => BusRoute::find($this->route)->from_destination . ' - ' . BusRoute::find($this->route)->to_destination,
-                    'price' => $this->price,
-                    'schedule' => Schedule::find($this->schedule)->title,
-                    'quantity' => 1
-                ];
-                $data = urlencode(json_encode($data)); // to json
-                $encrypted_data = Crypt::encryptString($data);
-
-                $route = route('admin-payment', [
-                    'id' => $encrypted_data
-                ]);
-
-                return redirect()->to($route);
 
 
 
-                // $this->alert(
-                //     'success',
-                //     'Created successfully'
-                // );
 
-                // $this->emitTo('component', 'refresh');
-                //       $this->emitSelf('hideModal');
-                //      $this->emitSelf('resetdata');
+
+
+
+                $this->alert(
+                    'success',
+                    'Created successfully'
+                );
+
+                $this->emitTo('component', 'refresh');
+                $this->emitSelf('hideModal');
+                $this->emitSelf('resetdata');
             }
         } else {
 
@@ -302,33 +298,77 @@ class AddBooking extends Component
 
 */
 
-    public function paynow()
+   
+
+    public function fetchData()
     {
-        $validatedData =   $this->validate();
+        $response = Http::get('https://v6.exchangerate-api.com/v6/fe9dad822a73f2a8da92adea/latest/MWK');
+        $this->data = $response->json();
+        $status = $this->data['result'];
+        $from = 'MWK';
+        $to = 'USD';
+        $rate = $this->data['conversion_rates']['USD'];
 
 
-        if ($validatedData) {
+        if ($status == 'success') {
 
-            $this->dispatchBrowserEvent('paypal', ['price' => $this->price]);
-        } else {
+
+            $date = date('Y-m-d');
+            ExchangeRate::create([
+                'fetch_date' => $date,
+                'currency_from' => $from,
+                'currency_to' => $to,
+                'exchange_rate' => $rate,
+            ]);
+
+            return  $this->exchange_rate = $rate;
         }
     }
 
-
-    public function updatedRoute($value)
+    public function mount($id)
     {
 
-        $price = BusRoute::find($value);
-        if ($price) {
-            $this->price = $price->price;
+
+
+        try {
+            $id = Crypt::decryptString($id);
+            $data = json_decode(urldecode($id), true);
+            $this->payment_data = $data;
+
+            $date = date('Y-m-d');
+            $check = ExchangeRate::where('fetch_date', $date)->get();
+            if ($check->count() == 0) {
+                $this->fetchData();
+            } else {
+                $this->exchange_rate = $check[0]->exchange_rate;
+            }
+
+
+            $this->amount = number_format($this->payment_data['price'] * $this->exchange_rate, 2);
+
+            //   dd($this->amount);
+        } catch (DecryptException  $e) {
+            // ...
+            abort(404);
         }
     }
 
-    public function mount()
-    {
+    // public function save_exchange_rate($amount, $to, $from, $rate, $status)
+    // {
 
-        $crypt = Crypt::encrypt('sss');
-    }
+    //     if ($status == 'success') {
+
+
+    //         $date = date('Y-m-d');
+    //         ExchangeRate::create([
+    //             'fetch_date' => $date,
+    //             'currency_from' => $from,
+    //             'currency_to' => $to,
+    //             'exchange_rate' => $rate,
+    //         ]);
+    //     }
+    // }
+
 
 
     # ---------------------------------------------------------------------------- #
@@ -337,11 +377,6 @@ class AddBooking extends Component
 
     public function render()
     {
-        return view('livewire.admin.add-booking', [
-            'customers' => Customer::all(),
-            'routes' => BusRoute::all(),
-            'schedules' => Schedule::all(),
-
-        ]);
+        return view('livewire.admin.payment');
     }
 }

@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('exchange_rates', function (Blueprint $table) {
             $table->id();
+            $table->date('fetch_date');
+            $table->string('currency_from', 3);
+            $table->string('currency_to', 3);
+            $table->decimal('exchange_rate', 15, 8);
             $table->timestamps();
-            $table->foreignId('user_id')->constrained();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('phone_number');
-            $table->string('customer_uuid');
+
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('exchange_rates');
     }
 };

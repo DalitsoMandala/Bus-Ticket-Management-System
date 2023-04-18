@@ -101,7 +101,7 @@
                         <div>
                             <x-input-label class="form-label" for="inputName">Brand</x-input-label>
 
-                            <x-input wire:model.defer="brand" placeholder="brand" />
+                            <x-text-inputwire:model.defer="brand" placeholder="brand" />
                         </div>
                         <div>
                             @error('brand')
@@ -115,7 +115,7 @@
                         <div>
                             <x-input-label class="form-label" for="inputName">S/N</x-input-label>
 
-                            <x-input wire:model.defer="serial_number" placeholder="serial number" />
+                            <x-text-inputwire:model.defer="serial_number" placeholder="serial number" />
                         </div>
                         <div>
                             @error('serial_number')
@@ -128,7 +128,7 @@
                         <div>
                             <x-input-label class="form-label" for="inputName">Seats</x-input-label>
 
-                            <x-input wire:model.defer="seats" placeholder="seat number" />
+                            <x-text-inputwire:model.defer="seats" placeholder="seat number" />
                         </div>
                         <div>
                             @error('seats')
@@ -144,7 +144,7 @@
 
 
                     <div class="col-12 gy-6">
-                        <div class="row g-3 justify-content-end">
+                        <div class="row g-3 justify-content-end" wire:ignore>
 
                             <div class="col-auto">
                                 <x-primary-button>{{ $button }}</x-primary-button>
