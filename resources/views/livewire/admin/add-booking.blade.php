@@ -1,7 +1,7 @@
 <div>
-    <x-button class="add-session" wire:click="showModal" wire:loading.attr="disabled">
+    <x-black-button class="add-session" wire:click="showModal" wire:loading.attr="disabled">
         ADD BOOKING
-    </x-button>
+    </x-black-button>
     <x-dialog-modal wire:model.defer="showingModalAddBooking">
 
         <x-slot name="title">
@@ -55,7 +55,7 @@
                     <div class="col-md-6">
                         <div>
                             <x-input-label class="form-label" for="inputName">Price (MWK)</x-input-label>
-                            <x-text-inputwire:model="price" disabled placeholder="price" />
+                            <x-text-input wire:model="price" disabled placeholder="price" />
 
                         </div>
 

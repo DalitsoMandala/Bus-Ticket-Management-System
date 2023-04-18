@@ -20,7 +20,7 @@ class AddBus extends Component
     public $edit; // id of table
     public $showingModalAddBus;
     public $button = "SUBMIT";
-    public $status, $model, $brand, $serial_number, $seats;
+    public $status, $model, $brand, $serial_number, $seats, $condition;
 
 
     # ---------------------------------------------------------------------------- #
@@ -112,7 +112,8 @@ class AddBus extends Component
                     'model' => $this->model,
                     'brand' => $this->brand,
                     'serial_number' => $this->serial_number,
-                    'seats' => $this->seats
+                    'seats' => $this->seats,
+                    'condition' => $this->condition
                 ]);
                 for ($i = 1; $i <= $this->seats; $i++) {
                     $seats = [
@@ -154,7 +155,8 @@ class AddBus extends Component
                     'model' => $this->model,
                     'brand' => $this->brand,
                     'serial_number' => $this->serial_number,
-                    'seats' => $this->seats
+                    'seats' => $this->seats,
+                    'condition' => $this->condition
                 ]);
 
 

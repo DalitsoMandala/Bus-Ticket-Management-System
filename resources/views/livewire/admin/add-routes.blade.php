@@ -1,7 +1,7 @@
 <div>
-    <x-button class="add-session" wire:click="showModal" wire:loading.attr="disabled">
+    <x-black-button class="add-session" wire:click="showModal" wire:loading.attr="disabled">
         ADD ROUTE
-    </x-button>
+    </x-black-button>
     <x-dialog-modal wire:model.defer="showingModalAddRoutes">
 
         <x-slot name="title">
@@ -125,7 +125,7 @@
                         <div>
                             <x-input-label class="form-label" for="inputName">PRICE (MWK)</x-input-label>
 
-                            <x-text-inputtype="text" placeholder="price" wire:model.defer="price" />
+                            <x-text-input type="text" placeholder="price" wire:model.defer="price" />
 
 
 

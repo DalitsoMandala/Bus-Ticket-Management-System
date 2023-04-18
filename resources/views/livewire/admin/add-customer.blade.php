@@ -1,7 +1,7 @@
 <div>
-    <x-button class="add-session" wire:click="showModal" wire:loading.attr="disabled">
+    <x-black-button class="add-session" wire:click="showModal" wire:loading.attr="disabled">
         ADD CUSTOMER
-    </x-button>
+    </x-black-button>
     <x-dialog-modal wire:model.defer="showingModalAddCustomer">
 
         <x-slot name="title">

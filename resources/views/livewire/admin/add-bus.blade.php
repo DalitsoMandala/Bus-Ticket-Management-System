@@ -1,7 +1,7 @@
 <div>
-    <x-button class="add-session" wire:click="showModal" wire:loading.attr="disabled">
+    <x-black-button class="add-session" wire:click="showModal" wire:loading.attr="disabled">
         ADD BUS
-    </x-button>
+    </x-black-button>
     <x-dialog-modal wire:model.defer="showingModalAddBus">
 
         <x-slot name="title">
@@ -101,7 +101,7 @@
                         <div>
                             <x-input-label class="form-label" for="inputName">Brand</x-input-label>
 
-                            <x-text-inputwire:model.defer="brand" placeholder="brand" />
+                            <x-text-input wire:model.defer="brand" placeholder="brand" />
                         </div>
                         <div>
                             @error('brand')
@@ -115,7 +115,7 @@
                         <div>
                             <x-input-label class="form-label" for="inputName">S/N</x-input-label>
 
-                            <x-text-inputwire:model.defer="serial_number" placeholder="serial number" />
+                            <x-text-input wire:model.defer="serial_number" placeholder="serial number" />
                         </div>
                         <div>
                             @error('serial_number')
@@ -128,7 +128,7 @@
                         <div>
                             <x-input-label class="form-label" for="inputName">Seats</x-input-label>
 
-                            <x-text-inputwire:model.defer="seats" placeholder="seat number" />
+                            <x-text-input wire:model.defer="seats" placeholder="seat number" />
                         </div>
                         <div>
                             @error('seats')
@@ -138,6 +138,23 @@
                     </div>
 
 
+
+                    <div class="col-md-12">
+                        <div>
+                            <x-input-label for="" class="form-label">Condition</x-input-label>
+                            <select class="form-select " wire:model.defer="condition" id="">
+                                <option>Select one</option>
+                                <option value="good">Good</option>
+                                <option value="fair">Fair</option>
+                                <option value="bad">Bad</option>
+                            </select>
+                        </div>
+                        <div>
+                            @error('condition')
+                                <x-alert>{{ $message }}</x-alert>
+                            @enderror
+                        </div>
+                    </div>
 
 
 

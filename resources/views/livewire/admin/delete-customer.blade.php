@@ -14,13 +14,13 @@
 
             <x-button-deny class="fs--1" wire:loading.attr="disabled" wire:click="hideModal">
                 No
-                </x-button>
+                </x-black-button>
 
 
 
-                <x-button class="fs--1" wire:loading.attr="disabled" wire:click="confirm_request">
+                <x-black-button class="fs--1" wire:loading.attr="disabled" wire:click="confirm_request">
                     Yes
-                </x-button>
+                </x-black-button>
 
 
         </x-slot>
