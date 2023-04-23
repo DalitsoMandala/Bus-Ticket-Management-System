@@ -1,6 +1,12 @@
 <?php
 
+use App\Models\Bus;
+use App\Models\Seat;
+use App\Models\Customer;
+use App\Models\BookedBus;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\URL;
+use App\Http\Livewire\Admin\BookBus;
 use App\Http\Livewire\Admin\Payment;
 use App\Http\Livewire\Admin\Profile;
 use App\Http\Livewire\Admin\Overview;
@@ -9,12 +15,11 @@ use App\Http\Livewire\Admin\ManageBuses;
 use App\Http\Livewire\Admin\ManageSeats;
 use App\Http\Livewire\Admin\ManageRoutes;
 use App\Http\Controllers\ProfileController;
-use App\Http\Livewire\Admin\BookBus;
+use App\Http\Controllers\TestController;
 use App\Http\Livewire\Admin\ManageBookings;
 use App\Http\Livewire\Admin\ManagePayments;
 use App\Http\Livewire\Admin\ManageCustomers;
 use App\Http\Livewire\Admin\ManageSchedules;
-use App\Models\BookedBus;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,12 +38,7 @@ Route::get('/', function () {
 
 
 
-Route::get('/test', function () {
-    $bookedBus = BookedBus::where('route_id', '=', 1)->where('schedule_id', '=', 1)->where('date_departing', '=', '2023-04-17')->get();
-    if ($bookedBus->count() == 1) {
-    } else {
-    }
-});
+Route::get('/test', [TestController::class, 'test']);
 Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 

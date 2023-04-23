@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('bus_id')->constrained('buses');
             $table->foreignId('route_id')->constrained('routes');
             $table->foreignId('schedule_id')->constrained('schedules');
-            $table->boolean('is_full');
+            $table->boolean('is_full')->default(false);
             $table->date('date_departing');
             $table->timestamps();
         });

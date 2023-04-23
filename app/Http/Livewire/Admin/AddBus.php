@@ -113,7 +113,8 @@ class AddBus extends Component
                     'brand' => $this->brand,
                     'serial_number' => $this->serial_number,
                     'seats' => $this->seats,
-                    'condition' => $this->condition
+                    'condition' => $this->condition,
+                    'is_booked' => false,
                 ]);
                 for ($i = 1; $i <= $this->seats; $i++) {
                     $seats = [
@@ -156,7 +157,8 @@ class AddBus extends Component
                     'brand' => $this->brand,
                     'serial_number' => $this->serial_number,
                     'seats' => $this->seats,
-                    'condition' => $this->condition
+                    'condition' => $this->condition,
+                    'is_booked' => false,
                 ]);
 
 

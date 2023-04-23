@@ -14,11 +14,10 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->foreignId('payment_id')->constrained('payments');
+            $table->foreignId('booked_bus_id')->constrained('booked_buses');
             $table->foreignId('seat_id')->constrained('seats');
-            $table->string('ticket_number');
             $table->date('date_departing');
-            $table->boolean('is_completed');
-            $table->text('qr_code');
         });
     }
 
