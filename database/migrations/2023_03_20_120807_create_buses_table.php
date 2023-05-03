@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('serial_number');
             $table->unsignedInteger('seats');
             $table->string('condition');
+            $table->foreignId('route_id')->nullable()->constrained('routes');
+            $table->foreignId('schedule_id')->nullable()->constrained('schedules');
+            $table->boolean('is_full')->default(false)->nullable();
+            $table->date('date_departing')->nullable();
         });
     }
 

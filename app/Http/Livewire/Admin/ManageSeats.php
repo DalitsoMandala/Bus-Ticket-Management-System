@@ -2,7 +2,10 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Bus;
+use App\Models\Seat;
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class ManageSeats extends Component
@@ -11,21 +14,21 @@ class ManageSeats extends Component
     use LivewireAlert;
 
 
-# ---------------------------------------------------------------------------- #
-#                       Livewire properties / models here                      #
-# ---------------------------------------------------------------------------- #
-public $name;
-public $edit; // id of table
-public $showingModalManageSeats;
-public $button = "SUBMIT";
-public $status;
+    # ---------------------------------------------------------------------------- #
+    #                       Livewire properties / models here                      #
+    # ---------------------------------------------------------------------------- #
+    public $name;
+    public $edit; // id of table
+    public $showingModalManageSeats;
+    public $button = "SUBMIT";
+    public $status, $bus;
 
 
-# ---------------------------------------------------------------------------- #
-#                            Livewire listeners here                           #
-# ---------------------------------------------------------------------------- #
+    # ---------------------------------------------------------------------------- #
+    #                            Livewire listeners here                           #
+    # ---------------------------------------------------------------------------- #
 
-protected $listeners = [
+    protected $listeners = [
 
         'resetdata' => 'resetdata',
         'edit' => 'edit',
@@ -42,16 +45,16 @@ protected $listeners = [
         'deleteMultiple' => 'deleteMultiple',
         'changeMessage' => 'changeMessage',
 
-        ];
+    ];
 
-# ---------------------------------------------------------------------------- #
-#                              Livewire rules here                             #
-# ---------------------------------------------------------------------------- #
+    # ---------------------------------------------------------------------------- #
+    #                              Livewire rules here                             #
+    # ---------------------------------------------------------------------------- #
 
 
-protected $rules = [
-    'name' => 'required',
-];
+    protected $rules = [
+        'name' => 'required',
+    ];
 
 
     public function updated($fields)
@@ -62,15 +65,14 @@ protected $rules = [
 
 
 
-# ---------------------------------------------------------------------------- #
-#                       Livewire Modals & Reset Data here                      #
-# ---------------------------------------------------------------------------- #
+    # ---------------------------------------------------------------------------- #
+    #                       Livewire Modals & Reset Data here                      #
+    # ---------------------------------------------------------------------------- #
     public function resetdata()
     {
 
         $this->reset();
         $this->resetValidation();
-
     }
 
 
@@ -78,12 +80,11 @@ protected $rules = [
     {
 
         $this->showingModalManageSeats = true;
-          if ($this->edit) {
+        if ($this->edit) {
             $this->button = 'UPDATE';
         } else {
             $this->button = 'SUBMIT';
         }
-
     }
 
 
@@ -93,15 +94,15 @@ protected $rules = [
         $this->showingModalManageSeats = false;
     }
 
-# ---------------------------------------------------------------------------- #
-#                              Livewire CRUD here                              #
-# ---------------------------------------------------------------------------- #
+    # ---------------------------------------------------------------------------- #
+    #                              Livewire CRUD here                              #
+    # ---------------------------------------------------------------------------- #
 
-   public function save()
+    public function save()
     {
 
         if ($this->edit == '') {
-    $validatedData = $this->validate();
+            $validatedData = $this->validate();
             if ($validatedData) {
 
 
@@ -116,9 +117,8 @@ protected $rules = [
                 );
 
                 $this->emitTo('component', 'refresh');
-                 $this->emitSelf('hideModal');
-                 $this->emitSelf('resetdata');
-
+                $this->emitSelf('hideModal');
+                $this->emitSelf('resetdata');
             }
         } else {
 
@@ -126,7 +126,7 @@ protected $rules = [
             $validatedData = $this->validate();
 
 
-                 if ($validatedData) {
+            if ($validatedData) {
 
 
 
@@ -142,17 +142,16 @@ protected $rules = [
                 );
 
                 $this->emitTo('component', 'refresh');
-                 $this->emitSelf('hideModal');
-                 $this->emitSelf('resetdata');
-
+                $this->emitSelf('hideModal');
+                $this->emitSelf('resetdata');
             }
         }
     } // End SAVE
 
 
-# ---------------------------------------------------------------------------- #
-#                         ALL OTHER LIVEWIRE FUNCTIONS                         #
-# ---------------------------------------------------------------------------- #
+    # ---------------------------------------------------------------------------- #
+    #                         ALL OTHER LIVEWIRE FUNCTIONS                         #
+    # ---------------------------------------------------------------------------- #
 
     // Edit modal open with fields inserted
 
@@ -177,7 +176,7 @@ protected $rules = [
         $this->edit = $data['key'];
     }
 
-// Delete data here
+    // Delete data here
 
     public function destroy()
     {
@@ -237,7 +236,7 @@ protected $rules = [
     #                        Livewire Delete Functions here                        #
     # ---------------------------------------------------------------------------- #
 
-/*
+    /*
  public $message = " Are you sure you want delete this programme?";
     public $count = 0;
     public $data = [];
@@ -286,9 +285,28 @@ protected $rules = [
 
 */
 
-# ---------------------------------------------------------------------------- #
-#                             Livewire Render here                             #
-# ---------------------------------------------------------------------------- #
+
+    public function mount()
+    {
+        $seats = Bus::join('seats', 'seats.bus_id', '=', 'buses.id')->select([
+            'buses.id as id',
+            'buses.serial_number as serial_number',
+            'buses.brand as brand',
+            'buses.model as model_name',
+            'buses.seats as number_of_seats',
+            DB::raw('SUM(CASE WHEN seats.is_taken = 1 THEN 1 ELSE 0 END) as taken_seats'), DB::raw('SUM(CASE WHEN seats.is_taken = 0 THEN 1 ELSE 0 END) as remaining_seats')
+
+        ])
+            ->groupBy('buses.id', 'buses.serial_number', 'buses.brand', 'buses.model', 'buses.seats')
+            ->orderBy('taken_seats', 'desc')
+
+            ->get();
+
+        $this->fill(['bus' => $seats]);
+    }
+    # ---------------------------------------------------------------------------- #
+    #                             Livewire Render here                             #
+    # ---------------------------------------------------------------------------- #
 
     public function render()
     {
