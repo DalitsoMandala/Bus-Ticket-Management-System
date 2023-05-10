@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->string('transaction_id');
-            $table->foreignId('customer_id')->constrained('customers');
+
             $table->unsignedFloat('price', 8, 2);
-            $table->unsignedFloat('amount_paid');
+            $table->unsignedFloat('amount_paid', 8, 2);
             $table->boolean('payment_status');
             $table->string('payment_method');
             $table->timestamps();

@@ -16,10 +16,16 @@ use App\Http\Livewire\Admin\ManageSeats;
 use App\Http\Livewire\Admin\ManageRoutes;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestController;
+use App\Http\Livewire\Customer\CustomerOverview;
 use App\Http\Livewire\Admin\ManageBookings;
 use App\Http\Livewire\Admin\ManagePayments;
 use App\Http\Livewire\Admin\ManageCustomers;
 use App\Http\Livewire\Admin\ManageSchedules;
+use App\Http\Livewire\Customer\BookBus as CustomerBookBus;
+use App\Http\Livewire\Customer\CancelBooking;
+use App\Http\Livewire\Customer\Profile as CustomerProfile;
+use App\Http\Livewire\Customer\Refunds;
+use App\Http\Livewire\Customer\Schedules;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +44,7 @@ Route::get('/', function () {
 
 
 
-Route::get('/test', [TestController::class, 'test']);
+Route::get('/test', [TestController::class, 'changed']);
 Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -64,8 +70,14 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 
 
 
+
 Route::middleware(['auth', 'role:customer'])->prefix('customer')->group(function () {
-    Route::get('/dashboard', Overview::class)->name('customer-dashboard');
+    Route::get('/dashboard', CustomerOverview::class)->name('customer-dashboard');
+    Route::get('/profile', CustomerProfile::class)->name('customer-profile');
+    Route::get('/schedules', Schedules::class)->name('customer-schedules');
+    Route::get('/refunds', Refunds::class)->name('customer-refunds');
+    Route::get('/book-a-bus', CustomerBookBus::class)->name('customer-book-a-bus');
+    Route::get('/cancel-booking', CancelBooking::class)->name('customer-cancel-booking');
 });
 
 require __DIR__ . '/auth.php';

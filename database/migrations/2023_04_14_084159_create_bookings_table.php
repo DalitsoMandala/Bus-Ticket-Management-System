@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('payment_id')->constrained('payments');
-            $table->foreignId('booked_bus_id')->constrained('booked_buses');
+            $table->foreignId('customer_id')->constrained('customers');
+            $table->foreignId('bus_id')->constrained('buses');
             $table->foreignId('seat_id')->constrained('seats');
             $table->date('date_departing');
+            $table->boolean('is_completed')->default(false);
         });
     }
 

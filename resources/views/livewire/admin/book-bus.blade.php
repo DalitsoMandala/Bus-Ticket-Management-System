@@ -40,9 +40,9 @@
                 reset() {
                     showCustomer = !showCustomer;
                     $wire.emit('resetCustomer');
-            
+
                 }
-            
+
             }">
                 <div x-show="currentStep === 1">
 
@@ -484,7 +484,7 @@
 
 
 
-                    s
+                    
                 </div>
 
                 <div class=" my-5 card card-body ">

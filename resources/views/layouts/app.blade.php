@@ -127,6 +127,9 @@
                 @include('layouts.admin-layout')
             @endrole
 
+            @role('customer')
+                @include('layouts.customer-layout')
+            @endrole
 
             <div class="content">
                 <div class="pb-5">

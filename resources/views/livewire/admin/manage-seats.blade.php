@@ -1,10 +1,10 @@
 <div>
     <div>
-        @section('title', 'Seats | ' . config('app.name'))
+        @section('title', 'Manage seats | ' . config('app.name'))
 
         <div class="mb-3">
-            <h2 class="fs-2 fw-black mb-2"></h2>
-            <h5 class="text-700 fw-semi-bold"></h5>
+            <h2 class="fs-2 fw-black mb-2">Manage Seats</h2>
+            <h5 class="text-700 fw-semi-bold">Overview of buses and their seat capacities</h5>
         </div>
 
         <style>
@@ -16,86 +16,278 @@
             .seat g:hover {
                 fill: red;
             }
+
+            .inner {
+                -webkit-box-flex: 1;
+                -ms-flex: 1 1 auto;
+                flex: 1 1 auto;
+                padding: 0px;
+                padding-left: 10px;
+            }
         </style>
 
 
-        @foreach ($bus as $buses)
-            <div class="card">
+        <div class="row align-items-start">
+            <div class="col-4">
+                <div class="mb-3">
+                    <x-input-label for="" class="form-label">Status</x-input-label>
 
-                <div class="card-body">
-                    <p>Bus Brand : {{ $buses->brand }}</p>
-                    <p>Bus Name : {{ $buses->model_name }}</p>
-                    <p>Bus Serial Number : {{ $buses->serial_number }}</p>
 
-                    <div>
+                    <select class="form-select " wire:model.debounce.500ms="is_booked">
+                        <option value="">Select one</option>
 
-                        @php
-                            $seats = range(1, $buses->number_of_seats);
-                        @endphp
-                        @foreach ($seats as $seat)
-                            <svg class="seat me-2" version="1.0" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+                        <option value="booked">Booked</option>
+                        <option value="not_booked">Not booked</option>
 
-                                <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#000000"
-                                    stroke="none">
-                                    <path
-                                        d="M239 5102 c-66 -27 -114 -69 -146 -127 -53 -95 -66 -28 351 -1839
-                   207 -901 381 -1647 387 -1658 23 -43 88 -41 122 4 l20 27 -262 1173 c-143 645
-                   -261 1188 -261 1206 0 54 41 114 90 134 32 13 322 10 380 -4 132 -31 268 -135
-                   325 -248 77 -152 225 -568 289 -810 81 -312 106 -478 177 -1164 39 -384 48
-                   -500 39 -506 -7 -4 -38 -11 -69 -14 l-57 -7 -50 49 c-168 162 -427 160 -592
-                   -5 -75 -75 -115 -163 -120 -270 -4 -77 2 -108 93 -490 54 -228 107 -425 119
-                   -448 11 -21 41 -53 64 -70 l44 -30 1527 0 1527 0 76 38 c121 59 202 168 217
-                   291 l6 51 135 5 c118 4 141 8 184 30 71 36 133 101 169 178 31 64 32 72 31
-                   187 -1 238 -89 446 -259 610 -142 138 -323 214 -509 215 -38 0 -587 -68 -1219
-                   -151 -632 -83 -1150 -149 -1152 -147 -2 2 -29 248 -60 548 -70 677 -103 885
-                   -195 1210 -83 293 -245 721 -310 818 -50 75 -141 161 -213 202 -31 17 -57 33
-                   -57 33 0 1 9 25 19 53 41 108 46 267 12 379 -63 205 -258 414 -466 497 -147
-                   60 -328 82 -406 50z m256 -158 c192 -49 368 -196 452 -380 38 -84 44 -223 14
-                   -324 l-22 -72 -37 6 c-20 4 -111 7 -202 8 -152 2 -169 0 -215 -20 -27 -13 -57
-                   -30 -67 -39 -11 -10 -22 -13 -27 -7 -5 5 -48 170 -96 368 -60 250 -85 368 -81
-                   391 6 30 45 76 76 89 22 8 136 -3 205 -20z m3907 -3499 c220 -46 419 -249 483
-                   -490 26 -98 30 -213 11 -271 -18 -55 -73 -116 -119 -133 -18 -7 -182 -11 -466
-                   -11 -451 0 -491 -3 -511 -40 -16 -30 -12 -68 10 -90 19 -19 33 -20 295 -20
-                   l275 0 0 -32 c0 -46 -53 -133 -98 -162 -20 -14 -55 -29 -77 -36 -29 -8 -356
-                   -10 -1165 -8 l-1125 3 -26 110 c-14 61 -24 113 -22 117 2 5 381 8 842 8 827 0
-                   838 0 856 20 25 28 23 76 -4 103 l-22 22 -857 3 -857 2 -68 292 c-37 160 -66
-                   292 -65 293 10 8 2517 333 2573 334 39 0 100 -6 137 -14z m-3029 -175 c62 -23
-                   118 -73 147 -130 14 -28 240 -956 240 -987 0 -1 -119 -3 -264 -3 -280 0 -286
-                   1 -300 48 -3 9 -46 188 -96 397 -81 334 -91 388 -87 447 12 178 191 291 360
-                   228z" />
-                                </g>
-                            </svg>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+            <div class="col-4">
+                <div class="mb-3">
+                    <x-input-label for="" class="form-label">Date</x-input-label>
+                    <select class="form-select " wire:model.debounce.500ms="date_departing" name=""
+                        id="">
+                        <option value="">Select one</option>
+
+
+                        @foreach ($date as $dt)
+                            <option value="{{ $dt->date_departing }}">
+                                {{ \Carbon\Carbon::parse($dt->date_departing)->format('d/m/Y') }}
+                            </option>
                         @endforeach
+                    </select>
+                </div>
+
+            </div>
+            <div class="col-4">
+                <div class="mb-3">
+                    <x-input-label for="" class="form-label">Schedule</x-input-label>
+                    <select class="form-select " wire:model.debounce.500ms="schedule_time" name=""
+                        id="">
+                        <option>Select one</option>
+                        @foreach ($schedules as $schedule)
+                            <option value="{{ $schedule->id }}">{{ $schedule->title }} @
+                                {{ \Carbon\Carbon::parse($schedule->depart_time)->format('H:i A') }}
+                            </option>
+                        @endforeach
+
+
+                    </select>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="row align-items-start ">
+            <div class="col-12">
+                @if ($date_departing || $schedule_time || $is_booked)
+                    <button class="btn btn-sm btn-outline-secondary rounded-pill me-2 mr-4 mb-1 text-uppercase"
+                        type="button" wire:click="cancel('all')">CLEAR ALL FILTERS <i
+                            class="fa-solid fa-xmark"></i></button>
+                @endif
+
+
+
+                @if ($is_booked)
+                    <button class="btn btn-sm btn-phoenix-secondary rounded-pill me-2 mr-4 mb-1 text-uppercase"
+                        type="button" wire:click="cancel('is_booked')">Status <i
+                            class="fa-solid fa-xmark"></i></button>
+                @endif
+
+
+                @if ($date_departing)
+                    <button class="btn btn-sm btn-phoenix-secondary rounded-pill me-2 mr-4 mb-1 text-uppercase"
+                        type="button" wire:click="cancel('date_departing')">Date <i
+                            class="fa-solid fa-xmark"></i></button>
+                @endif
+
+                @if ($schedule_time)
+                    <button class="btn btn-sm btn-phoenix-secondary rounded-pill me-2 pr-4 mb-1 text-uppercase"
+                        type="button" wire:click="cancel('schedule_time')">Schedule <i
+                            class="fa-solid fa-xmark"></i></button>
+                @endif
+
+            </div>
+
+
+
+
+        </div>
+
+        <hr class="py-2">
+        @php
+            $bscount = 0;
+        @endphp
+
+        <div class="row  align-items-start">
+
+
+
+
+            @foreach ($bus as $key => $buses)
+                <div class="col-lg-6 col-sm-12">
+
+
+                    <div class="card  my-2   ">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between">
+                                <div>
+
+                                    <div class="d-flex align-items-center ">
+                                        <div class="me-3">
+                                            <div class="avatar avatar-xl ">
+                                                <div class="avatar-name rounded-circle text-body bg-200">
+                                                    <span><i class="fa-solid fa-van-shuttle"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <h5 class="m-0 me-2"> {{ $buses->model_name }}</h5>
+                                            <small class="text-muted">S/N : {{ $buses->serial_number }}</small>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="dropdown open d-none">
+                                    <button class="btn  " type="button" id="triggerId" data-bs-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="triggerId">
+                                        <button class="dropdown-item" href="#">View details</button>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between">
+
+                                <div>
+                                    <h5 class="text-uppercase fs--1">Total number of Seats </h5> <span
+                                        class="badge badge-phoenix badge-phoenix-secondary">{{ $buses->number_of_seats }}</span>
+                                </div>
+
+                                <div>
+                                    <h5 class="text-uppercase fs--1">Number of taken Seats </h5> <span
+                                        class="badge badge-phoenix @if ($buses->taken_seats > 0) badge-phoenix-secondary @else badge-phoenix-danger @endif">{{ $buses->taken_seats }}</span>
+                                </div>
+
+                                <div>
+                                    <h5 class="text-uppercase fs--1">Number of free Seats </h5> <span
+                                        class="badge badge-phoenix @if ($buses->remaining_seats == 0) badge-phoenix-danger @else badge-phoenix-secondary @endif">{{ $buses->remaining_seats }}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-body   ">
+
+
+                            <div>
+                                @foreach ($seats as $seat)
+                                    @if ($buses->id == $seat->bus_id)
+                                        @if ($seat->is_taken == 0)
+                                            <div class="card  my-1" style="display: inline-table; width:10%; ">
+                                                <div class="card-body  d-flex justify-content-center"
+                                                    style="height: 55px;">
+                                                    <x-seat-untaken />
+                                                </div>
+
+
+                                                <div class="card-footer  d-flex justify-content-center border-top-0">
+                                                    <span class="badge badge-phoenix badge-phoenix-secondary"> #
+                                                        {{ $seat->seat_no }}</span>
+                                                </div>
+                                            </div>
+
+
+
+
+
+
+
+
+
+
+                                            {{-- <div class="d-flex flex-column me-2 py-1   " x-data="{
+                hov: false
+            }">
+                <a href="#" x-on:mouseover="hov = true" x-on:mouseout="hov = false"
+                    wire:click="sss" title="seat # {{ $seat->seat_no }}">
+                    <div class="avatar avatar-xl mb-1">
+                        <div class="avatar-name rounded-soft bg-200 seat-avatar"
+                            x-bind:class="{ 'bg-400': hov }"><span>
+                                <x-seat-untaken />
+                            </span></div>
+                    </div>
+                </a>
+
+                <span class="badge badge-phoenix badge-phoenix-secondary"> #
+                    {{ $seat->seat_no }}</span>
+            </div> --}}
+                                        @else
+                                            <div class="card  my-1" style="display: inline-table; width:10%">
+                                                <div class="card-body d-flex justify-content-center"
+                                                    style="height: 55px;">
+                                                    <x-seat-taken />
+                                                </div>
+
+
+                                                <div class="card-footer d-flex justify-content-center border-top-0">
+                                                    <span class="badge bg-secondary"> # {{ $seat->seat_no }}</span>
+                                                </div>
+                                            </div>
+
+
+                                            {{-- <div class="d-flex flex-column me-2 py-1   " x-data="{
+                hov: false
+            }">
+                <a href="#" x-on:mouseover="hov = true" x-on:mouseout="hov = false"
+                    wire:click="sss" title="seat # {{ $seat->seat_no }}">
+                    <div class="avatar avatar-xl mb-1">
+                        <div class="avatar-name rounded-soft bg-200 "
+                            x-bind:class="{ 'bg-400': hov }"><span>
+                                <x-seat-taken />
+                            </span></div>
+                    </div>
+                </a>
+                <span class="badge bg-secondary"> # {{ $seat->seat_no }}</span>
+
+            </div> --}}
+                                        @endif
+                                    @endif
+                                @endforeach
+
+                            </div>
+
+
+
+
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
 
 
-        <div class="card">
+        </div>
 
+        <div class="row ">
 
-            <div class="card-header d-flex justify-content-end">
-
-
-
-
-            </div>
-            <div class="card-body">
-
-
-
-
-
-
-
-
-
-
-                <livewire:admin.seats-table />
-            </div>
-
+            {{ $bus->links('pagination::bootstrap-4') }}
         </div>
 
 

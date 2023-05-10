@@ -41,12 +41,24 @@ class DatabaseSeeder extends Seeder
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ])->AssignRole('admin');
 
-        User::create([
+        $cus =  User::create([
             'name' => 'customer',
             'email' => 'customer@gmail.com',
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ])->AssignRole('customer');
+
+        $firstname = 'customerFirstName';
+        $lastname = 'customerLastName';
+
+
+        $cus->customers()->create([
+            'first_name' => $firstname,
+            'last_name' => $lastname,
+            'phone_number' => $faker->phoneNumber(),
+            'customer_uuid' => Str::upper(Str::random(6)) . $cus->id
+        ]);
+
 
 
 
@@ -91,7 +103,7 @@ class DatabaseSeeder extends Seeder
                 'model' => $faker->company(),
                 'brand' => $faker->companySuffix(),
                 'serial_number' => $faker->bothify('?????-#####'),
-                'seats' => $faker->numberBetween(1, 5),
+                'seats' => $faker->numberBetween(1, 20),
                 'condition' => $faker->randomElement(['good', 'bad', 'fair']),
 
             ]);
@@ -132,7 +144,6 @@ class DatabaseSeeder extends Seeder
 
             Payment::create([
                 'transaction_id' => $faker->regexify('[A-Z]{5}[0-4]{3}'),
-                'customer_id' => $customer->id,
                 'price' => $faker->randomNumber(5, true),
                 'amount_paid' => $faker->randomNumber(5, true),
                 'payment_method' => 'paypal',
