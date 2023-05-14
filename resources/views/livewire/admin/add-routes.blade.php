@@ -2,7 +2,7 @@
     <x-black-button class="add-session" wire:click="showModal" wire:loading.attr="disabled">
         ADD ROUTE
     </x-black-button>
-    <bootstrap-dialog-modal wire:model.defer="showingModalAddRoutes">
+    <x-bootstrap-dialog-modal wire:model.defer="showingModalAddRoutes">
 
         <x-slot name="title">
 
@@ -151,7 +151,7 @@
 
         </x-slot>
 
-    </bootstrap-dialog-modal>
+    </x-bootstrap-dialog-modal>
 
 </div>
 
