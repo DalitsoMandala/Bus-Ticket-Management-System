@@ -1,6 +1,6 @@
 @props(['id' => null, 'maxWidth' => null])
 
-<x-modal :id="$id" :maxWidth="$maxWidth" {{ $attributes }}>
+<x-bootstrap-modal :id="$id" :maxWidth="$maxWidth" {{ $attributes }}>
     <div class="modal-content">
         <div class="modal-body py-5">
             <div class="d-flex justify-content-start">
@@ -21,4 +21,4 @@
             {{ $footer }}
         </div>
     </div>
-</x-modal>
+</x-bootstrap-modal>

@@ -1,17 +1,34 @@
 <div>
 
-    @section('title', ' | Book a bus')
+    @section('title', config('app.name') . ' | Book a bus')
 
     <div class="mb-3">
-        <h2 class="fs-2 fw-black mb-2"></h2>
-        <h5 class="text-700 fw-semi-bold"></h5>
+        <h2 class="fs-2 fw-black mb-2">Book a bus</h2>
+        <h5 class="text-700 fw-semi-bold">Use the available information to get your ticket</h5>
     </div>
 
     <style>
         .flatpickr-wrapper {
             display: block;
         }
+
+        .bg-image-overlay {
+            position: relative;
+            background-size: cover;
+            background-position: center center;
+        }
+
+        .bg-image-overlay::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
     </style>
+
 
 
     <div class="row card card-body">
@@ -44,6 +61,8 @@
                 showCustomer: @entangle('showCustomer'),
                 paid: @entangle('paid'),
                 available: @entangle('canShow'),
+                payment_data: @entangle('payment_data'),
+                loading: @entangle('loading'),
                 reset() {
                     showCustomer = !showCustomer;
                     $wire.emit('resetCustomer');
@@ -53,8 +72,8 @@
             }">
                 <div x-show="currentStep === 1">
 
-                    <div class="row align-items-center mt-4 ">
-                        <div class="col-lg-6 col-sm-12 mb-3 order-1">
+                    <div class="row align-items-center mt-4 px-3 ">
+                        <div class="col-lg-6 col-sm-12 mb-3 order-1 ">
 
                             <h2 class="fs-2 fw-black mb-2">Booking Details</h2>
                             <div class="col-md-12 d-none">
@@ -315,37 +334,38 @@
 
 
                         </div>
-                        <div
-                            class="col-lg-6 col-sm-12 bg-100 dark__bg-1100 rounded-3 position-relative overflow-hidden auth-title-box">
-                            <div class="bg-holder"></div>
+                        <div class="col-lg-6 col-sm-12 mb-3 bg-100 bg-image-overlay rounded-3 position-relative overflow-hidden auth-title-box"
+                            style="background-image: url('{{ asset('assets/assets/img/bus.jpg') }}'); height:100%;">
+
                             <!--/.bg-holder-->
                             <div
                                 class="position-relative px-4 px-lg-7 pt-7 pb-7 pb-sm-5 text-center text-md-start pb-lg-7">
-                                <h3 class="mb-3 text-black fs-1 text-capitalize">Book your bus with Us</h3>
-                                <p class="text-700"><i class="fa-solid fa-quote-left"></i> From booking your trip to
+                                <h3 class="mb-3 text-white fs-1 text-capitalize">Book your bus with Us</h3>
+                                <p class="text-100"><i class="fa-solid fa-quote-left"></i> From
+                                    booking your trip to
                                     arriving at your destination, we're here
                                     to provide you with the best possible customer service <i
                                         class="fa-solid fa-quote-right"></i></p>
-                                <ul class="list-unstyled mb-0 w-max-content w-md-auto mx-auto">
+                                <ul class="list-unstyled mb-0 w-max-content w-md-auto mx-auto" style="color:#dddd">
                                     <li class="d-flex align-items-center">
                                         <i class="fa-solid fa-hand-point-right me-3"></i> <span
-                                            class="text-700 fw-semi-bold">We are Fast</span>
+                                            class="text-100 fw-semi-bold">We are Fast</span>
                                     </li>
                                     <li class="d-flex align-items-center"> <i
                                             class="fa-solid fa-hand-point-right me-3"></i> <span
-                                            class="text-700 fw-semi-bold">We are Reliable</span></li>
+                                            class="text-100 fw-semi-bold">We are Reliable</span></li>
                                     </li>
                                     <li class="d-flex align-items-center"> <i
                                             class="fa-solid fa-hand-point-right me-3"></i> <span
-                                            class="text-700 fw-semi-bold">We are Responsive</span></li>
+                                            class="text-100 fw-semi-bold">We are Responsive</span></li>
                                     </li>
                                 </ul>
                             </div>
-                            <div class="position-relative z-index--1 mb-6 d-none d-md-block text-center mt-md-15"><img
-                                    class="auth-title-box-img d-dark-none"
-                                    src="../../../assets/img/spot-illustrations/auth.png" alt=""><img
-                                    class="auth-title-box-img d-light-none"
-                                    src="../../../assets/img/spot-illustrations/auth-dark.png" alt=""></div>
+                            <div
+                                class="position-relative  mb-6 d-none d-md-block text-center mt-md-15 border-top border-dashed text-uppercase">
+
+                                <h3 class="text-white mt-3">Get your ticket <i class="fa-solid fa-ticket"></i></h3>
+                            </div>
                         </div>
 
                     </div>
@@ -569,31 +589,50 @@
                 <!-- Repeat for additional steps -->
                 <div x-show="currentStep === totalSteps">
                     <!-- Final step form -->
-                    @if ($payment_data)
+
+
+                    @if (session()->has('booking') && session()->has('payment_status') && session()->get('payment_status') === 'success')
+
+
                         <div class="container py-2 mb-7 bg-200">
                             <div class="row justify-content-center">
                                 <div class="col-lg-12 col-xl-7">
-                                    <div class="card">
+                                    <div class="card" id="invoice">
                                         <div class="card-body p-5">
                                             <h2>
                                                 Hey {!! Auth::user()->customers->first()->first_name . ' ' . Auth::user()->customers->first()->last_name !!},
                                             </h2>
                                             <p class="fs-sm">
                                                 This is the receipt for a payment of
-                                                <strong>{{ $payment_data['amount'] }}
-                                                    {{ $payment_data['payment_currency'] }}</strong> you made
+                                                <strong>
+                                                    @if ($payment_data['payment_currency'] == 'USD')
+                                                        {!! '$' !!}{{ $payment_data['amount'] }}
+                                                    @else
+                                                        {!! 'MWK' !!}{{ $payment_data['amount'] }}
+                                                    @endif
+
+                                                </strong> you made
                                                 to {{ config('app.name') }}.
                                             </p>
 
+
+
                                             <div class="border-top border-gray-200 pt-4 mt-4">
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-4">
                                                         <div class="text-muted mb-2">Payment No. / Ticket No.</div>
                                                         <strong>{{ $payment_data['transaction_id'] }}</strong>
+
                                                     </div>
-                                                    <div class="col-md-6 text-md-end">
+
+                                                    <div class="col-md-4 text-md-center ">
+                                                        <div class="text-muted mb-2">Seat No.</div>
+                                                        <strong>{{ $payment_data['seat_no'] }}</strong>
+
+                                                    </div>
+                                                    <div class="col-md-4 text-md-end">
                                                         <div class="text-muted mb-2">Payment Date</div>
-                                                        <strong>{{ $date }}</strong>
+                                                        <strong>{{ $payment_data['payment_date'] }}</strong>
                                                     </div>
                                                 </div>
                                             </div>
@@ -603,24 +642,25 @@
                                                     <div class="col-md-6">
                                                         <div class="text-muted mb-2">Client</div>
                                                         <strong>
-                                                            John McClane
+                                                            {!! Auth::user()->customers->first()->first_name . ' ' . Auth::user()->customers->first()->last_name !!}
                                                         </strong>
                                                         <p class="fs-sm">
-                                                            989 5th Avenue, New York, 55832
+                                                            {!! Auth::user()->customers->first()->phone_number !!}
                                                             <br>
-                                                            <a href="#!" class="text-purple">john@email.com
+                                                            <a href="#!"
+                                                                class="text-purple">{!! Auth::user()->email !!}
                                                             </a>
                                                         </p>
                                                     </div>
                                                     <div class="col-md-6 text-md-end">
                                                         <div class="text-muted mb-2">Payment To</div>
                                                         <strong>
-                                                            Themes LLC
+                                                            {{ config('app.name') }}
                                                         </strong>
                                                         <p class="fs-sm">
-                                                            9th Avenue, San Francisco 99383
-                                                            <br>
-                                                            <a href="#!" class="text-purple">themes@email.com
+
+                                                            <a href="#!"
+                                                                class="text-purple">{{ config('mail.from.address') }}
                                                             </a>
                                                         </p>
                                                     </div>
@@ -641,47 +681,68 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td class="px-0">Theme customization</td>
-                                                        <td class="text-end px-0">$60.00</td>
+                                                        <td class="px-0">Bus Ticket, <br>
+                                                            @if ($collect)
+                                                                {{ $collect['route'] }},<br>
+                                                                @
+                                                                {{ \Carbon\Carbon::parse($schedule->depart_time)->format('H:i') }}
+                                                                /
+                                                                {{ $collect['schedule'] }}
+                                                            @endif
+                                                        </td>
+                                                        <td class="text-end px-0">
+                                                            @if ($payment_data['payment_currency'] == 'USD')
+                                                                {!! '$' !!}
+                                                            @else
+                                                                {!! 'MWK' !!}
+                                                            @endif{{ $payment_data['amount'] }}
+                                                        </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td class="px-0">Website design</td>
-                                                        <td class="text-end px-0">$80.00</td>
-                                                    </tr>
+
                                                 </tbody>
                                             </table>
 
                                             <div class="mt-5">
                                                 <div class="d-flex justify-content-end">
                                                     <p class="text-muted me-3">Subtotal:</p>
-                                                    <span>$390.00</span>
+                                                    <span>
+                                                        @if ($payment_data['payment_currency'] == 'USD')
+                                                            {!! '$' !!}
+                                                        @else
+                                                            {!! 'MWK' !!}
+                                                        @endif{{ $payment_data['amount'] }}
+                                                    </span>
                                                 </div>
-                                                <div class="d-flex justify-content-end">
-                                                    <p class="text-muted me-3">Discount:</p>
-                                                    <span>-$40.00</span>
-                                                </div>
+
                                                 <div class="d-flex justify-content-end mt-3">
                                                     <h5 class="me-3">Total:</h5>
-                                                    <h5 class="text-success">$399.99 USD</h5>
+                                                    <h5 class="text-success">
+                                                        @if ($payment_data['payment_currency'] == 'USD')
+                                                            {!! '$' !!}
+                                                        @else
+                                                            {!! 'MWK' !!}
+                                                        @endif{{ $payment_data['amount'] }}
+                                                    </h5>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="d-flex justify-content-center my-2">
-                                            <a href="#!" class="btn btn-secondary btn-lg  px-4">
-                                                <span class="fa-solid fa-print">
 
-                                                </span>
-                                                Print Invoice
-                                            </a>
-                                        </div>
 
+                                    </div>
+
+                                    <div class="d-flex justify-content-center my-2">
+                                        <button id="print" class="btn btn-secondary btn-lg  px-4">
+                                            <span class="fa-solid fa-print">
+
+                                            </span>
+                                            Print Invoice
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     @endif
-
                 </div>
 
                 <div class=" mt-10  ">
@@ -691,17 +752,20 @@
                         <div class="d-flex justify-content-between ">
 
                             <button type="button" class="btn btn-secondary "
-                                x-bind:disabled="(currentStep === 1) || (currentStep === 3) || paid === true"
+                                x-bind:disabled="(currentStep === 1) || (currentStep === 3) || (paid === true)"
                                 wire:click="previousStep"><i class="fa-solid fa-angle-left" aria-hidden="true"></i>
                                 BACK</button>
                             <button type="button" class="btn btn-secondary " :disabled="showCustomer == true"
-                                x-bind:class="{ 'd-none': currentStep === 3 || currentStep === totalSteps }"
-                                x-bind:disabled="paid === '' || available === false" wire:click="nextStep">CONTINUE <i
-                                    class="fa-solid fa-angle-right" aria-hidden="true"></i></button>
+                                x-bind:class="{ 'd-none': currentStep === totalSteps }"
+                                x-bind:disabled="(paid === '') || (available === false)" wire:click="nextStep">CONTINUE
+                                <i class="fa-solid fa-angle-right" aria-hidden="true"></i></button>
                             <button type="button" class="btn btn-secondary "
-                                x-bind:class="{ 'd-none': currentStep != totalSteps || paid === true }"
-                                wire:click.prevent="save">
-                                <i class="fa-solid fa-check"></i> {{ $button }}
+                                x-bind:class="{ 'd-none': currentStep != totalSteps }"
+                                x-bind:disabled="loading === 'PLEASE WAIT...'" wire:click.prevent="save">
+                                <i x-bind:class="{
+                                    'd-none': loading === 'PLEASE WAIT...'
+                                }"
+                                    class="fa-solid fa-check"></i> {{ $button }}
                             </button>
 
                         </div>
@@ -810,6 +874,15 @@
 
             });
             $('#select2').val(e.detail.lastId).trigger('change');
+        });
+    </script>
+
+    <script>
+        $('#print').click(function() {
+            $('#invoice').printThis({
+                debug: false,
+            });
+
         });
     </script>
 @endpush

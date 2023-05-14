@@ -17,6 +17,7 @@ return new class extends Migration
 
             $table->unsignedFloat('price', 8, 2);
             $table->unsignedFloat('amount_paid', 8, 2);
+            $table->string('currency', 3);
             $table->boolean('payment_status');
             $table->string('payment_method');
             $table->timestamps();

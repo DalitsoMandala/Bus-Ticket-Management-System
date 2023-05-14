@@ -2,7 +2,7 @@
     <x-black-button class="add-session" wire:click="showModal" wire:loading.attr="disabled">
         ADD CUSTOMER
     </x-black-button>
-    <x-dialog-modal wire:model.defer="showingModalAddCustomer">
+    <bootstrap-dialog-modal wire:model.defer="showingModalAddCustomer">
 
         <x-slot name="title">
 
@@ -42,7 +42,7 @@
                         <div>
                             <x-input-label class="form-label" for="inputName">Email</x-input-label>
 
-                            <x-text-input placeholder="email" type="email" wire:model.defer="email" />
+                            <x-text-input type="email" placeholder="email" wire:model.defer="email" />
                         </div>
                         <div>
                             @error('email')
@@ -74,7 +74,6 @@
                     </div>
                 </div>
 
-
             </form>
 
         </x-slot>
@@ -83,7 +82,7 @@
 
         </x-slot>
 
-    </x-dialog-modal>
+    </bootstrap-dialog-modal>
 
 </div>
 

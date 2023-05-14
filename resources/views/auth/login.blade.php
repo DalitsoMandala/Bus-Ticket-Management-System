@@ -48,9 +48,9 @@
 
         <div class="justify-content-center d-flex mt-4 flex">
 
-            <x-button class="ml-3">
+            <x-primary-button class="ml-3">
                 {{ __('Log in') }}
-            </x-button>
+            </x-primary-button>
         </div>
     </form>
 

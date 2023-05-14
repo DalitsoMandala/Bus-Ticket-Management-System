@@ -2,7 +2,11 @@
 
 namespace App\Http\Livewire\Customer;
 
+use Closure;
+use Carbon\Carbon;
+use Dompdf\Dompdf;
 use App\Models\Bus;
+use Dompdf\Options;
 use App\Models\Seat;
 use App\Models\User;
 use App\Models\Booking;
@@ -13,10 +17,16 @@ use App\Models\Customer;
 use App\Models\Schedule;
 use App\Models\BookedBus;
 use Illuminate\Support\Str;
+use App\Mail\BookingReceipt;
 use App\Models\ExchangeRate;
+use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class BookBus extends Component
@@ -54,7 +64,8 @@ class BookBus extends Component
     public $canShow;
     public $seatData;
     public $currency;
-    public $payment_data;
+    public $loading;
+    public $payment_data = [];
     # ---------------------------------------------------------------------------- #
     #                            Livewire listeners here                           #
     # ---------------------------------------------------------------------------- #
@@ -80,6 +91,7 @@ class BookBus extends Component
         'resetCustomer' => 'resetCustomer',
         'updateOptions' => 'updateOptions',
         'loadOptions' => 'loadOptions',
+        'sendPdf' => 'sendPdf'
     ];
 
 
@@ -165,14 +177,10 @@ class BookBus extends Component
                     'seat_id' => $chooseSeat->id
                 ];
 
-
+                session()->put('seat', $this->seatData);
 
                 // book a bus and set seats if they are full or not
                 $this->canShow = true;
-
-                /* -------------------------------------------------------------------------- */
-                /*                choose one that has alot of seats taken first               */
-                /* -------------------------------------------------------------------------- */
             } else if ($checkBookedBuses->count() == 0) {
 
                 // look for some bus in the database
@@ -185,6 +193,7 @@ class BookBus extends Component
                 if ($checkBus == null) {
                     // no bus available
                     $this->canShow = false;
+                    session()->forget('seat');
                 } else {
                     $this->canShow = true;
                     // pull out one bus from the database and add the person
@@ -198,10 +207,14 @@ class BookBus extends Component
                         'bus_id' => $checkBus->id,
                         'seat_id' => $chooseSeat->id
                     ];
+
+                    session()->put('seat', $this->seatData);
                 }
             }
         } else {
             $this->canShow = null;
+
+            session()->forget('seat');
         }
     }
 
@@ -237,14 +250,44 @@ class BookBus extends Component
 
 
             if ($this->showCustomer == false) {
+                $this->resetValidation();
+                $data = [
+                    'schedule' => $this->schedule,
+                    'route' => $this->route,
+                    'customer' => $this->customer,
+                    'price' => $this->price,
+                    'date' => $this->date
+                ];
 
-                $this->validate([
+                $rules = [
                     'schedule' => 'required',
                     'route' => 'required',
                     'customer' => 'required',
                     'price' => 'required',
-                    'date' => 'required',
-                ]);
+                    'date' => [
+                        'required',
+                        function (string $attribute, mixed $value, Closure $fail) {
+                            $countIf =   Booking::where('customer_id', $this->customer)->where('date_departing', $value)->where('is_completed', 0)->count();
+
+                            if ($countIf == 1) {
+                                $fail("You have an existing booking on this day, choose another.");
+                            }
+                        },
+                    ],
+                ];
+
+
+
+                // $this->validate([
+                //     'schedule' => 'required',
+                //     'route' => 'required',
+                //     'customer' => 'required',
+                //     'price' => 'required',
+                //     'date' => 'required',
+                // ]);
+
+
+                $validator = Validator::make($data, $rules)->validate();
             } else {
 
                 $this->validate([
@@ -307,6 +350,9 @@ class BookBus extends Component
             ], [
                 'paid.required' => 'required',
             ]);
+        } else if ($this->currentStep == 3) {
+            $this->resetErrorBag();
+            $this->resetValidation();
         }
     }
 
@@ -316,6 +362,10 @@ class BookBus extends Component
         $this->currentStep--;
         if ($this->currentStep < 1) {
             $this->currentStep = 1;
+        } else if ($this->currentStep == 1) {
+
+            // $this->reset();
+            // $this->booking('')
         }
     }
 
@@ -328,7 +378,7 @@ class BookBus extends Component
 
         $amount = $data[2]['amount'];
 
-
+        //   dd($amount);
 
 
 
@@ -343,12 +393,14 @@ class BookBus extends Component
             $payment = Payment::create([
                 'transaction_id' => $transactionId,
                 'price' => $this->price,
-                'amount_paid' =>  $this->price,
+                'amount_paid' =>   $amount['value'],
                 'payment_method' => $this->payment_method,
-                'payment_status' => true
+                'payment_status' => true,
+                'currency' => $amount['currency_code'],
+
             ]);
 
-            $bus = Bus::whereNull('route_id')->whereNull('schedule_id')->whereNull('date_departing')->where('id', $this->seatData['bus_id'])->update([
+            $bus = Bus::find($this->seatData['bus_id'])->update([
                 'route_id' => $this->route,
                 'schedule_id' => $this->schedule,
                 'date_departing' => $this->date
@@ -376,7 +428,9 @@ class BookBus extends Component
                 ->first();
 
 
-
+            Seat::find($this->seatData['seat_id'])->update([
+                'is_taken' => true,
+            ]);
 
             if ($remainingSeats->remaining_seats == 0) {
 
@@ -390,22 +444,30 @@ class BookBus extends Component
             }
 
 
-            Seat::find($this->seatData['seat_id'])->update([
-                'is_taken' => true,
-            ]);
+
 
             session()->put('booking.payment_type', $this->payment_method);
 
             session()->put('booking.amount', $amount['value']);
             session()->put('booking.payment_currency', $amount['currency_code']);
             session()->put('booking.transaction_id',  $data[0]);
+            session()->put('booking.payment_date',  $payment->updated_at);
+            session()->put('booking.seat_no',  Seat::find($this->seatData['seat_id'])->seat_no);
+            $array = session()->get('booking');
 
+
+            $this->payment_data = [
+                'payment_type' => $array['payment_type'],
+                'payment_currency' => $array['payment_currency'],
+                'transaction_id' => $array['transaction_id'],
+                'amount' => $array['amount'],
+                'payment_date' => Carbon::parse($array['payment_date'])->format('d/m/Y'),
+                'seat_no' => Seat::find($this->seatData['seat_id'])->seat_no
+            ];
             $this->alert(
                 'success',
                 'Payment was successfull!'
             );
-
-            $this->reset('seatData');
         } else {
             session()->put('payment_status', 'failure');
 
@@ -420,8 +482,6 @@ class BookBus extends Component
                 'payment_method' => $this->payment_method,
                 'payment_status' => false
             ]);
-
-            $this->reset('seatData');
         }
     }
 
@@ -467,18 +527,17 @@ class BookBus extends Component
 
 
 
+        $this->loading = 'PLEASE WAIT...';
+        $this->button = $this->loading;
+        $this->emitSelf('sendPdf');
 
-        //session()->flush();
 
 
-        $this->alert(
-            'success',
-            'Created successfully'
-        );
 
-        $this->emitTo('component', 'refresh');
-        $this->emitSelf('hideModal');
-        $this->emitSelf('resetdata');
+
+
+        //  $this->emitSelf('hideModal');
+        //  $this->emitSelf('resetdata');
     } // End SAVE
 
     public function saveCustomer()
@@ -548,62 +607,60 @@ class BookBus extends Component
 
 
 
-    # ---------------------------------------------------------------------------- #
-    #                        Livewire Delete Functions here                        #
-    # ---------------------------------------------------------------------------- #
 
-    /*
- public $message = " Are you sure you want delete this programme?";
-    public $count = 0;
-    public $data = [];
-
-
-
-    public $showingModalDeleteProgram = false;
-    public function showModal()
-    {
-        $this->reset('message');
-        $this->showingModalDeleteProgram = true;
-
-        //    $this->counter++;
-    }
-
-    public function hideModal()
-    {
-        $this->showingModalDeleteProgram = false;
-    }
-
-    public function changeMessage($data)
-    {
-        $this->data = $data;
-        $valuesCount = count($data);
-
-        if ($valuesCount == 1) {
-            $this->message =  "Are you sure you want delete this programme?";
-            $this->showingModalDeleteProgram = true;
-            $this->count = 0; //0 means default value to hide the button
-
-
-        } else if ($valuesCount > 1) {
-            $this->message =  "Are you sure you want delete these programmes?";
-            $this->showingModalDeleteProgram = true;
-            $this->count = 1; // 1 means multiple data
-
-
-        }
-    }
-
-    public function delete()
-    {
-        $this->emitTo('admin.add-program', 'destroyAll', $this->data);
-    }
-
-
-*/
 
     # ---------------------------------------------------------------------------- #
     #                             Livewire Render here                             #
     # ---------------------------------------------------------------------------- #
+
+    public function sendPdf()
+    {
+
+
+        $data = [
+            'ticket_no' => 'WIOERF23344',
+            'seat_no' => 23,
+            'payment_date' => Carbon::parse(date('Y-m-d'))->format('d/m/Y'),
+            'client' => 'John Doe',
+            'payment_to' => config('app.name'),
+            'description' => 'Booking ticket',
+            'amount' => '$45.00',
+            'sub_total' => '$45.00',
+            'total_amount' => '$45.00',
+            'customer_phone_number' => '+26599339393',
+            'customer_email' => 'dalitso@gmail.com',
+            'company_email' => config('mail.from.address'),
+        ];
+
+
+
+
+
+        try {
+            //code...
+            session()->forget(['booking', 'payment_status']);
+            Mail::to('daliprinc8@gmail.com')
+
+                ->send(new BookingReceipt($data));
+
+
+            $this->loading = null;
+            $this->button = "SUBMIT";
+            $this->redirect(url()->previous());
+        } catch (\Exception $th) {
+            //throw $th;
+            $this->alert(
+                'warning',
+                'Something went wrong!'
+            );
+
+            $this->redirect(url()->previous());
+        }
+
+        // Mail sent successfully
+
+    }
+
 
     public function mount()
     {
@@ -615,9 +672,11 @@ class BookBus extends Component
 
 
 
+
+
         if (session()->has('booking')  && !session()->has('payment_status')) {
             $array = session()->get('booking');
-
+            $seatArray = session()->get('seat');
 
             $this->collect = [
                 'full_name' => $array['full_name'],
@@ -636,12 +695,16 @@ class BookBus extends Component
             $this->price = $array['customer_price'];
             $this->amount = $array['customer_usd'];
             $this->date = $array['date'];
-            $this->currentStep = 2;
+            $this->seatData = [
+                'bus_id' => $seatArray['bus_id'],
+                'seat_id' => $seatArray['seat_id']
+            ];
+            //     $this->currentStep = 2;
         } else if (session()->has('booking')  && session()->has('payment_status')) {
 
             if (session()->get('payment_status') == 'success') {
                 $array = session()->get('booking');
-
+                $seatArray = session()->get('seat');
 
 
                 $this->collect = [
@@ -652,27 +715,34 @@ class BookBus extends Component
                     'price' => $array['price'],
                     'schedule' => $array['schedule'],
                     'quantity' => $array['quantity'],
-                    'amount' => $array['amount']
+                    'amount' => $array['amount'],
+                    'seat_no' => $array['seat_no'],
                 ];
                 $this->customer = $array['customer_id'];
                 $this->route = $array['customer_route'];
                 $this->schedule = $array['customer_schedule'];
                 $this->price = $array['customer_price'];
                 $this->amount = $array['customer_usd'];
-
                 $this->payment_data = [
                     'payment_type' => $array['payment_type'],
                     'payment_currency' => $array['payment_currency'],
                     'transaction_id' => $array['transaction_id'],
                     'amount' => $array['amount'],
+                    'payment_date' => Carbon::parse($array['payment_date'])->format('d/m/Y'),
+                    'seat_no' =>  $array['seat_no']
                 ];
-                $this->currentStep = 3;
+
+                $this->seatData = [
+                    'bus_id' => $seatArray['bus_id'],
+                    'seat_id' => $seatArray['seat_id']
+                ];
+                //   $this->currentStep = 3;
 
 
                 // $bookedBus = BookedBus::where('route_id', '=', $this->route)->where('schedule_id', '=', $this->schedule);
             } else {
                 $array = session()->get('booking');
-
+                $seatArray = session()->get('seat');
 
                 $this->collect = [
                     'full_name' => $array['full_name'],
@@ -689,7 +759,11 @@ class BookBus extends Component
                 $this->schedule = $array['customer_schedule'];
                 $this->price = $array['customer_price'];
                 $this->amount = $array['customer_usd'];
-                $this->currentStep = 2;
+                $this->seatData = [
+                    'bus_id' => $seatArray['bus_id'],
+                    'seat_id' => $seatArray['seat_id']
+                ];
+                //   $this->currentStep = 2;
             }
         }
 
@@ -703,6 +777,8 @@ class BookBus extends Component
 
     public function render()
     {
+
+
         return view('livewire.customer.book-bus', [
             'routes' => BusRoute::all(),
             'schedules' => Schedule::all(),

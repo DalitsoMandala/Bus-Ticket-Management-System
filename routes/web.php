@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use App\Models\Bus;
 use App\Models\Seat;
 use App\Models\Customer;
@@ -11,21 +12,21 @@ use App\Http\Livewire\Admin\Payment;
 use App\Http\Livewire\Admin\Profile;
 use App\Http\Livewire\Admin\Overview;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Customer\Refunds;
+use App\Http\Controllers\TestController;
 use App\Http\Livewire\Admin\ManageBuses;
 use App\Http\Livewire\Admin\ManageSeats;
 use App\Http\Livewire\Admin\ManageRoutes;
+use App\Http\Livewire\Customer\Schedules;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TestController;
-use App\Http\Livewire\Customer\CustomerOverview;
 use App\Http\Livewire\Admin\ManageBookings;
 use App\Http\Livewire\Admin\ManagePayments;
 use App\Http\Livewire\Admin\ManageCustomers;
 use App\Http\Livewire\Admin\ManageSchedules;
-use App\Http\Livewire\Customer\BookBus as CustomerBookBus;
 use App\Http\Livewire\Customer\CancelBooking;
+use App\Http\Livewire\Customer\CustomerOverview;
+use App\Http\Livewire\Customer\BookBus as CustomerBookBus;
 use App\Http\Livewire\Customer\Profile as CustomerProfile;
-use App\Http\Livewire\Customer\Refunds;
-use App\Http\Livewire\Customer\Schedules;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,7 @@ use App\Http\Livewire\Customer\Schedules;
 */
 
 Route::get('/', function () {
+
     return view('welcome');
 });
 
@@ -78,6 +80,25 @@ Route::middleware(['auth', 'role:customer'])->prefix('customer')->group(function
     Route::get('/refunds', Refunds::class)->name('customer-refunds');
     Route::get('/book-a-bus', CustomerBookBus::class)->name('customer-book-a-bus');
     Route::get('/cancel-booking', CancelBooking::class)->name('customer-cancel-booking');
+    Route::get('/receipt', function () {
+        return view('mail.booking-receipt', [
+            'data' => [
+                'ticket_no' => 'WIOERF23344',
+                'seat_no' => 23,
+                'payment_date' => Carbon::parse(date('Y-m-d'))->format('d/m/Y'),
+                'client' => 'John Doe',
+                'payment_to' => config('app.name'),
+                'description' => 'Booking ticket',
+                'amount' => '$45.00',
+                'sub_total' => '$45.00',
+                'total_amount' => '$45.00',
+                'customer_phone_number' => '+26599339393',
+                'customer_email' => 'dalitso@gmail.com',
+                'company_email' => config('mail.from.address'),
+
+            ]
+        ]);
+    })->name('mail');
 });
 
 require __DIR__ . '/auth.php';

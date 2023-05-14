@@ -144,9 +144,10 @@ class DatabaseSeeder extends Seeder
 
             Payment::create([
                 'transaction_id' => $faker->regexify('[A-Z]{5}[0-4]{3}'),
-                'price' => $faker->randomNumber(5, true),
-                'amount_paid' => $faker->randomNumber(5, true),
+                'price' => round($faker->randomNumber(5, true)),
+                'amount_paid' => round($faker->randomNumber(5, true)),
                 'payment_method' => 'paypal',
+                'currency' => 'USD',
                 'payment_status' => true,
             ]);
         }

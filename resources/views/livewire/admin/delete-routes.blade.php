@@ -1,5 +1,5 @@
 <div>
-    <x-confirmation-modal wire:model="showingModalDeleteRoutes">
+    <x-bootstrap-confirmation-modal wire:model="showingModalDeleteRoutes">
 
         <x-slot name="title">
 
@@ -16,16 +16,12 @@
                 No
                 </x-black-button>
 
-
-
                 <x-black-button class="fs--1" wire:loading.attr="disabled" wire:click="confirm_request">
                     Yes
                 </x-black-button>
 
-
         </x-slot>
 
-    </x-confirmation-modal>
-
+    </x-bootstrap-confirmation-modal>
 
 </div>

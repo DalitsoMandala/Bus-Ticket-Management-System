@@ -2,7 +2,7 @@
     <x-black-button class="add-session" wire:click="showModal" wire:loading.attr="disabled">
         ADD BOOKING
     </x-black-button>
-    <x-dialog-modal wire:model.defer="showingModalAddBooking">
+    <bootstrap-dialog-modal wire:model.defer="showingModalAddBooking">
 
         <x-slot name="title">
 
@@ -88,7 +88,6 @@
 
                     <div id="paypal-area">
 
-
                         <div id="paypal-button-container"></div>
                     </div>
 
@@ -96,7 +95,6 @@
                         <div class="row g-3 justify-content-center">
 
                             <div class="col-auto">
-
 
                                 <x-primary-button>proceed to
                                     payment
@@ -106,7 +104,6 @@
                     </div>
                 </div>
 
-
             </form>
 
         </x-slot>
@@ -115,7 +112,7 @@
 
         </x-slot>
 
-    </x-dialog-modal>
+    </bootstrap-dialog-modal>
 
 </div>
 

@@ -2,7 +2,7 @@
     <x-black-button class="add-session" wire:click="showModal" wire:loading.attr="disabled">
         ADD ROUTE
     </x-black-button>
-    <x-dialog-modal wire:model.defer="showingModalAddRoutes">
+    <bootstrap-dialog-modal wire:model.defer="showingModalAddRoutes">
 
         <x-slot name="title">
 
@@ -45,7 +45,6 @@
                                 <option value="Phalombe"> Phalombe</option>
                                 <option value="Zomba"> Zomba</option>
                                 <option value="Neno"> Neno</option>
-
 
                             </select>
                         </div>
@@ -91,7 +90,6 @@
                                 <option value="Zomba"> Zomba</option>
                                 <option value="Neno"> Neno</option>
 
-
                             </select>
                         </div>
                         <div>
@@ -127,10 +125,6 @@
 
                             <x-text-input type="text" placeholder="price" wire:model.defer="price" />
 
-
-
-
-
                         </div>
                         <div>
                             @error('price')
@@ -138,11 +132,6 @@
                             @enderror
                         </div>
                     </div>
-
-
-
-
-
 
                     <div class="col-12 gy-6">
                         <div class="row g-3 justify-content-end">
@@ -154,7 +143,6 @@
                     </div>
                 </div>
 
-
             </form>
 
         </x-slot>
@@ -163,7 +151,7 @@
 
         </x-slot>
 
-    </x-dialog-modal>
+    </bootstrap-dialog-modal>
 
 </div>
 

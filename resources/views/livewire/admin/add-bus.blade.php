@@ -2,7 +2,7 @@
     <x-black-button class="add-session" wire:click="showModal" wire:loading.attr="disabled">
         ADD BUS
     </x-black-button>
-    <x-dialog-modal wire:model.defer="showingModalAddBus">
+    <bootstrap-dialog-modal wire:model.defer="showingModalAddBus">
 
         <x-slot name="title">
 
@@ -13,14 +13,11 @@
             <form wire:submit.prevent="save">
                 <div class="row g-3">
 
-
-
                     <div class="col-md-12">
                         <div>
                             <x-input-label class="form-label" for="inputName">Model</x-input-label>
 
-
-                            <select wire:model.defer="model" class="form-control">
+                            <select class="form-control" wire:model.defer="model">
                                 <option value=''>choose one</option>
                                 <option value='Abarth'>Abarth</option>
                                 <option value='Alfa Romeo'>Alfa Romeo</option>
@@ -96,7 +93,6 @@
                         </div>
                     </div>
 
-
                     <div class="col-md-12">
                         <div>
                             <x-input-label class="form-label" for="inputName">Brand</x-input-label>
@@ -109,7 +105,6 @@
                             @enderror
                         </div>
                     </div>
-
 
                     <div class="col-md-12">
                         <div>
@@ -137,12 +132,10 @@
                         </div>
                     </div>
 
-
-
                     <div class="col-md-12">
                         <div>
-                            <x-input-label for="" class="form-label">Condition</x-input-label>
-                            <select class="form-select " wire:model.defer="condition" id="">
+                            <x-input-label class="form-label" for="">Condition</x-input-label>
+                            <select class="form-select " id="" wire:model.defer="condition">
                                 <option>Select one</option>
                                 <option value="good">Good</option>
                                 <option value="fair">Fair</option>
@@ -156,10 +149,6 @@
                         </div>
                     </div>
 
-
-
-
-
                     <div class="col-12 gy-6">
                         <div class="row g-3 justify-content-end" wire:ignore>
 
@@ -170,7 +159,6 @@
                     </div>
                 </div>
 
-
             </form>
 
         </x-slot>
@@ -179,7 +167,7 @@
 
         </x-slot>
 
-    </x-dialog-modal>
+    </bootstrap-dialog-modal>
 
 </div>
 
