@@ -42,7 +42,7 @@ use App\Http\Livewire\Customer\Profile as CustomerProfile;
 Route::get('/', function () {
 
     return view('welcome');
-});
+})->name('home');
 
 
 

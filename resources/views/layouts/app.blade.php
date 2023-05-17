@@ -193,6 +193,10 @@
             @role('admin')
                 @include('layouts.admin-layout')
             @endrole
+
+            @role('customer')
+                @include('layouts.customer-layout')
+            @endrole
             <div class="content">
                 {{ $slot }}
 
