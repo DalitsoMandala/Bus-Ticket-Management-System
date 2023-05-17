@@ -129,7 +129,7 @@
                 <div class="card shadow-lg">
                     <div class="mt-5">
 
-                        <x-application-logo />
+                        <x-application-logo width="60px" />
 
                     </div>
 

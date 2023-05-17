@@ -19,4 +19,4 @@
             {{ $footer }}
         </div>
     </div>
-</x-bootstrap-modal>
+</x-bootstrap-modal >

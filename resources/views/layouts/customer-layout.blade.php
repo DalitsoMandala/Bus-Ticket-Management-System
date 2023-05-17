@@ -8,7 +8,7 @@
         z-index: 1020;
         background: var(--phoenix-navbar-top-bg-color);
         min-height: 4rem;
-    }
+    }   
 </style>
 
 {{-- <nav class="navbar navbar-light navbar-vertical navbar-vibrant navbar-expand-lg">
