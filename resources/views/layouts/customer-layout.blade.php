@@ -1057,10 +1057,11 @@
             data-bs-toggle="collapse" data-bs-target="#navbarTopCollapse" type="button"
             aria-controls="navbarTopCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span
                 class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
-        <a class="navbar-brand me-1 me-sm-3" href="https://prium.github.io/phoenix/v1.11.0/index.html">
+        <a class="navbar-brand me-1 me-sm-3" href="{{ route('home') }}">
             <div class="d-flex align-items-center">
-                <div class="d-flex align-items-center"><x-application-logo width="30" />
-                   
+                <div class="d-flex align-items-center">
+                    <x-application-logo width="30" />
+
                 </div>
             </div>
         </a>
@@ -1076,8 +1077,7 @@
                             <div class="dropdown-item-wrapper"><span class="me-2 uil"
                                     data-feather="home"></span>Home</div>
                         </a></li>
-                    <li><a class="dropdown-item"
-                            href="{{ route('customer-dashboard') }}">
+                    <li><a class="dropdown-item" href="{{ route('customer-dashboard') }}">
                             <div class="dropdown-item-wrapper"><span class="me-2 uil"
                                     data-feather="box"></span>Dashboard</div>
                         </a></li>
@@ -1085,25 +1085,24 @@
                             <div class="dropdown-item-wrapper"><span class="me-2 uil"
                                     data-feather="user-check"></span>Profile</div>
                         </a></li>
-               
+
                 </ul>
             </li>
-         
+
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" data-bs-toggle="dropdown"
                     data-bs-auto-close="outside" href="#!" role="button" aria-haspopup="true"
                     aria-expanded="false"><span class="uil fs-0 me-2 uil-files-landscapes-alt"></span>Pages</a>
                 <ul class="dropdown-menu navbar-dropdown-caret">
-                 
+
                     <li class="dropdown"><a class="dropdown-item dropdown-toggle" id="landing"
                             data-bs-toggle="dropdown" data-bs-auto-close="outside" href="#">
                             <div class="dropdown-item-wrapper"><span
                                     class="uil fs-0 uil-angle-right lh-1 dropdown-indicator-icon"></span><span><span
-                                        class="me-2 uil" data-feather="globe"></span>Booking</span>
+                                        class="me-2 uil" data-feather="archive"></span>Booking</span>
                             </div>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item"
-                                    href="https://prium.github.io/phoenix/v1.11.0/pages/landing/default.html">
+                            <li><a class="dropdown-item" href="{{ route('customer-book-a-bus') }}">
                                     <div class="dropdown-item-wrapper"><span class="me-2 uil"></span>Book a bus
                                     </div>
                                 </a></li>
@@ -1114,25 +1113,24 @@
                                 </a></li>
                         </ul>
                     </li>
-                  
+
                     <li><a class="dropdown-item"
                             href="https://prium.github.io/phoenix/v1.11.0/pages/notifications.html">
                             <div class="dropdown-item-wrapper"><span class="me-2 uil"
-                                    data-feather="bell"></span>Payments</div>
+                                    data-feather="credit-card"></span>Payments</div>
                         </a></li>
                     <li><a class="dropdown-item" href="https://prium.github.io/phoenix/v1.11.0/pages/members.html">
                             <div class="dropdown-item-wrapper"><span class="me-2 uil"
-                                    data-feather="users"></span>Refunds</div>
+                                    data-feather="corner-up-left"></span>Refunds</div>
                         </a></li>
                     <li><a class="dropdown-item" href="https://prium.github.io/phoenix/v1.11.0/pages/timeline.html">
                             <div class="dropdown-item-wrapper"><span class="me-2 uil"
-                                    data-feather="clock"></span>Queries</div>
+                                    data-feather="alert-circle"></span>Queries</div>
                         </a></li>
-                
-              
+
                 </ul>
             </li>
-        
+
         </ul>
     </div>
     <ul class="navbar-nav navbar-nav-icons flex-row">
@@ -1514,51 +1512,38 @@
                     <div class="card-body p-0">
                         <div class="text-center pt-4 pb-3">
                             <div class="avatar avatar-xl ">
-                                <img class="rounded-circle "
-                                    src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/72x72/57.webp"
-                                    alt="" />
+                                <img class="rounded-circle" src="https://github.com/mdo.png" alt="mdo"
+                                    width="32" height="32">
                             </div>
-                            <h6 class="mt-2 text-black">Jerry Seinfield</h6>
+                            <h6 class="mt-2 text-black">{{ Auth::user()->name }}</h6>
                         </div>
-                        <div class="mb-3 mx-3"><input class="form-control form-control-sm" id="statusUpdateInput"
-                                type="text" placeholder="Update your status" />
-                        </div>
+
                     </div>
-                    <div class="overflow-auto scrollbar" style="height: 10rem;">
+                    <hr />
+                    <div class="overflow-auto scrollbar" style="height: 5rem;">
                         <ul class="nav d-flex flex-column mb-2 pb-1">
                             <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
                                         class="me-2 text-900" data-feather="user"></span><span>Profile</span></a>
                             </li>
                             <li class="nav-item"><a class="nav-link px-3" href="#!"><span
-                                        class="me-2 text-900" data-feather="pie-chart"></span>Dashboard</a></li>
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
-                                        class="me-2 text-900" data-feather="lock"></span>Posts &amp;
-                                    Activity</a></li>
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
-                                        class="me-2 text-900" data-feather="settings"></span>Settings
-                                    &amp; Privacy </a></li>
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
-                                        class="me-2 text-900" data-feather="help-circle"></span>Help
-                                    Center</a></li>
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
-                                        class="me-2 text-900" data-feather="globe"></span>Language</a>
+                                        class="me-2 text-900" data-feather="pie-chart"></span>Dashboard</a>
                             </li>
+
                         </ul>
                     </div>
                     <div class="card-footer p-0 border-top">
-                        <ul class="nav d-flex flex-column my-3">
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
-                                        class="me-2 text-900" data-feather="user-plus"></span>Add
-                                    another account</a></li>
-                        </ul>
-                        <hr />
-                        <div class="px-3"> <a class="btn btn-phoenix-secondary d-flex flex-center w-100"
-                                href="#!"> <span class="me-2" data-feather="log-out">
-                                </span>Sign out</a></div>
-                        <div class="my-2 text-center fw-bold fs--2 text-600"><a class="text-600 me-1"
-                                href="#!">Privacy policy</a>&bull;<a class="text-600 mx-1"
-                                href="#!">Terms</a>&bull;<a class="text-600 ms-1" href="#!">Cookies</a>
+
+                        <div class="px-3 py-3"> <a class="btn btn-phoenix-secondary d-flex flex-center w-100"
+                                href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                   document.getElementById('logout-form').submit();">
+                                <span class="me-2" data-feather="log-out"> </span>Sign out</a>
                         </div>
+
+                        <form class="d-none" id="logout-form" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -5748,7 +5733,7 @@
         navbarVertical.removeAttribute('style');
     }
 
-    var navbarTopStyle = window.config.config.phoenixNavbarTopStyle;
+    var navbarTopStyle = 'darker';
 
     var navbarTop = document.querySelector('.navbar-top');
     if (navbarTopStyle === 'darker') {

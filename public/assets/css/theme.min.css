@@ -26621,7 +26621,7 @@ pre[class*=language-] {
     background-color: var(--phoenix-tinymce-bg) !important
 }
 
-.flatpickr-input-container {
+/* .flatpickr-input-container {
     position: relative
 }
 
@@ -26899,7 +26899,7 @@ span.flatpickr-weekday,
     width: 100% !important;
     min-width: 100% !important;
     max-width: 100% !important
-}
+} */
 
 .isotope-nav {
     font-weight: 700;

@@ -60,7 +60,22 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
+        foreach (range(1, 10) as $index) {
+            # code...
 
+            $cus =  User::create([
+                'name' => 'customer' . $index,
+                'email' => 'customer' . $index . '@gmail.com',
+                'email_verified_at' => now(),
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            ])->AssignRole('customer');
+            $cus->customers()->create([
+                'first_name' => $firstname,
+                'last_name' => $lastname,
+                'phone_number' => $faker->phoneNumber(),
+                'customer_uuid' => Str::upper(Str::random(6)) . $cus->id
+            ]);
+        }
 
 
         //create schedules

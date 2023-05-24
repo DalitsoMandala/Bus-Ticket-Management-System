@@ -419,12 +419,14 @@ class ManageSeats extends Component
                 ->paginate($this->perPage);
         }
 
+        $date = Bus::whereNotNull('date_departing')->select(['date_departing'])->distinct()->get();
+
 
         return view('livewire.admin.manage-seats', [
             'bus' => $seats,
             'seats' => $seatnumbers,
             'schedules' => Schedule::all(),
-            'date' => Bus::whereNotNull('date_departing')->get()
+            'date' => $date
         ]);
     }
 }

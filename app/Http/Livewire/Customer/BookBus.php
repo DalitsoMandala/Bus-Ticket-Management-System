@@ -9,6 +9,7 @@ use App\Models\Bus;
 use Dompdf\Options;
 use App\Models\Seat;
 use App\Models\User;
+
 use App\Models\Booking;
 use App\Models\Payment;
 use Livewire\Component;
@@ -25,6 +26,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -62,6 +64,7 @@ class BookBus extends Component
     public $finished_transaction = false;
     public $paid;
     public $canShow;
+    public $availability;
     public $seatData;
     public $currency;
     public $loading;
@@ -95,15 +98,9 @@ class BookBus extends Component
     ];
 
 
-    public function updatedRoute($value)
-    {
-
-        $price = BusRoute::find($value);
-        if ($price) {
-            $this->price = $price->price;
-        }
-    }
-
+    /* -------------------------------------------------------------------------- */
+    /*                                   Helpers                                  */
+    /* -------------------------------------------------------------------------- */
     public function filterLargest($bus)
     {
 
@@ -116,6 +113,366 @@ class BookBus extends Component
         $theBus = $bus->where('taken_seats', $maxNumberofTakenSeats)->first();
         return $theBus->id; // the id of the bus that has the largest number of customers booked
     }
+
+    public function previousStep()
+    {
+        $this->resetErrorBag();
+        $this->currentStep--;
+        if ($this->currentStep < 1) {
+            $this->currentStep = 1;
+        } else if ($this->currentStep == 1) {
+
+            // $this->reset();
+            // $this->booking('')
+        }
+    }
+    public function nextStep()
+    {
+
+
+        //1
+        $this->resetErrorBag();
+        $this->validateData();
+        $this->currentStep++;
+
+        if ($this->currentStep > $this->totalSteps) {
+            $this->currentStep = $this->totalSteps;
+        }
+    }
+
+    public function resetCustomer()
+    {
+
+        if ($this->showCustomer == true) {
+            $this->reset(['customer']);
+            $this->resetValidation(['customer']);
+        } else {
+            $this->resetValidation(['customer_email', 'first_name', 'last_name', 'phone_number']);
+        }
+    }
+
+
+    public function validateData()
+    {
+
+        if ($this->currentStep == 1) {
+
+
+            if ($this->showCustomer == false) {
+                $this->resetValidation();
+                $data = [
+                    'schedule' => $this->schedule,
+                    'route' => $this->route,
+                    'customer' => $this->customer,
+                    'price' => $this->price,
+                    'date' => $this->date
+                ];
+
+                $rules = [
+                    'schedule' => 'required',
+                    'route' => 'required',
+                    'customer' => 'required',
+                    'price' => 'required',
+                    'canShow' => ['required_if:canShow,false'],
+                    'date' => [
+                        'required',
+                        function (string $attribute, mixed $value, Closure $fail) {
+                            $countIf =   Booking::where('customer_id', $this->customer)->where('date_departing', $value)->where('is_completed', 0)->count();
+
+                            if ($countIf == 1) {
+                                $fail("You have an existing booking on this day, choose another day.");
+                            }
+                        },
+                    ],
+
+                ];
+
+
+
+                // $this->validate([
+                //     'schedule' => 'required',
+                //     'route' => 'required',
+                //     'customer' => 'required',
+                //     'price' => 'required',
+                //     'date' => 'required',
+                // ]);
+
+
+                $validator = Validator::make($data, $rules)->validate();
+            } else {
+
+                $this->validate([
+                    'schedule' => 'required',
+                    'route' => 'required',
+                    'price' => 'required',
+                    'customer_email' => 'required|email',
+                    'first_name' => 'required',
+                    'last_name' => 'required',
+                    'phone_number' => 'required',
+                    'date' => 'required',
+
+                ]);
+            }
+
+
+            $this->collect = [
+                'full_name' => Customer::find($this->customer)->first_name . ' ' . Customer::find($this->customer)->last_name,
+                'email' => Customer::find($this->customer)->user->email,
+                'phone' => Customer::find($this->customer)->phone_number,
+                'route' => BusRoute::find($this->route)->from_destination . ' - ' . BusRoute::find($this->route)->to_destination,
+                'price' => $this->price,
+                'schedule' => Schedule::find($this->schedule)->title,
+                'quantity' => 1,
+                'date' => $this->date,
+                'depart_time' => Schedule::find($this->schedule)->depart_time,
+                'check_in_time' => Schedule::find($this->schedule)->check_in_time
+            ];
+
+            $amount = $this->collect['quantity'] * $this->collect['price'];
+
+            $this->collect['amount'] =  $amount;
+
+            $date = date('Y-m-d');
+            $check = ExchangeRate::where('fetch_date', $date)->get();
+            if ($check->count() == 0) {
+                $this->fetchData();
+            } else {
+                $this->exchange_rate = $check[0]->exchange_rate;
+            }
+
+
+            $this->amount = number_format($this->collect['price'] * $this->exchange_rate, 2);
+
+
+            //push arrays together
+            $myArray = [
+                'customer_id' => $this->customer,
+                'customer_route' => $this->route,
+                'customer_price' => $this->price,
+                'customer_schedule' => $this->schedule,
+                'customer_usd' => $this->amount
+            ];
+
+            $oldArray = $this->collect;
+
+            $myArray = $myArray + $oldArray;
+            session()->forget('payment_status');
+            session()->put('booking', $myArray);
+        } else if ($this->currentStep == 2) {
+            $this->validate([
+                'paid' => 'required',
+            ], [
+                'paid.required' => 'required',
+            ]);
+        } else if ($this->currentStep == 3) {
+            $this->resetErrorBag();
+            $this->resetValidation();
+        }
+    }
+
+
+
+    public function payment($data)
+    {
+        // Handle form submission
+
+
+        //
+
+        $amount = $data[2]['amount'];
+
+        //   dd($amount);
+
+
+
+
+
+        if ($data[1] === 'success') {
+
+            session()->put('payment_status', 'success');
+            $this->paid = true;
+            $this->resetValidation('paid');
+            $transactionId = $data[0];
+            $payment = Payment::create([
+                'transaction_id' => $transactionId,
+                'price' => $this->price,
+                'amount_paid' =>   $amount['value'],
+                'payment_method' => $this->payment_method,
+                'payment_status' => true,
+                'currency' => $amount['currency_code'],
+
+            ]);
+
+            $bus = Bus::find($this->seatData['bus_id'])->update([
+                'route_id' => $this->route,
+                'schedule_id' => $this->schedule,
+                'date_departing' => $this->date
+            ]);
+
+            $booking = Booking::create([
+                'payment_id' => $payment->id,
+                'bus_id' => $this->seatData['bus_id'], //he
+                'seat_id' => $this->seatData['seat_id'],
+                'date_departing' => $this->date,
+                'customer_id' => $this->customer
+
+            ]);
+
+
+
+            Seat::find($this->seatData['seat_id'])->update([
+                'is_taken' => true,
+            ]);
+
+            // after that update bus status if full or not
+
+            $remainingSeats =   Bus::join('seats', 'buses.id', '=', 'seats.bus_id')
+                ->where('buses.id', $this->seatData['bus_id'])
+                ->select('buses.id',  DB::raw('COUNT(seats.id) as seat_count'), DB::raw('SUM(CASE WHEN seats.is_taken = 1 THEN 1 ELSE 0 END) as taken_seats'), DB::raw('SUM(CASE WHEN seats.is_taken = 0 THEN 1 ELSE 0 END) as remaining_seats'))
+                ->groupBy('buses.id')
+                ->orderBy('taken_seats', 'desc')
+                ->first();
+
+
+            if ($remainingSeats->remaining_seats == 0) {
+
+                Bus::find($this->seatData['bus_id'])->update([
+                    'is_full' => true,
+                ]);
+
+                //set full status
+
+
+            }
+
+
+
+
+            session()->put('booking.payment_type', $this->payment_method);
+
+            session()->put('booking.amount', $amount['value']);
+            session()->put('booking.payment_currency', $amount['currency_code']);
+            session()->put('booking.transaction_id',  $data[0]);
+            session()->put('booking.payment_date',  $payment->updated_at);
+            session()->put('booking.seat_no',  Seat::find($this->seatData['seat_id'])->seat_no);
+            $array = session()->get('booking');
+
+
+            $this->payment_data = [
+                'payment_type' => $array['payment_type'],
+                'payment_currency' => $array['payment_currency'],
+                'transaction_id' => $array['transaction_id'],
+                'amount' => $array['amount'],
+                'payment_date' => Carbon::parse($array['payment_date'])->format('d/m/Y'),
+                'seat_no' => Seat::find($this->seatData['seat_id'])->seat_no
+            ];
+            $this->alert(
+                'success',
+                'Payment was successfull!'
+            );
+        } else {
+            session()->put('payment_status', 'failure');
+
+            $this->paid = false;
+            $this->resetValidation('paid');
+
+            $transactionId = $data[0];
+            $payment = Payment::create([
+                'transaction_id' => $transactionId,
+                'price' => $this->price,
+                'amount_paid' =>  0.00,
+                'payment_method' => $this->payment_method,
+                'payment_status' => false
+            ]);
+        }
+    }
+
+    public function print()
+    {
+
+        $this->dispatchBrowserEvent('print');
+    }
+
+    public function sendPdf()
+    {
+        $time = Carbon::parse($this->collect['depart_time'])->format('H:i A');
+        $desc = 'Bus ticket, Location : ' . $this->collect['route'] . ', Date/Time : ' . $this->collect['schedule'] . ' (' . $time . ')';
+
+        $data = [
+            'ticket_no' => $this->payment_data['transaction_id'],
+            'seat_no' =>  $this->payment_data['seat_no'],
+            'payment_date' => $this->payment_data['payment_date'],
+            'client' => $this->collect['full_name'],
+            'payment_to' => config('app.name'),
+            'description' => htmlentities($desc),
+            'amount' => $this->payment_data['amount'],
+            'sub_total' => $this->payment_data['amount'] * 1,
+            'total_amount' => $this->payment_data['amount'] * 1,
+            'customer_phone_number' => $this->collect['phone'],
+            'customer_email' => $this->collect['email'],
+            'company_email' => config('mail.from.address'),
+        ];
+
+
+
+
+
+        try {
+            //code...
+
+
+            session()->forget(['booking', 'payment_status']);
+            Mail::to('daliprinc8@gmail.com')
+
+                ->send(new BookingReceipt($data));
+
+
+            $this->loading = null;
+            $this->button = "SUBMIT";
+            Session::flash('mailable');
+            $this->redirect(url()->previous());
+        } catch (\Exception $th) {
+            //throw $th;
+            $this->alert(
+                'warning',
+                'Something went wrong!'
+            );
+
+            $this->redirect(url()->previous());
+        }
+
+        // Mail sent successfully
+
+    }
+
+    public function clear()
+    {
+        $this->currentStep = 1;
+        session()->forget(['booking', 'payment_status']);
+        $this->reset();
+        $this->customers = Customer::all();
+        $this->customer = auth()->user()->customers->first()->id;
+    }
+
+
+    /* -------------------------------------------------------------------------- */
+    /*                               End of Helpers                               */
+    /* -------------------------------------------------------------------------- */
+
+
+    /* -------------------------------------------------------------------------- */
+    /*                              Livewire Updated                              */
+    /* -------------------------------------------------------------------------- */
+
+    public function updatedRoute($value)
+    {
+
+        $price = BusRoute::find($value);
+        if ($price) {
+            $this->price = $price->price;
+        }
+    }
+
 
 
     public function updated($propertyName)
@@ -193,12 +550,9 @@ class BookBus extends Component
                 if ($checkBus == null) {
                     // no bus available
                     $this->canShow = false;
-                    session()->forget('seat');
                 } else {
                     $this->canShow = true;
                     // pull out one bus from the database and add the person
-
-
 
                     // book the customer
                     $chooseSeat = Seat::where('bus_id', '=', $checkBus->id)->where('is_taken', false)->inRandomOrder()->first();
@@ -218,273 +572,9 @@ class BookBus extends Component
         }
     }
 
-    public function nextStep()
-    {
-
-
-        //1
-        $this->resetErrorBag();
-        $this->validateData();
-        $this->currentStep++;
-
-        if ($this->currentStep > $this->totalSteps) {
-            $this->currentStep = $this->totalSteps;
-        }
-    }
-
-    public function resetCustomer()
-    {
-
-        if ($this->showCustomer == true) {
-            $this->reset(['customer']);
-            $this->resetValidation(['customer']);
-        } else {
-            $this->resetValidation(['customer_email', 'first_name', 'last_name', 'phone_number']);
-        }
-    }
-
-    public function validateData()
-    {
-
-        if ($this->currentStep == 1) {
-
-
-            if ($this->showCustomer == false) {
-                $this->resetValidation();
-                $data = [
-                    'schedule' => $this->schedule,
-                    'route' => $this->route,
-                    'customer' => $this->customer,
-                    'price' => $this->price,
-                    'date' => $this->date
-                ];
-
-                $rules = [
-                    'schedule' => 'required',
-                    'route' => 'required',
-                    'customer' => 'required',
-                    'price' => 'required',
-                    'date' => [
-                        'required',
-                        function (string $attribute, mixed $value, Closure $fail) {
-                            $countIf =   Booking::where('customer_id', $this->customer)->where('date_departing', $value)->where('is_completed', 0)->count();
-
-                            if ($countIf == 1) {
-                                $fail("You have an existing booking on this day, choose another.");
-                            }
-                        },
-                    ],
-                ];
-
-
-
-                // $this->validate([
-                //     'schedule' => 'required',
-                //     'route' => 'required',
-                //     'customer' => 'required',
-                //     'price' => 'required',
-                //     'date' => 'required',
-                // ]);
-
-
-                $validator = Validator::make($data, $rules)->validate();
-            } else {
-
-                $this->validate([
-                    'schedule' => 'required',
-                    'route' => 'required',
-                    'price' => 'required',
-                    'customer_email' => 'required|email',
-                    'first_name' => 'required',
-                    'last_name' => 'required',
-                    'phone_number' => 'required',
-                    'date' => 'required',
-                ]);
-            }
-
-
-            $this->collect = [
-                'full_name' => Customer::find($this->customer)->first_name . ' ' . Customer::find($this->customer)->last_name,
-                'email' => Customer::find($this->customer)->user->email,
-                'phone' => Customer::find($this->customer)->phone_number,
-                'route' => BusRoute::find($this->route)->from_destination . ' - ' . BusRoute::find($this->route)->to_destination,
-                'price' => $this->price,
-                'schedule' => Schedule::find($this->schedule)->title,
-                'quantity' => 1,
-                'date' => $this->date,
-            ];
-
-            $amount = $this->collect['quantity'] * $this->collect['price'];
-
-            $this->collect['amount'] =  $amount;
-
-            $date = date('Y-m-d');
-            $check = ExchangeRate::where('fetch_date', $date)->get();
-            if ($check->count() == 0) {
-                $this->fetchData();
-            } else {
-                $this->exchange_rate = $check[0]->exchange_rate;
-            }
-
-
-            $this->amount = number_format($this->collect['price'] * $this->exchange_rate, 2);
-
-
-            //push arrays together
-            $myArray = [
-                'customer_id' => $this->customer,
-                'customer_route' => $this->route,
-                'customer_price' => $this->price,
-                'customer_schedule' => $this->schedule,
-                'customer_usd' => $this->amount
-            ];
-
-            $oldArray = $this->collect;
-
-            $myArray = $myArray + $oldArray;
-            session()->forget('payment_status');
-            session()->put('booking', $myArray);
-        } else if ($this->currentStep == 2) {
-            $this->validate([
-                'paid' => 'required',
-            ], [
-                'paid.required' => 'required',
-            ]);
-        } else if ($this->currentStep == 3) {
-            $this->resetErrorBag();
-            $this->resetValidation();
-        }
-    }
-
-    public function previousStep()
-    {
-        $this->resetErrorBag();
-        $this->currentStep--;
-        if ($this->currentStep < 1) {
-            $this->currentStep = 1;
-        } else if ($this->currentStep == 1) {
-
-            // $this->reset();
-            // $this->booking('')
-        }
-    }
-
-    public function payment($data)
-    {
-        // Handle form submission
-
-
-        //
-
-        $amount = $data[2]['amount'];
-
-        //   dd($amount);
-
-
-
-
-
-        if ($data[1] === 'success') {
-
-            session()->put('payment_status', 'success');
-            $this->paid = true;
-            $this->resetValidation('paid');
-            $transactionId = $data[0];
-            $payment = Payment::create([
-                'transaction_id' => $transactionId,
-                'price' => $this->price,
-                'amount_paid' =>   $amount['value'],
-                'payment_method' => $this->payment_method,
-                'payment_status' => true,
-                'currency' => $amount['currency_code'],
-
-            ]);
-
-            $bus = Bus::find($this->seatData['bus_id'])->update([
-                'route_id' => $this->route,
-                'schedule_id' => $this->schedule,
-                'date_departing' => $this->date
-            ]);
-
-            $booking = Booking::create([
-                'payment_id' => $payment->id,
-                'bus_id' => $this->seatData['bus_id'], //he
-                'seat_id' => $this->seatData['seat_id'],
-                'date_departing' => $this->date,
-                'customer_id' => $this->customer
-
-            ]);
-
-
-
-
-            // after that update bus status if full or not
-
-            $remainingSeats =   Bus::join('seats', 'buses.id', '=', 'seats.bus_id')
-                ->where('buses.id', $this->seatData['bus_id'])
-                ->select('buses.id',  DB::raw('COUNT(seats.id) as seat_count'), DB::raw('SUM(CASE WHEN seats.is_taken = 1 THEN 1 ELSE 0 END) as taken_seats'), DB::raw('SUM(CASE WHEN seats.is_taken = 0 THEN 1 ELSE 0 END) as remaining_seats'))
-                ->groupBy('buses.id')
-                ->orderBy('taken_seats', 'desc')
-                ->first();
-
-
-            Seat::find($this->seatData['seat_id'])->update([
-                'is_taken' => true,
-            ]);
-
-            if ($remainingSeats->remaining_seats == 0) {
-
-                Bus::find($this->seatData['bus_id'])->update([
-                    'is_full' => true,
-                ]);
-
-                //set full status
-
-
-            }
-
-
-
-
-            session()->put('booking.payment_type', $this->payment_method);
-
-            session()->put('booking.amount', $amount['value']);
-            session()->put('booking.payment_currency', $amount['currency_code']);
-            session()->put('booking.transaction_id',  $data[0]);
-            session()->put('booking.payment_date',  $payment->updated_at);
-            session()->put('booking.seat_no',  Seat::find($this->seatData['seat_id'])->seat_no);
-            $array = session()->get('booking');
-
-
-            $this->payment_data = [
-                'payment_type' => $array['payment_type'],
-                'payment_currency' => $array['payment_currency'],
-                'transaction_id' => $array['transaction_id'],
-                'amount' => $array['amount'],
-                'payment_date' => Carbon::parse($array['payment_date'])->format('d/m/Y'),
-                'seat_no' => Seat::find($this->seatData['seat_id'])->seat_no
-            ];
-            $this->alert(
-                'success',
-                'Payment was successfull!'
-            );
-        } else {
-            session()->put('payment_status', 'failure');
-
-            $this->paid = false;
-            $this->resetValidation('paid');
-
-            $transactionId = $data[0];
-            $payment = Payment::create([
-                'transaction_id' => $transactionId,
-                'price' => $this->price,
-                'amount_paid' =>  0.00,
-                'payment_method' => $this->payment_method,
-                'payment_status' => false
-            ]);
-        }
-    }
-
+    /* -------------------------------------------------------------------------- */
+    /*                           End of Livewire Updated                          */
+    /* -------------------------------------------------------------------------- */
 
 
 
@@ -608,58 +698,10 @@ class BookBus extends Component
 
 
 
-
     # ---------------------------------------------------------------------------- #
     #                             Livewire Render here                             #
     # ---------------------------------------------------------------------------- #
 
-    public function sendPdf()
-    {
-
-
-        $data = [
-            'ticket_no' => 'WIOERF23344',
-            'seat_no' => 23,
-            'payment_date' => Carbon::parse(date('Y-m-d'))->format('d/m/Y'),
-            'client' => 'John Doe',
-            'payment_to' => config('app.name'),
-            'description' => 'Booking ticket',
-            'amount' => '$45.00',
-            'sub_total' => '$45.00',
-            'total_amount' => '$45.00',
-            'customer_phone_number' => '+26599339393',
-            'customer_email' => 'dalitso@gmail.com',
-            'company_email' => config('mail.from.address'),
-        ];
-
-
-
-
-
-        try {
-            //code...
-            session()->forget(['booking', 'payment_status']);
-            Mail::to('daliprinc8@gmail.com')
-
-                ->send(new BookingReceipt($data));
-
-
-            $this->loading = null;
-            $this->button = "SUBMIT";
-            $this->redirect(url()->previous());
-        } catch (\Exception $th) {
-            //throw $th;
-            $this->alert(
-                'warning',
-                'Something went wrong!'
-            );
-
-            $this->redirect(url()->previous());
-        }
-
-        // Mail sent successfully
-
-    }
 
 
     public function mount()
@@ -688,6 +730,9 @@ class BookBus extends Component
                 'quantity' => $array['quantity'],
                 'amount' => $array['amount'],
                 'date' => $array['date'],
+                'depart_time' => $array['depart_time'],
+                'check_in_time' => $array['check_in_time']
+
             ];
             $this->customer = $array['customer_id'];
             $this->route = $array['customer_route'];
@@ -717,6 +762,9 @@ class BookBus extends Component
                     'quantity' => $array['quantity'],
                     'amount' => $array['amount'],
                     'seat_no' => $array['seat_no'],
+                    'depart_time' => $array['depart_time'],
+                    'check_in_time' => $array['check_in_time']
+
                 ];
                 $this->customer = $array['customer_id'];
                 $this->route = $array['customer_route'];
@@ -736,7 +784,7 @@ class BookBus extends Component
                     'bus_id' => $seatArray['bus_id'],
                     'seat_id' => $seatArray['seat_id']
                 ];
-                //   $this->currentStep = 3;
+                $this->currentStep = 3;
 
 
                 // $bookedBus = BookedBus::where('route_id', '=', $this->route)->where('schedule_id', '=', $this->schedule);
@@ -752,7 +800,10 @@ class BookBus extends Component
                     'price' => $array['price'],
                     'schedule' => $array['schedule'],
                     'quantity' => $array['quantity'],
-                    'amount' => $array['amount']
+                    'amount' => $array['amount'],
+                    'depart_time' => $array['depart_time'],
+                    'check_in_time' => $array['check_in_time']
+
                 ];
                 $this->customer = $array['customer_id'];
                 $this->route = $array['customer_route'];

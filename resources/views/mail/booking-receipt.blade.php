@@ -96,27 +96,28 @@
 
 <body
     style="background-color: rgba(158,207,250,0.3); margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none; display:flex; justify-content:center; align-items:center">
-    <table class="nl-container" width="" border="0" cellpadding="0" cellspacing="0" role="presentation"
-        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff; padding-top:25px; padding-right: 10px; padding-left:10px;  padding-bottom:25px; border-radius:20px; margin:3em;">
+    <table class="nl-container" role="presentation"
+        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff; padding-top:25px; padding-right: 10px; padding-left:10px;  padding-bottom:25px; border-radius:20px; margin:3em;"
+        width="" border="0" cellpadding="0" cellspacing="0">
         <tbody>
             <tr>
                 <td>
-                    <table class="row row-1" align="center" width="100%" border="0" cellpadding="0"
-                        cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <table class="row row-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                        align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
                         <tbody>
                             <tr>
                                 <td>
-                                    <table class="row-content stack" align="center" border="0" cellpadding="0"
-                                        cellspacing="0" role="presentation"
+                                    <table class="row-content stack" role="presentation"
                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000000; width: 600px;"
-                                        width="600">
+                                        align="center" border="0" cellpadding="0" cellspacing="0" width="600">
                                         <tbody>
                                             <tr>
-                                                <td class="column column-1" width="100%"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                    <table class="heading_block block-1" width="100%" border="0"
-                                                        cellpadding="10" cellspacing="0" role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                <td class="column column-1"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="100%">
+                                                    <table class="heading_block block-1" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                                                        width="100%" border="0" cellpadding="10" cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <h1
@@ -125,9 +126,9 @@
                                                             </td>
                                                         </tr>
                                                     </table>
-                                                    <table class="paragraph_block block-2" width="100%" border="0"
-                                                        cellpadding="10" cellspacing="0" role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+                                                    <table class="paragraph_block block-2" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
+                                                        width="100%" border="0" cellpadding="10" cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <div
@@ -139,16 +140,16 @@
                                                             </td>
                                                         </tr>
                                                     </table>
-                                                    <table class="divider_block block-3" width="100%" border="0"
-                                                        cellpadding="10" cellspacing="0" role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                    <table class="divider_block block-3" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                                                        width="100%" border="0" cellpadding="10" cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <div class="alignment" align="center">
-                                                                    <table border="0" cellpadding="0"
-                                                                        cellspacing="0" role="presentation"
-                                                                        width="100%"
-                                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                                    <table role="presentation"
+                                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                                                                        border="0" cellpadding="0" cellspacing="0"
+                                                                        width="100%">
                                                                         <tr>
                                                                             <td class="divider_inner"
                                                                                 style="font-size: 1px; line-height: 1px; border-top: 1px solid #dddddd;">
@@ -168,22 +169,22 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="row row-2" align="center" width="100%" border="0" cellpadding="0"
-                        cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <table class="row row-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                        align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
                         <tbody>
                             <tr>
                                 <td>
-                                    <table class="row-content stack" align="center" border="0" cellpadding="0"
-                                        cellspacing="0" role="presentation"
+                                    <table class="row-content stack" role="presentation"
                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000000; width: 600px;"
-                                        width="600">
+                                        align="center" border="0" cellpadding="0" cellspacing="0" width="600">
                                         <tbody>
                                             <tr>
-                                                <td class="column column-1" width="33.333333333333336%"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                    <table class="heading_block block-1" width="100%" border="0"
-                                                        cellpadding="10" cellspacing="0" role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                <td class="column column-1"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="33.333333333333336%">
+                                                    <table class="heading_block block-1" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                                                        width="100%" border="0" cellpadding="10" cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <h3
@@ -192,10 +193,10 @@
                                                             </td>
                                                         </tr>
                                                     </table>
-                                                    <table class="paragraph_block block-2" width="100%"
-                                                        border="0" cellpadding="10" cellspacing="0"
-                                                        role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+                                                    <table class="paragraph_block block-2" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <div
@@ -207,12 +208,13 @@
                                                         </tr>
                                                     </table>
                                                 </td>
-                                                <td class="column column-2" width="33.333333333333336%"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                    <table class="heading_block block-1" width="100%"
-                                                        border="0" cellpadding="10" cellspacing="0"
-                                                        role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                <td class="column column-2"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="33.333333333333336%">
+                                                    <table class="heading_block block-1" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <h3
@@ -221,10 +223,10 @@
                                                             </td>
                                                         </tr>
                                                     </table>
-                                                    <table class="paragraph_block block-2" width="100%"
-                                                        border="0" cellpadding="10" cellspacing="0"
-                                                        role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+                                                    <table class="paragraph_block block-2" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <div
@@ -236,12 +238,13 @@
                                                         </tr>
                                                     </table>
                                                 </td>
-                                                <td class="column column-3" width="33.333333333333336%"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                    <table class="heading_block block-1" width="100%"
-                                                        border="0" cellpadding="10" cellspacing="0"
-                                                        role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                <td class="column column-3"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="33.333333333333336%">
+                                                    <table class="heading_block block-1" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <h3
@@ -250,10 +253,10 @@
                                                             </td>
                                                         </tr>
                                                     </table>
-                                                    <table class="paragraph_block block-2" width="100%"
-                                                        border="0" cellpadding="10" cellspacing="0"
-                                                        role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+                                                    <table class="paragraph_block block-2" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <div
@@ -272,30 +275,32 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="row row-3" align="center" width="100%" border="0" cellpadding="0"
-                        cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <table class="row row-3" role="presentation"
+                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" align="center" width="100%"
+                        border="0" cellpadding="0" cellspacing="0">
                         <tbody>
                             <tr>
                                 <td>
-                                    <table class="row-content stack" align="center" border="0" cellpadding="0"
-                                        cellspacing="0" role="presentation"
+                                    <table class="row-content stack" role="presentation"
                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000000; width: 600px;"
+                                        align="center" border="0" cellpadding="0" cellspacing="0"
                                         width="600">
                                         <tbody>
                                             <tr>
-                                                <td class="column column-1" width="100%"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                    <table class="divider_block block-1" width="100%"
-                                                        border="0" cellpadding="10" cellspacing="0"
-                                                        role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                <td class="column column-1"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="100%">
+                                                    <table class="divider_block block-1" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <div class="alignment" align="center">
-                                                                    <table border="0" cellpadding="0"
-                                                                        cellspacing="0" role="presentation"
-                                                                        width="100%"
-                                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                                    <table role="presentation"
+                                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                                                                        border="0" cellpadding="0"
+                                                                        cellspacing="0" width="100%">
                                                                         <tr>
                                                                             <td class="divider_inner"
                                                                                 style="font-size: 1px; line-height: 1px; border-top: 1px solid #DDDDDD;">
@@ -315,23 +320,25 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="row row-4" align="center" width="100%" border="0" cellpadding="0"
-                        cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <table class="row row-4" role="presentation"
+                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" align="center" width="100%"
+                        border="0" cellpadding="0" cellspacing="0">
                         <tbody>
                             <tr>
                                 <td>
-                                    <table class="row-content stack" align="center" border="0" cellpadding="0"
-                                        cellspacing="0" role="presentation"
+                                    <table class="row-content stack" role="presentation"
                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000000; width: 600px;"
+                                        align="center" border="0" cellpadding="0" cellspacing="0"
                                         width="600">
                                         <tbody>
                                             <tr>
-                                                <td class="column column-1" width="50%"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                    <table class="heading_block block-1" width="100%"
-                                                        border="0" cellpadding="10" cellspacing="0"
-                                                        role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                <td class="column column-1"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="50%">
+                                                    <table class="heading_block block-1" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <h3
@@ -340,10 +347,10 @@
                                                             </td>
                                                         </tr>
                                                     </table>
-                                                    <table class="paragraph_block block-2" width="100%"
-                                                        border="0" cellpadding="10" cellspacing="0"
-                                                        role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+                                                    <table class="paragraph_block block-2" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <div
@@ -362,12 +369,13 @@
                                                         </tr>
                                                     </table>
                                                 </td>
-                                                <td class="column column-2" width="50%"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                    <table class="heading_block block-1" width="100%"
-                                                        border="0" cellpadding="10" cellspacing="0"
-                                                        role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                <td class="column column-2"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="50%">
+                                                    <table class="heading_block block-1" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <h3
@@ -376,10 +384,10 @@
                                                             </td>
                                                         </tr>
                                                     </table>
-                                                    <table class="paragraph_block block-2" width="100%"
-                                                        border="0" cellpadding="10" cellspacing="0"
-                                                        role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+                                                    <table class="paragraph_block block-2" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <div
@@ -403,23 +411,25 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="row row-5" align="center" width="100%" border="0" cellpadding="0"
-                        cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <table class="row row-5" role="presentation"
+                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" align="center" width="100%"
+                        border="0" cellpadding="0" cellspacing="0">
                         <tbody>
                             <tr>
                                 <td>
-                                    <table class="row-content" align="center" border="0" cellpadding="0"
-                                        cellspacing="0" role="presentation"
+                                    <table class="row-content" role="presentation"
                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-left: 0 solid #757575; border-radius: 0; border-right: 0px solid #757575; border-top: 0 solid #757575; color: #000000; border-bottom: 1px solid #DDDDDD; width: 600px;"
+                                        align="center" border="0" cellpadding="0" cellspacing="0"
                                         width="600">
                                         <tbody>
                                             <tr>
-                                                <td class="column column-1" width="50%"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                    <table class="heading_block block-1" width="100%"
-                                                        border="0" cellpadding="10" cellspacing="0"
-                                                        role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                <td class="column column-1"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="50%">
+                                                    <table class="heading_block block-1" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <h3
@@ -431,12 +441,13 @@
                                                         </tr>
                                                     </table>
                                                 </td>
-                                                <td class="column column-2" width="50%"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                    <table class="heading_block block-1" width="100%"
-                                                        border="0" cellpadding="10" cellspacing="0"
-                                                        role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                <td class="column column-2"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="50%">
+                                                    <table class="heading_block block-1" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <h3
@@ -454,40 +465,43 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="row row-6" align="center" width="100%" border="0" cellpadding="0"
-                        cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <table class="row row-6" role="presentation"
+                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" align="center" width="100%"
+                        border="0" cellpadding="0" cellspacing="0">
                         <tbody>
                             <tr>
                                 <td>
-                                    <table class="row-content" align="center" border="0" cellpadding="0"
-                                        cellspacing="0" role="presentation"
+                                    <table class="row-content" role="presentation"
                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-left: 0 solid #757575; border-radius: 0; border-right: 0px solid #757575; border-top: 0 solid #757575; color: #000000; border-bottom: 1px solid #DDDDDD; width: 600px;"
+                                        align="center" border="0" cellpadding="0" cellspacing="0"
                                         width="600">
                                         <tbody>
                                             <tr>
-                                                <td class="column column-1" width="50%"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                    <table class="paragraph_block block-1" width="100%"
-                                                        border="0" cellpadding="10" cellspacing="0"
-                                                        role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+                                                <td class="column column-1"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="50%">
+                                                    <table class="paragraph_block block-1" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <div
                                                                     style="color:#101112;direction:ltr;font-family:Arial, Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:19.2px;">
-                                                                    <p style="margin: 0;">{{ $data['description'] }}
+                                                                    <p style="margin: 0;">{!! $data['description'] !!}
                                                                     </p>
                                                                 </div>
                                                             </td>
                                                         </tr>
                                                     </table>
                                                 </td>
-                                                <td class="column column-2" width="50%"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                    <table class="paragraph_block block-1" width="100%"
-                                                        border="0" cellpadding="10" cellspacing="0"
-                                                        role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+                                                <td class="column column-2"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="50%">
+                                                    <table class="paragraph_block block-1" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <div
@@ -506,23 +520,25 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="row row-7" align="center" width="100%" border="0" cellpadding="0"
-                        cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <table class="row row-7" role="presentation"
+                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" align="center" width="100%"
+                        border="0" cellpadding="0" cellspacing="0">
                         <tbody>
                             <tr>
                                 <td>
-                                    <table class="row-content stack" align="center" border="0" cellpadding="0"
-                                        cellspacing="0" role="presentation"
+                                    <table class="row-content stack" role="presentation"
                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-left: 0 solid #757575; border-radius: 0; border-right: 0px solid #757575; border-top: 0 solid #757575; color: #000000; border-bottom: 0 solid #757575; width: 600px;"
+                                        align="center" border="0" cellpadding="0" cellspacing="0"
                                         width="600">
                                         <tbody>
                                             <tr>
-                                                <td class="column column-1" width="100%"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                    <table class="paragraph_block block-1" width="100%"
-                                                        border="0" cellpadding="10" cellspacing="0"
-                                                        role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+                                                <td class="column column-1"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="100%">
+                                                    <table class="paragraph_block block-1" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <div
@@ -541,23 +557,25 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="row row-8" align="center" width="100%" border="0" cellpadding="0"
-                        cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <table class="row row-8" role="presentation"
+                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" align="center" width="100%"
+                        border="0" cellpadding="0" cellspacing="0">
                         <tbody>
                             <tr>
                                 <td>
-                                    <table class="row-content stack" align="center" border="0" cellpadding="0"
-                                        cellspacing="0" role="presentation"
+                                    <table class="row-content stack" role="presentation"
                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-left: 0 solid #757575; border-radius: 0; border-right: 0px solid #757575; border-top: 0 solid #757575; color: #000000; border-bottom: 0 solid #757575; width: 600px;"
+                                        align="center" border="0" cellpadding="0" cellspacing="0"
                                         width="600">
                                         <tbody>
                                             <tr>
-                                                <td class="column column-1" width="100%"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                    <table class="paragraph_block block-1" width="100%"
-                                                        border="0" cellpadding="10" cellspacing="0"
-                                                        role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+                                                <td class="column column-1"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="100%">
+                                                    <table class="paragraph_block block-1" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <div

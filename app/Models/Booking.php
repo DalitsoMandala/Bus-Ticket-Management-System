@@ -12,12 +12,7 @@ class Booking extends Model
     protected $table = "bookings";
     protected $guarded = [];
 
-    /**
-     * Get all of the payments for the Booking
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-
+  
 
     /**
      * Get the payment associated with the Booking

@@ -150,6 +150,8 @@ class BookBus extends Component
                 'schedule' => Schedule::find($this->schedule)->title,
                 'quantity' => 1,
                 'date' => $this->date,
+                'depart_time' => Schedule::find($this->schedule)->depart_time,
+                'check_in_time' => Schedule::find($this->schedule)->check_in_time
             ];
 
             $amount = $this->collect['quantity'] * $this->collect['price'];
@@ -423,6 +425,8 @@ class BookBus extends Component
                 'quantity' => $array['quantity'],
                 'amount' => $array['amount'],
                 'date' => $array['date'],
+                'depart_time' => $array['depart_time'],
+                'check_in_time' => $array['check_in_time']
             ];
             $this->customer = $array['customer_id'];
             $this->route = $array['customer_route'];
@@ -445,7 +449,10 @@ class BookBus extends Component
                     'price' => $array['price'],
                     'schedule' => $array['schedule'],
                     'quantity' => $array['quantity'],
-                    'amount' => $array['amount']
+                    'amount' => $array['amount'],
+                    'depart_time' => $array['depart_time'],
+                    'check_in_time' => $array['check_in_time']
+
                 ];
                 $this->customer = $array['customer_id'];
                 $this->route = $array['customer_route'];
@@ -468,7 +475,9 @@ class BookBus extends Component
                     'price' => $array['price'],
                     'schedule' => $array['schedule'],
                     'quantity' => $array['quantity'],
-                    'amount' => $array['amount']
+                    'amount' => $array['amount'],
+                    'depart_time' => $array['depart_time'],
+                    'check_in_time' => $array['check_in_time']
                 ];
                 $this->customer = $array['customer_id'];
                 $this->route = $array['customer_route'];
@@ -492,6 +501,7 @@ class BookBus extends Component
             [
                 'routes' => BusRoute::all(),
                 'schedules' => Schedule::all(),
+
 
             ]
         );

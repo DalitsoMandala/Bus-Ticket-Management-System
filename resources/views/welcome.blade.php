@@ -442,7 +442,7 @@
 
         <!-- ============================================-->
         <!-- <section> begin ============================-->
-        <section class="pb-10 pb-xl-14">
+        <section class="pb-10 pb-xl-14" id="contact">
             <div class="container-small px-lg-7 px-xxl-3">
                 <div class="text-center mb-7">
                     <h5 class="text-secondary mb-3">Contact</h5>
@@ -529,7 +529,7 @@
                             <li><a class="text-300 dark__text-300" href="#about-us">About Us</a></li>
                             <li><a class="text-300 dark__text-300" href="#services">Services</a></li>
                             <li><a class="text-300 dark__text-300" href="#contact">Contact</a></li>
-                            <li><a class="text-300 dark__text-300" href="#login">Login</a></li>
+                            <li><a class="text-300 dark__text-300" href="{{ route('login') }}">Login</a></li>
 
                         </ul>
                     </div>
