@@ -20,6 +20,7 @@ use App\Models\BookedBus;
 use Illuminate\Support\Str;
 use App\Mail\BookingReceipt;
 use App\Models\ExchangeRate;
+use Illuminate\Validation\Rule;
 use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -160,45 +161,81 @@ class BookBus extends Component
 
             if ($this->showCustomer == false) {
                 $this->resetValidation();
-                $data = [
+
+
+
+                Validator::make([
                     'schedule' => $this->schedule,
                     'route' => $this->route,
                     'customer' => $this->customer,
                     'price' => $this->price,
-                    'date' => $this->date
-                ];
-
-                $rules = [
+                    'date' => $this->date,
+                    'availability' => $this->availability
+                ], [
                     'schedule' => 'required',
                     'route' => 'required',
                     'customer' => 'required',
                     'price' => 'required',
-                    'canShow' => ['required_if:canShow,false'],
+                    'availability' => [
+                        'required',
+                        function (string $attribute, mixed $value, Closure $fail) {
+
+
+                            if ($value == false) {
+                                $fail("Bus not available at the moment. please try again later!");
+                            }
+                        }
+                    ],
+
                     'date' => [
                         'required',
                         function (string $attribute, mixed $value, Closure $fail) {
-                            $countIf =   Booking::where('customer_id', $this->customer)->where('date_departing', $value)->where('is_completed', 0)->count();
+                            $countIf =   Booking::join('buses', 'buses.id', 'bookings.bus_id')
+                                ->where('bookings.customer_id', $this->customer)
+                                ->where('bookings.date_departing', $value)
+                                ->where('buses.route_id', $this->route)
+                                ->where('buses.schedule_id', $this->schedule)
+                                ->where('bookings.is_completed', 0)->count();
 
                             if ($countIf == 1) {
-                                $fail("You have an existing booking on this day, choose another day.");
+                                $fail("You already have an existing booking.");
+                                $this->availability = false;
+                            } else {
+                                $this->availability = true;
+                            }
+
+                            if ($this->schedule != null && $this->route != null) {
+                                $todayDate = Carbon::now();
+                                $currentDate = $todayDate->format('Y-m-d');
+
+
+
+                                if ($value == $currentDate) {
+
+                                    $scheduleTime = Carbon::parse(Schedule::find($this->schedule)->depart_time);
+                                    $currentDateTime = Carbon::now();
+
+
+                                    $schedules = Schedule::select('depart_time')->get();
+                                    $arr = $schedules->toArray();
+
+
+
+
+                                    if ($currentDateTime->greaterThan($scheduleTime)) {
+                                        $fail("Sorry, you can not book this bus right now. It is " . Carbon::now()->format('H:i A') . " now ");
+                                        //  dd("Current time is less than the given time");
+                                        $this->availability = false;
+                                    } else {
+                                        $this->availability = true;
+                                    }
+                                }
                             }
                         },
-                    ],
-
-                ];
-
-
-
-                // $this->validate([
-                //     'schedule' => 'required',
-                //     'route' => 'required',
-                //     'customer' => 'required',
-                //     'price' => 'required',
-                //     'date' => 'required',
-                // ]);
-
-
-                $validator = Validator::make($data, $rules)->validate();
+                    ]
+                ], [
+                    'availability.required' => 'You must fill the route,schedule and date of departure fields.'
+                ])->validate();
             } else {
 
                 $this->validate([
@@ -225,7 +262,8 @@ class BookBus extends Component
                 'quantity' => 1,
                 'date' => $this->date,
                 'depart_time' => Schedule::find($this->schedule)->depart_time,
-                'check_in_time' => Schedule::find($this->schedule)->check_in_time
+                'check_in_time' => Schedule::find($this->schedule)->check_in_time,
+                'availability' => $this->availability,
             ];
 
             $amount = $this->collect['quantity'] * $this->collect['price'];
@@ -405,9 +443,9 @@ class BookBus extends Component
             'client' => $this->collect['full_name'],
             'payment_to' => config('app.name'),
             'description' => htmlentities($desc),
-            'amount' => $this->payment_data['amount'],
-            'sub_total' => $this->payment_data['amount'] * 1,
-            'total_amount' => $this->payment_data['amount'] * 1,
+            'amount' => $this->payment_data['payment_currency'] . ' ' . $this->payment_data['amount'],
+            'sub_total' => $this->payment_data['payment_currency'] . ' ' . $this->payment_data['amount'] * 1,
+            'total_amount' => $this->payment_data['payment_currency'] . ' ' .  $this->payment_data['amount'] * 1,
             'customer_phone_number' => $this->collect['phone'],
             'customer_email' => $this->collect['email'],
             'company_email' => config('mail.from.address'),
@@ -549,9 +587,9 @@ class BookBus extends Component
 
                 if ($checkBus == null) {
                     // no bus available
-                    $this->canShow = false;
+                    $this->availability = false;
                 } else {
-                    $this->canShow = true;
+                    $this->availability = true;
                     // pull out one bus from the database and add the person
 
                     // book the customer
@@ -566,7 +604,7 @@ class BookBus extends Component
                 }
             }
         } else {
-            $this->canShow = null;
+            $this->availability = null;
 
             session()->forget('seat');
         }
@@ -731,8 +769,8 @@ class BookBus extends Component
                 'amount' => $array['amount'],
                 'date' => $array['date'],
                 'depart_time' => $array['depart_time'],
-                'check_in_time' => $array['check_in_time']
-
+                'check_in_time' => $array['check_in_time'],
+                'availability' => $array['availability'],
             ];
             $this->customer = $array['customer_id'];
             $this->route = $array['customer_route'];
@@ -744,6 +782,8 @@ class BookBus extends Component
                 'bus_id' => $seatArray['bus_id'],
                 'seat_id' => $seatArray['seat_id']
             ];
+
+            $this->availability = $array['availability'];
             //     $this->currentStep = 2;
         } else if (session()->has('booking')  && session()->has('payment_status')) {
 
@@ -763,7 +803,8 @@ class BookBus extends Component
                     'amount' => $array['amount'],
                     'seat_no' => $array['seat_no'],
                     'depart_time' => $array['depart_time'],
-                    'check_in_time' => $array['check_in_time']
+                    'check_in_time' => $array['check_in_time'],
+                    'availability' => $array['availability'],
 
                 ];
                 $this->customer = $array['customer_id'];
@@ -779,7 +820,7 @@ class BookBus extends Component
                     'payment_date' => Carbon::parse($array['payment_date'])->format('d/m/Y'),
                     'seat_no' =>  $array['seat_no']
                 ];
-
+                $this->availability = $array['availability'];
                 $this->seatData = [
                     'bus_id' => $seatArray['bus_id'],
                     'seat_id' => $seatArray['seat_id']
@@ -802,9 +843,12 @@ class BookBus extends Component
                     'quantity' => $array['quantity'],
                     'amount' => $array['amount'],
                     'depart_time' => $array['depart_time'],
-                    'check_in_time' => $array['check_in_time']
+                    'check_in_time' => $array['check_in_time'],
+                    'availability' => $array['availability'],
 
                 ];
+
+                $this->availability = $array['availability'];
                 $this->customer = $array['customer_id'];
                 $this->route = $array['customer_route'];
                 $this->schedule = $array['customer_schedule'];

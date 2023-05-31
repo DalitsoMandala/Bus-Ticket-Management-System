@@ -255,17 +255,18 @@
                                         <div>
                                             <x-input-label class="form-label" for="inputName">Route
                                             </x-input-label>
+                                            <div wire:ignore>
+                                                <select class="form-select" id="customer-route" wire:model="route">
+                                                    <option value="">choose route</option>
+                                                    @foreach ($routes as $route)
+                                                        <option value="{{ $route->id }}">
+                                                            {{ $route->from_destination }}
+                                                            -
+                                                            {{ $route->to_destination }} </option>
+                                                    @endforeach
 
-                                            <select class="form-select" wire:model="route">
-                                                <option value="">choose route</option>
-                                                @foreach ($routes as $route)
-                                                    <option value="{{ $route->id }}">
-                                                        {{ $route->from_destination }}
-                                                        -
-                                                        {{ $route->to_destination }} </option>
-                                                @endforeach
-
-                                            </select>
+                                                </select>
+                                            </div>
                                         </div>
                                         <div>
                                             @error('route')
@@ -296,17 +297,19 @@
                                         <div>
                                             <x-input-label class="form-label" for="inputName">Schedule
                                             </x-input-label>
+                                            <div wire:ignore>
+                                                <select class="form-select" id="customer-schedule"
+                                                    wire:model="schedule">
+                                                    <option value="">choose route</option>
+                                                    @foreach ($schedules as $schedule)
+                                                        <option value="{{ $schedule->id }}">
+                                                            {{ $schedule->title }}
+                                                            ({{ \Carbon\Carbon::parse($schedule->depart_time)->format('H:i A') }})
+                                                        </option>
+                                                    @endforeach
 
-                                            <select class="form-select" wire:model="schedule">
-                                                <option value="">choose route</option>
-                                                @foreach ($schedules as $schedule)
-                                                    <option value="{{ $schedule->id }}">
-                                                        {{ $schedule->title }}
-                                                        ({{ \Carbon\Carbon::parse($schedule->depart_time)->format('H:i A') }})
-                                                    </option>
-                                                @endforeach
-
-                                            </select>
+                                                </select>
+                                            </div>
                                         </div>
                                         <div>
                                             @error('schedule')
@@ -335,50 +338,29 @@
                                             <x-input-label class="form-label" for="inputName">Bus Availability
                                             </x-input-label>
 
-                                            <x-text-input disabled wire:model="availability" />
+                                            <x-text-input class="d-none" disabled wire:model="availability" />
                                         </div>
+
                                         <div>
-                                            @error('canShow')
+                                            @if ($availability === true)
+                                                <span class="fa-solid fa-check text-success me-1"></span>
+                                                <span class="text-success">Available</span>
+                                            @elseif($availability === false)
+                                                <span class="fa-solid fa-times text-danger me-1"></span>
+                                                <span class="text-danger">Unvailable</span>
+                                            @else
+                                                <span class="fa-solid fa-hourglass-start text-secondary me-1"></span>
+                                                <span class="text-secondary">Pending</span>
+                                            @endif
+                                        </div>
+
+                                        <div>
+                                            @error('availability')
                                                 <x-alert>{{ $message }}</x-alert>
                                             @enderror
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12">
-
-                                        <div x-data="{
-                                            canShow: @entangle('canShow'),
-                                        
-                                        }">
-
-                                            <div x-show="canShow === true">
-
-                                                <div class="alert alert-outline-success d-flex align-items-center"
-                                                    role="alert">
-                                                    <span class="fas fa-check-circle text-success fs-3 me-3"></span>
-                                                    <p class="mb-0 flex-1">Bus is available for this route! You can
-                                                        proceed
-                                                        to the payment details.</p>
-
-                                                </div>
-                                            </div>
-
-                                            <div x-show="canShow === false">
-
-                                                <div class="alert alert-outline-danger d-flex align-items-center"
-                                                    role="alert">
-                                                    <span class="fas fa-times-circle text-danger fs-3 me-3"></span>
-                                                    <p class="mb-0 flex-1">Buses are not available at this time !
-                                                        Please
-                                                        try
-                                                        again later.</p>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
                                 </div>
 
                             </div>
@@ -937,7 +919,17 @@
                 @this.set('customer', $(this).val());
             });
 
+            $('#customer-route').select2({
 
+            }).on('change', function() {
+                @this.set('route', $(this).val());
+            });
+
+            $('#customer-schedule').select2({
+
+            }).on('change', function() {
+                @this.set('schedule', $(this).val());
+            });
 
 
 
