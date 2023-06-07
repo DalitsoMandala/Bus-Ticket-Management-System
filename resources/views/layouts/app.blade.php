@@ -202,7 +202,7 @@
 
                 {{ $slot }}
 
-                <x-check-time />
+                <livewire:bus-checker />
 
                 <footer class="footer position-absolute">
                     <div class="row g-0 justify-content-between align-items-center h-100">

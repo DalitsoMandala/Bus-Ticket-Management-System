@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+
             $table->string('title');
             $table->time('check_in_time');
-            $table->time('depart_time');
-  ;
+            $table->time('depart_time');;
+            $table->timestamps();
         });
     }
 

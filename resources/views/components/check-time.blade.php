@@ -8,9 +8,10 @@
 
       currentTime();
 
-      setInterval(currentTime, 1000);
+      setInterval(currentTime, 60000);
 
 
   })();">
     <span x-text="newDate"></span>
+    
 </div>

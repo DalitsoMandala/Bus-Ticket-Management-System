@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('routes', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+
             $table->string('from_destination');
             $table->string('to_destination');
             $table->unsignedFloat('price', 8, 2);
             $table->foreignId('schedule_id')->constrained('schedules')->onUpdate('cascade')->onDelete('cascade');
+            $table->decimal('discount_amount', 8, 2)->default(0.00);
+            $table->timestamps();
         });
     }
 

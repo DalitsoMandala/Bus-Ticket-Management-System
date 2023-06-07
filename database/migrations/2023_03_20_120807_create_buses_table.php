@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('buses', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+
             $table->string('model');
             $table->string('brand');
             $table->string('serial_number');
@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreignId('schedule_id')->nullable()->constrained('schedules');
             $table->boolean('is_full')->default(false)->nullable();
             $table->date('date_departing')->nullable();
+            $table->timestamps();
         });
     }
 

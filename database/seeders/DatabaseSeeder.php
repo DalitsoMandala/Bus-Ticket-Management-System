@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\Bus;
 use App\Models\Seat;
 use App\Models\User;
+use App\Models\Company;
 use App\Models\Payment;
 use App\Models\BusRoute;
 use App\Models\Customer;
@@ -77,6 +78,21 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+
+        //create company details
+
+
+        Company::create([
+            'company_name' => config('app.name'),
+            'company_email' => 'company@example.com',
+            'company_phone_number' => '+265999293999',
+            'company_country' => 'Malawi',
+            'company_street' => 'Area 49',
+            'company_city' => 'Lilongwe',
+            'company_state' => '',
+            'company_zip_code' => '',
+            'tax_percentage' => '20.00',
+        ]);
 
         //create schedules
         Schedule::create([

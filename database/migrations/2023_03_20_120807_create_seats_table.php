@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('seats', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+
             $table->foreignId('bus_id')->constrained('buses');
             $table->unsignedInteger('seat_no');
             $table->boolean('is_taken');
-   
 
+            $table->timestamps();
         });
     }
 
