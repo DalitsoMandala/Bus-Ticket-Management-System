@@ -98,7 +98,7 @@
         </div>
     </div>
 
-    <div class="row card card-body mb-5 p-5 purple" style="border-radius:0%">
+    <div class="row card card-body mb-5 p-5 ">
         @if (session()->has('mailable'))
             <div class="alert alert-soft-success alert-dismissible fade show" role="alert">
                 <button class="btn-close" data-bs-dismiss="alert" type="button" aria-label="Close"></button>
@@ -332,41 +332,55 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    @if ($availability === true && !$errors->has('availability'))
+                                        <div class="col-md-12">
+                                            <div>
+                                                <x-input-label class="form-label" for="inputName">Bus Availability
+                                                </x-input-label>
 
-                                    <div class="col-md-12">
-                                        <div>
-                                            <x-input-label class="form-label" for="inputName">Bus Availability
-                                            </x-input-label>
+                                                <x-text-input class="d-none" disabled wire:model="availability" />
+                                            </div>
 
-                                            <x-text-input class="d-none" disabled wire:model="availability" />
+                                            <div>
+
+                                                <span class="badge badge-phoenix fs--2 badge-phoenix-success"><span
+                                                        class="badge-label">AVAILABLE</span><span class="ms-1"
+                                                        data-feather="check"
+                                                        style="height:12.8px;width:12.8px;"></span></span>
+
+                                            </div>
+
+                                            <div>
+                                                @error('availability')
+                                                    <x-alert>{{ $message }}</x-alert>
+                                                @enderror
+                                            </div>
                                         </div>
+                                    @endif
 
-                                        <div>
-                                            @if ($availability === true)
-                                                <span class="fa-solid fa-check text-success me-1"></span>
-                                                <span class="text-success">Available</span>
-                                            @elseif($availability === false)
-                                                <span class="fa-solid fa-times text-danger me-1"></span>
-                                                <span class="text-danger">Unvailable</span>
-                                            @else
-                                                <span class="fa-solid fa-hourglass-start text-secondary me-1"></span>
-                                                <span class="text-secondary">Pending</span>
-                                            @endif
-                                        </div>
+                                    @if ($errors->has('availability'))
+                                        <div class="col-md-12">
+                                            <div>
+                                                <x-input-label class="form-label" for="inputName">Bus Availability
+                                                </x-input-label>
 
-                                        <div>
-                                            @error('availability')
-                                                <x-alert>{{ $message }}</x-alert>
-                                            @enderror
+                                                <x-text-input class="d-none" disabled wire:model="availability" />
+                                            </div>
+
+                                            <div>
+                                                @error('availability')
+                                                    <x-alert>{{ $message }}</x-alert>
+                                                @enderror
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
 
                                 </div>
 
                             </div>
 
                         </div>
-                        <div class="col-lg-6     col-sm-12 d-lg-block d-sm-none mb-3 bg-100 bg-image-overlay  position-relative overflow-hidden auth-title-box"
+                        <div class="col-lg-6  rounded-1   col-sm-12 d-lg-block d-sm-none mb-3 bg-100 bg-image-overlay  position-relative overflow-hidden auth-title-box"
                             style="background-image: url('{{ asset('assets/img/happy.jpg') }}'); height:100%;">
 
                             <!--/.bg-holder-->
@@ -407,7 +421,7 @@
                     <!-- Step 2 form -->
 
                     <div class="row d-grid-3 my-2">
-                        <div class="col-lg-7 col-sm-12">
+                        <div class="col-lg-6 col-sm-12">
 
                             <div class=" align-items-end mb-4">
                                 <h4 class="mb-2 me-3">Payment Method</h4>
@@ -473,19 +487,20 @@
                                         aria-describedby="helpId" wire:model="paid" placeholder="">
 
                                 </div>
+                                <div id="payment_check">
+                                    @error('paid')
+                                        <div class="alert alert-outline-danger d-flex align-items-center" role="alert">
+                                            <span class="fas fa-times-circle text-danger fs-3 me-3"></span>
+                                            <p class="mb-0 flex-1"> <b>Payment required!</b> <br>You can't proceed without
+                                                payment!</p>
 
-                                @error('paid')
-                                    <div class="alert alert-outline-danger d-flex align-items-center" role="alert">
-                                        <span class="fas fa-times-circle text-danger fs-3 me-3"></span>
-                                        <p class="mb-0 flex-1"> <b>Payment required!</b> <br>You can't proceed without
-                                            payment!</p>
-
-                                    </div>
-                                @enderror
+                                        </div>
+                                    @enderror
+                                </div>
 
                                 @if (session()->has('payment_status'))
                                     @if (session()->get('payment_status') == 'success')
-                                        <div class="alert alert-outline-success d-flex align-items-center"
+                                        <div class="alert alert-outline-success d-flex align-items-center "
                                             role="alert">
                                             <span class="fas fa-check-circle text-success fs-3 me-3"></span>
                                             <p class="mb-0 flex-1"> <b>Payment successful!</b> <br>Thank you
@@ -511,7 +526,7 @@
                             </div>
 
                         </div>
-                        <div class="col-lg-5  col-sm-12">
+                        <div class="col-lg-6  col-sm-12">
                             <div class="card text-start  rounded-0 my-3 border-0 border-sm-0 border-lg">
 
                                 <div class="card-body">
@@ -556,15 +571,18 @@
                                     <table class="table table-borderless  fs--1 mb-0">
 
                                         <tbody>
-                                            <tr class=" align-items-center  border border-dashed">
+                                            <tr class=" align-items-center  ">
 
-                                                <td class="border px-2 py-1 text-center"><img
+                                                <td class=" px-2 py-1 text-center"><img
                                                         src="{{ asset('assets/img/ticket.png') }}" width="70px">
                                                 </td>
                                                 <td class="py-2 ps-2 " colspan="2">
-                                                    @if ($collect)
+                                                    @if ($collect && $collect['payment_method'] == 'paypal')
                                                         <h6>Bus Ticket</h6>
-                                                        <p>Route : {{ $collect['route'] }} <br>
+                                                        <p>Starting Point : <b>{{ $collect['route_to'] }}</b>
+                                                            <br>
+                                                            Destination : <b>{{ $collect['route_from'] }}</b>
+                                                            <br>
 
                                                             Date:
                                                             {{ \Carbon\Carbon::parse($collect['date'])->format('d/m/Y') }}
@@ -574,18 +592,16 @@
                                                             {{ $collect['schedule'] }}({{ \Carbon\Carbon::parse($schedule->depart_time)->format('H:i A') }})
                                                             <br>
 
-                                                            Price : <strong>MWK
-                                                                {{ number_format($collect['price'], 2) }}</strong>
-
                                                         </p>
                                                     @endif
 
                                                 </td>
-                                                @if (session()->has('payment_status') && !session()->get('payment_status') == 'success')
-                                                    <td class="border py-5 px-2 text-center">
+                                                @if (!session()->get('payment_status') == 'success')
+                                                    <td class=" py-5 px-2 text-center">
                                                         <a class="btn btn-link btn-sm " href="#" title="Remove"
                                                             role="button" wire:click="clear">
-                                                            <i class="fa-solid fa-trash-can text-secondary"></i> </a>
+                                                            <i class="fa-solid fa-trash-can text-secondary fs-0"></i>
+                                                        </a>
 
                                                     </td>
                                                 @endif
@@ -593,14 +609,57 @@
 
                                             <tr class="border-top border-dashed ">
                                                 <td>
-                                                    <h4 class="mb-0">Total :</h4>
+                                                    <h5 class="mb-0 fw-normal">Subtotal :</h5>
                                                 </td>
-                                                <td class="text-end">
+                                                <td class="text-end" colspan="3">
 
-                                                    <h4 class="mb-0">
-                                                        @if ($collect)
-                                                            MWK
-                                                            {{ number_format($collect['price'], 2) }}
+                                                    <h5 class="mb-0 fw-normal">
+                                                        @if ($collect && $collect['payment_method'] == 'paypal')
+                                                            $ {{ number_format($subtotal, 2) }}
+                                                        @endif
+                                                    </h5>
+
+                                                </td>
+                                            </tr>
+
+                                            <tr class="border-top border-dashed ">
+                                                <td>
+                                                    <h5 class="mb-0 fw-normal">Discount :</h5>
+                                                </td>
+                                                <td class="text-end" colspan="3">
+
+                                                    <h5 class="mb-0 fw-normal">
+                                                        @if ($collect && $collect['payment_method'] == 'paypal')
+                                                            $ {{ number_format($discount, 2) }}
+                                                        @endif
+                                                    </h5>
+
+                                                </td>
+                                            </tr>
+                                            <tr class="border-top border-dashed ">
+                                                <td>
+                                                    <h5 class="mb-0 fw-normal">Tax :</h5>
+                                                </td>
+                                                <td class="text-end" colspan="3">
+
+                                                    <h5 class="mb-0 fw-normal">
+                                                        @if ($collect && $collect['payment_method'] == 'paypal')
+                                                            $ {{ number_format($tax, 2) }}
+                                                        @endif
+                                                    </h5>
+
+                                                </td>
+                                            </tr>
+
+                                            <tr class="border-top border-dashed ">
+                                                <td>
+                                                    <h4 class="mb-0 ">Total :</h4>
+                                                </td>
+                                                <td class="text-end" colspan="3">
+
+                                                    <h4 class="mb-0 ">
+                                                        @if ($collect && $collect['payment_method'] == 'paypal')
+                                                            $ {{ number_format($total, 2) }}
                                                         @endif
                                                     </h4>
 
@@ -632,148 +691,153 @@
                     <!-- Final step form -->
 
                     @if (session()->has('booking') && session()->has('payment_status') && session()->get('payment_status') === 'success')
+                        @if ($collect && $collect['payment_method'] == 'paypal')
 
-                        <div class="container py-2 mb-7 bg-200">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-12 col-xl-7">
-                                    <div class="card" id="invoice">
-                                        <div class="card-body p-5">
-                                            <h2>
-                                                Hey {!! Auth::user()->customers->first()->first_name . ' ' . Auth::user()->customers->first()->last_name !!},
-                                            </h2>
-                                            <p class="fs-sm">
-                                                This is the receipt for a payment of
-                                                <strong>
-                                                    @if ($payment_data['payment_currency'] == 'USD')
-                                                        {!! '$' !!}{{ $payment_data['amount'] }}
-                                                    @else
-                                                        {!! 'MWK' !!}{{ $payment_data['amount'] }}
-                                                    @endif
+                            <div class="container py-2 mb-7 bg-200">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-12 col-xl-7">
+                                        <div class="card" id="invoice">
+                                            <div class="card-body p-5">
+                                                <h2>
+                                                    Hey {!! Auth::user()->customers->first()->first_name . ' ' . Auth::user()->customers->first()->last_name !!},
+                                                </h2>
+                                                <p class="fs-sm">
+                                                    This is the receipt for a payment of
+                                                    <strong>
+                                                        @if ($collect['payment_currency'] == 'USD')
+                                                            {!! '$' !!}{{ $collect['amount'] }}
+                                                        @else
+                                                            {!! 'MWK' !!}{{ $collect['amount'] }}
+                                                        @endif
 
-                                                </strong> you made
-                                                to {{ config('app.name') }}.
-                                            </p>
+                                                    </strong> you made
+                                                    to {{ config('app.name') }}.
+                                                </p>
 
-                                            <div class="border-top border-gray-200 pt-4 mt-4">
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <div class="text-muted mb-2">Payment No. / Ticket No.</div>
-                                                        <strong>{{ $payment_data['transaction_id'] }}</strong>
+                                                <div class="border-top border-gray-200 pt-4 mt-4">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="text-muted mb-2">Payment No. / Ticket No.</div>
+                                                            <strong>{{ $collect['transaction_id'] }}</strong>
 
-                                                    </div>
+                                                        </div>
 
-                                                    <div class="col-md-4 text-md-center ">
-                                                        <div class="text-muted mb-2">Seat No.</div>
-                                                        <strong>{{ $payment_data['seat_no'] }}</strong>
+                                                        <div class="col-md-4 text-md-center ">
+                                                            <div class="text-muted mb-2">Seat No.</div>
+                                                            <strong>{{ $collect['seat_no'] }}</strong>
 
-                                                    </div>
-                                                    <div class="col-md-4 text-md-end">
-                                                        <div class="text-muted mb-2">Payment Date</div>
-                                                        <strong>{{ $payment_data['payment_date'] }}</strong>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="border-top border-gray-200 mt-4 py-4">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="text-muted mb-2">Client</div>
-                                                        <strong>
-                                                            {!! Auth::user()->customers->first()->first_name . ' ' . Auth::user()->customers->first()->last_name !!}
-                                                        </strong>
-                                                        <p class="fs-sm">
-                                                            {!! Auth::user()->customers->first()->phone_number !!}
-                                                            <br>
-                                                            <a class="text-purple"
-                                                                href="#!">{!! Auth::user()->email !!}
-                                                            </a>
-                                                        </p>
-                                                    </div>
-                                                    <div class="col-md-6 text-md-end">
-                                                        <div class="text-muted mb-2">Payment To</div>
-                                                        <strong>
-                                                            {{ config('app.name') }}
-                                                        </strong>
-                                                        <p class="fs-sm">
-
-                                                            <a class="text-purple"
-                                                                href="#!">{{ config('mail.from.address') }}
-                                                            </a>
-                                                        </p>
+                                                        </div>
+                                                        <div class="col-md-4 text-md-end">
+                                                            <div class="text-muted mb-2">Payment Date</div>
+                                                            <strong>{{ $collect['payment_date'] }}</strong>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <table class="table border-bottom border-gray-200 mt-3">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="fs-sm text-dark text-uppercase-bold-sm px-0"
-                                                            scope="col">
-                                                            Description
-                                                        </th>
-                                                        <th class="fs-sm text-dark text-uppercase-bold-sm text-end px-0"
-                                                            scope="col">
-                                                            Amount</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="px-0">Bus Ticket, <br>
-                                                            @if ($collect)
-                                                                {{ $collect['route'] }},<br>
-                                                                {{ $collect['schedule'] }}({{ \Carbon\Carbon::parse($schedule->depart_time)->format('H:i A') }})
-                                                            @endif
-                                                        </td>
-                                                        <td class="text-end px-0">
-                                                            @if ($payment_data['payment_currency'] == 'USD')
+                                                <div class="border-top border-gray-200 mt-4 py-4">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="text-muted mb-2">Client</div>
+                                                            <strong>
+                                                                {!! Auth::user()->customers->first()->first_name . ' ' . Auth::user()->customers->first()->last_name !!}
+                                                            </strong>
+                                                            <p class="fs-sm">
+                                                                {!! Auth::user()->customers->first()->phone_number !!}
+                                                                <br>
+                                                                <a class="text-purple"
+                                                                    href="#!">{!! Auth::user()->email !!}
+                                                                </a>
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-md-6 text-md-end">
+                                                            <div class="text-muted mb-2">Payment To</div>
+                                                            <strong>
+                                                                {{ config('app.name') }}
+                                                            </strong>
+                                                            <p class="fs-sm">
+
+                                                                <a class="text-purple"
+                                                                    href="#!">{{ config('mail.from.address') }}
+                                                                </a>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <table class="table border-bottom border-gray-200 mt-3">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="fs-sm text-dark text-uppercase-bold-sm px-0"
+                                                                scope="col">
+                                                                Description
+                                                            </th>
+                                                            <th class="fs-sm text-dark text-uppercase-bold-sm text-end px-0"
+                                                                scope="col">
+                                                                Amount</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="px-0">Bus Ticket, <br>
+                                                                @if ($collect)
+                                                                    {{ $collect['route_to'] }},<br>
+                                                                    {{ $collect['schedule'] }}({{ \Carbon\Carbon::parse($schedule->depart_time)->format('H:i A') }})
+                                                                @endif
+                                                            </td>
+                                                            <td class="text-end px-0">
+                                                                @if ($collect['payment_currency'] == 'USD')
+                                                                    {!! '$' !!}
+                                                                @else
+                                                                    {!! 'MWK' !!}
+                                                                @endif
+                                                                {{ $collect['amount'] }}
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+
+                                                <div class="mt-5">
+                                                    <div class="d-flex justify-content-end">
+                                                        <p class="text-muted me-3">Subtotal:</p>
+                                                        <span>
+                                                            @if ($collect['payment_currency'] == 'USD')
                                                                 {!! '$' !!}
                                                             @else
                                                                 {!! 'MWK' !!}
-                                                            @endif{{ $payment_data['amount'] }}
-                                                        </td>
-                                                    </tr>
+                                                            @endif{{ $collect['amount'] }}
+                                                        </span>
+                                                    </div>
 
-                                                </tbody>
-                                            </table>
-
-                                            <div class="mt-5">
-                                                <div class="d-flex justify-content-end">
-                                                    <p class="text-muted me-3">Subtotal:</p>
-                                                    <span>
-                                                        @if ($payment_data['payment_currency'] == 'USD')
-                                                            {!! '$' !!}
-                                                        @else
-                                                            {!! 'MWK' !!}
-                                                        @endif{{ $payment_data['amount'] }}
-                                                    </span>
-                                                </div>
-
-                                                <div class="d-flex justify-content-end mt-3">
-                                                    <h5 class="me-3">Total:</h5>
-                                                    <h5 class="text-success">
-                                                        @if ($payment_data['payment_currency'] == 'USD')
-                                                            {!! '$' !!}
-                                                        @else
-                                                            {!! 'MWK' !!}
-                                                        @endif{{ $payment_data['amount'] }}
-                                                    </h5>
+                                                    <div class="d-flex justify-content-end mt-3">
+                                                        <h5 class="me-3">Total:</h5>
+                                                        <h5 class="text-success">
+                                                            @if ($collect['payment_currency'] == 'USD')
+                                                                {!! '$' !!}
+                                                            @else
+                                                                {!! 'MWK' !!}
+                                                            @endif{{ $collect['amount'] }}
+                                                        </h5>
+                                                    </div>
                                                 </div>
                                             </div>
+
                                         </div>
 
-                                    </div>
+                                        <div class="d-flex justify-content-center my-2">
+                                            <button class="btn btn-secondary btn-lg  px-4" wire:click="print">
+                                                <span class="fa-solid fa-print">
 
-                                    <div class="d-flex justify-content-center my-2">
-                                        <button class="btn btn-secondary btn-lg  px-4" wire:click="print">
-                                            <span class="fa-solid fa-print">
-
-                                            </span>
-                                            Print Invoice
-                                        </button>
+                                                </span>
+                                                Print Invoice
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
+                        @endif
+
                     @endif
                 </div>
 
@@ -827,88 +891,95 @@
         });
 
 
-        paypal.Buttons({
 
-            style: {
+        document.addEventListener('livewire:load', function() {
 
-                layout: 'horizontal',
+            paypal.Buttons({
 
-                color: 'silver',
+                style: {
 
-                shape: 'rect',
+                    layout: 'horizontal',
 
-                label: 'pay',
+                    color: 'silver',
 
-                size: '55',
-                tagline: 'false'
+                    shape: 'rect',
 
-            },
-            createOrder: function(data, actions) {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: @this.amount
-                        },
+                    label: 'pay',
 
-                    }]
-                });
+                    size: '55',
+                    tagline: 'false'
 
+                },
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: @this.total
+                            },
 
-            },
-
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
-                    Livewire.emit('payment', [details.id, 'success', details.purchase_units[0]]);
-                });
-            },
-            onError: function(err) {
-                Livewire.emit('payment', [details.id, 'failure', details.purchase_units[0]]);
+                        }]
+                    });
 
 
-            }
-        }).render('#paypal-button-container');
+                },
+
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(details) {
+                        Livewire.emit('payment', [details.id, 'success', details.purchase_units[
+                            0]]);
+                    });
+                },
+                onError: function(err) {
+                    Livewire.emit('payment', [details.id, 'failure', details.purchase_units[0]]);
 
 
-        paypal.Buttons({
-
-            style: {
-
-                layout: 'horizontal',
-
-                color: 'silver',
-
-                shape: 'rect',
-
-                label: 'pay',
-
-                size: '55',
-                tagline: 'false'
-
-            },
-            createOrder: function(data, actions) {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: @this.amount
-                        },
-
-                    }]
-                });
+                }
+            }).render('#paypal-button-container');
 
 
-            },
+            paypal.Buttons({
 
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
-                    Livewire.emit('payment', [details.id, 'success', details.purchase_units[0]]);
-                });
-            },
-            onError: function(err) {
-                Livewire.emit('payment', [details.id, 'failure', details.purchase_units[0]]);
+                style: {
+
+                    layout: 'horizontal',
+
+                    color: 'silver',
+
+                    shape: 'rect',
+
+                    label: 'pay',
+
+                    size: '55',
+                    tagline: 'false'
+
+                },
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: @this.total
+                            },
+
+                        }]
+                    });
 
 
-            }
-        }).render('#paypal-button-container-lg');
+                },
+
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(details) {
+                        Livewire.emit('payment', [details.id, 'success', details.purchase_units[
+                            0]]);
+                    });
+                },
+                onError: function(err) {
+                    Livewire.emit('payment', [details.id, 'failure', details.purchase_units[0]]);
+
+
+                }
+            }).render('#paypal-button-container-lg');
+        })
+
 
 
 
@@ -933,6 +1004,15 @@
 
 
 
+
+
+            // Default export is a4 paper, portrait, using millimeters for units
+            const {
+                jsPDF
+            } = window.jspdf;
+            const doc = new jsPDF();
+            doc.text("Hello world!", 100, 100);
+            doc.save("newFile.pdf");
         });
 
 

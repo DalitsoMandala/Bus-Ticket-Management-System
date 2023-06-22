@@ -202,8 +202,6 @@
 
                 {{ $slot }}
 
-                <livewire:bus-checker />
-
                 <footer class="footer position-absolute">
                     <div class="row g-0 justify-content-between align-items-center h-100">
                         <div class="col-12 col-sm-auto text-center">
@@ -444,6 +442,7 @@
         }, 2000);
     </script>
     <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     @stack('scripts')
 </body>
 

@@ -2,8 +2,7 @@
 
 namespace App\Mail;
 
-use Dompdf\Dompdf;
-use Dompdf\Options;
+use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
@@ -12,6 +11,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Contracts\Queue\ShouldQueue;
+
 
 class BookingReceipt extends Mailable
 {
@@ -26,16 +26,32 @@ class BookingReceipt extends Mailable
         //
 
         $this->data = $data;
-        $options = new Options();
-        $options->set('isRemoteEnabled', true);
-        $dompdf = new Dompdf($options);
-        $view = view('mail.booking-receipt', ['data' => $this->data])->render();
-        $dompdf->loadHtml($view);
-        $dompdf->setPaper('A4', 'portrait');
-        $dompdf->render();
-        $pdf = $dompdf->output();
+        // $options = new Options();
+        // $options->set('isRemoteEnabled', true);
+        // $dompdf = new Dompdf($options);
+        // $view = view('mail.booking-receipt', ['data' => $this->data])->render();
+        // $dompdf->loadHtml($view);
+        // // (Optional) Set paper size and orientation
+        // $dompdf->setPaper('A4', 'portrait');
+
+        // $dompdf->render();
+        // $pdf = $dompdf->output();
+        // $uniqueId = uniqid();
+        // $this->filepath = 'public/invoices/invoice_'    . $uniqueId . '.pdf';
+        // $filePath = Storage::put($this->filepath, $pdf);
+
+
+
+
+        $pdf = new PDF();
+        //   $view = view('mail.booking-receipt', ['data' => $this->data])->render();
+        $pdf = PDF::loadView('mail.booking-receipt', ['data' => $this->data]);
+
+
+        // (Optional) Set paper size and orientation
+        $pdf = $pdf->output();
         $uniqueId = uniqid();
-        $this->filepath = 'public/invoices/invoice_' . $uniqueId . '.pdf';
+        $this->filepath = 'public/invoices/bus_ticket_receipt_'    . $uniqueId . '.pdf';
         $filePath = Storage::put($this->filepath, $pdf);
     }
 

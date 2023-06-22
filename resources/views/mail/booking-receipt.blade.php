@@ -6,6 +6,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml><![endif]-->
+    <!--[if !mso]><!-->
+    <link type="text/css"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900"
+        rel="stylesheet">
+    <!--<![endif]-->
     <style>
         * {
             box-sizing: border-box;
@@ -82,28 +87,76 @@
                 max-height: none !important;
             }
 
-            .row-2 .column-2 .block-1.heading_block h3,
-            .row-2 .column-2 .block-2.paragraph_block td.pad>div,
-            .row-2 .column-3 .block-1.heading_block h3,
-            .row-2 .column-3 .block-2.paragraph_block td.pad>div,
-            .row-4 .column-2 .block-1.heading_block h3,
-            .row-4 .column-2 .block-2.paragraph_block td.pad>div {
-                text-align: left !important;
+            .disappear {
+                display: none !important;
             }
         }
     </style>
 </head>
 
-<body
-    style="background-color: rgba(158,207,250,0.3); margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none; display:flex; justify-content:center; align-items:center">
+<body style="margin: 0; background-color: #ffffff; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
     <table class="nl-container" role="presentation"
-        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff; padding-top:25px; padding-right: 10px; padding-left:10px;  padding-bottom:25px; border-radius:20px; margin:3em;"
-        width="" border="0" cellpadding="0" cellspacing="0">
+        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;" width="100%" border="0"
+        cellpadding="0" cellspacing="0">
         <tbody>
             <tr>
                 <td>
-                    <table class="row row-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
-                        align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <table class="row row-1" role="presentation"
+                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #3e465b;" align="center"
+                        width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="row-content stack" role="presentation"
+                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-bottom: 1px dashed #FAFAFA; border-left: 0 dotted transparent; border-right: 0px dotted transparent; border-top: 0 dotted transparent; color: #000000; width: 600px;"
+                                        align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+                                        <tbody>
+                                            <tr>
+                                                <td class="column column-1"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: middle; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="16.666666666666668%">
+                                                    <table class="image_block block-1" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                                                        width="100%" border="0" cellpadding="0" cellspacing="0">
+                                                        <tr>
+                                                            <td class="pad"
+                                                                style="width:100%;padding-right:0px;padding-left:0px;">
+                                                                <div class="alignment" style="line-height:10px"
+                                                                    align="left"><img
+                                                                        src="{{ asset('assets/img/bus.png') }}"
+                                                                        style="display: block; height: auto; border: 0; width: 100px; max-width: 100%;"
+                                                                        width="100"></div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td class="column column-2"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: middle; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="83.33333333333333%">
+                                                    <table class="heading_block block-1" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                                                        width="100%" border="0" cellpadding="10" cellspacing="0">
+                                                        <tr>
+                                                            <td class="pad">
+                                                                <h1
+                                                                    style="margin: 0; color: #fafafa; direction: ltr; font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; font-size: 38px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0;">
+                                                                    <span
+                                                                        class="tinyMce-placeholder">{{ $data['company_name'] }}</span>
+                                                                </h1>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="row row-2" role="presentation"
+                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #3e465b;" align="center"
+                        width="100%" border="0" cellpadding="0" cellspacing="0">
                         <tbody>
                             <tr>
                                 <td>
@@ -120,9 +173,11 @@
                                                         width="100%" border="0" cellpadding="10" cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
-                                                                <h1
-                                                                    style="margin: 0; color: #2e2e2e; direction: ltr; font-family: Arial, Helvetica, sans-serif; font-size: 38px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0;">
-                                                                    Hey {{ $data['client'] }},</h1>
+                                                                <h3
+                                                                    style="margin: 0; color: #ffffff; direction: ltr; font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; font-size: 18px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0;">
+                                                                    <span class="tinyMce-placeholder">Thank you for
+                                                                        booking with us!</span>
+                                                                </h3>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -132,24 +187,146 @@
                                                         <tr>
                                                             <td class="pad">
                                                                 <div
-                                                                    style="color:#757575;direction:ltr;font-family:Arial, Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:19.2px;">
-                                                                    <p style="margin: 0;">This is the receipt for a
-                                                                        payment of <strong> </strong> you made to
-                                                                        {{ $data['payment_to'] }}.</p>
+                                                                    style="color:#ffffff;direction:ltr;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;font-size:12px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:14.399999999999999px;">
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <strong>Hi John</strong>, we have received your
+                                                                        payment.
+                                                                    </p>
+                                                                    <p style="margin: 0;">We will notify you when it is
+                                                                        check-in time on the departure day.</p>
                                                                 </div>
                                                             </td>
                                                         </tr>
                                                     </table>
-                                                    <table class="divider_block block-3" role="presentation"
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="row row-3" role="presentation"
+                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f0f3f9;"
+                        align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="row-content stack" role="presentation"
+                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000000; width: 600px;"
+                                        align="center" border="0" cellpadding="0" cellspacing="0"
+                                        width="600">
+                                        <tbody>
+                                            <tr>
+                                                <td class="column column-1"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; background-color: #ffffff; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="41.666666666666664%">
+                                                    <table class="paragraph_block block-1" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
+                                                        <tr>
+                                                            <td class="pad">
+                                                                <div
+                                                                    style="color:#101112;direction:ltr;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;font-size:12px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:14.399999999999999px;">
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <strong>Invoice No.</strong>
+                                                                    </p>
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <em>{{ $data['inv_no'] }}</em>
+                                                                    </p>
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <strong>Invoice Date</strong>
+                                                                    </p>
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <em>{{ $data['inv_date'] }}</em>
+                                                                    </p>
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <strong>Customer Details</strong>
+                                                                    </p>
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <em>Name: {{ $data['customer_name'] }}</em>
+                                                                    </p>
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <em>Email: {{ $data['customer_email'] }}</em>
+                                                                    </p>
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <em>Phone Number:
+                                                                            {{ $data['customer_phone_number'] }}</em>
+                                                                    </p>
+                                                                    <p style="margin: 0;">&nbsp;</p>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td class="column column-2"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; background-color: #ffffff; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="58.333333333333336%">
+                                                    <table class="paragraph_block block-1" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
+                                                        <tr>
+                                                            <td class="pad">
+                                                                <div
+                                                                    style="color:#101112;direction:ltr;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;font-size:12px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:14.399999999999999px;">
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <strong>Payment method</strong>
+                                                                    </p>
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <em>{{ $data['payment_method'] }}</em>
+                                                                    </p>
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <strong>Payment Currency</strong>
+                                                                    </p>
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <em>{{ $data['payment_currency'] }}</em>
+                                                                    </p>
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <strong>Payment Date</strong>
+                                                                    </p>
+                                                                    <p style="margin: 0;">
+                                                                        <em>{{ $data['payment_date'] }}</em>
+                                                                    </p>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="row row-4" role="presentation"
+                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f0f3f9;"
+                        align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="row-content stack" role="presentation"
+                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000000; width: 600px;"
+                                        align="center" border="0" cellpadding="0" cellspacing="0"
+                                        width="600">
+                                        <tbody>
+                                            <tr>
+                                                <td class="column column-1"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; background-color: #ffffff; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="100%">
+                                                    <table class="divider_block block-1" role="presentation"
                                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
-                                                        width="100%" border="0" cellpadding="10" cellspacing="0">
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <div class="alignment" align="center">
                                                                     <table role="presentation"
                                                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
-                                                                        border="0" cellpadding="0" cellspacing="0"
-                                                                        width="100%">
+                                                                        border="0" cellpadding="0"
+                                                                        cellspacing="0" width="100%">
                                                                         <tr>
                                                                             <td class="divider_inner"
                                                                                 style="font-size: 1px; line-height: 1px; border-top: 1px solid #dddddd;">
@@ -169,39 +346,46 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="row row-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                    <table class="row row-5" role="presentation"
+                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f0f3f9;"
                         align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
                         <tbody>
                             <tr>
                                 <td>
                                     <table class="row-content stack" role="presentation"
                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000000; width: 600px;"
-                                        align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+                                        align="center" border="0" cellpadding="0" cellspacing="0"
+                                        width="600">
                                         <tbody>
                                             <tr>
                                                 <td class="column column-1"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
-                                                    width="33.333333333333336%">
-                                                    <table class="heading_block block-1" role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
-                                                        width="100%" border="0" cellpadding="10" cellspacing="0">
-                                                        <tr>
-                                                            <td class="pad">
-                                                                <h3
-                                                                    style="margin: 0; color: #757575; direction: ltr; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0;">
-                                                                    Payment No. / Ticket No.</h3>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                    <table class="paragraph_block block-2" role="presentation"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; background-color: #ffffff; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="41.666666666666664%">
+                                                    <table class="paragraph_block block-1" role="presentation"
                                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
                                                         width="100%" border="0" cellpadding="10"
                                                         cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <div
-                                                                    style="color:#101112;direction:ltr;font-family:Arial, Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:19.2px;">
-                                                                    <p style="margin: 0;">{{ $data['ticket_no'] }}
+                                                                    style="color:#101112;direction:ltr;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;font-size:12px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:14.399999999999999px;">
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <strong>Ticket No.<br></strong>
+                                                                    </p>
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <u><em>{{ $data['ticket_no'] }}</em></u>
+                                                                    </p>
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <strong>Seat No.<br></strong>
+                                                                    </p>
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <u><em>{{ $data['seat_no'] }}</em></u>
+                                                                    </p>
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <strong>Bus Type.<br></strong>
+                                                                    </p>
+                                                                    <p style="margin: 0;">
+                                                                        <em>{{ $data['bus_type'] }}</em>
                                                                     </p>
                                                                 </div>
                                                             </td>
@@ -209,59 +393,33 @@
                                                     </table>
                                                 </td>
                                                 <td class="column column-2"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
-                                                    width="33.333333333333336%">
-                                                    <table class="heading_block block-1" role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
-                                                        width="100%" border="0" cellpadding="10"
-                                                        cellspacing="0">
-                                                        <tr>
-                                                            <td class="pad">
-                                                                <h3
-                                                                    style="margin: 0; color: #757575; direction: ltr; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0;">
-                                                                    Seat No.</h3>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                    <table class="paragraph_block block-2" role="presentation"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; background-color: #ffffff; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="58.333333333333336%">
+                                                    <table class="paragraph_block block-1" role="presentation"
                                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
                                                         width="100%" border="0" cellpadding="10"
                                                         cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <div
-                                                                    style="color:#101112;direction:ltr;font-family:Arial, Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:center;mso-line-height-alt:19.2px;">
-                                                                    <p style="margin: 0;">{{ $data['seat_no'] }}
+                                                                    style="color:#101112;direction:ltr;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;font-size:12px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:14.399999999999999px;">
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <strong>Journey Date<br></strong>
                                                                     </p>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td class="column column-3"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
-                                                    width="33.333333333333336%">
-                                                    <table class="heading_block block-1" role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
-                                                        width="100%" border="0" cellpadding="10"
-                                                        cellspacing="0">
-                                                        <tr>
-                                                            <td class="pad">
-                                                                <h3
-                                                                    style="margin: 0; color: #757575; direction: ltr; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: right; margin-top: 0; margin-bottom: 0;">
-                                                                    Payment Date</h3>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                    <table class="paragraph_block block-2" role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
-                                                        width="100%" border="0" cellpadding="10"
-                                                        cellspacing="0">
-                                                        <tr>
-                                                            <td class="pad">
-                                                                <div
-                                                                    style="color:#101112;direction:ltr;font-family:Arial, Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:right;mso-line-height-alt:19.2px;">
-                                                                    <p style="margin: 0;">{{ $data['payment_date'] }}
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <em>{{ $data['journey_date'] }}</em>
+                                                                    </p>
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <strong>Bus S/N<br></strong>
+                                                                    </p>
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <em>{{ $data['bus_serial_no'] }}</em>
+                                                                    </p>
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <strong>No of Seats</strong>
+                                                                    </p>
+                                                                    <p style="margin: 0;">
+                                                                        <em>{{ $data['bus_max_seats'] }}</em>
                                                                     </p>
                                                                 </div>
                                                             </td>
@@ -275,9 +433,9 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="row row-3" role="presentation"
-                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" align="center" width="100%"
-                        border="0" cellpadding="0" cellspacing="0">
+                    <table class="row row-6" role="presentation"
+                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f0f3f9;"
+                        align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
                         <tbody>
                             <tr>
                                 <td>
@@ -288,7 +446,7 @@
                                         <tbody>
                                             <tr>
                                                 <td class="column column-1"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; background-color: #ffffff; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
                                                     width="100%">
                                                     <table class="divider_block block-1" role="presentation"
                                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
@@ -303,7 +461,7 @@
                                                                         cellspacing="0" width="100%">
                                                                         <tr>
                                                                             <td class="divider_inner"
-                                                                                style="font-size: 1px; line-height: 1px; border-top: 1px solid #DDDDDD;">
+                                                                                style="font-size: 1px; line-height: 1px; border-top: 1px solid #dddddd;">
                                                                                 <span>&#8202;</span>
                                                                             </td>
                                                                         </tr>
@@ -320,9 +478,9 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="row row-4" role="presentation"
-                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" align="center" width="100%"
-                        border="0" cellpadding="0" cellspacing="0">
+                    <table class="row row-7" role="presentation"
+                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f0f3f9;"
+                        align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
                         <tbody>
                             <tr>
                                 <td>
@@ -333,36 +491,21 @@
                                         <tbody>
                                             <tr>
                                                 <td class="column column-1"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
-                                                    width="50%">
-                                                    <table class="heading_block block-1" role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
-                                                        width="100%" border="0" cellpadding="10"
-                                                        cellspacing="0">
-                                                        <tr>
-                                                            <td class="pad">
-                                                                <h3
-                                                                    style="margin: 0; color: #757575; direction: ltr; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0;">
-                                                                    Client</h3>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                    <table class="paragraph_block block-2" role="presentation"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; background-color: #ffffff; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="41.666666666666664%">
+                                                    <table class="paragraph_block block-1" role="presentation"
                                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
                                                         width="100%" border="0" cellpadding="10"
                                                         cellspacing="0">
                                                         <tr>
                                                             <td class="pad">
                                                                 <div
-                                                                    style="color:#101112;direction:ltr;font-family:Arial, Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:19.2px;">
-                                                                    <p style="margin: 0;">{{ $data['client'] }}
+                                                                    style="color:#101112;direction:ltr;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;font-size:12px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:14.399999999999999px;">
+                                                                    <p style="margin: 0;"><strong>DESCRIPTION</strong>
                                                                     </p>
 
-                                                                    <p style="margin: 0; ">
-                                                                        {{ $data['customer_email'] }}
-                                                                    </p>
-                                                                    <p style="margin: 0; ">
-                                                                        {{ $data['customer_phone_number'] }}
+                                                                    <p>
+                                                                        {{ $data['description'] }}
                                                                     </p>
                                                                 </div>
                                                             </td>
@@ -370,116 +513,8 @@
                                                     </table>
                                                 </td>
                                                 <td class="column column-2"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
-                                                    width="50%">
-                                                    <table class="heading_block block-1" role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
-                                                        width="100%" border="0" cellpadding="10"
-                                                        cellspacing="0">
-                                                        <tr>
-                                                            <td class="pad">
-                                                                <h3
-                                                                    style="margin: 0; color: #757575; direction: ltr; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: right; margin-top: 0; margin-bottom: 0;">
-                                                                    Payment To</h3>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                    <table class="paragraph_block block-2" role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
-                                                        width="100%" border="0" cellpadding="10"
-                                                        cellspacing="0">
-                                                        <tr>
-                                                            <td class="pad">
-                                                                <div
-                                                                    style="color:#101112;direction:ltr;font-family:Arial, Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:right;mso-line-height-alt:19.2px;">
-                                                                    <p style="margin: 0; ">
-                                                                        {{ $data['payment_to'] }}
-                                                                    </p>
-
-                                                                    <p style="margin: 0;">
-                                                                        {{ $data['company_email'] }}
-                                                                    </p>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="row row-5" role="presentation"
-                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" align="center" width="100%"
-                        border="0" cellpadding="0" cellspacing="0">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <table class="row-content" role="presentation"
-                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-left: 0 solid #757575; border-radius: 0; border-right: 0px solid #757575; border-top: 0 solid #757575; color: #000000; border-bottom: 1px solid #DDDDDD; width: 600px;"
-                                        align="center" border="0" cellpadding="0" cellspacing="0"
-                                        width="600">
-                                        <tbody>
-                                            <tr>
-                                                <td class="column column-1"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
-                                                    width="50%">
-                                                    <table class="heading_block block-1" role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
-                                                        width="100%" border="0" cellpadding="10"
-                                                        cellspacing="0">
-                                                        <tr>
-                                                            <td class="pad">
-                                                                <h3
-                                                                    style="margin: 0; color: #757575; direction: ltr; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0;">
-                                                                    <span
-                                                                        class="tinyMce-placeholder">DESCRIPTION</span>
-                                                                </h3>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td class="column column-2"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
-                                                    width="50%">
-                                                    <table class="heading_block block-1" role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
-                                                        width="100%" border="0" cellpadding="10"
-                                                        cellspacing="0">
-                                                        <tr>
-                                                            <td class="pad">
-                                                                <h3
-                                                                    style="margin: 0; color: #757575; direction: ltr; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: right; margin-top: 0; margin-bottom: 0;">
-                                                                    <span class="tinyMce-placeholder">AMOUNT</span>
-                                                                </h3>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="row row-6" role="presentation"
-                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" align="center" width="100%"
-                        border="0" cellpadding="0" cellspacing="0">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <table class="row-content" role="presentation"
-                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-left: 0 solid #757575; border-radius: 0; border-right: 0px solid #757575; border-top: 0 solid #757575; color: #000000; border-bottom: 1px solid #DDDDDD; width: 600px;"
-                                        align="center" border="0" cellpadding="0" cellspacing="0"
-                                        width="600">
-                                        <tbody>
-                                            <tr>
-                                                <td class="column column-1"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
-                                                    width="50%">
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; background-color: #ffffff; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="25%">
                                                     <table class="paragraph_block block-1" role="presentation"
                                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
                                                         width="100%" border="0" cellpadding="10"
@@ -487,17 +522,19 @@
                                                         <tr>
                                                             <td class="pad">
                                                                 <div
-                                                                    style="color:#101112;direction:ltr;font-family:Arial, Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:19.2px;">
-                                                                    <p style="margin: 0;">{!! $data['description'] !!}
+                                                                    style="color:#101112;direction:ltr;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;font-size:12px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:14.399999999999999px;">
+                                                                    <p style="margin: 0;"><strong>QTY</strong></p>
+                                                                    <p>
+                                                                        X 1
                                                                     </p>
                                                                 </div>
                                                             </td>
                                                         </tr>
                                                     </table>
                                                 </td>
-                                                <td class="column column-2"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
-                                                    width="50%">
+                                                <td class="column column-3"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; background-color: #ffffff; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="33.333333333333336%">
                                                     <table class="paragraph_block block-1" role="presentation"
                                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
                                                         width="100%" border="0" cellpadding="10"
@@ -505,46 +542,11 @@
                                                         <tr>
                                                             <td class="pad">
                                                                 <div
-                                                                    style="color:#101112;direction:ltr;font-family:Arial, Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:right;mso-line-height-alt:19.2px;">
-                                                                    <p style="margin: 0;">{{ $data['amount'] }}
+                                                                    style="color:#101112;direction:ltr;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;font-size:12px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:14.399999999999999px;">
+                                                                    <p style="margin: 0;"><strong>AMOUNT</strong></p>
+                                                                    <p>
+                                                                        {{ $data['amount'] }}
                                                                     </p>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="row row-7" role="presentation"
-                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" align="center" width="100%"
-                        border="0" cellpadding="0" cellspacing="0">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <table class="row-content stack" role="presentation"
-                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-left: 0 solid #757575; border-radius: 0; border-right: 0px solid #757575; border-top: 0 solid #757575; color: #000000; border-bottom: 0 solid #757575; width: 600px;"
-                                        align="center" border="0" cellpadding="0" cellspacing="0"
-                                        width="600">
-                                        <tbody>
-                                            <tr>
-                                                <td class="column column-1"
-                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
-                                                    width="100%">
-                                                    <table class="paragraph_block block-1" role="presentation"
-                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
-                                                        width="100%" border="0" cellpadding="10"
-                                                        cellspacing="0">
-                                                        <tr>
-                                                            <td class="pad">
-                                                                <div
-                                                                    style="color:#757575;direction:ltr;font-family:Arial, Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:right;mso-line-height-alt:19.2px;">
-                                                                    <p style="margin: 0;">SUBTOTAL:
-                                                                        {{ $data['sub_total'] }}</p>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -558,13 +560,138 @@
                         </tbody>
                     </table>
                     <table class="row row-8" role="presentation"
-                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" align="center" width="100%"
-                        border="0" cellpadding="0" cellspacing="0">
+                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f0f3f9;"
+                        align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
                         <tbody>
                             <tr>
                                 <td>
                                     <table class="row-content stack" role="presentation"
-                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-left: 0 solid #757575; border-radius: 0; border-right: 0px solid #757575; border-top: 0 solid #757575; color: #000000; border-bottom: 0 solid #757575; width: 600px;"
+                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000000; width: 600px;"
+                                        align="center" border="0" cellpadding="0" cellspacing="0"
+                                        width="600">
+                                        <tbody>
+                                            <tr>
+                                                <td class="column column-1"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; background-color: #ffffff; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="100%">
+                                                    <table class="divider_block block-1" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
+                                                        <tr>
+                                                            <td class="pad">
+                                                                <div class="alignment" align="center">
+                                                                    <table role="presentation"
+                                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;"
+                                                                        border="0" cellpadding="0"
+                                                                        cellspacing="0" width="100%">
+                                                                        <tr>
+                                                                            <td class="divider_inner"
+                                                                                style="font-size: 1px; line-height: 1px; border-top: 1px solid #dddddd;">
+                                                                                <span>&#8202;</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="row row-11" role="presentation"
+                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f0f3f9;"
+                        align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="row-content stack" role="presentation"
+                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000000; width: 600px;"
+                                        align="center" border="0" cellpadding="0" cellspacing="0"
+                                        width="600">
+                                        <tbody>
+                                            <tr>
+                                                <td class="column column-1 disappear"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; background-color: #ffffff; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="41.666666666666664%">
+                                                    <table class="paragraph_block block-1" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
+                                                        <tr>
+                                                            <td class="pad">
+                                                                <div
+                                                                    style="color:#101112;direction:ltr;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;font-size:12px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:14.399999999999999px;">
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td class="column column-2 disappear"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; background-color: #ffffff; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="25%">
+                                                    <table class="paragraph_block block-1" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
+                                                        <tr>
+                                                            <td class="pad">
+                                                                <div
+                                                                    style="color:#101112;direction:ltr;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;font-size:12px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:14.399999999999999px;">
+
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td class="column column-3"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; background-color: #ffffff; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="33.333333333333336%">
+                                                    <table class="paragraph_block block-1" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
+                                                        <tr>
+                                                            <td class="pad">
+                                                                <div
+                                                                    style="color:#101112;direction:ltr;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;font-size:12px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:14.399999999999999px;">
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        Subtotal: {{ $data['sub_total'] }}
+                                                                    </p>
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        Discount: {{ $data['discount'] }}</p>
+                                                                    <p style="margin: 0; margin-bottom: 16px;">Tax:
+                                                                        {{ $data['tax'] }}
+                                                                    </p>
+                                                                    <p style="margin: 0;"><strong>TOTAL:
+                                                                        </strong><strong>{{ $data['total'] }}</strong>
+                                                                    </p>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="row row-12" role="presentation"
+                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #3e465b;"
+                        align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="row-content stack" role="presentation"
+                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000000; width: 600px;"
                                         align="center" border="0" cellpadding="0" cellspacing="0"
                                         width="600">
                                         <tbody>
@@ -579,9 +706,18 @@
                                                         <tr>
                                                             <td class="pad">
                                                                 <div
-                                                                    style="color:#0f0101;direction:ltr;font-family:Arial, Helvetica, sans-serif;font-size:16px;font-weight:700;letter-spacing:0px;line-height:120%;text-align:right;mso-line-height-alt:19.2px;">
-                                                                    <p style="margin: 0;">TOTAL:
-                                                                        {{ $data['total_amount'] }}</p>
+                                                                    style="color:#ffffff;direction:ltr;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;font-size:12px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:14.399999999999999px;">
+                                                                    <p style="margin: 0; margin-bottom: 16px;">If you
+                                                                        have any questions, reply to this email or
+                                                                        <strong>contact us at
+                                                                        </strong>{{ $data['company_email'] }}
+                                                                    </p>
+                                                                    <p style="margin: 0;">
+                                                                        {{ $data['company_street'] }},
+                                                                        {{ $data['company_state'] }},
+                                                                        {{ $data['company_zip_code'] }},
+                                                                        {{ $data['company_country'] }}
+                                                                        </p>
                                                                 </div>
                                                             </td>
                                                         </tr>
