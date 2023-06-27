@@ -48,7 +48,7 @@ class ManageSeats extends Component
         'change' => 'change',
         'deleteMultiple' => 'deleteMultiple',
         'changeMessage' => 'changeMessage',
-
+        'refresh' => '$refresh',
     ];
 
     # ---------------------------------------------------------------------------- #
@@ -63,13 +63,16 @@ class ManageSeats extends Component
 
     public function updated($fields)
     {
+        $this->emitSelf('refresh');
     }
 
     public function cancel($field)
     {
         if ($field === 'all') {
+
             $this->reset(['schedule_time', 'date_departing', 'is_booked']);
         } else {
+
             $this->reset("$field");
         }
     }

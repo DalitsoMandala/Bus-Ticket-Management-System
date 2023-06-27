@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->string('transaction_id');
-
             $table->unsignedFloat('price', 8, 2);
             $table->unsignedFloat('amount_paid', 8, 2);
             $table->unsignedFloat('tax_amount', 8, 2)->default(0.00);
             $table->string('currency', 3);
             $table->boolean('payment_status');
             $table->string('payment_method');
+            $table->foreignId('customer_id')->constrained();
+            $table->json('customer_data')->nullable();
             $table->timestamps();
         });
     }

@@ -72,6 +72,7 @@ class BookBus extends Component
     public $loading;
     public $payment_data = [];
     public $tax, $discount, $subtotal, $total;
+    public $data_raw;
     # ---------------------------------------------------------------------------- #
     #                            Livewire listeners here                           #
     # ---------------------------------------------------------------------------- #
@@ -359,16 +360,20 @@ class BookBus extends Component
             $this->paid = true;
             $this->resetValidation('paid');
             $transactionId = $data[0];
-            $payment = Payment::create([
+
+            $payment = new Payment([
                 'transaction_id' => $transactionId,
                 'price' => $this->price,
                 'amount_paid' =>   $amount['value'],
                 'payment_method' => $this->payment_method,
                 'payment_status' => true,
                 'currency' => $amount['currency_code'],
-                'tax_amount' => $this->tax
-
+                'tax_amount' => $this->tax,
             ]);
+
+            $paid =   Customer::find($this->customer)->payments()->save($payment);
+            $payment_id = $paid->id;
+
 
             $bus = Bus::find($this->seatData['bus_id'])->update([
                 'route_id' => $this->route,
@@ -377,7 +382,7 @@ class BookBus extends Component
             ]);
 
             $booking = Booking::create([
-                'payment_id' => $payment->id,
+                'payment_id' => $payment_id,
                 'bus_id' => $this->seatData['bus_id'], //he
                 'seat_id' => $this->seatData['seat_id'],
                 'date_departing' => $this->date,
@@ -420,8 +425,52 @@ class BookBus extends Component
             session()->put('booking.payment_date', Carbon::parse($payment->updated_at)->format('d/m/Y'));
             session()->put('booking.seat_no',  Seat::find($this->seatData['seat_id'])->seat_no);
             session()->put('booking.bus_id',  $this->seatData['bus_id']);
-
+            // collection of all data
             $this->collect = session()->get('booking');
+            //email data
+            $time = Carbon::parse($this->collect['depart_time'])->format('H:i A');
+            $desc = 'Bus ticket for ' . $this->collect['full_name'] . ', starting off from ' . $this->collect['route_from'] . ' going to ' . $this->collect['route_to'] . ' on ' . $this->collect['date'] . ' at ' . Carbon::parse($this->collect['depart_time'])->format('H:i A');
+
+            $this->data_raw = [
+                'ticket_no' => $this->collect['transaction_id'],
+                'seat_no' => $this->collect['seat_no'],
+                'payment_date' => $this->collect['payment_date'],
+                'customer_name' => $this->collect['full_name'],
+                'payment_to' => Company::find(1)->company_name,
+                'description' => htmlentities($desc),
+                'amount' =>  number_format($this->collect['customer_total'], 2),
+                'sub_total' =>  number_format($this->collect['customer_subtotal'], 2),
+                'total' => number_format($this->collect['customer_total'], 2),
+                'discount' =>  number_format($this->collect['customer_discount'], 2),
+                'tax' =>  number_format($this->collect['customer_tax_amount'], 2),
+                'customer_phone_number' => $this->collect['phone'],
+                'customer_email' =>  $this->collect['email'],
+                'company_email' => config('mail.from.address'),
+                'payment_currency' => $this->collect['payment_currency'],
+                'journey_date' => $this->collect['date'],
+                'journey_time' => $time,
+                'payment_method' => $this->collect['payment_method'],
+                'company_name' => Company::find(1)->company_name,
+                'company_country' => Company::find(1)->company_country,
+                'company_city' => Company::find(1)->company_city,
+                'company_state' => Company::find(1)->company_state,
+                'company_zip_code' => Company::find(1)->company_zip_code,
+                'company_street' => Company::find(1)->company_street,
+                'inv_no' => Payment::max('id'),
+                'inv_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
+                'bus_type' => Bus::find($this->collect['bus_id'])->model,
+                'bus_serial_no' => Bus::find($this->collect['bus_id'])->serial_number,
+                'bus_max_seats' => Bus::find($this->collect['bus_id'])->seats,
+                'route_from' =>  $this->collect['route_from'],
+                'route_to'  => $this->collect['route_to'],
+                'seat_id' => $this->seatData['seat_id'],
+
+            ];
+
+
+            Payment::find($payment_id)->update([
+                'customer_data' => $this->data_raw
+            ]);
 
             $this->alert(
                 'success',
@@ -464,16 +513,17 @@ class BookBus extends Component
             'customer_name' => $this->collect['full_name'],
             'payment_to' => Company::find(1)->company_name,
             'description' => htmlentities($desc),
-            'amount' => $this->collect['payment_currency'] . ' ' . number_format($this->collect['customer_total'], 2),
-            'sub_total' => $this->collect['payment_currency'] . ' ' . number_format($this->collect['customer_subtotal'], 2),
-            'total' => $this->collect['payment_currency'] . ' ' . number_format($this->collect['customer_total'], 2),
-            'discount' => $this->collect['payment_currency'] . ' ' . number_format($this->collect['customer_discount'], 2),
-            'tax' => $this->collect['payment_currency'] . ' ' . number_format($this->collect['customer_tax_amount'], 2),
+            'amount' =>  number_format($this->collect['customer_total'], 2),
+            'sub_total' =>  number_format($this->collect['customer_subtotal'], 2),
+            'total' => number_format($this->collect['customer_total'], 2),
+            'discount' =>  number_format($this->collect['customer_discount'], 2),
+            'tax' =>  number_format($this->collect['customer_tax_amount'], 2),
             'customer_phone_number' => $this->collect['phone'],
             'customer_email' =>  $this->collect['email'],
             'company_email' => config('mail.from.address'),
             'payment_currency' => $this->collect['payment_currency'],
             'journey_date' => $this->collect['date'],
+            'journey_time' => $time,
             'payment_method' => $this->collect['payment_method'],
             'company_name' => Company::find(1)->company_name,
             'company_country' => Company::find(1)->company_country,
@@ -486,9 +536,10 @@ class BookBus extends Component
             'bus_type' => Bus::find($this->collect['bus_id'])->model,
             'bus_serial_no' => Bus::find($this->collect['bus_id'])->serial_number,
             'bus_max_seats' => Bus::find($this->collect['bus_id'])->seats,
-
+            'route_from' =>  $this->collect['route_from'],
+            'route_to'  => $this->collect['route_to'],
+            'seat_id' => $this->seatData['seat_id'],
         ];
-
 
 
 
@@ -802,7 +853,7 @@ class BookBus extends Component
             $seatArray = session()->get('seat');
             if ($array['payment_method'] == 'paypal') {
                 $this->collect = $array;
-                dd($array);
+
 
                 $this->customer = $array['customer_id'];
                 $this->route = $array['customer_route_id'];
@@ -847,6 +898,42 @@ class BookBus extends Component
                 }
 
                 $this->currentStep = 3;
+                $time = Carbon::parse($this->collect['depart_time'])->format('H:i A');
+                $desc = 'Bus ticket for ' . $this->collect['full_name'] . ', starting off from ' . $this->collect['route_from'] . ' going to ' . $this->collect['route_to'] . ' on ' . $this->collect['date'] . ' at ' . Carbon::parse($this->collect['depart_time'])->format('H:i A');
+                $this->data_raw = [
+                    'ticket_no' => $this->collect['transaction_id'],
+                    'seat_no' => $this->collect['seat_no'],
+                    'payment_date' => $this->collect['payment_date'],
+                    'customer_name' => $this->collect['full_name'],
+                    'payment_to' => Company::find(1)->company_name,
+                    'description' => htmlentities($desc),
+                    'amount' =>  number_format($this->collect['customer_total'], 2),
+                    'sub_total' =>  number_format($this->collect['customer_subtotal'], 2),
+                    'total' => number_format($this->collect['customer_total'], 2),
+                    'discount' =>  number_format($this->collect['customer_discount'], 2),
+                    'tax' =>  number_format($this->collect['customer_tax_amount'], 2),
+                    'customer_phone_number' => $this->collect['phone'],
+                    'customer_email' =>  $this->collect['email'],
+                    'company_email' => config('mail.from.address'),
+                    'payment_currency' => $this->collect['payment_currency'],
+                    'journey_date' => $this->collect['date'],
+                    'journey_time' => $time,
+                    'payment_method' => $this->collect['payment_method'],
+                    'company_name' => Company::find(1)->company_name,
+                    'company_country' => Company::find(1)->company_country,
+                    'company_city' => Company::find(1)->company_city,
+                    'company_state' => Company::find(1)->company_state,
+                    'company_zip_code' => Company::find(1)->company_zip_code,
+                    'company_street' => Company::find(1)->company_street,
+                    'inv_no' => Payment::max('id'),
+                    'inv_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
+                    'bus_type' => Bus::find($this->collect['bus_id'])->model,
+                    'bus_serial_no' => Bus::find($this->collect['bus_id'])->serial_number,
+                    'bus_max_seats' => Bus::find($this->collect['bus_id'])->seats,
+                    'route_from' =>  $this->collect['route_from'],
+                    'route_to'  => $this->collect['route_to'],
+                    'seat_id' => $this->seatData['seat_id'],
+                ];
 
 
                 // $bookedBus = BookedBus::where('route_id', '=', $this->route)->where('schedule_id', '=', $this->schedule);

@@ -31,7 +31,7 @@ use App\Http\Livewire\Customer\CancelBooking;
 use App\Http\Livewire\Customer\CustomerOverview;
 use App\Http\Livewire\Customer\BookBus as CustomerBookBus;
 use App\Http\Livewire\Customer\Profile as CustomerProfile;
-
+use  App\Http\Livewire\Customer\MyBookings as CustomerBookings;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -83,6 +83,8 @@ Route::middleware(['auth', 'role:customer'])->prefix('customer')->group(function
     Route::get('/schedules', Schedules::class)->name('customer-schedules');
     Route::get('/refunds', Refunds::class)->name('customer-refunds');
     Route::get('/book-a-bus', CustomerBookBus::class)->name('customer-book-a-bus');
+
+    Route::get('/my-bookings', CustomerBookings::class)->name('customer-bookings');
     Route::get('/cancel-booking', CancelBooking::class)->name('customer-cancel-booking');
     Route::get('/receipt', function () {
 
@@ -92,11 +94,11 @@ Route::middleware(['auth', 'role:customer'])->prefix('customer')->group(function
             'payment_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
             'customer_name' => 'John Doe',
             'payment_to' => config('app.name'),
-            'amount' => '$45.00',
-            'sub_total' => '$45.00',
-            'total' => '$45.00',
-            'discount' => '$45.00',
-            'tax' => '$45.00',
+            'amount' => '45.00',
+            'sub_total' => '45.00',
+            'total' => '45.00',
+            'discount' => '45.00',
+            'tax' => '45.00',
             'customer_phone_number' => '+26599339393',
             'customer_email' => 'dalitso@gmail.com',
             'company_email' => config('mail.from.address'),
@@ -114,47 +116,8 @@ Route::middleware(['auth', 'role:customer'])->prefix('customer')->group(function
             'bus_type' => 'MXAO 222',
             'bus_serial_no' => 'WICOWO@@@113',
             'bus_max_seats' => '23',
-            'description' => 'asadasdsadasd asdsasdasd asda sdasdadsdasdas dasdsa da',
+            'description' => 'wwwdwdwdwqdqcwdqwqwdqwdwd',
         ];
-
-
-        Mail::to('daliprinc8@gmail.com')
-
-            ->send(new BookingReceipt($data));
-
-        $htmlContent = view('mail.booking-receipt', [
-            'data' => [
-                'ticket_no' => 'WIOERF23344',
-                'seat_no' => 23,
-                'payment_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
-                'customer_name' => 'John Doe',
-                'payment_to' => config('app.name'),
-                'amount' => '$45.00',
-                'sub_total' => '$45.00',
-                'total' => '$45.00',
-                'discount' => '$45.00',
-                'tax' => '$45.00',
-                'customer_phone_number' => '+26599339393',
-                'customer_email' => 'dalitso@gmail.com',
-                'company_email' => config('mail.from.address'),
-                'payment_currency' => 'USD',
-                'journey_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
-                'payment_method' => 'paypal',
-                'company_name' => config('app.name'),
-                'company_country' => 'Malwi',
-                'company_city' => 'Lilongwe',
-                'company_state' => 'Lilongwe',
-                'company_zip_code' => '265',
-                'company_street' => 'Area 49',
-                'inv_no' => '#00922',
-                'inv_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
-                'bus_type' => 'MXAO 222',
-                'bus_serial_no' => 'WICOWO@@@113',
-                'bus_max_seats' => '23',
-                'description' => 'asadasdsadasd asdsasdasd asda sdasdadsdasdas dasdsa da',
-            ]
-        ]);
-
 
         return view('mail.booking-receipt', [
             'data' => [
@@ -163,11 +126,11 @@ Route::middleware(['auth', 'role:customer'])->prefix('customer')->group(function
                 'payment_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
                 'customer_name' => 'John Doe',
                 'payment_to' => config('app.name'),
-                'amount' => '$45.00',
-                'sub_total' => '$45.00',
-                'total' => '$45.00',
-                'discount' => '$45.00',
-                'tax' => '$45.00',
+                'amount' => '45.00',
+                'sub_total' => '45.00',
+                'total' => '45.00',
+                'discount' => '45.00',
+                'tax' => '45.00',
                 'customer_phone_number' => '+26599339393',
                 'customer_email' => 'dalitso@gmail.com',
                 'company_email' => config('mail.from.address'),
@@ -186,6 +149,8 @@ Route::middleware(['auth', 'role:customer'])->prefix('customer')->group(function
                 'bus_serial_no' => 'WICOWO@@@113',
                 'bus_max_seats' => '23',
                 'description' => 'wwwdwdwdwqdqcwdqwqwdqwdwd',
+                'route_from' =>  'amssas',
+                'route_to'  => 'asxaxs',
             ]
         ]);
     })->name('mail');

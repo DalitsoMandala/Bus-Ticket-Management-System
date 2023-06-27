@@ -189,7 +189,9 @@
                                                                 <div
                                                                     style="color:#ffffff;direction:ltr;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;font-size:12px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:14.399999999999999px;">
                                                                     <p style="margin: 0; margin-bottom: 16px;">
-                                                                        <strong>Hi John</strong>, we have received your
+                                                                        <strong>Hi
+                                                                            {{ $data['customer_name'] }}</strong>, we
+                                                                        have received your
                                                                         payment.
                                                                     </p>
                                                                     <p style="margin: 0;">We will notify you when it is
@@ -233,26 +235,26 @@
                                                                         <strong>Invoice No.</strong>
                                                                     </p>
                                                                     <p style="margin: 0; margin-bottom: 16px;">
-                                                                        <em>{{ $data['inv_no'] }}</em>
+                                                                        {{ $data['inv_no'] }}
                                                                     </p>
                                                                     <p style="margin: 0; margin-bottom: 16px;">
                                                                         <strong>Invoice Date</strong>
                                                                     </p>
                                                                     <p style="margin: 0; margin-bottom: 16px;">
-                                                                        <em>{{ $data['inv_date'] }}</em>
+                                                                        {{ $data['inv_date'] }}
                                                                     </p>
                                                                     <p style="margin: 0; margin-bottom: 16px;">
                                                                         <strong>Customer Details</strong>
                                                                     </p>
                                                                     <p style="margin: 0; margin-bottom: 16px;">
-                                                                        <em>Name: {{ $data['customer_name'] }}</em>
+                                                                        Name: {{ $data['customer_name'] }}
                                                                     </p>
                                                                     <p style="margin: 0; margin-bottom: 16px;">
-                                                                        <em>Email: {{ $data['customer_email'] }}</em>
+                                                                        Email: {{ $data['customer_email'] }}
                                                                     </p>
                                                                     <p style="margin: 0; margin-bottom: 16px;">
-                                                                        <em>Phone Number:
-                                                                            {{ $data['customer_phone_number'] }}</em>
+                                                                        Phone Number:
+                                                                        {{ $data['customer_phone_number'] }}
                                                                     </p>
                                                                     <p style="margin: 0;">&nbsp;</p>
                                                                 </div>
@@ -275,19 +277,19 @@
                                                                         <strong>Payment method</strong>
                                                                     </p>
                                                                     <p style="margin: 0; margin-bottom: 16px;">
-                                                                        <em>{{ $data['payment_method'] }}</em>
+                                                                        {{ $data['payment_method'] }}
                                                                     </p>
                                                                     <p style="margin: 0; margin-bottom: 16px;">
                                                                         <strong>Payment Currency</strong>
                                                                     </p>
                                                                     <p style="margin: 0; margin-bottom: 16px;">
-                                                                        <em>{{ $data['payment_currency'] }}</em>
+                                                                        {{ $data['payment_currency'] }}
                                                                     </p>
                                                                     <p style="margin: 0; margin-bottom: 16px;">
                                                                         <strong>Payment Date</strong>
                                                                     </p>
                                                                     <p style="margin: 0;">
-                                                                        <em>{{ $data['payment_date'] }}</em>
+                                                                        {{ $data['payment_date'] }}
                                                                     </p>
                                                                 </div>
                                                             </td>
@@ -360,7 +362,7 @@
                                             <tr>
                                                 <td class="column column-1"
                                                     style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; background-color: #ffffff; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
-                                                    width="41.666666666666664%">
+                                                    width="33.333333333333336%">
                                                     <table class="paragraph_block block-1" role="presentation"
                                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
                                                         width="100%" border="0" cellpadding="10"
@@ -373,19 +375,20 @@
                                                                         <strong>Ticket No.<br></strong>
                                                                     </p>
                                                                     <p style="margin: 0; margin-bottom: 16px;">
-                                                                        <u><em>{{ $data['ticket_no'] }}</em></u>
+                                                                        <u>{{ $data['ticket_no'] }}</u>
                                                                     </p>
                                                                     <p style="margin: 0; margin-bottom: 16px;">
                                                                         <strong>Seat No.<br></strong>
                                                                     </p>
                                                                     <p style="margin: 0; margin-bottom: 16px;">
-                                                                        <u><em>{{ $data['seat_no'] }}</em></u>
+                                                                        <u
+                                                                            style="background: #3E465B; color:#ffffff;padding: 0.4rem;"><b>{{ $data['seat_no'] }}</b></u>
                                                                     </p>
                                                                     <p style="margin: 0; margin-bottom: 16px;">
                                                                         <strong>Bus Type.<br></strong>
                                                                     </p>
                                                                     <p style="margin: 0;">
-                                                                        <em>{{ $data['bus_type'] }}</em>
+                                                                        {{ $data['bus_type'] }}
                                                                     </p>
                                                                 </div>
                                                             </td>
@@ -394,7 +397,7 @@
                                                 </td>
                                                 <td class="column column-2"
                                                     style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; background-color: #ffffff; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
-                                                    width="58.333333333333336%">
+                                                    width="33.333333333333336%">
                                                     <table class="paragraph_block block-1" role="presentation"
                                                         style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
                                                         width="100%" border="0" cellpadding="10"
@@ -407,19 +410,47 @@
                                                                         <strong>Journey Date<br></strong>
                                                                     </p>
                                                                     <p style="margin: 0; margin-bottom: 16px;">
-                                                                        <em>{{ $data['journey_date'] }}</em>
+                                                                        {{ $data['journey_date'] }}
                                                                     </p>
                                                                     <p style="margin: 0; margin-bottom: 16px;">
                                                                         <strong>Bus S/N<br></strong>
                                                                     </p>
                                                                     <p style="margin: 0; margin-bottom: 16px;">
-                                                                        <em>{{ $data['bus_serial_no'] }}</em>
+                                                                        {{ $data['bus_serial_no'] }}
                                                                     </p>
                                                                     <p style="margin: 0; margin-bottom: 16px;">
                                                                         <strong>No of Seats</strong>
                                                                     </p>
                                                                     <p style="margin: 0;">
-                                                                        <em>{{ $data['bus_max_seats'] }}</em>
+                                                                        {{ $data['bus_max_seats'] }}
+                                                                    </p>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td class="column column-3"
+                                                    style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; background-color: #ffffff; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;"
+                                                    width="33.333333333333336%">
+                                                    <table class="paragraph_block block-1" role="presentation"
+                                                        style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
+                                                        width="100%" border="0" cellpadding="10"
+                                                        cellspacing="0">
+                                                        <tr>
+                                                            <td class="pad">
+                                                                <div
+                                                                    style="color:#101112;direction:ltr;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;font-size:12px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:14.399999999999999px;">
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <strong>Depart From<br></strong>
+                                                                    </p>
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        {{ $data['route_from'] }}
+                                                                    </p>
+                                                                    <p style="margin: 0; margin-bottom: 16px;">
+                                                                        <strong>Depart For<br></strong>
+                                                                    </p>
+                                                                    <p style="margin: 0;">
+                                                                        {{ $data['route_to'] }}
                                                                     </p>
                                                                 </div>
                                                             </td>
@@ -545,6 +576,11 @@
                                                                     style="color:#101112;direction:ltr;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;font-size:12px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:14.399999999999999px;">
                                                                     <p style="margin: 0;"><strong>AMOUNT</strong></p>
                                                                     <p>
+                                                                        @if ($data['payment_currency'] === 'USD')
+                                                                            $
+                                                                        @else
+                                                                            MWK
+                                                                        @endif
                                                                         {{ $data['amount'] }}
                                                                     </p>
                                                                 </div>
@@ -662,15 +698,36 @@
                                                                 <div
                                                                     style="color:#101112;direction:ltr;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;font-size:12px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:14.399999999999999px;">
                                                                     <p style="margin: 0; margin-bottom: 16px;">
-                                                                        Subtotal: {{ $data['sub_total'] }}
+                                                                        Subtotal: @if ($data['payment_currency'] === 'USD')
+                                                                            $
+                                                                        @else
+                                                                            MWK
+                                                                        @endif
+                                                                        {{ $data['sub_total'] }}
                                                                     </p>
                                                                     <p style="margin: 0; margin-bottom: 16px;">
-                                                                        Discount: {{ $data['discount'] }}</p>
+                                                                        Discount: @if ($data['payment_currency'] === 'USD')
+                                                                            $
+                                                                        @else
+                                                                            MWK
+                                                                        @endif
+                                                                        {{ $data['discount'] }}</p>
                                                                     <p style="margin: 0; margin-bottom: 16px;">Tax:
-                                                                        {{ $data['tax'] }}
+                                                                        @if ($data['payment_currency'] === 'USD')
+                                                                            $
+                                                                        @else
+                                                                            MWK
+                                                                        @endif{{ $data['tax'] }}
                                                                     </p>
                                                                     <p style="margin: 0;"><strong>TOTAL:
-                                                                        </strong><strong>{{ $data['total'] }}</strong>
+                                                                        </strong><strong>
+                                                                            @if ($data['payment_currency'] === 'USD')
+                                                                                $
+                                                                            @else
+                                                                                MWK
+                                                                            @endif
+                                                                            {{ $data['total'] }}
+                                                                        </strong>
                                                                     </p>
                                                                 </div>
                                                             </td>
@@ -717,7 +774,7 @@
                                                                         {{ $data['company_state'] }},
                                                                         {{ $data['company_zip_code'] }},
                                                                         {{ $data['company_country'] }}
-                                                                        </p>
+                                                                    </p>
                                                                 </div>
                                                             </td>
                                                         </tr>

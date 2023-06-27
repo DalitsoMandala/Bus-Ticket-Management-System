@@ -23,4 +23,9 @@ class Payment extends Model
     {
         return $this->hasOne(Booking::class);
     }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
 }

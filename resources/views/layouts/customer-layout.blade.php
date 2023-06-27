@@ -597,7 +597,7 @@
                 <span class="text-1000 d-none d-sm-inline">slim</span></a>
         </div>
         <ul class="navbar-nav navbar-nav-icons flex-row">
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <div class="theme-control-toggle fa-ion-wait pe-2 theme-control-toggle-slim"><input
                         class="form-check-input ms-0 theme-control-toggle-input" id="themeControlToggle"
                         data-theme-control="phoenixTheme" type="checkbox" value="dark" /><label
@@ -610,7 +610,7 @@
                             class="icon me-1 d-none d-sm-block" data-feather="sun"></span><span
                             class="fs--1 fw-bold">Light</span></label>
                 </div>
-            </li>
+            </li> --}}
             <li class="nav-item"> <a class="nav-link" data-bs-toggle="modal" data-bs-target="#searchBoxModal"
                     href="#"><span data-feather="search" style="height:12px;width:12px;"></span></a></li>
             <li class="nav-item dropdown">
@@ -1106,8 +1106,7 @@
                                     <div class="dropdown-item-wrapper"><span class="me-2 uil"></span>Book a bus
                                     </div>
                                 </a></li>
-                            <li><a class="dropdown-item"
-                                    href="https://prium.github.io/phoenix/v1.11.0/pages/landing/alternate.html">
+                            <li><a class="dropdown-item" href="{{ route('customer-bookings') }}">
                                     <div class="dropdown-item-wrapper"><span class="me-2 uil"></span>My bookings
                                     </div>
                                 </a></li>
@@ -1134,7 +1133,7 @@
         </ul>
     </div>
     <ul class="navbar-nav navbar-nav-icons flex-row">
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <div class="theme-control-toggle fa-icon-wait px-2"><input
                     class="form-check-input ms-0 theme-control-toggle-input" id="themeControlToggle"
                     data-theme-control="phoenixTheme" type="checkbox" value="dark" /><label
@@ -1144,7 +1143,7 @@
                     class="mb-0 theme-control-toggle-label theme-control-toggle-dark" data-bs-toggle="tooltip"
                     data-bs-placement="left" for="themeControlToggle" title="Switch theme"><span class="icon"
                         data-feather="sun"></span></label></div>
-        </li>
+        </li> --}}
         <li class="nav-item"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#searchBoxModal"
                 href="#"><span data-feather="search"
                     style="height:19px;width:19px;margin-bottom: 2px;"></span></a></li>
@@ -2431,7 +2430,7 @@
         </ul>
     </div>
     <ul class="navbar-nav navbar-nav-icons flex-row">
-        <li class="nav-item">
+        {{-- <li class="nav-item d-none">
             <div class="theme-control-toggle fa-ion-wait pe-2 theme-control-toggle-slim"><input
                     class="form-check-input ms-0 theme-control-toggle-input" id="themeControlToggle"
                     data-theme-control="phoenixTheme" type="checkbox" value="dark" /><label
@@ -2443,7 +2442,7 @@
                     data-bs-placement="left" for="themeControlToggle" title="Switch theme"><span
                         class="icon me-1 d-none d-sm-block" data-feather="sun"></span><span
                         class="fs--1 fw-bold">Light</span></label></div>
-        </li>
+        </li> --}}
         <li class="nav-item"> <a class="nav-link" data-bs-toggle="modal" data-bs-target="#searchBoxModal"
                 href="#"><span data-feather="search" style="height:12px;width:12px;"></span></a></li>
         <li class="nav-item dropdown">
@@ -5053,7 +5052,7 @@
         </ul>
     </div>
     <ul class="navbar-nav navbar-nav-icons flex-row">
-        <li class="nav-item">
+        {{-- <li class="nav-item d-none">
             <div class="theme-control-toggle fa-ion-wait pe-2 theme-control-toggle-slim"><input
                     class="form-check-input ms-0 theme-control-toggle-input" id="themeControlToggle"
                     data-theme-control="phoenixTheme" type="checkbox" value="dark" /><label
@@ -5065,7 +5064,7 @@
                     data-bs-placement="left" for="themeControlToggle" title="Switch theme"><span
                         class="icon me-1 d-none d-sm-block" data-feather="sun"></span><span
                         class="fs--1 fw-bold">Light</span></label></div>
-        </li>
+        </li> --}}
         <li class="nav-item"> <a class="nav-link" data-bs-toggle="modal" data-bs-target="#searchBoxModal"
                 href="#"><span data-feather="search" style="height:12px;width:12px;"></span></a></li>
         <li class="nav-item dropdown">

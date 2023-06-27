@@ -26,12 +26,10 @@
             }
         </style>
 
-
         <div class="row align-items-start">
             <div class="col-4">
                 <div class="mb-3">
-                    <x-input-label for="" class="form-label">Status</x-input-label>
-
+                    <x-input-label class="form-label" for="">Status</x-input-label>
 
                     <select class="form-select " wire:model.debounce.500ms="is_booked">
                         <option value="">Select one</option>
@@ -39,20 +37,17 @@
                         <option value="booked">Booked</option>
                         <option value="not_booked">Not booked</option>
 
-
                     </select>
 
                 </div>
 
-
             </div>
             <div class="col-4">
                 <div class="mb-3">
-                    <x-input-label for="" class="form-label">Date</x-input-label>
-                    <select class="form-select " wire:model.debounce.500ms="date_departing" name=""
-                        id="">
+                    <x-input-label class="form-label" for="">Date</x-input-label>
+                    <select class="form-select " id="" name=""
+                        wire:model.debounce.500ms="date_departing">
                         <option value="">Select one</option>
-
 
                         @foreach ($date as $dt)
                             <option value="{{ $dt->date_departing }}">
@@ -65,9 +60,9 @@
             </div>
             <div class="col-4">
                 <div class="mb-3">
-                    <x-input-label for="" class="form-label">Schedule</x-input-label>
-                    <select class="form-select " wire:model.debounce.500ms="schedule_time" name=""
-                        id="">
+                    <x-input-label class="form-label" for="">Schedule</x-input-label>
+                    <select class="form-select " id="" name=""
+                        wire:model.debounce.500ms="schedule_time">
                         <option>Select one</option>
                         @foreach ($schedules as $schedule)
                             <option value="{{ $schedule->id }}">{{ $schedule->title }} @
@@ -75,10 +70,8 @@
                             </option>
                         @endforeach
 
-
                     </select>
                 </div>
-
 
             </div>
 
@@ -92,14 +85,11 @@
                             class="fa-solid fa-xmark"></i></button>
                 @endif
 
-
-
                 @if ($is_booked)
                     <button class="btn btn-sm btn-phoenix-secondary rounded-pill me-2 mr-4 mb-1 text-uppercase"
                         type="button" wire:click="cancel('is_booked')">Status <i
                             class="fa-solid fa-xmark"></i></button>
                 @endif
-
 
                 @if ($date_departing)
                     <button class="btn btn-sm btn-phoenix-secondary rounded-pill me-2 mr-4 mb-1 text-uppercase"
@@ -115,9 +105,6 @@
 
             </div>
 
-
-
-
         </div>
 
         <hr class="py-2">
@@ -125,14 +112,10 @@
             $bscount = 0;
         @endphp
 
-        <div class="row  align-items-start">
-
-
-
+        <div class="row ">
 
             @foreach ($bus as $key => $buses)
-                <div class="col-lg-6 col-sm-12">
-
+                <div class="col-lg-6 col-sm-12 d-flex align-items-stretch">
 
                     <div class="card  my-2   ">
                         <div class="card-header">
@@ -155,12 +138,10 @@
 
                                     </div>
 
-
                                 </div>
 
-
                                 <div class="dropdown open d-none">
-                                    <button class="btn  " type="button" id="triggerId" data-bs-toggle="dropdown"
+                                    <button class="btn  " id="triggerId" data-bs-toggle="dropdown" type="button"
                                         aria-haspopup="true" aria-expanded="false">
                                         <i class="fa-solid fa-ellipsis-vertical"></i>
                                     </button>
@@ -174,126 +155,121 @@
 
                         </div>
 
-                        <div class="card-header">
-                            <div class="d-flex justify-content-between">
+                        <div class="card-header" style="padding: 10px">
 
-                                <div>
-                                    <h5 class="text-uppercase fs--1">Total number of Seats </h5> <span
+                            <div class="row ">
+
+                                <div class="col">
+                                    <h5 class="text-uppercase fs--1">Total number of Seats </h5>
+                                </div>
+
+                                <div class="col">
+                                    <h5 class="text-uppercase fs--1">Number of taken Seats </h5>
+                                </div>
+
+                                <div class="col">
+                                    <h5 class="text-uppercase fs--1">Number of free Seats </h5>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="card-header " style="padding: 10px">
+
+                            <div class="row align-items-end">
+
+                                <div class="col">
+                                    <span
                                         class="badge badge-phoenix badge-phoenix-secondary">{{ $buses->number_of_seats }}</span>
                                 </div>
 
-                                <div>
-                                    <h5 class="text-uppercase fs--1">Number of taken Seats </h5> <span
+                                <div class="col">
+                                    <span
                                         class="badge badge-phoenix @if ($buses->taken_seats > 0) badge-phoenix-secondary @else badge-phoenix-danger @endif">{{ $buses->taken_seats }}</span>
                                 </div>
 
-                                <div>
-                                    <h5 class="text-uppercase fs--1">Number of free Seats </h5> <span
+                                <div class="col">
+                                    <span
                                         class="badge badge-phoenix @if ($buses->remaining_seats == 0) badge-phoenix-danger @else badge-phoenix-secondary @endif">{{ $buses->remaining_seats }}</span>
                                 </div>
                             </div>
 
                         </div>
                         <div class="card-body   ">
-
-
-                            <div>
+                            <div class="row">
                                 @foreach ($seats as $seat)
                                     @if ($buses->id == $seat->bus_id)
                                         @if ($seat->is_taken == 0)
-                                            <div class="card  my-1" style="display: inline-table; width:10%; ">
-                                                <div class="card-body  d-flex justify-content-center"
-                                                    style="height: 55px;">
-                                                    <x-seat-untaken />
-                                                </div>
+                                            <div class="col-2">
+                                                <a data-bs-toggle="button" href="#" style="text-decoration: none"
+                                                    wire:loading.attr="disabled">
+                                                    <div class="card my-1">
+                                                        <div class="card-body d-flex justify-content-center "
+                                                            style="padding: 10px;">
+                                                            <x-seat-untaken />
+                                                        </div>
 
+                                                        <div class="card-footer  d-flex justify-content-center "
+                                                            style="font-size: 9px; padding:1em">
+                                                            #{{ $seat->seat_no }}
+                                                        </div>
+                                                    </div>
+                                                </a>
 
-                                                <div class="card-footer  d-flex justify-content-center border-top-0">
-                                                    <span class="badge badge-phoenix badge-phoenix-secondary"> #
-                                                        {{ $seat->seat_no }}</span>
-                                                </div>
                                             </div>
-
-
-
-
-
-
-
-
-
-
-                                            {{-- <div class="d-flex flex-column me-2 py-1   " x-data="{
-                hov: false
-            }">
-                <a href="#" x-on:mouseover="hov = true" x-on:mouseout="hov = false"
-                    wire:click="sss" title="seat # {{ $seat->seat_no }}">
-                    <div class="avatar avatar-xl mb-1">
-                        <div class="avatar-name rounded-soft bg-200 seat-avatar"
-                            x-bind:class="{ 'bg-400': hov }"><span>
-                                <x-seat-untaken />
-                            </span></div>
-                    </div>
-                </a>
-
-                <span class="badge badge-phoenix badge-phoenix-secondary"> #
-                    {{ $seat->seat_no }}</span>
-            </div> --}}
                                         @else
-                                            <div class="card  my-1" style="display: inline-table; width:10%">
-                                                <div class="card-body d-flex justify-content-center"
-                                                    style="height: 55px;">
-                                                    <x-seat-taken />
-                                                </div>
+                                            <div class="col-2" x-data="{
+                                                updated(id) {
+                                                    window.livewire.emitTo('admin.view-seat', 'showModal', '' + id);
+                                                }
 
+                                            }">
+                                                <a class="seat_check" id="seat_{{ $seat->id }}"
+                                                    data-bs-toggle="button" href="#"
+                                                    style="text-decoration: none"
+                                                    @click="updated('{{ $seat->id }}')"
+                                                    wire:loading.attr="disabled">
+                                                    <div class="card   my-1">
+                                                        <div class="card-body d-flex justify-content-center "
+                                                            style="padding: 10px;">
+                                                            <x-seat-taken />
+                                                        </div>
 
-                                                <div class="card-footer d-flex justify-content-center border-top-0">
-                                                    <span class="badge bg-secondary"> # {{ $seat->seat_no }}</span>
-                                                </div>
+                                                        <div class="card-footer  d-flex justify-content-center "
+                                                            style="font-size: 9px; padding:1em">
+                                                            #{{ $seat->seat_no }}
+                                                        </div>
+                                                    </div>
+                                                </a>
                                             </div>
-
-
-                                            {{-- <div class="d-flex flex-column me-2 py-1   " x-data="{
-                hov: false
-            }">
-                <a href="#" x-on:mouseover="hov = true" x-on:mouseout="hov = false"
-                    wire:click="sss" title="seat # {{ $seat->seat_no }}">
-                    <div class="avatar avatar-xl mb-1">
-                        <div class="avatar-name rounded-soft bg-200 "
-                            x-bind:class="{ 'bg-400': hov }"><span>
-                                <x-seat-taken />
-                            </span></div>
-                    </div>
-                </a>
-                <span class="badge bg-secondary"> # {{ $seat->seat_no }}</span>
-
-            </div> --}}
                                         @endif
                                     @endif
                                 @endforeach
 
                             </div>
 
-
-
-
                         </div>
                     </div>
                 </div>
             @endforeach
 
-
         </div>
 
         <div class="row ">
-
+            <livewire:admin.view-seat />
             {{ $bus->links('pagination::bootstrap-4') }}
         </div>
-
 
     </div>
 
 </div>
 @push('scripts')
-    <script></script>
+    <script>
+        $('.seat_check').click(function(e) {
+            let id = $(this).attr('id');
+            let seat_id = id.replace('seat_', '');
+
+
+        });
+    </script>
 @endpush

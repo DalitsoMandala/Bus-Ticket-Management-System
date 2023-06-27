@@ -102,7 +102,8 @@
         @if (session()->has('mailable'))
             <div class="alert alert-soft-success alert-dismissible fade show" role="alert">
                 <button class="btn-close" data-bs-dismiss="alert" type="button" aria-label="Close"></button>
-                <strong>You have successfully booked a bus. You can view your bookings in "My Bookings" Page</strong>
+                <strong>You have successfully booked a bus and we have sent you an email of your receipt. You can view
+                    your bookings in <a href="{{ route('customer-bookings') }}">My Bookings</a> page.</strong>
                 Thank you!
             </div>
         @endif
@@ -693,138 +694,209 @@
                     @if (session()->has('booking') && session()->has('payment_status') && session()->get('payment_status') === 'success')
                         @if ($collect && $collect['payment_method'] == 'paypal')
 
-                            <div class="container py-2 mb-7 bg-200">
-                                <div class="row justify-content-center">
-                                    <div class="col-lg-12 col-xl-7">
-                                        <div class="card" id="invoice">
-                                            <div class="card-body p-5">
-                                                <h2>
-                                                    Hey {!! Auth::user()->customers->first()->first_name . ' ' . Auth::user()->customers->first()->last_name !!},
-                                                </h2>
-                                                <p class="fs-sm">
-                                                    This is the receipt for a payment of
-                                                    <strong>
-                                                        @if ($collect['payment_currency'] == 'USD')
-                                                            {!! '$' !!}{{ $collect['amount'] }}
-                                                        @else
-                                                            {!! 'MWK' !!}{{ $collect['amount'] }}
-                                                        @endif
-
-                                                    </strong> you made
-                                                    to {{ config('app.name') }}.
-                                                </p>
-
-                                                <div class="border-top border-gray-200 pt-4 mt-4">
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <div class="text-muted mb-2">Payment No. / Ticket No.</div>
-                                                            <strong>{{ $collect['transaction_id'] }}</strong>
-
-                                                        </div>
-
-                                                        <div class="col-md-4 text-md-center ">
-                                                            <div class="text-muted mb-2">Seat No.</div>
-                                                            <strong>{{ $collect['seat_no'] }}</strong>
-
-                                                        </div>
-                                                        <div class="col-md-4 text-md-end">
-                                                            <div class="text-muted mb-2">Payment Date</div>
-                                                            <strong>{{ $collect['payment_date'] }}</strong>
-                                                        </div>
-                                                    </div>
+                            <div class="container  mb-7 bg-200">
+                                <div class="row">
+                                    <div class="col-lg-12 col-xl-12">
+                                        <div class="row justify-content-center pt-2 pb-2"
+                                            style="background:#3E465B;  color:#fff">
+                                            <div class="col-lg-7 px-7 ">
+                                                <div class="mb-2 text-center">
+                                                    <span class="badge badge-phoenix badge-phoenix-secondary ">RECEIPT
+                                                        PREVIEW</span>
                                                 </div>
-
-                                                <div class="border-top border-gray-200 mt-4 py-4">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="text-muted mb-2">Client</div>
-                                                            <strong>
-                                                                {!! Auth::user()->customers->first()->first_name . ' ' . Auth::user()->customers->first()->last_name !!}
-                                                            </strong>
-                                                            <p class="fs-sm">
-                                                                {!! Auth::user()->customers->first()->phone_number !!}
-                                                                <br>
-                                                                <a class="text-purple"
-                                                                    href="#!">{!! Auth::user()->email !!}
-                                                                </a>
-                                                            </p>
-                                                        </div>
-                                                        <div class="col-md-6 text-md-end">
-                                                            <div class="text-muted mb-2">Payment To</div>
-                                                            <strong>
-                                                                {{ config('app.name') }}
-                                                            </strong>
-                                                            <p class="fs-sm">
-
-                                                                <a class="text-purple"
-                                                                    href="#!">{{ config('mail.from.address') }}
-                                                                </a>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <table class="table border-bottom border-gray-200 mt-3">
-                                                    <thead>
-                                                        <tr>
-                                                            <th class="fs-sm text-dark text-uppercase-bold-sm px-0"
-                                                                scope="col">
-                                                                Description
-                                                            </th>
-                                                            <th class="fs-sm text-dark text-uppercase-bold-sm text-end px-0"
-                                                                scope="col">
-                                                                Amount</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="px-0">Bus Ticket, <br>
-                                                                @if ($collect)
-                                                                    {{ $collect['route_to'] }},<br>
-                                                                    {{ $collect['schedule'] }}({{ \Carbon\Carbon::parse($schedule->depart_time)->format('H:i A') }})
-                                                                @endif
-                                                            </td>
-                                                            <td class="text-end px-0">
-                                                                @if ($collect['payment_currency'] == 'USD')
-                                                                    {!! '$' !!}
-                                                                @else
-                                                                    {!! 'MWK' !!}
-                                                                @endif
-                                                                {{ $collect['amount'] }}
-                                                            </td>
-                                                        </tr>
-
-                                                    </tbody>
-                                                </table>
-
-                                                <div class="mt-5">
-                                                    <div class="d-flex justify-content-end">
-                                                        <p class="text-muted me-3">Subtotal:</p>
-                                                        <span>
-                                                            @if ($collect['payment_currency'] == 'USD')
-                                                                {!! '$' !!}
-                                                            @else
-                                                                {!! 'MWK' !!}
-                                                            @endif{{ $collect['amount'] }}
+                                                <div class="d-flex inline-block border-bottom border-dashed pb-2 mb-2">
+                                                    <img src="{{ asset('assets/img/bus.png') }}"
+                                                        style="display: block; height: auto; border: 0; width: 100px; max-width: 100%;"
+                                                        width="100">
+                                                    <h1
+                                                        style="margin: 0; color: #fafafa; direction: ltr; font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; font-size: 38px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0;">
+                                                        <span class="tinyMce-placeholder">
+                                                            @if ($data_raw != null)
+                                                                {{ $data_raw['company_name'] }}
+                                                            @endif
                                                         </span>
-                                                    </div>
+                                                    </h1>
+                                                </div>
+                                                <h3 class="text-white" style="font-size: 18px;">Thank you for booking
+                                                    with us!</h3>
+                                                <p style="font-size: 12px;margin: 0; margin-bottom: 5px;">
+                                                    Hi {{ $data_raw['customer_name'] }}, we have received your payment.
+                                                </p>
+                                                <p style="font-size: 12px;margin: 0; margin-bottom: 5px;">We will
+                                                    notify you when it is check-in time
+                                                    on the departure day.</p>
+                                            </div>
 
-                                                    <div class="d-flex justify-content-end mt-3">
-                                                        <h5 class="me-3">Total:</h5>
-                                                        <h5 class="text-success">
-                                                            @if ($collect['payment_currency'] == 'USD')
-                                                                {!! '$' !!}
-                                                            @else
-                                                                {!! 'MWK' !!}
-                                                            @endif{{ $collect['amount'] }}
-                                                        </h5>
+                                        </div>
+                                        @if ($data_raw != null)
+                                            <div class="row justify-content-center">
+                                                <div class="col-lg-7  ">
+                                                    <div class="card rounded-0" id="invoice">
+                                                        <div class="card-body p-5">
+
+                                                            <div class="row" style="font-size: 12px">
+                                                                <div class="col">
+                                                                    <p>
+                                                                        <b> Invoice No.</b> <br>
+                                                                        {{ $data_raw['inv_no'] }} <br>
+                                                                        <b> Invoice Date</b><br>
+                                                                        {{ $data_raw['inv_date'] }} <br>
+                                                                        <b> Customer Details</b><br>
+
+                                                                        Name: {{ $data_raw['customer_name'] }} <br>
+
+                                                                        Email: {{ $data_raw['customer_email'] }} <br>
+
+                                                                        Phone Number:
+                                                                        {{ $data_raw['customer_phone_number'] }}
+
+                                                                    </p>
+
+                                                                </div>
+                                                                <div class="col">
+                                                                    <p>
+                                                                        <b>Payment method</b> <br>
+                                                                        {{ $data_raw['payment_method'] }} <br>
+                                                                        <b> Payment Currency</b><br>
+                                                                        {{ $data_raw['payment_currency'] }} <br>
+                                                                        <b> Payment Date</b><br>
+                                                                        {{ $data_raw['payment_date'] }}
+
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+
+                                                            <div class="row" style="font-size: 12px">
+                                                                <div class="col">
+                                                                    <p>
+                                                                        <b> Ticket No.</b> <br>
+                                                                        {{ $data_raw['ticket_no'] }} <br>
+                                                                        <b> Seat No.</b><br>
+                                                                        {{ $data_raw['seat_no'] }} <br>
+                                                                        <b> Bus Type.</b><br>
+                                                                        {{ $data_raw['bus_type'] }}
+                                                                    </p>
+
+                                                                </div>
+                                                                <div class="col">
+                                                                    <p>
+                                                                        <b>Journey Date</b> <br>
+                                                                        {{ $data_raw['journey_date'] }} <br>
+                                                                        <b>Bus S/N</b><br>
+                                                                        {{ $data_raw['bus_serial_no'] }} <br>
+                                                                        <b>No of Seats</b><br>
+                                                                        {{ $data_raw['bus_max_seats'] }}
+
+                                                                    </p>
+                                                                </div>
+
+                                                                <div class="col">
+                                                                    <p>
+                                                                        <b>Depart From</b> <br>
+                                                                        {{ $data_raw['route_from'] }} <br>
+
+                                                                        <b>Depart For</b><br>
+                                                                        {{ $data_raw['route_to'] }}
+
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+
+                                                            <hr>
+
+                                                            <div class="row" style="font-size: 12px">
+                                                                <div class="col">
+                                                                    <p>
+                                                                        <b> DESCRIPTION</b> <br>
+                                                                        {{ $data_raw['description'] }} <br>
+
+                                                                </div>
+                                                                <div class="col">
+                                                                    <p>
+                                                                        <b> QTY</b> <br>
+                                                                        X 1 <br>
+
+                                                                </div>
+                                                                <div class="col">
+                                                                    <p>
+                                                                        <b>AMOUNT</b> <br>
+                                                                        @if ($data_raw['payment_currency'] === 'USD')
+                                                                            $
+                                                                        @else
+                                                                            MWK
+                                                                        @endif
+                                                                        {{ $data_raw['amount'] }} <br>
+
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+
+                                                            <div class="row " style="font-size: 12px">
+                                                                <div class="col"></div>
+                                                                <div class="col"></div>
+                                                                <div class="col">
+                                                                    <p>
+
+                                                                        Subtotal: @if ($data_raw['payment_currency'] === 'USD')
+                                                                            $
+                                                                        @else
+                                                                            MWK
+                                                                        @endif
+                                                                        {{ $data_raw['sub_total'] }} <br>
+
+                                                                        Discount: @if ($data_raw['payment_currency'] === 'USD')
+                                                                            $
+                                                                        @else
+                                                                            MWK
+                                                                        @endif
+                                                                        {{ $data_raw['discount'] }} <br>
+
+                                                                        Tax: @if ($data_raw['payment_currency'] === 'USD')
+                                                                            $
+                                                                        @else
+                                                                            MWK
+                                                                        @endif
+                                                                        {{ $data_raw['tax'] }} <br>
+
+                                                                        <b>TOTAL: @if ($data_raw['payment_currency'] === 'USD')
+                                                                                $
+                                                                            @else
+                                                                                MWK
+                                                                            @endif
+                                                                            {{ $data_raw['total'] }}</b>
+
+                                                                    </p>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
 
-                                        </div>
+                                            <div class="row justify-content-center pt-2 pb-2"
+                                                style="background:#3E465B;  color:#fff">
+                                                <div class="col-lg-7 px-7 ">
+                                                    <p style="margin: 0; margin-bottom: 16px;font-size:12px">If you
+                                                        have any questions, reply to this email or
+                                                        <strong>contact us at
+                                                        </strong>{{ $data_raw['company_email'] }}
+                                                    </p>
+                                                    <p style="margin: 0; font-size:12px">
+                                                        {{ $data_raw['company_street'] }},
+                                                        {{ $data_raw['company_state'] }},
+                                                        {{ $data_raw['company_zip_code'] }},
+                                                        {{ $data_raw['company_country'] }}
+                                                    </p>
+                                                </div>
 
-                                        <div class="d-flex justify-content-center my-2">
+                                            </div>
+                                        @endif
+                                        <div class="d-flex justify-content-center my-2 d-none">
                                             <button class="btn btn-secondary btn-lg  px-4" wire:click="print">
                                                 <span class="fa-solid fa-print">
 
@@ -849,15 +921,17 @@
 
                             <button class="btn btn-secondary " type="button"
                                 x-bind:disabled="(currentStep === 1) || (currentStep === 3) || (paid === true)"
-                                wire:click="previousStep"><i class="fa-solid fa-angle-left" aria-hidden="true"></i>
+                                wire:click="previousStep" wire:loading.attr="disabled"><i
+                                    class="fa-solid fa-angle-left" aria-hidden="true"></i>
                                 BACK</button>
                             <button class="btn btn-secondary " type="button" :disabled="showCustomer == true"
                                 x-bind:class="{ 'd-none': currentStep === totalSteps }" x-bind:disabled="(paid === '')"
-                                wire:click="nextStep">CONTINUE
+                                wire:click="nextStep" wire:loading.attr="disabled">CONTINUE
                                 <i class="fa-solid fa-angle-right" aria-hidden="true"></i></button>
                             <button class="btn btn-secondary " type="button"
                                 x-bind:class="{ 'd-none': currentStep != totalSteps }"
-                                x-bind:disabled="loading === 'PLEASE WAIT...'" wire:click.prevent="save">
+                                x-bind:disabled="loading === 'PLEASE WAIT...'" wire:click.prevent="save"
+                                wire:loading.attr="disabled">
                                 <i class="fa-solid fa-check"
                                     x-bind:class="{
                                         'd-none': loading === 'PLEASE WAIT...'
@@ -1006,13 +1080,7 @@
 
 
 
-            // Default export is a4 paper, portrait, using millimeters for units
-            const {
-                jsPDF
-            } = window.jspdf;
-            const doc = new jsPDF();
-            doc.text("Hello world!", 100, 100);
-            doc.save("newFile.pdf");
+
         });
 
 
