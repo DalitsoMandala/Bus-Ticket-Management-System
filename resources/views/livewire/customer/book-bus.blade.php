@@ -953,7 +953,7 @@
 </div>
 @push('scripts')
     <script
-        src="https://www.paypal.com/sdk/js?client-id=ASrAQJzOKewNu0ebmPWd3EAR2zLjwMTXjmNISzq6S1kHI020jqXS5dBqyWC7j9Lzt8vVY-qHuz0fAQXm&currency=USD">
+        src="https://www.paypal.com/sdk/js?client-id=AaYXQcPNRcEjWkntqfGBJ6JHFkZyUWYr3I4r2edWm2Cr6wbgoQG8hOZ9NQ4yep_yZ-rCWF0vA2cEjCK8&currency=USD">
     </script>
     <script>
         $(window).on('showButton', function() {

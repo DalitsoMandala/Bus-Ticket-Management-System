@@ -173,50 +173,51 @@ class DatabaseSeeder extends Seeder
             ]);
 
             // payment
-            $customer_with_payment = Customer::find(1);
-            $data = [
-                'ticket_no' => 'WIOERF23344',
-                'seat_no' => 23,
-                'payment_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
-                'customer_name' => 'John Doe',
-                'payment_to' => config('app.name'),
-                'amount' => '45.00',
-                'sub_total' => '45.00',
-                'total' => '45.00',
-                'discount' => '45.00',
-                'tax' => '45.00',
-                'customer_phone_number' => '+26599339393',
-                'customer_email' => 'dalitso@gmail.com',
-                'company_email' => config('mail.from.address'),
-                'payment_currency' => 'USD',
-                'journey_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
-                'payment_method' => 'paypal',
-                'company_name' => config('app.name'),
-                'company_country' => 'Malwi',
-                'company_city' => 'Lilongwe',
-                'company_state' => 'Lilongwe',
-                'company_zip_code' => '265',
-                'company_street' => 'Area 49',
-                'inv_no' => '#00922',
-                'inv_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
-                'bus_type' => 'MXAO 222',
-                'bus_serial_no' => 'WICOWO@@@113',
-                'bus_max_seats' => '23',
-                'description' => 'wwwdwdwdwqdqcwdqwqwdqwdwd',
-            ];
+            // $customer_with_payment = Customer::find(1);
+            // $data = [
+            //     'ticket_no' => 'WIOERF23344',
+            //     'seat_no' => 23,
+            //     'payment_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
+            //     'customer_name' => 'John Doe',
+            //     'payment_to' => config('app.name'),
+            //     'amount' => '45.00',
+            //     'sub_total' => '45.00',
+            //     'total' => '45.00',
+            //     'discount' => '45.00',
+            //     'tax' => '45.00',
+            //     'customer_phone_number' => '+26599339393',
+            //     'customer_email' => 'dalitso@gmail.com',
+            //     'company_email' => config('mail.from.address'),
+            //     'payment_currency' => 'USD',
+            //     'journey_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
+            //     'payment_method' => 'paypal',
+            //     'company_name' => config('app.name'),
+            //     'company_country' => 'Malwi',
+            //     'company_city' => 'Lilongwe',
+            //     'company_state' => 'Lilongwe',
+            //     'company_zip_code' => '265',
+            //     'company_street' => 'Area 49',
+            //     'inv_no' => '#00922',
+            //     'inv_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
+            //     'bus_type' => 'MXAO 222',
+            //     'bus_serial_no' => 'WICOWO@@@113',
+            //     'bus_max_seats' => '23',
+            //     'description' => 'wwwdwdwdwqdqcwdqwqwdqwdwd',
 
-            $payment = new Payment([
-                'transaction_id' => $faker->regexify('[A-Z]{5}[0-4]{3}'),
-                'price' => round($faker->randomNumber(5, true)),
-                'amount_paid' => round($faker->randomNumber(5, true)),
-                'payment_method' => 'paypal',
-                'currency' => 'USD',
-                'payment_status' => true,
-                'customer_data' => '',
+            // ];
 
-            ]);
+            // $payment = new Payment([
+            //     'transaction_id' => $faker->regexify('[A-Z]{5}[0-4]{3}'),
+            //     'price' => round($faker->randomNumber(5, true)),
+            //     'amount_paid' => round($faker->randomNumber(5, true)),
+            //     'payment_method' => 'paypal',
+            //     'currency' => 'USD',
+            //     'payment_status' => true,
+            //     'customer_data' => json_encode($data),
 
-            $customer_with_payment->payments()->save($payment);
+            // ]);
+
+            // $customer_with_payment->payments()->save($payment);
         }
     }
 }
