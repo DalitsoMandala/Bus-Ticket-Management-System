@@ -369,6 +369,7 @@ class BookBus extends Component
                 'payment_status' => true,
                 'currency' => $amount['currency_code'],
                 'tax_amount' => $this->tax,
+                'local_currency' => Company::find(1)->company_local_currency,
             ]);
 
             $paid =   Customer::find($this->customer)->payments()->save($payment);
@@ -456,6 +457,7 @@ class BookBus extends Component
                 'company_state' => Company::find(1)->company_state,
                 'company_zip_code' => Company::find(1)->company_zip_code,
                 'company_street' => Company::find(1)->company_street,
+                'company_local_currency' => Company::find(1)->company_local_currency,
                 'inv_no' => Payment::max('id'),
                 'inv_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
                 'bus_type' => Bus::find($this->collect['bus_id'])->model,
@@ -464,6 +466,7 @@ class BookBus extends Component
                 'route_from' =>  $this->collect['route_from'],
                 'route_to'  => $this->collect['route_to'],
                 'seat_id' => $this->seatData['seat_id'],
+                'check_in_time' => Schedule::find($this->schedule)->check_in_time
 
             ];
 
@@ -531,6 +534,7 @@ class BookBus extends Component
             'company_state' => Company::find(1)->company_state,
             'company_zip_code' => Company::find(1)->company_zip_code,
             'company_street' => Company::find(1)->company_street,
+            'company_local_currency' => Company::find(1)->company_local_currency,
             'inv_no' => Payment::max('id'),
             'inv_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
             'bus_type' => Bus::find($this->collect['bus_id'])->model,
@@ -539,6 +543,7 @@ class BookBus extends Component
             'route_from' =>  $this->collect['route_from'],
             'route_to'  => $this->collect['route_to'],
             'seat_id' => $this->seatData['seat_id'],
+            'check_in_time' => Schedule::find($this->schedule)->check_in_time
         ];
 
 
@@ -557,6 +562,7 @@ class BookBus extends Component
             $this->button = "SUBMIT";
             Session::flash('mailable');
             session()->forget(['booking', 'payment_status']);
+            $this->reset();
             $this->redirect(url()->previous());
         } catch (\Exception $th) {
             //throw $th;
@@ -925,6 +931,7 @@ class BookBus extends Component
                     'company_state' => Company::find(1)->company_state,
                     'company_zip_code' => Company::find(1)->company_zip_code,
                     'company_street' => Company::find(1)->company_street,
+                    'company_local_currency' => Company::find(1)->company_local_currency,
                     'inv_no' => Payment::max('id'),
                     'inv_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
                     'bus_type' => Bus::find($this->collect['bus_id'])->model,
@@ -933,6 +940,7 @@ class BookBus extends Component
                     'route_from' =>  $this->collect['route_from'],
                     'route_to'  => $this->collect['route_to'],
                     'seat_id' => $this->seatData['seat_id'],
+                    'check_in_time' => Schedule::find($this->schedule)->check_in_time
                 ];
 
 

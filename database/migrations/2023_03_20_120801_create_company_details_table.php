@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('company_city')->nullable();
             $table->string('company_state')->nullable();
             $table->string('company_zip_code')->nullable();
+            $table->string('company_local_currency', 3)->nullable();
             $table->decimal('tax_percentage', 8, 2)->default(0.00);
             $table->timestamps();
         });
