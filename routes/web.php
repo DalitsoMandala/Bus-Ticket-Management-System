@@ -50,7 +50,9 @@ Route::get('/', function () {
 
 
 
-Route::get('/test', [TestController::class, 'changed']);
+Route::get('/test', function () {
+  return  Storage::url('bus_ticket_receipt_64a6910989b0b.pdf');
+});
 Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 

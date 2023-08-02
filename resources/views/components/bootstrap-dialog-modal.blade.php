@@ -2,7 +2,7 @@
 
 <x-bootstrap-modal :id="$id" :maxWidth="$maxWidth" {{ $attributes }}>
     <div class="modal-content">
-        <div class="modal-header">
+        <div class="pb-0 mb-0 modal-header border-bottom-0">
             <h5 class="modal-title fs-0">{{ $title }}</h5>
             <button type="button" data-bs-dismiss="modal" class="btn-close" data-modal-toggle="defaultModal">
 
@@ -12,7 +12,7 @@
 
 
         </div>
-        <div class="modal-body">
+        <div class="pt-0 mt-0 modal-body">
             {{ $content }}
         </div>
         <div class="modal-footer bg-light d-none">

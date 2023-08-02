@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
+use App\Models\Payment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
@@ -11,6 +11,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 
 class BookingReceipt extends Mailable
@@ -53,9 +54,10 @@ class BookingReceipt extends Mailable
         $uniqueId = uniqid();
         $this->filepath = 'public/invoices/bus_ticket_receipt_'    . $uniqueId . '.pdf';
         $filePath = Storage::put($this->filepath, $pdf);
-
-
-        
+        $trans = Payment::where('transaction_id', $this->data['ticket_no'])->first();
+        Payment::find($trans->id)->update([
+            'file_name' => $this->filepath,
+        ]);
     }
 
     /**

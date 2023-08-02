@@ -62,6 +62,11 @@
         .fc-theme-standard .fc-scrollgrid {
             border: none;
         }
+
+        .scroll {
+            max-height: 500px;
+            overflow: auto;
+        }
     </style>
     <div class="mb-3">
         <h2 class="mb-2 fs-2 fw-black">My Bookings</h2>
@@ -70,7 +75,7 @@
 
     <div class="py-3 row">
         <div class="col-lg-8 col-sm-12 ">
-            <div class="card">
+            <div class="card ">
                 <div class="card-header">
                     <b>Calendar</b>
                 </div>
@@ -86,11 +91,11 @@
         </div>
         <hr class="my-2 d-lg-none d-sm-block">
         <div class="col-lg-4 col-sm-12 d-flex align-items-stretch">
-            <div class="card col-12">
+            <div class="card col-12 scroll ">
                 <div class="card-header">
                     <b>Your upcoming travels</b>
                 </div>
-                <div class="p-1 card-body">
+                <div class="p-1 card-body ">
                     <div class="list-group ">
 
 
@@ -190,7 +195,6 @@
                                     </p>
                                 </div>
                             </a>
-                            <hr class="mt-0 mb-0">
                         @endforeach
 
                     </div>

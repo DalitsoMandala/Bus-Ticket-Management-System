@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreignId('customer_id')->constrained();
             $table->json('customer_data')->nullable();
             $table->boolean('is_complete')->default(false);
+            $table->longText('file_name')->nullable();
             $table->timestamps();
         });
     }
