@@ -93,18 +93,20 @@ class DatabaseSeeder extends Seeder
             'company_state' => 'Lilongwe',
             'company_zip_code' => '268392',
             'tax_percentage' => '20.00',
+            'company_local_currency' => 'MWK',
         ]);
 
         //create schedules
         Schedule::create([
             'title' => 'Morning Hours',
-            'depart_time' => '07:30',
-            'check_in_time' => '08:00'
+
+            'check_in_time' => '08:00',
+            'depart_time' => '08:30',
         ]);
         Schedule::create([
             'title' => 'Afternoon Hours',
-            'depart_time' => '12:30',
-            'check_in_time' => '13:00'
+
+            'check_in_time' => '13:00', 'depart_time' => '13:30',
         ]);
 
 

@@ -2,13 +2,11 @@
 
 namespace App\Http\Livewire\Customer;
 
-use Carbon\Carbon;
 use App\Models\Payment;
 use Livewire\Component;
-use Illuminate\Support\Collection;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
-class MyBookings extends Component
+class ViewEvent extends Component
 {
 
     use LivewireAlert;
@@ -19,13 +17,14 @@ class MyBookings extends Component
     # ---------------------------------------------------------------------------- #
     public $name;
     public $edit; // id of table
-    public $showingModalMyBookings;
+    public $showingModalViewEvent;
     public $button = "SUBMIT";
     public $status;
-    public $travelEvents;
-    public $schedules;
-    public $time;
-
+    public $title, $description, $date;
+    public $ticket_no, $seat_no, $customer_name,
+        $payment_method, $payment_currency,
+        $ticket_price, $journey_time,
+        $journey_date, $route_to, $route_from, $amount_paid, $local_currency, $check_in_time;
     # ---------------------------------------------------------------------------- #
     #                            Livewire listeners here                           #
     # ---------------------------------------------------------------------------- #
@@ -47,9 +46,6 @@ class MyBookings extends Component
         'deleteMultiple' => 'deleteMultiple',
         'changeMessage' => 'changeMessage',
         'confirm_request' => 'confirm_request',
-        'updateEvents' => 'updateEvents',
-        'updateDeparture' => 'updateDeparture',
-        'updateEventsTest' => 'updateEventsTest',
     ];
 
     # ---------------------------------------------------------------------------- #
@@ -81,22 +77,42 @@ class MyBookings extends Component
     }
 
 
-    public function showModal()
+    public function showModal($id, $title, $status)
     {
 
-        $this->showingModalMyBookings = true;
+
+        $this->showingModalViewEvent = true;
         if ($this->edit) {
             $this->button = 'UPDATE';
         } else {
             $this->button = 'SUBMIT';
         }
+
+        $getdata = Payment::where('transaction_id', $id)->first();
+        $json = json_decode($getdata->customer_data);
+        $this->title = $title;
+        $this->ticket_no = $json->ticket_no;
+        $this->seat_no = $json->seat_no;
+        $this->payment_method = $json->payment_method;
+        $this->payment_currency = $json->payment_currency;
+        $this->route_from = $json->route_from;
+        $this->amount_paid = number_format($json->total, 2);
+        $this->ticket_price = number_format($getdata->price, 2);;
+        $this->journey_date = $json->journey_date;
+        $this->journey_time = $json->journey_time;
+        $this->customer_name = $json->customer_name;
+        $this->local_currency = $json->company_local_currency;
+        $this->check_in_time = $json->check_in_time;
+        if ($status == 'danger') {
+            $this->status = false;
+        } else {
+            $this->status = true;
+        }
     }
-
-
 
     public function hideModal()
     {
-        $this->showingModalMyBookings = false;
+        $this->showingModalViewEvent = false;
     }
 
     # ---------------------------------------------------------------------------- #
@@ -290,149 +306,12 @@ class MyBookings extends Component
 
 */
 
-    public function mount()
-    {
-
-        $mycustomerId =  auth()->user()->customers->first()->id;
-
-
-        $mypayments = Payment::where('customer_id', $mycustomerId)->get();
-
-        $events = array();
-        $schedules = new Collection();
-        foreach ($mypayments as $payment) {
-            # code...
-            $json = json_decode($payment->customer_data);
-            $getjourneyDate = $json->journey_date . ' ' . $json->journey_time;
-
-            $givenDate  = Carbon::parse($getjourneyDate)->isPast();
-
-            $events[] = [
-                'id' => 'event_' . $payment->transaction_id,
-                'title' => 'Travel from ' . $json->route_from . ' to ' . $json->route_to,
-                'start' => $json->journey_date,
-                'className' => $givenDate == false ? 'text-success' :  'text-danger',
-
-            ];
-
-            $schedules->add([
-                'date' => $json->journey_date,
-                'time' => $json->journey_time,
-                'check_in_time' => $json->check_in_time,
-                'route_to' => $json->route_to,
-                'route_from' => $json->route_from,
-                'id' => $payment->transaction_id,
-                'data' => [
-                    'id' => 'event_' . $payment->transaction_id,
-                    'title' => 'Travel from ' . $json->route_from . ' to ' . $json->route_to,
-                    'start' => $json->journey_date,
-                    'className' => $givenDate == false ? 'success' :  'danger',
-                ],
-                'is_complete' => $payment->is_complete
-            ]);
-        }
-
-
-
-        $sortedCollection = $schedules->sortByDesc(function ($item) {
-
-
-            return [$item['date'], $item['time']];
-        });
-
-        $this->travelEvents = $events;
-        $this->schedules =  $sortedCollection->values()->all();
-        //dd($this->schedules);
-        $this->time = '2023-08-12 09:00:00';
-    }
-
-    public function updateEvents()
-    {
-
-        $mycustomerId =  auth()->user()->customers->first()->id;
-
-
-        $mypayments = Payment::where('customer_id', $mycustomerId)->get();
-
-        $events = array();
-        $schedules = new Collection();
-        foreach ($mypayments as $payment) {
-            # code...
-            $json = json_decode($payment->customer_data);
-            $getjourneyDate = $json->journey_date . ' ' . $json->journey_time;
-
-            $givenDate  = Carbon::parse($getjourneyDate)->isPast();
-
-            $events[] = [
-                'id' => 'event_' . $payment->transaction_id,
-                'title' => 'Travel from ' . $json->route_from . ' to ' . $json->route_to,
-                'start' => $json->journey_date,
-                'className' => $givenDate == false ? 'text-success' :  'text-danger',
-
-            ];
-
-            $schedules->add([
-                'date' => $json->journey_date,
-                'time' => $json->journey_time,
-                'check_in_time' => $json->check_in_time,
-                'route_to' => $json->route_to,
-                'route_from' => $json->route_from,
-                'id' => $payment->transaction_id,
-                'data' => [
-                    'id' => 'event_' . $payment->transaction_id,
-                    'title' => 'Travel from ' . $json->route_from . ' to ' . $json->route_to,
-                    'start' => $json->journey_date,
-                    'className' => $givenDate == false ? 'success' :  'danger',
-                ],
-                'is_complete' => $payment->is_complete
-            ]);
-        }
-
-
-
-        $sortedCollection = $schedules->sortByDesc(function ($item) {
-
-
-            return [$item['date'], $item['time']];
-        });
-
-        $this->travelEvents = $events;
-        $this->schedules =  $sortedCollection->values()->all();
-        //dd($this->schedules);
-        $this->time = '2023-08-12 09:00:00';
-    }
-
-    public function updateDeparture($id)
-    {
-
-
-
-        $payment = Payment::where('transaction_id', $id)->first();
-
-
-
-
-
-        Payment::find($payment->id)->update([
-            'is_complete' => true,
-        ]);
-
-        $this->emitSelf('updateEvents');
-    }
-
-    public function updateEventsTest()
-    {
-
-        $this->dispatchBrowserEvent('eventsUpdated');
-    }
-
     # ---------------------------------------------------------------------------- #
     #                             Livewire Render here                             #
     # ---------------------------------------------------------------------------- #
 
     public function render()
     {
-
-        return view('livewire.customer.my-bookings');
+        return view('livewire.customer.view-event');
     }
 }

@@ -53,6 +53,9 @@ class BookingReceipt extends Mailable
         $uniqueId = uniqid();
         $this->filepath = 'public/invoices/bus_ticket_receipt_'    . $uniqueId . '.pdf';
         $filePath = Storage::put($this->filepath, $pdf);
+
+
+        
     }
 
     /**
