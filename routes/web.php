@@ -1,6 +1,5 @@
 <?php
 
-use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use Carbon\Carbon;
 use App\Models\Bus;
 use App\Models\Seat;
@@ -20,6 +19,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\TestController;
 use App\Http\Livewire\Admin\ManageBuses;
 use App\Http\Livewire\Admin\ManageSeats;
+use App\Http\Livewire\Customer\Payments;
 use App\Http\Livewire\Admin\ManageRoutes;
 use App\Http\Livewire\Customer\Schedules;
 use App\Http\Controllers\ProfileController;
@@ -29,6 +29,7 @@ use App\Http\Livewire\Admin\ManageCustomers;
 use App\Http\Livewire\Admin\ManageSchedules;
 use App\Http\Livewire\Customer\CancelBooking;
 use App\Http\Livewire\Customer\CustomerOverview;
+use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use App\Http\Livewire\Customer\BookBus as CustomerBookBus;
 use App\Http\Livewire\Customer\Profile as CustomerProfile;
 use  App\Http\Livewire\Customer\MyBookings as CustomerBookings;
@@ -51,7 +52,7 @@ Route::get('/', function () {
 
 
 Route::get('/test', function () {
-  return  Storage::url('bus_ticket_receipt_64a6910989b0b.pdf');
+    return  Storage::url('bus_ticket_receipt_64a6910989b0b.pdf');
 });
 Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -85,7 +86,7 @@ Route::middleware(['auth', 'role:customer'])->prefix('customer')->group(function
     Route::get('/schedules', Schedules::class)->name('customer-schedules');
     Route::get('/refunds', Refunds::class)->name('customer-refunds');
     Route::get('/book-a-bus', CustomerBookBus::class)->name('customer-book-a-bus');
-
+    Route::get('/payments', Payments::class)->name('customer-payments');
     Route::get('/my-bookings', CustomerBookings::class)->name('customer-bookings');
     Route::get('/cancel-booking', CancelBooking::class)->name('customer-cancel-booking');
     Route::get('/receipt', function () {
