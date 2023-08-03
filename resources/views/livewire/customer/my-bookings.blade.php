@@ -153,28 +153,28 @@
                                     dateDifference: '',
                                     isExpired: false,
                                     updateTime() {
-
+                                
                                         $wire.emitSelf('updateDeparture', '{{ $schedule['id'] }}');
                                     },
                                     calculateDateDifference() {
                                         const targetTime = new Date(this.targetDate).getTime();
                                         const currentTime = new Date().getTime();
-
+                                
                                         const difference = targetTime - currentTime;
-
+                                
                                         if (difference < 0) {
                                             this.dateDifference = 'Day has long passed';
-                                            isExpired = true;
+                                            this.isExpired = true;
                                         } else {
                                             const seconds = Math.floor(difference / 1000);
                                             const minutes = Math.floor(seconds / 60);
                                             const hours = Math.floor(minutes / 60);
                                             const days = Math.floor(hours / 24);
-
+                                
                                             this.dateDifference = `${days} day(s), ${hours % 24} hour(s), ${minutes % 60} minute(s), ${seconds % 60} second(s) remaining`;
                                         }
-
-
+                                
+                                
                                     }
                                 }" x-init="calculateDateDifference();
                                 status = setInterval(() => calculateDateDifference(), 1000);
@@ -193,6 +193,8 @@
                                     <p class="badge badge-phoenix fs--2 badge-phoenix-success" x-show="isExpired">
                                         <i class="fa-regular fa-circle-check"></i> Departed
                                     </p>
+
+
                                 </div>
                             </a>
                         @endforeach
