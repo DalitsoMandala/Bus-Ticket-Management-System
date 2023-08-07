@@ -197,31 +197,30 @@ class BookBus extends Component
                                     $fail("You already have an existing booking on this date/time.");
                                 } else {
 
+                                    $chosenDate = Carbon::parse($value)->format('Y-m-d');
+                                    $currentDate = Carbon::now()->format('Y-m-d H:i:s');
+                                    $time = Schedule::find($this->schedule)->check_in_time;
+                                    $scheduledDate = $chosenDate . ' ' . $time;
 
-                                    // $todayDate = Carbon::now();
-                                    // $currentDate = $todayDate->format('Y-m-d');
-                                    // if ($value == $currentDate) {
-
-                                    //     $scheduleTime = Carbon::parse(Schedule::find($this->schedule)->depart_time);
-                                    //     $currentDateTime = Carbon::now();
-
-
-                                    //     $schedules = Schedule::select('depart_time')->get();
-                                    //     $arr = $schedules->toArray();
+                                    $carbon = Carbon::parse($currentDate)->greaterThan(Carbon::parse($scheduledDate));
 
 
+                                    if (Carbon::parse($currentDate)->greaterThan(Carbon::parse($scheduledDate)) == true) {
+                                        $fail("Sorry, you can not book this bus right now. It is " . Carbon::now()->format('H:i A') . " now ");
+                                        //  dd("Current time is less than the given time");
 
+                                        $this->alert('warning', 'Sorry, you can not book this bus right now. It is ' . Carbon::now()->format('H:i A') . ' now');
+                                    }
 
-                                    //     if ($currentDateTime->greaterThan($scheduleTime) && $this->availability == true) {
-                                    //         $fail("Sorry, you can not book this bus right now. It is " . Carbon::now()->format('H:i A') . " now ");
-                                    //         //  dd("Current time is less than the given time");
-                                    //     }
-                                    // }
 
                                     $array =  $this->checkAvailalableBuses();
 
                                     if (empty($array)) {
                                         $fail("Bus not available, please try again later");
+
+                                        $this->alert('warning', 'Bus not available, please try again later', [
+                                            'timer' => 5000,
+                                        ]);
                                     } else {
                                         $this->resetErrorBag('date');
                                     }

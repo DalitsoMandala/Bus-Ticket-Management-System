@@ -213,7 +213,7 @@
                         <div class="text-center col-12 col-sm-auto">
                             <p class="mb-0 text-600">v1.11.0</p>
                         </div>
-                    </div>  
+                    </div>
                 </footer>
             </div>
 

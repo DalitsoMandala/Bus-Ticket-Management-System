@@ -1,35 +1,31 @@
 <?php
 
-namespace App\Http\Livewire\Customer;
+namespace App\Http\Livewire;
 
-use App\Models\Payment;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
-class ViewEvent extends Component
+class PaymentPage extends Component
 {
 
     use LivewireAlert;
 
 
-    # ---------------------------------------------------------------------------- #
-    #                       Livewire properties / models here                      #
-    # ---------------------------------------------------------------------------- #
-    public $name;
-    public $edit; // id of table
-    public $showingModalViewEvent;
-    public $button = "SUBMIT";
-    public $status;
-    public $title, $description, $date, $file_name;
-    public $ticket_no, $seat_no, $customer_name,
-        $payment_method, $payment_currency,
-        $ticket_price, $journey_time,
-        $journey_date, $route_to, $route_from, $amount_paid, $local_currency, $check_in_time;
-    # ---------------------------------------------------------------------------- #
-    #                            Livewire listeners here                           #
-    # ---------------------------------------------------------------------------- #
+# ---------------------------------------------------------------------------- #
+#                       Livewire properties / models here                      #
+# ---------------------------------------------------------------------------- #
+public $name;
+public $edit; // id of table
+public $showingModalPaymentPage;
+public $button = "SUBMIT";
+public $status;
 
-    protected $listeners = [
+
+# ---------------------------------------------------------------------------- #
+#                            Livewire listeners here                           #
+# ---------------------------------------------------------------------------- #
+
+protected $listeners = [
 
         'resetdata' => 'resetdata',
         'edit' => 'edit',
@@ -46,16 +42,16 @@ class ViewEvent extends Component
         'deleteMultiple' => 'deleteMultiple',
         'changeMessage' => 'changeMessage',
         'confirm_request' => 'confirm_request',
-    ];
+        ];
 
-    # ---------------------------------------------------------------------------- #
-    #                              Livewire rules here                             #
-    # ---------------------------------------------------------------------------- #
+# ---------------------------------------------------------------------------- #
+#                              Livewire rules here                             #
+# ---------------------------------------------------------------------------- #
 
 
-    protected $rules = [
-        'name' => 'required',
-    ];
+protected $rules = [
+    'name' => 'required',
+];
 
 
     public function updated($fields)
@@ -66,66 +62,46 @@ class ViewEvent extends Component
 
 
 
-    # ---------------------------------------------------------------------------- #
-    #                       Livewire Modals & Reset Data here                      #
-    # ---------------------------------------------------------------------------- #
+# ---------------------------------------------------------------------------- #
+#                       Livewire Modals & Reset Data here                      #
+# ---------------------------------------------------------------------------- #
     public function resetdata()
     {
 
         $this->reset();
         $this->resetValidation();
+
     }
 
 
-    public function showModal($id, $title, $status)
+    public function showModal()
     {
 
-
-        $this->showingModalViewEvent = true;
-        if ($this->edit) {
+        $this->showingModalPaymentPage = true;
+          if ($this->edit) {
             $this->button = 'UPDATE';
         } else {
             $this->button = 'SUBMIT';
         }
 
-        $getdata = Payment::where('transaction_id', $id)->first();
-        $json = json_decode(json_encode($getdata->customer_data));
-        $this->title = $title;
-        $this->ticket_no = $json->ticket_no;
-        $this->seat_no = $json->seat_no;
-        $this->payment_method = $json->payment_method;
-        $this->payment_currency = $json->payment_currency;
-        $this->route_from = $json->route_from;
-        $this->amount_paid = number_format($json->total, 2);
-        $this->ticket_price = number_format($getdata->price, 2);;
-        $this->journey_date = $json->journey_date;
-        $this->journey_time = $json->journey_time;
-        $this->customer_name = $json->customer_name;
-        $this->local_currency = $json->company_local_currency;
-        $this->check_in_time = $json->check_in_time;
-        $this->file_name = str_replace('public/invoices/', '', $getdata->file_name);
-
-        if ($status == 'danger') {
-            $this->status = false;
-        } else {
-            $this->status = true;
-        }
     }
+
+
 
     public function hideModal()
     {
-        $this->showingModalViewEvent = false;
+        $this->showingModalPaymentPage = false;
     }
 
-    # ---------------------------------------------------------------------------- #
-    #                              Livewire CRUD here                              #
-    # ---------------------------------------------------------------------------- #
+# ---------------------------------------------------------------------------- #
+#                              Livewire CRUD here                              #
+# ---------------------------------------------------------------------------- #
 
-    public function save()
+   public function save()
     {
 
         if ($this->edit == '') {
-            $validatedData = $this->validate();
+    $validatedData = $this->validate();
             if ($validatedData) {
 
 
@@ -140,8 +116,9 @@ class ViewEvent extends Component
                 );
 
                 $this->emitTo('component', 'refresh');
-                $this->emitSelf('hideModal');
-                $this->emitSelf('resetdata');
+                 $this->emitSelf('hideModal');
+                 $this->emitSelf('resetdata');
+
             }
         } else {
 
@@ -149,7 +126,7 @@ class ViewEvent extends Component
             $validatedData = $this->validate();
 
 
-            if ($validatedData) {
+                 if ($validatedData) {
 
 
 
@@ -165,16 +142,17 @@ class ViewEvent extends Component
                 );
 
                 $this->emitTo('component', 'refresh');
-                $this->emitSelf('hideModal');
-                $this->emitSelf('resetdata');
+                 $this->emitSelf('hideModal');
+                 $this->emitSelf('resetdata');
+
             }
         }
     } // End SAVE
 
 
-    # ---------------------------------------------------------------------------- #
-    #                         ALL OTHER LIVEWIRE FUNCTIONS                         #
-    # ---------------------------------------------------------------------------- #
+# ---------------------------------------------------------------------------- #
+#                         ALL OTHER LIVEWIRE FUNCTIONS                         #
+# ---------------------------------------------------------------------------- #
 
     // Edit modal open with fields inserted
 
@@ -199,7 +177,7 @@ class ViewEvent extends Component
         $this->edit = $data['key'];
     }
 
-    // Delete data here
+// Delete data here
 
     public function destroy()
     {
@@ -259,7 +237,7 @@ class ViewEvent extends Component
     #                        Livewire Delete Functions here                        #
     # ---------------------------------------------------------------------------- #
 
-    /*
+/*
  public $message = " Are you sure you want delete this programme?";
     public $count = 0;
     public $data = [];
@@ -308,12 +286,12 @@ class ViewEvent extends Component
 
 */
 
-    # ---------------------------------------------------------------------------- #
-    #                             Livewire Render here                             #
-    # ---------------------------------------------------------------------------- #
+# ---------------------------------------------------------------------------- #
+#                             Livewire Render here                             #
+# ---------------------------------------------------------------------------- #
 
     public function render()
     {
-        return view('livewire.customer.view-event');
+        return view('livewire.payment-page');
     }
 }

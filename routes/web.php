@@ -33,6 +33,8 @@ use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use App\Http\Livewire\Customer\BookBus as CustomerBookBus;
 use App\Http\Livewire\Customer\Profile as CustomerProfile;
 use  App\Http\Livewire\Customer\MyBookings as CustomerBookings;
+use App\Http\Livewire\PaymentPage;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,6 +51,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+Route::get('/payment', PaymentPage::class)->middleware(['auth'])->name('payment');
 
 
 Route::get('/test', function () {

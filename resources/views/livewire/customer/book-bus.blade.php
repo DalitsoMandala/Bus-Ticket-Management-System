@@ -80,8 +80,8 @@
 
         <div x-data="{
             currentStep: @entangle('currentStep'),
-
-
+        
+        
         }">
             <nav class="breadcrumb" style="pointer-events: none">
                 <a class="breadcrumb-item" href="#" aria-current="page"
@@ -98,7 +98,7 @@
         </div>
     </div>
 
-    <div class="p-5 mb-5 row card card-body ">
+    <div class=" mb-5 row  ">
         @if (session()->has('mailable'))
             <div class="alert alert-soft-success alert-dismissible fade show" role="alert">
                 <button class="btn-close" data-bs-dismiss="alert" type="button" aria-label="Close"></button>
@@ -119,15 +119,15 @@
                 reset() {
                     showCustomer = !showCustomer;
                     $wire.emit('resetCustomer');
-
+            
                 },
                 chosenPaymentMethod: @entangle('payment_method')
-
+            
             }">
                 <div x-show="currentStep === 1">
 
-                    <div class="px-3 mt-4 row ">
-                        <div class="mb-3 col-lg-6 col-sm-12 d-flex align-items-stretch">
+                    <div class="mt-4 row ">
+                        <div class="mb-3 pl-0 col-lg-6 col-sm-12 d-flex align-items-stretch">
                             <div class="border border-dashed card card-body">
                                 <h2 class="mt-4 mb-2 fs-2 fw-black">Booking Details</h2>
                                 <div class="col-md-12 d-none">
@@ -384,7 +384,7 @@
                             </div>
 
                         </div>
-                        <div class="mb-3 overflow-hidden col-lg-6 rounded-1 col-sm-12 d-lg-block d-sm-none bg-100 bg-image-overlay position-relative auth-title-box"
+                        <div class="mb-3 overflow-hidden col-lg-6 rounded-1 col-sm-12 d-lg-block d-sm-none bg-100 bg-image-overlay position-relative auth-title-box d-flex align-items-stretch"
                             style="background-image: url('{{ asset('assets/img/happy.jpg') }}'); height:100%;">
 
                             <!--/.bg-holder-->

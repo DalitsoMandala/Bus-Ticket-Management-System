@@ -177,6 +177,9 @@
                                 
                                     }
                                 }" x-init="calculateDateDifference();
+                                if (isExpired === true) {
+                                    updateTime();
+                                }
                                 status = setInterval(() => calculateDateDifference(), 1000);
                                 $watch('isExpired', value => {
                                     if (value === true) updateTime();
