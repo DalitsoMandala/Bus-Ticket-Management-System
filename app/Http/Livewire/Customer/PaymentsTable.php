@@ -49,12 +49,54 @@ final class PaymentsTable extends PowerGridComponent
      *
      * @return Builder<\App\Models\Payment>
      */
-    public function datasource(): Builder
+    public function datasource(): array
     {
-        return Payment::query()->where('customer_id', auth()->user()->customers->first()->id)->select([
+        // $data =
+        //     Payment::query()->where('customer_id', auth()->user()->customers->first()->id)->select([
+        //         'payments.*',
+        //         'customer_data->journey_date as journdate',
+        //         'customer_data->payment_date as paydate',
+        //     'customer_data->journey_time as journtime',
+        //     'customer_data->route_to as paydate',
+        //         DB::Raw('ROW_NUMBER() OVER (ORDER BY payments.id) AS rn'),
+        //     ])->get();
+
+        $data = Payment::query()->where('customer_id', auth()->user()->customers->first()->id)->select([
             'payments.*',
             DB::Raw('ROW_NUMBER() OVER (ORDER BY payments.id) AS rn'),
-        ]);
+        ])->get();
+
+        foreach ($data as $key => $paymentvalues) {
+            # code...
+            if ($paymentvalues['customer_data'] == null) {
+                $paymentvalues['customer_data'] = [];
+            }
+            $getCustomerData = $paymentvalues['customer_data'];
+            //['ticket_no'] = 'QEWCWEC';
+            //loop this
+
+
+
+            foreach ($getCustomerData as $key2 => $customer) {
+                // ADD VALUES TO EXISTING ARRAY
+
+                if ($key2 == 'payment_method') {
+                    $key2 = 'payment_method_reference';
+                }
+                $data[$key]['' . $key2 . ''] = $customer;
+            }
+
+            if ($data[$key]['payment_status'] == 1) {
+                $data[$key]['payment_status'] = 'successful';
+            } else {
+                $data[$key]['payment_status'] = 'failed';
+            }
+        }
+
+
+
+
+        return $data->toArray();
     }
 
     /*
@@ -90,85 +132,94 @@ final class PaymentsTable extends PowerGridComponent
     {
         return PowerGrid::eloquent()
             ->addColumn('id')
-            ->addColumn('transaction_id', function ($model) {
-                $data = json_decode($model->customer_data);
-                return $data->ticket_no;
-            })
-
-            ->addColumn('amount_paid', function ($model) {
+            ->addColumn('rn')
+            ->addColumn('transaction_id')
+            ->addColumn('amount_paid')
+            ->addColumn('amt_paid', function ($model) {
 
                 $data = $model->amount_paid;
                 return $model->currency . ' ' . $data;
             })
-            ->addColumn('tax_amount', function ($model) {
+            ->addColumn('tax_amount')
+            ->addColumn('tax', function ($model) {
                 $data = $model->tax_amount;
                 return $model->currency . ' ' . $data;
             })
-            ->addColumn('payment_status', function ($model) {
+
+            ->addColumn('payment_status')
+            ->addColumn('status', function ($model) {
                 $data = $model->payment_status;
 
-                if ($data == 1) {
-                    return '<span class="badge-phoenix  fs--1 badge-phoenix-success">success</span>';
-                } else if ($data == 0) {
-                    return '<span class="badge-phoenix  fs--1 badge-phoenix-danger">failed</span>';
+                if ($data == 'successful') {
+                    return '<span class="badge badge-phoenix  fs--1 badge-phoenix-success">successful</span>';
+                } else {
+                    return '<span class="badge badge-phoenix  fs--1 badge-phoenix-danger">failed</span>';
                 }
             })
 
+            ->addColumn('journey_date')
+            ->addColumn('jrn_date', function ($model) {
+                // $data = json_decode($model->customer_data);
+                return Carbon::parse($model->customer_data['journey_date'])->format('d/m/Y');
+            })
+            ->addColumn('journey_time')
 
-            ->addColumn('journey_date', function ($model) {
-                $data = json_decode($model->customer_data);
-                return Carbon::parse($data->journey_date)->format('d/m/Y');
-            })
-            ->addColumn('journey_time', function ($model) {
-                $data = json_decode($model->customer_data);
-                return $data->journey_time;
-            })
+            ->addColumn('jrn_time', function ($model) {
 
-            ->addColumn('payment_date', function ($model) {
-                $data = json_decode($model->customer_data);
-                return $data->payment_date;
-            })
-            ->addColumn('route_from', function ($model) {
-                $data = json_decode($model->customer_data);
-                return $data->route_from;
+                return $model->journey_time;
             })
 
-            ->addColumn('route_to', function ($model) {
-                $data = json_decode($model->customer_data);
-                return $data->route_to;
+
+            ->addColumn('payment_date')
+
+            ->addColumn('pay_date', function ($model) {
+
+                return Carbon::parse($model->payment_date)->format('d/m/Y');
             })
 
-            ->addColumn('seat_no', function ($model) {
-                $data = json_decode($model->customer_data);
-                return $data->seat_no;
+            ->addColumn('route_from')
+
+            ->addColumn('route_to')
+
+            ->addColumn('seat_no')
+            ->addColumn('payment_method')
+
+            ->addColumn('rt_from', function ($model) {
+                return $model->route_from;
             })
-            ->addColumn('transaction_method', function ($model) {
+
+            ->addColumn('rt_to', function ($model) {
+                return $model->route_to;
+            })
+
+            ->addColumn('st_no', function ($model) {
+                return $model->seat_no;
+            })
+            ->addColumn('trans_method', function ($model) {
                 $method =  $model->payment_method;
 
-                if ($method == 'paypal') {
-                }
+
                 switch ($method) {
                     case 'airtel':
                         # code...
 
-                        return '<i class="fa-solid fa-signal text-danger"></i> ' . $method;
+                        return '<i class="fa-solid fa-signal text-danger"></i> <span class="text-uppercase fw-bold">' . $method . '</span>';
                         break;
 
                     case 'mpamba':
                         # code...
 
-                        return '<i class="fa-solid fa-signal text-success"></i> ' . $method;
+                        return
+                            '<i class="fa-solid fa-signal text-success"></i> <span class="text-uppercase fw-bold">' . $method . '</span>';
                         break;
                     default:
                         # code...
-                        return '<span class="badge  fs--1 bg-secondary"> <i class="fa-solid fa-credit-card"></i> ' . $method . '</span>';
+                        return '<span class="badge  fs--1 bg-secondary text-uppercase"> <i class="fa-solid fa-credit-card"></i> ' . $method . '</span>';
                         break;
                 }
-            })
-
-
-            ->addColumn('updated_at_formatted', fn (Payment $model) => Carbon::parse($model->updated_at)->format('d/m/Y H:i:s'));
+            });
     }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -187,47 +238,48 @@ final class PaymentsTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('ID', 'id')
+
+
+            Column::make('ID', 'id', 'rn')
                 ->searchable(),
 
-            Column::make('TRANSACTION METHOD', 'transaction_method', 'payment_method')
+            Column::make('TRANSACTION METHOD', 'trans_method', 'payment_method')
+                ->sortable()->searchable(),
+
+            Column::make('PAID AMOUNT', 'amt_paid', 'amount_paid')
                 ->searchable(),
 
-            Column::make('PAID AMOUNT', 'amount_paid')
+            Column::make('TAX AMOUNT', 'tax', 'tax_amount')
                 ->searchable(),
+            Column::make('PAYMENT STATUS', 'status', 'payment_status')
+                ->sortable()->searchable(),
 
-            Column::make('TAX AMOUNT', 'tax_amount'),
-            Column::make('PAYMENT STATUS', 'payment_status'),
-
-            Column::make('JOURNEY DATE', 'journey_date')
-                ->searchable(),
-
-
-
-            Column::make('JOURNEY TIME', 'journey_time')
-                ->searchable(),
-
-
-
-            Column::make('DEPART FROM', 'route_from')
+            Column::make('JOURNEY DATE', 'jrn_date', 'journey_date')
                 ->searchable(),
 
 
 
-            Column::make('DEPART FOR', 'route_to')
+            Column::make('JOURNEY TIME', 'jrn_time', 'journey_time')
                 ->searchable(),
 
 
 
-            Column::make('SEAT #', 'seat_no')
+            Column::make('DEPART FROM', 'rt_from', 'route_from')
                 ->searchable(),
 
-            Column::make('PAYMENT DATE', 'payment_date'),
 
-            // Column::make('UPDATED AT', 'updated_at_formatted', 'updated_at')
-            //     ->searchable()
-            //     ->sortable()
-            //     ->makeInputDatePicker(),
+
+            Column::make('DEPART FOR', 'rt_to', 'route_to')
+                ->searchable(),
+
+
+
+            Column::make('SEAT #', 'st_no', 'seat_no')
+                ->searchable(),
+
+            Column::make('PAYMENT DATE', 'pay_date', 'payment_date')
+                ->sortable()
+                ->searchable(),
 
 
         ];

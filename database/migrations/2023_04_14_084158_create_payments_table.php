@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('transaction_id');
+            $table->string('transaction_id')->nullable();
             $table->unsignedFloat('price', 8, 2);
-            $table->unsignedFloat('amount_paid', 8, 2);
+            $table->unsignedFloat('amount_paid', 8, 2)->default(0.00);
             $table->unsignedFloat('tax_amount', 8, 2)->default(0.00);
             $table->string('currency', 3);
             $table->string('local_currency', 3)->nullable();
@@ -25,6 +25,7 @@ return new class extends Migration
             $table->json('customer_data')->nullable();
             $table->boolean('is_complete')->default(false);
             $table->longText('file_name')->nullable();
+            $table->longText('error_message')->nullable();
             $table->timestamps();
         });
     }

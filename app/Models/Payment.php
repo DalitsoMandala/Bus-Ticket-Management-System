@@ -14,6 +14,10 @@ class Payment extends Model
     protected $guarded = [];
     protected $table = 'payments';
 
+    protected $casts = [
+        'customer_data' => 'json', // This casts the "data" column to a JSON object/array.
+    ];
+
     /**
      * Get the has_booking that owns the Payment
      *
@@ -24,6 +28,10 @@ class Payment extends Model
         return $this->hasOne(Booking::class);
     }
 
+    public function getPaymentDateAttribute()
+    {
+        return $this->data['payment_date'] ?? null;
+    }
     public function customer()
     {
         return $this->belongsTo(Customer::class);

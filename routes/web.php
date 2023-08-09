@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\BookedBus;
 use Illuminate\Support\Str;
 use App\Mail\BookingReceipt;
+use App\Http\Livewire\PaymentPage;
 use Illuminate\Support\Facades\URL;
 use App\Http\Livewire\Admin\BookBus;
 use App\Http\Livewire\Admin\Payment;
@@ -14,6 +15,7 @@ use App\Http\Livewire\Admin\Profile;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Livewire\Admin\Overview;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Customer\Queries;
 use App\Http\Livewire\Customer\Refunds;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\TestController;
@@ -33,6 +35,7 @@ use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use App\Http\Livewire\Customer\BookBus as CustomerBookBus;
 use App\Http\Livewire\Customer\Profile as CustomerProfile;
 use  App\Http\Livewire\Customer\MyBookings as CustomerBookings;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,6 +52,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+Route::get('/payment', PaymentPage::class)->middleware(['auth'])->name('payment');
 
 
 Route::get('/test', function () {
@@ -85,6 +89,7 @@ Route::middleware(['auth', 'role:customer'])->prefix('customer')->group(function
     Route::get('/profile', CustomerProfile::class)->name('customer-profile');
     Route::get('/schedules', Schedules::class)->name('customer-schedules');
     Route::get('/refunds', Refunds::class)->name('customer-refunds');
+    Route::get('/queries', Queries::class)->name('customer-queries');
     Route::get('/book-a-bus', CustomerBookBus::class)->name('customer-book-a-bus');
     Route::get('/payments', Payments::class)->name('customer-payments');
     Route::get('/my-bookings', CustomerBookings::class)->name('customer-bookings');

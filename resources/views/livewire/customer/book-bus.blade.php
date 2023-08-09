@@ -62,11 +62,53 @@
         label.radio input:disabled+div {
             opacity: .5;
         }
+
+
+
+        .waitscreen {}
+
+        .loadersmall {
+            width: 48px;
+            height: 48px;
+            border: 3px solid #dddd;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 1;
+        }
+
+        .loadersmall::after {
+            content: '';
+            box-sizing: border-box;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-bottom-color: #31374a;
+        }
+
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
     @section('title', config('app.name') . ' | Book a bus')
 
-    <div class="row">
-        <div class="mb-3">
+    <div class="row ">
+        <div class="mb-3 p-0">
             <h2 class="mb-2 fs-2 fw-black">Book a bus</h2>
             <h5 class="text-700 fw-semi-bold">Use the available information to get your ticket</h5>
         </div>
@@ -78,12 +120,12 @@
             })
         </script>
 
-        <div x-data="{
+        <div class="p-0" x-data="{
             currentStep: @entangle('currentStep'),
-
-
+        
+        
         }">
-            <nav class="breadcrumb" style="pointer-events: none">
+            <nav class="breadcrumb " style="pointer-events: none">
                 <a class="breadcrumb-item" href="#" aria-current="page"
                     x-bind:class="currentStep == 1 ? 'active' : ''">
                     <span class="rounded badge badge-phoenix badge-phoenix-secondary">1</span> Booking
@@ -98,7 +140,7 @@
         </div>
     </div>
 
-    <div class="p-5 mb-5 row card card-body ">
+    <div class=" mb-5 row  ">
         @if (session()->has('mailable'))
             <div class="alert alert-soft-success alert-dismissible fade show" role="alert">
                 <button class="btn-close" data-bs-dismiss="alert" type="button" aria-label="Close"></button>
@@ -116,18 +158,23 @@
                 available: @entangle('canShow'),
                 payment_data: @entangle('payment_data'),
                 loading: @entangle('loading'),
+                showloader: @entangle('showloader'),
                 reset() {
                     showCustomer = !showCustomer;
                     $wire.emit('resetCustomer');
-
+            
                 },
                 chosenPaymentMethod: @entangle('payment_method')
-
+            
             }">
+
+                <div class="waitscreen" id="waitscreen" x-show="showloader">
+                    <span class="loadersmall"></span>
+                </div>
                 <div x-show="currentStep === 1">
 
-                    <div class="px-3 mt-4 row ">
-                        <div class="mb-3 col-lg-6 col-sm-12 d-flex align-items-stretch">
+                    <div class="mt-4 row ">
+                        <div class="mb-3 pl-0 col-lg-6 col-sm-12 d-flex align-items-stretch">
                             <div class="border border-dashed card card-body">
                                 <h2 class="mt-4 mb-2 fs-2 fw-black">Booking Details</h2>
                                 <div class="col-md-12 d-none">
@@ -384,7 +431,7 @@
                             </div>
 
                         </div>
-                        <div class="mb-3 overflow-hidden col-lg-6 rounded-1 col-sm-12 d-lg-block d-sm-none bg-100 bg-image-overlay position-relative auth-title-box"
+                        <div class="mb-3 overflow-hidden col-lg-6 rounded-1 col-sm-12 d-lg-block d-sm-none bg-100 bg-image-overlay position-relative auth-title-box d-flex align-items-stretch"
                             style="background-image: url('{{ asset('assets/img/happy.jpg') }}'); height:100%;">
 
                             <!--/.bg-holder-->
@@ -421,7 +468,8 @@
                     </div>
                 </div>
 
-                <div x-show="currentStep === 2">
+                <div x-show="currentStep === 2"
+                    x-bind:class="{ 'opacity-25': showloader === true, 'pe-none': showloader === true }">
                     <!-- Step 2 form -->
 
                     <div class="my-2 row d-grid-3">
@@ -920,7 +968,8 @@
 
                     <div class="form-group">
 
-                        <div class="d-flex justify-content-between ">
+                        <div class="d-flex justify-content-between "
+                            x-bind:class="{ 'opacity-25': showloader === true, 'pe-none': showloader === true }">
 
                             <button class="btn btn-secondary " type="button"
                                 x-bind:disabled="(currentStep === 1) || (currentStep === 3) || (paid === true)"
@@ -959,16 +1008,6 @@
         src="https://www.paypal.com/sdk/js?client-id=AaYXQcPNRcEjWkntqfGBJ6JHFkZyUWYr3I4r2edWm2Cr6wbgoQG8hOZ9NQ4yep_yZ-rCWF0vA2cEjCK8&currency=USD">
     </script>
     <script>
-        $(window).on('showButton', function() {
-
-
-
-
-
-        });
-
-
-
         document.addEventListener('livewire:load', function() {
 
             paypal.Buttons({
@@ -1034,7 +1073,7 @@
                     return actions.order.create({
                         purchase_units: [{
                             amount: {
-                                value: @this.total
+                                value: @this.total,
                             },
 
                         }]
@@ -1048,9 +1087,13 @@
                         Livewire.emit('payment', [details.id, 'success', details.purchase_units[
                             0]]);
                     });
+
+
                 },
                 onError: function(err) {
-                    Livewire.emit('payment', [details.id, 'failure', details.purchase_units[0]]);
+
+                    Livewire.emit('payment', [err.message, 'failure', 0.0]);
+
 
 
                 }

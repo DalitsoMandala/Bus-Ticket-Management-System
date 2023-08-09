@@ -1113,16 +1113,11 @@
                         </ul>
                     </li>
 
-                    <li><a class="dropdown-item"
-                            href="{{ route('customer-payments') }}">
+                    <li><a class="dropdown-item" href="{{ route('customer-payments') }}">
                             <div class="dropdown-item-wrapper"><span class="me-2 uil"
                                     data-feather="credit-card"></span>Payments</div>
                         </a></li>
-                    <li><a class="dropdown-item" href="https://prium.github.io/phoenix/v1.11.0/pages/members.html">
-                            <div class="dropdown-item-wrapper"><span class="me-2 uil"
-                                    data-feather="corner-up-left"></span>Refunds</div>
-                        </a></li>
-                    <li><a class="dropdown-item" href="https://prium.github.io/phoenix/v1.11.0/pages/timeline.html">
+                    <li><a class="dropdown-item" href="{{ route('customer-queries') }}">
                             <div class="dropdown-item-wrapper"><span class="me-2 uil"
                                     data-feather="alert-circle"></span>Queries</div>
                         </a></li>

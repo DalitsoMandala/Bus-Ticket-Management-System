@@ -96,7 +96,7 @@ class ViewSeat extends Component
         $arr = $payments;
         foreach ($arr as $payment) {
 
-            $json = json_decode($payment['customer_data']);
+            $json = json_decode(json_encode($payment['customer_data']));
 
             if ($json->seat_id == $id) {
 
