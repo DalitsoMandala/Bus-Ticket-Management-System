@@ -158,6 +158,34 @@ class BookBus extends Component
     }
 
 
+    public function calculateTax($percentage)
+    {
+        $amount = $this->collect['quantity'] * $this->collect['price'];
+        $getFinaltax = $amount * ($percentage / 100);
+        $this->collect['amount_raw'] =  $amount;
+        $this->collect['tax_raw'] = $getFinaltax;
+        $date = date('Y-m-d');
+        $check = ExchangeRate::where('fetch_date', $date)->get();
+        if ($check->count() == 0) {
+            $this->fetchData();
+        } else {
+            $this->exchange_rate = $check[0]->exchange_rate; // in usd
+        }
+
+        // calculations
+        $amount_in_usd = $this->collect['amount_raw'] * $this->exchange_rate;
+        $tax_in_usd = $this->collect['tax_raw'] * $this->exchange_rate;
+        $discount = $this->collect['discount_raw'] * $this->exchange_rate;
+        $subtotal = $amount_in_usd;
+        $total = $subtotal + $tax_in_usd + $discount;
+        $this->amount = $amount_in_usd;
+        $this->tax = $tax_in_usd;
+        $this->subtotal = number_format(round($subtotal, 2), 2);
+        $this->total = number_format(round($total, 2), 2);
+        $this->discount = $discount;
+    }
+
+
     public function validateData()
     {
 
@@ -249,7 +277,6 @@ class BookBus extends Component
             }
 
 
-
             ////////////////////////////////////////////////////////////////
 
             /* -------------------------------------------------------------------------- */
@@ -259,7 +286,7 @@ class BookBus extends Component
 
 
             if ($this->payment_method === 'paypal') {
-
+                // Collection of customer data
                 $this->collect = [
                     'full_name' => Customer::find($this->customer)->first_name . ' ' . Customer::find($this->customer)->last_name,
                     'email' => Customer::find($this->customer)->user->email,
@@ -281,29 +308,8 @@ class BookBus extends Component
 
                 // calculate price with tax
                 $tax = Company::find(1)->tax_percentage;
-                $amount = $this->collect['quantity'] * $this->collect['price'];
-                $getFinaltax = $amount * ($tax / 100);
-                $this->collect['amount_raw'] =  $amount;
-                $this->collect['tax_raw'] = $getFinaltax;
-                $date = date('Y-m-d');
-                $check = ExchangeRate::where('fetch_date', $date)->get();
-                if ($check->count() == 0) {
-                    $this->fetchData();
-                } else {
-                    $this->exchange_rate = $check[0]->exchange_rate; // in usd
-                }
+                $this->calculateTax($tax);
 
-                // calculations
-                $amount_in_usd = $this->collect['amount_raw'] * $this->exchange_rate;
-                $tax_in_usd = $this->collect['tax_raw'] * $this->exchange_rate;
-                $discount = $this->collect['discount_raw'] * $this->exchange_rate;
-                $subtotal = $amount_in_usd;
-                $total = $subtotal + $tax_in_usd + $discount;
-                $this->amount = $amount_in_usd;
-                $this->tax = $tax_in_usd;
-                $this->subtotal = number_format(round($subtotal, 2), 2);
-                $this->total = number_format(round($total, 2), 2);
-                $this->discount = $discount;
                 //push arrays together
                 $myArray = [
                     'customer_id' => $this->customer,
@@ -324,6 +330,8 @@ class BookBus extends Component
                 session()->put('booking', $myArray);
 
                 $this->collect =  session()->get('booking');
+
+                // Now we have the final collection
             }
         } else if ($this->currentStep == 2) {
             $this->validate([
@@ -358,7 +366,7 @@ class BookBus extends Component
             session()->put('payment_status', 'success');
             $this->paid = true;
             $this->resetValidation('paid');
-            $transactionId = $data[0];
+            $transactionId = $data[0]; // transaction
 
             $payment = new Payment([
                 'transaction_id' => $transactionId,

@@ -65,18 +65,27 @@ final class PaymentsTable extends PowerGridComponent
             'payments.*',
             DB::Raw('ROW_NUMBER() OVER (ORDER BY payments.id) AS rn'),
         ])->get();
+<<<<<<< HEAD
 
         foreach ($data as $key => $paymentvalues) {
             # code...
             if ($paymentvalues['customer_data'] == null) {
                 $paymentvalues['customer_data'] = [];
             }
+=======
+        foreach ($data as $key => $paymentvalues) {
+            # code...
+
+>>>>>>> 6116b5d31f4411750824499a2a9ca1e846a9a1d3
             $getCustomerData = $paymentvalues['customer_data'];
             //['ticket_no'] = 'QEWCWEC';
             //loop this
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 6116b5d31f4411750824499a2a9ca1e846a9a1d3
             foreach ($getCustomerData as $key2 => $customer) {
                 // ADD VALUES TO EXISTING ARRAY
 
