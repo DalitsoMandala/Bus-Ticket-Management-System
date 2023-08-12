@@ -430,19 +430,19 @@ class BookBus extends Component
             session()->put('booking.tax_amount', $this->tax);
             session()->put('booking.payment_currency', $amount['currency_code']);
             session()->put('booking.transaction_id',  $data[0]);
-            session()->put('booking.payment_date', Carbon::parse($payment->updated_at)->format('d/m/Y'));
+            session()->put('booking.payment_date', Carbon::parse($this->collect['date'])->format('d-m-Y'));
             session()->put('booking.seat_no',  Seat::find($this->seatData['seat_id'])->seat_no);
             session()->put('booking.bus_id',  $this->seatData['bus_id']);
             // collection of all data
             $this->collect = session()->get('booking');
             //email data
             $time = Carbon::parse($this->collect['depart_time'])->format('H:i');
-            $desc = 'Bus ticket for ' . $this->collect['full_name'] . ', starting off from ' . $this->collect['route_from'] . ' going to ' . $this->collect['route_to'] . ' on ' . $this->collect['date'] . ' at ' . Carbon::parse($this->collect['depart_time'])->format('H:i A');
+            $desc = 'Bus ticket for ' . $this->collect['full_name'] . ', starting off from ' . $this->collect['route_from'] . ' going to ' . $this->collect['route_to'] . ' on ' . Carbon::parse($this->collect['date'])->format('d-m-Y') . ' at ' . Carbon::parse($this->collect['depart_time'])->format('H:i A');
 
             $this->data_raw = [
                 'ticket_no' => $this->collect['transaction_id'],
                 'seat_no' => $this->collect['seat_no'],
-                'payment_date' => $this->collect['payment_date'],
+                'payment_date' =>  Carbon::parse(Carbon::now())->format('d-m-Y'),
                 'customer_name' => $this->collect['full_name'],
                 'payment_to' => Company::find(1)->company_name,
                 'description' => htmlentities($desc),
@@ -455,7 +455,7 @@ class BookBus extends Component
                 'customer_email' =>  $this->collect['email'],
                 'company_email' => config('mail.from.address'),
                 'payment_currency' => $this->collect['payment_currency'],
-                'journey_date' => $this->collect['date'],
+                'journey_date' => Carbon::parse($this->collect['date'])->format('d-m-Y'),
                 'journey_time' => $time,
                 'payment_method' => $this->collect['payment_method'],
                 'company_name' => Company::find(1)->company_name,
@@ -465,8 +465,8 @@ class BookBus extends Component
                 'company_zip_code' => Company::find(1)->company_zip_code,
                 'company_street' => Company::find(1)->company_street,
                 'company_local_currency' => Company::find(1)->company_local_currency,
-                'inv_no' => Payment::max('id'),
-                'inv_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
+                'inv_no' => str_pad(Payment::max('id'), 5, "0", STR_PAD_LEFT),
+                'inv_date' => Carbon::parse(Carbon::now())->format('d-m-Y'),
                 'bus_type' => Bus::find($this->collect['bus_id'])->model,
                 'bus_serial_no' => Bus::find($this->collect['bus_id'])->serial_number,
                 'bus_max_seats' => Bus::find($this->collect['bus_id'])->seats,
@@ -566,11 +566,11 @@ class BookBus extends Component
 
 
         $time = Carbon::parse($this->collect['depart_time'])->format('H:i');
-        $desc = 'Bus ticket for ' . $this->collect['full_name'] . ', starting off from ' . $this->collect['route_from'] . ' going to ' . $this->collect['route_to'] . ' on ' . $this->collect['date'] . ' at ' . Carbon::parse($this->collect['depart_time'])->format('H:i A');
+        $desc = 'Bus ticket for ' . $this->collect['full_name'] . ', starting off from ' . $this->collect['route_from'] . ' going to ' . $this->collect['route_to'] . ' on ' . Carbon::parse($this->collect['date'])->format('d-m-Y') . ' at ' . Carbon::parse($this->collect['depart_time'])->format('H:i A');
         $data = [
             'ticket_no' => $this->collect['transaction_id'],
             'seat_no' => $this->collect['seat_no'],
-            'payment_date' => $this->collect['payment_date'],
+            'payment_date' =>  Carbon::parse(Carbon::now())->format('d-m-Y'),
             'customer_name' => $this->collect['full_name'],
             'payment_to' => Company::find(1)->company_name,
             'description' => htmlentities($desc),
@@ -583,7 +583,7 @@ class BookBus extends Component
             'customer_email' =>  $this->collect['email'],
             'company_email' => config('mail.from.address'),
             'payment_currency' => $this->collect['payment_currency'],
-            'journey_date' => $this->collect['date'],
+            'journey_date' => Carbon::parse($this->collect['date'])->format('d-m-Y'),
             'journey_time' => $time,
             'payment_method' => $this->collect['payment_method'],
             'company_name' => Company::find(1)->company_name,
@@ -593,8 +593,8 @@ class BookBus extends Component
             'company_zip_code' => Company::find(1)->company_zip_code,
             'company_street' => Company::find(1)->company_street,
             'company_local_currency' => Company::find(1)->company_local_currency,
-            'inv_no' => Payment::max('id'),
-            'inv_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
+            'inv_no' => str_pad(Payment::max('id'), 5, "0", STR_PAD_LEFT),
+            'inv_date' =>  Carbon::parse(Carbon::now())->format('d-m-Y'),
             'bus_type' => Bus::find($this->collect['bus_id'])->model,
             'bus_serial_no' => Bus::find($this->collect['bus_id'])->serial_number,
             'bus_max_seats' => Bus::find($this->collect['bus_id'])->seats,
@@ -856,7 +856,7 @@ class BookBus extends Component
 
     public function fetchData()
     {
-        $response = Http::get('https://v6.exchangerate-api.com/v6/fe9dad822a73f2a8da92adea/latest/MWK');
+        $response = Http::get('https://v6.exchangerate-api.com/v6/5fffc43b8a147396c7adb54d/latest/MWK');
         $this->data = $response->json();
         $status = $this->data['result'];
         $from = 'MWK';
@@ -930,6 +930,7 @@ class BookBus extends Component
             if (session()->get('payment_status') == 'success') {
                 $array = session()->get('booking');
                 $seatArray = session()->get('seat');
+                $seatArray = session()->get('seat');
 
                 if ($array['payment_method'] == 'paypal') {
                     $this->collect = $array;
@@ -956,7 +957,7 @@ class BookBus extends Component
                 $this->data_raw = [
                     'ticket_no' => $this->collect['transaction_id'],
                     'seat_no' => $this->collect['seat_no'],
-                    'payment_date' => $this->collect['payment_date'],
+                    'payment_date' =>  Carbon::parse(Carbon::now())->format('d-m-Y'),
                     'customer_name' => $this->collect['full_name'],
                     'payment_to' => Company::find(1)->company_name,
                     'description' => htmlentities($desc),
@@ -980,7 +981,7 @@ class BookBus extends Component
                     'company_street' => Company::find(1)->company_street,
                     'company_local_currency' => Company::find(1)->company_local_currency,
                     'inv_no' => Payment::max('id'),
-                    'inv_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
+                    'inv_date' =>  Carbon::parse(Carbon::now())->format('d-m-Y'),
                     'bus_type' => Bus::find($this->collect['bus_id'])->model,
                     'bus_serial_no' => Bus::find($this->collect['bus_id'])->serial_number,
                     'bus_max_seats' => Bus::find($this->collect['bus_id'])->seats,

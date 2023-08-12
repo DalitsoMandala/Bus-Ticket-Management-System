@@ -65,27 +65,18 @@ final class PaymentsTable extends PowerGridComponent
             'payments.*',
             DB::Raw('ROW_NUMBER() OVER (ORDER BY payments.id) AS rn'),
         ])->get();
-<<<<<<< HEAD
 
         foreach ($data as $key => $paymentvalues) {
             # code...
             if ($paymentvalues['customer_data'] == null) {
                 $paymentvalues['customer_data'] = [];
             }
-=======
-        foreach ($data as $key => $paymentvalues) {
-            # code...
-
->>>>>>> 6116b5d31f4411750824499a2a9ca1e846a9a1d3
             $getCustomerData = $paymentvalues['customer_data'];
             //['ticket_no'] = 'QEWCWEC';
             //loop this
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 6116b5d31f4411750824499a2a9ca1e846a9a1d3
             foreach ($getCustomerData as $key2 => $customer) {
                 // ADD VALUES TO EXISTING ARRAY
 
@@ -160,9 +151,9 @@ final class PaymentsTable extends PowerGridComponent
                 $data = $model->payment_status;
 
                 if ($data == 'successful') {
-                    return '<span class="badge badge-phoenix  fs--1 badge-phoenix-success">successful</span>';
+                    return '<span class="badge badge-phoenix fs--1 badge-phoenix-success">successful</span>';
                 } else {
-                    return '<span class="badge badge-phoenix  fs--1 badge-phoenix-danger">failed</span>';
+                    return '<span class="badge badge-phoenix fs--1 badge-phoenix-danger">failed</span>';
                 }
             })
 
@@ -223,7 +214,7 @@ final class PaymentsTable extends PowerGridComponent
                         break;
                     default:
                         # code...
-                        return '<span class="badge  fs--1 bg-secondary text-uppercase"> <i class="fa-solid fa-credit-card"></i> ' . $method . '</span>';
+                        return '<span class="badge fs--1 bg-secondary text-uppercase"> <i class="fa-solid fa-credit-card"></i> ' . $method . '</span>';
                         break;
                 }
             });

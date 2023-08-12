@@ -149,7 +149,7 @@
                                 <!-- resources/views/alpine/date-component.blade.php -->
 
                                 <div wire:ignore x-data="{
-                                    targetDate: '{{ $schedule['date'] }} {{ \Carbon\Carbon::parse($schedule['time'])->format('H:i') }}',
+                                    targetDate: '{{ \Carbon\Carbon::parse($schedule['date'])->format('Y-m-d') }} {{ \Carbon\Carbon::parse($schedule['time'])->format('H:i') }}',
                                     dateDifference: '',
                                     isExpired: false,
                                     updateTime() {
