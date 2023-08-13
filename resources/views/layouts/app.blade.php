@@ -205,10 +205,7 @@
                 <footer class="footer position-absolute">
                     <div class="row g-0 justify-content-between align-items-center h-100">
                         <div class="text-center col-12 col-sm-auto">
-                            <p class="mt-2 mb-0 mt-sm-0 text-900">Thank you for creating with Phoenix<span
-                                    class="d-none d-sm-inline-block"></span><span
-                                    class="mx-1 d-none d-sm-inline-block">|</span><br class="d-sm-none" />2023
-                                &copy;<a class="mx-1" href="https://themewagon.com/">Themewagon</a></p>
+                            <p class="mt-2 mb-0 mt-sm-0 text-900">Developed by Dalitso Mandala &copy; 2023</p>
                         </div>
                         <div class="text-center col-12 col-sm-auto">
                             <p class="mb-0 text-600">v1.11.0</p>
@@ -388,7 +385,7 @@
     <!--    JavaScripts-->
     <!-- ===============================================-->
     @livewireScripts
-    @powerGridScripts
+
 
     <x-livewire-alert::scripts />
     <x-livewire-alert::flash />
