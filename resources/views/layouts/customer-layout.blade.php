@@ -611,7 +611,7 @@
                             class="fs--1 fw-bold">Light</span></label>
                 </div>
             </li> --}}
-            <li class="nav-item"> <a class="nav-link" data-bs-toggle="modal" data-bs-target="#searchBoxModal"
+            <li class="nav-item d-none"> <a class="nav-link" data-bs-toggle="modal" data-bs-target="#searchBoxModal"
                     href="#"><span data-feather="search" style="height:12px;width:12px;"></span></a></li>
             <li class="nav-item dropdown">
                 <a class="nav-link" id="navbarDropdownNotification" data-bs-toggle="dropdown"
@@ -1139,7 +1139,7 @@
                     data-bs-placement="left" for="themeControlToggle" title="Switch theme"><span class="icon"
                         data-feather="sun"></span></label></div>
         </li> --}}
-        <li class="nav-item"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#searchBoxModal"
+        <li class="nav-item d-none"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#searchBoxModal"
                 href="#"><span data-feather="search"
                     style="height:19px;width:19px;margin-bottom: 2px;"></span></a></li>
         <li class="nav-item dropdown">
@@ -1359,138 +1359,7 @@
                 </div>
             </div>
         </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link" id="navbarDropdownNindeDots" data-bs-toggle="dropdown"
-                data-bs-auto-close="outside" href="#" role="button" aria-haspopup="true"
-                aria-expanded="false"><svg width="16" height="16" viewbox="0 0 16 16" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="2" cy="2" r="2" fill="currentColor">
-                    </circle>
-                    <circle cx="2" cy="8" r="2" fill="currentColor">
-                    </circle>
-                    <circle cx="2" cy="14" r="2" fill="currentColor">
-                    </circle>
-                    <circle cx="8" cy="8" r="2" fill="currentColor">
-                    </circle>
-                    <circle cx="8" cy="14" r="2" fill="currentColor">
-                    </circle>
-                    <circle cx="14" cy="8" r="2" fill="currentColor">
-                    </circle>
-                    <circle cx="14" cy="14" r="2" fill="currentColor">
-                    </circle>
-                    <circle cx="8" cy="2" r="2" fill="currentColor">
-                    </circle>
-                    <circle cx="14" cy="2" r="2" fill="currentColor">
-                    </circle>
-                </svg></a>
-            <div class="py-0 border shadow dropdown-menu dropdown-menu-end navbar-dropdown-caret dropdown-nide-dots border-300"
-                aria-labelledby="navbarDropdownNindeDots">
-                <div class="bg-white border-0 card position-relative">
-                    <div class="px-3 pt-3 pb-0 overflow-auto card-body scrollbar" style="height: 20rem;">
-                        <div class="text-center row align-items-center gx-0 gy-0">
-                            <div class="col-4"><a
-                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/behance.webp"
-                                        alt="" width="30" />
-                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Behance</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-cloud.webp"
-                                        alt="" width="30" />
-                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Cloud</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/slack.webp"
-                                        alt="" width="30" />
-                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Slack</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/gitlab.webp"
-                                        alt="" width="30" />
-                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Gitlab</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/bitbucket.webp"
-                                        alt="" width="30" />
-                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">BitBucket</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-drive.webp"
-                                        alt="" width="30" />
-                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Drive</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/trello.webp"
-                                        alt="" width="30" />
-                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Trello</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/figma.webp"
-                                        alt="" width="20" />
-                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Figma</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/twitter.webp"
-                                        alt="" width="30" />
-                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Twitter</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/pinterest.webp"
-                                        alt="" width="30" />
-                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Pinterest</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/ln.webp"
-                                        alt="" width="30" />
-                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Linkedin</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-maps.webp"
-                                        alt="" width="30" />
-                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Maps</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-photos.webp"
-                                        alt="" width="30" />
-                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Photos</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/spotify.webp"
-                                        alt="" width="30" />
-                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Spotify</p>
-                                </a></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </li>
+
         <li class="nav-item dropdown"><a class="nav-link lh-1 pe-0" id="navbarDropdownUser"
                 data-bs-toggle="dropdown" data-bs-auto-close="outside" href="#!" role="button"
                 aria-haspopup="true" aria-expanded="false">
@@ -2438,7 +2307,7 @@
                         class="icon me-1 d-none d-sm-block" data-feather="sun"></span><span
                         class="fs--1 fw-bold">Light</span></label></div>
         </li> --}}
-        <li class="nav-item"> <a class="nav-link" data-bs-toggle="modal" data-bs-target="#searchBoxModal"
+        <li class="nav-item d-none"> <a class="nav-link" data-bs-toggle="modal" data-bs-target="#searchBoxModal"
                 href="#"><span data-feather="search" style="height:12px;width:12px;"></span></a></li>
         <li class="nav-item dropdown">
             <a class="nav-link" id="navbarDropdownNotification" data-bs-toggle="dropdown"

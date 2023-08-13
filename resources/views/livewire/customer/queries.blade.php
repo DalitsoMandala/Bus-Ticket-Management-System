@@ -73,7 +73,7 @@
             }
         </style>
 
-        <div class="flex-1 card   my-4">
+        <div class="flex-1 card  my-4">
             <div class="p-3 card-header p-md-4 d-flex flex-between-center">
                 <div class="d-flex align-items-center">
                     <div class="d-flex flex-column flex-md-row align-items-md-center"><button
@@ -87,7 +87,7 @@
                 </div>
 
             </div>
-            <div class="p-3 card-body p-sm-4  scrollable-card" id="scrollable-card">
+            <div class="p-3 card-body  p-sm-4  scrollable-card" id="scrollable-card">
 
                 @foreach ($msg_data as $chat)
                     @if ($chat->user_id == auth()->user()->id)
