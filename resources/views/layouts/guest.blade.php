@@ -192,7 +192,8 @@
         <div class="container-fluid px-0" data-layout="container">
             <div class="row vh-100 g-0">
                 <div class="col-lg-6 position-relative d-none d-lg-block">
-                    <div class="bg-holder" style="background-image:url('{{ asset('assets/img/public-bus.jpg') }}');"></div>
+                    <div class="bg-holder" style="background-image:url('{{ asset('assets/img/public-bus.jpg') }}');">
+                    </div>
                     <!--/.bg-holder-->
                 </div>
                 <div class="col-lg-6">
@@ -204,7 +205,7 @@
                     </div>
                 </div>
             </div>
-         
+
     </main>
 
     <!-- ===============================================-->
@@ -215,7 +216,7 @@
     <!--    JavaScripts-->
     <!-- ===============================================-->
     @livewireScripts
-    @powerGridScripts
+
 
     <x-livewire-alert::scripts />
     <x-livewire-alert::flash />

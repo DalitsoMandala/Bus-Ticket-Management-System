@@ -310,7 +310,6 @@ class CustomerOverview extends Component
         //get closest one first
         $booking = Booking::where('customer_id', $customer)->where('date_departing', '>', now())->orderByRaw('ABS(DATEDIFF(date_departing, ?))', [$currentDate])
             ->first();
-<<<<<<< HEAD
 
         if ($booking == null) {
             $this->nextDeparture = '';
@@ -318,13 +317,6 @@ class CustomerOverview extends Component
 
             $customer_data = json_decode(json_encode($booking->payment->customer_data));
             $nextDeparture = $customer_data->journey_date . ' ' . $customer_data->journey_time;
-=======
-        $customer_data = json_decode(json_encode($booking->payment->customer_data));
-        $nextDeparture = $customer_data->journey_date . ' ' . $customer_data->journey_time;
-        if ($booking->count() == 0) {
-            $this->nextDeparture = '';
-        } else {
->>>>>>> c2d82ab70c15ff05946d027988cc0e7439d347ba
             $this->nextDeparture = $nextDeparture;
         }
 
@@ -338,7 +330,8 @@ class CustomerOverview extends Component
             # code...
         }
 
-        $checkPayment = Payment::whereIn('id', $temp)->get();
+        $checkPayment = Payment::whereIn('id', $temp)->orderByDesc('customer_data->journey_date')->get();
+
 
         $this->recentBookings = $checkPayment;
     }

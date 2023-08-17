@@ -236,62 +236,14 @@
                                     href="#contact">Contact</a></li>
                         </ul>
                         @if (Auth::check())
-                            <div class="dropdown text-end ">
-                                <a class="d-block link-dark text-decoration-none " data-bs-toggle="dropdown"
-                                    href="#" aria-expanded="false">
-                                    <img class="rounded-circle" src="https://github.com/mdo.png" alt="mdo"
-                                        width="32" height="32">
-                                </a>
-                                <ul class="dropdown-menu   py-0 dropdown-profile shadow border border-300"
-                                    style="">
-                                    <div class="card position-relative border-0">
-                                        <div class="card-body p-0">
-                                            <div class="text-center pt-4 pb-3">
-                                                <div class="avatar avatar-xl ">
-                                                    <img class="rounded-circle" src="https://github.com/mdo.png"
-                                                        alt="mdo" width="32" height="32">
-                                                </div>
-                                                <h6 class="mt-2 text-black">{{ Auth::user()->name }}</h6>
-                                            </div>
-
-                                        </div>
-                                        <hr />
-                                        <div class="overflow-auto scrollbar" style="height: 5rem;">
-                                            <ul class="nav d-flex flex-column mb-2 pb-1">
-                                                <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
-                                                            class="me-2 text-900"
-                                                            data-feather="user"></span><span>Profile</span></a>
-                                                </li>
-                                                <li class="nav-item"><a class="nav-link px-3" href="#!"><span
-                                                            class="me-2 text-900"
-                                                            data-feather="pie-chart"></span>Dashboard</a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                        <div class="card-footer p-0 border-top">
-
-                                            <div class="px-3 py-3"> <a
-                                                    class="btn btn-phoenix-secondary d-flex flex-center w-100"
-                                                    href="{{ route('logout') }}"
-                                                    onclick="event.preventDefault();
-                                                   document.getElementById('logout-form').submit();">
-                                                    <span class="me-2" data-feather="log-out"> </span>Sign out</a>
-                                            </div>
-
-                                            <form class="d-none" id="logout-form" action="{{ route('logout') }}"
-                                                method="POST">
-                                                @csrf
-                                            </form>
-
-                                        </div>
-                                    </div>
-                                </ul>
-                            @else
-                                <div class="text-end d-sm-none d-lg-block">
-                                    <a class="btn btn-secondary text-uppercase" href="{{ route('login') }}"> <span
-                                            data-feather="user"></span> Login</a>
-                                </div>
+                            <ul class="flex-row navbar-nav navbar-nav-icons">
+                                <livewire:customer.pic-component />
+                            </ul>
+                        @else
+                            <div class="text-end d-sm-none d-lg-block">
+                                <a class="btn btn-secondary text-uppercase" href="{{ route('login') }}"> <span
+                                        data-feather="user"></span> Login</a>
+                            </div>
                         @endif
 
                     </div>
@@ -559,7 +511,7 @@
     <!--    JavaScripts-->
     <!-- ===============================================-->
     @livewireScripts
-    @powerGridScripts
+
 
     <x-livewire-alert::scripts />
     <x-livewire-alert::flash />

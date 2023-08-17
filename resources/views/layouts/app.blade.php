@@ -41,9 +41,11 @@
     <link id="user-style-rtl" type="text/css" href="{{ asset('assets/css/user-rtl.min.css') }}" rel="stylesheet">
     <link id="user-style-default" type="text/css" href="{{ asset('assets/css/user.min.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.3/flatpickr.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
-
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+        rel="stylesheet" />
+    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
     <link
         crossorigin="anonymous"href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.18/css/intlTelInput.css"
         integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw=="
@@ -409,8 +411,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.18/js/intlTelInput.min.js"
         integrity="sha512-hpJ6J4jGqnovQ5g1J39VtNq1/UPsaFjjR6tuCVVkKtFIx8Uy4GeixgIxHPSG72lRUYx1xg/Em+dsqxvKNwyrSg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="{{ asset('assets/vendors/filepond/filepond.js') }}"></script>
-    <script src="{{ asset('assets/vendors/filepond/filepond-plugin-image-preview.js') }}"></script>
+    <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script src="{{ asset('assets/vendors/filepond/filepond-plugin-file-validate-size.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.min.js"
@@ -419,10 +421,20 @@
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js">
+    </script>
+    <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js"></script>
     <script>
         FilePond.registerPlugin(FilePondPluginImagePreview);
         FilePond.registerPlugin(FilePondPluginFileValidateSize);
-
+        FilePond.registerPlugin(FilePondPluginImageExifOrientation);
+        FilePond.registerPlugin(FilePondPluginImageResize);
+        FilePond.registerPlugin(FilePondPluginFileEncode);
+        FilePond.registerPlugin(FilePondPluginImageTransform);
+        FilePond.registerPlugin(FilePondPluginImageEdit);
         $(function() {
             $('#loader').fadeOut();
         });
