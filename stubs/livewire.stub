@@ -290,6 +290,10 @@ protected $rules = [
 #                             Livewire Render here                             #
 # ---------------------------------------------------------------------------- #
 
+    public function mount()
+    {
+
+    }
     public function render()
     {
         return view('[view]');

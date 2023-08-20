@@ -2,34 +2,33 @@
 
 namespace App\Http\Livewire\Customer;
 
+use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Booking;
+use App\Models\Payment;
 use Livewire\Component;
-use App\Models\Customer;
-use Livewire\WithFileUploads;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules;
+use App\Notifications\Reminder;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Notification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
-class Profile extends Component
+class ReminderApp extends Component
 {
 
     use LivewireAlert;
-    use WithFileUploads;
+
 
     # ---------------------------------------------------------------------------- #
     #                       Livewire properties / models here                      #
     # ---------------------------------------------------------------------------- #
     public $name;
     public $edit; // id of table
-    public $showingModalProfile;
+    public $showingModalReminderApp;
     public $button = "SUBMIT";
     public $status;
-    public $profile_picture, $first_name, $last_name, $phone_number, $email, $home_address, $birth_date, $gender, $facebook_link, $twitter_link, $instagram_link;
-    public $image;
-    public $tab = 1;
-    public $facebook, $instagram, $twitter, $new_password, $old_password, $new_password_confirmation;
+    public $bookings = [];
+
     # ---------------------------------------------------------------------------- #
     #                            Livewire listeners here                           #
     # ---------------------------------------------------------------------------- #
@@ -51,9 +50,8 @@ class Profile extends Component
         'deleteMultiple' => 'deleteMultiple',
         'changeMessage' => 'changeMessage',
         'confirm_request' => 'confirm_request',
-        'clearUp' => 'clearUp',
-        'refresh' => '$refresh',
-        'data' => 'data',
+        'checkTime' => 'checkTime',
+        'clearTime' => 'clearTime',
     ];
 
     # ---------------------------------------------------------------------------- #
@@ -61,41 +59,18 @@ class Profile extends Component
     # ---------------------------------------------------------------------------- #
 
 
+    protected $rules = [
+        'name' => 'required',
+    ];
 
-    public function updatedProfilePicture($value)
-    {
 
-        $this->validate([
-            'profile_picture'  =>   'nullable|mimes:jpeg,jpg,png'
-        ]);
-        $cover_name = time() . '_' . $this->profile_picture->getClientOriginalName();
-
-        $this->profile_picture->storeAs('profile_pictures', $cover_name, 'public');
-
-        Customer::find(auth()->user()->customers->first()->id)->update([
-            'profile_picture' => $cover_name
-        ]);
-
-        $this->image = $cover_name;
-
-        $this->emitTo('customer.pic-component', 'changeImage');
-    }
     public function updated($fields)
     {
-        // $this->validateOnly($fields);
-
-
+        $this->validateOnly($fields);
     }
 
 
-    public function clearUp()
-    {
-  
-    }
 
-    public function updatedTab($value)
-    {
-    }
 
     # ---------------------------------------------------------------------------- #
     #                       Livewire Modals & Reset Data here                      #
@@ -111,7 +86,7 @@ class Profile extends Component
     public function showModal()
     {
 
-        $this->showingModalProfile = true;
+        $this->showingModalReminderApp = true;
         if ($this->edit) {
             $this->button = 'UPDATE';
         } else {
@@ -123,7 +98,7 @@ class Profile extends Component
 
     public function hideModal()
     {
-        $this->showingModalProfile = false;
+        $this->showingModalReminderApp = false;
     }
 
     # ---------------------------------------------------------------------------- #
@@ -133,116 +108,54 @@ class Profile extends Component
     public function save()
     {
 
-        if ($this->tab == 1) {
-
-            $validatedData = $this->validate([
-                'first_name' => 'required',
-                'last_name' => 'required',
-                'facebook_link' => 'nullable|url',
-                'instagram_link' => 'nullable|url',
-                'twitter_link' => 'nullable|url',
-                'birth_date' => 'nullable|date',
-                'home_address' => 'nullable',
-                'phone_number' => 'nullable|string',
-            ]);
+        if ($this->edit == '') {
+            $validatedData = $this->validate();
             if ($validatedData) {
 
-                $customer = auth()->user()->customers->first()->id;
 
-                Customer::find($customer)->update([
-                    'first_name' => $this->first_name,
-                    'last_name' => $this->last_name,
-                    'facebook_link' => $this->facebook_link,
-                    'instagram_link' => $this->instagram_link,
-                    'twitter_link' => $this->twitter_link,
-                    'birth_date' => $this->birth_date,
-                    'home_address' => $this->home_address,
-                    'phone_number' => $this->phone_number
-                ]);
+
+
+
+
 
                 $this->alert(
                     'success',
-                    'Profile updated successfully'
+                    'Created successfully'
                 );
 
-                $this->emitSelf('refresh');
+                $this->emitTo('component', 'refresh');
+                $this->emitSelf('hideModal');
+                $this->emitSelf('resetdata');
+            }
+        } else {
+
+
+            $validatedData = $this->validate();
+
+
+            if ($validatedData) {
+
+
+
+
+
+
+
+
+
+                $this->alert(
+                    'success',
+                    'Updated successfully'
+                );
+
+                $this->emitTo('component', 'refresh');
+                $this->emitSelf('hideModal');
+                $this->emitSelf('resetdata');
             }
         }
     } // End SAVE
 
-    public function saveEmail()
-    {
-        $customer = auth()->user()->customers->first()->id;
-        $user = auth()->user()->id;
 
-        $this->validate([
-            'email' => [
-                'required',
-                Rule::unique('users')->ignore($user),
-                'email'
-            ],
-
-            'name' => [
-                'required',
-
-            ],
-
-        ]);
-
-
-        User::find($user)->update([
-            'name' => $this->name,
-            'email' => $this->email,
-        ]);
-
-
-        $this->alert(
-            'success',
-            'Username & email updated successfully'
-        );
-
-        $this->emitSelf('data');
-    }
-    public function savePassword()
-    {
-        $customer = auth()->user()->customers->first()->id;
-        $user = auth()->user()->id;
-        $this->validate([
-            'old_password' => [
-                'required',
-                Rules\Password::defaults(),
-                'current_password'
-
-            ],
-            'new_password' => [
-                'required',
-                Rules\Password::defaults(),
-                'confirmed'
-            ],
-            'new_password_confirmation' => [
-                'required',
-                Rules\Password::defaults(),
-                'same:new_password'
-            ],
-
-
-        ]);
-
-
-        User::find($user)->update([
-
-            'password' => Hash::make($this->new_password)
-        ]);
-
-        $this->alert(
-            'success',
-            'Password updated successfully'
-        );
-
-        $this->reset(['old_password', 'new_password', 'new_password_confirmation']);
-
-        $this->emitSelf('data');
-    }
     # ---------------------------------------------------------------------------- #
     #                         ALL OTHER LIVEWIRE FUNCTIONS                         #
     # ---------------------------------------------------------------------------- #
@@ -259,12 +172,7 @@ class Profile extends Component
         $this->emitSelf('showModal');
     }
 
-    public function forgot()
-    {
-        Auth::logout();
 
-        $this->redirect(route('password.request'));
-    }
 
 
     public function delete($data)
@@ -384,59 +292,138 @@ class Profile extends Component
 
 */
 
-    public function data()
+    public function clearTime($booking_id)
     {
 
-        $this->gender = 'male';
-        $check = Customer::find(auth()->user()->customers->first()->id);
-        $user = Auth::user();
-        $this->image = $check->profile_picture;
-        $this->birth_date = $check->birth_date;
-        $this->first_name = $check->first_name;
-        $this->last_name = $check->last_name;
-        $this->phone_number = $check->phone_number;
-        $this->home_address = $check->home_address;
-        $this->facebook_link = $check->facebook_link;
-        $this->twitter_link = $check->twitter_link;
-        $this->instagram_link = $check->instagram_link;
 
+        $find = Booking::find($booking_id);
 
+        if ($find->is_notified == false) {
 
-        function trimUser($username)
-        {
-            $url = $username;
-            $string = $username;
-            $wordToFind =   ["instagram", "facebook", "twitter"];
+            Booking::find($booking_id)->update([
+                'is_notified' => true,
+                'is_completed' => true
+            ]);
+        }
+    }
 
-            foreach ($wordToFind as $word) {
-                # code...
+    public function checkTime($value)
+    {
 
-                if (strpos($string, $word) !== false) {
-                    $parts = explode('/', rtrim($url, '/'));
-                    return end($parts);
-                }
-            }
+        if ($value == '30min') {
+            $user = User::find(auth()->user()->id);
+            $title = 'Bus Departure';
+            $description = 'Your bus will leave in 30 minutes!';
+            $link = route('customer-bookings');
+            $user->notify(new Reminder($title, $description, $link));
         }
 
+        if ($value == '10min') {
+            $user = User::find(auth()->user()->id);
+            $title = 'Bus Departure';
+            $description = 'Your bus will leave in 10 minutes!';
+            $link = route('customer-bookings');
+            $user->notify(new Reminder($title, $description, $link));
+        }
 
-        $this->facebook = trimUser($check->facebook_link);
-        $this->instagram = trimUser($check->instagram_link);
-        $this->twitter = trimUser($check->twitter_link);
-        $this->email = $user->email;
-        $this->name = $user->name;
+        if ($value == '5min') {
+            $user = User::find(auth()->user()->id);
+            $title = 'Bus Departure';
+            $description = 'Your bus will leave in 5 minutes!';
+            $link = route('customer-bookings');
+            $user->notify(new Reminder($title, $description, $link));
+        }
+
+        if ($value == 'none') {
+
+            $user = User::find(auth()->user()->id);
+            $title = 'Bus Departure';
+            $description = 'Your bus has departed!';
+            $link = route('customer-bookings');
+            $user->notify(new Reminder($title, $description, $link));
+        }
+        //dd($value);
     }
 
     # ---------------------------------------------------------------------------- #
     #                             Livewire Render here                             #
     # ---------------------------------------------------------------------------- #
-
     public function mount()
     {
-        $this->data();
+        $user = User::find(auth()->user()->id); // Assuming the user is authenticated
+
+
+
+        $customer = User::find(auth()->user()->id)->customers->first(); // Assuming the user is authenticated
+        $booking  = Booking::where('customer_id', $customer->id)->get();
+
+
+
+        foreach ($booking as $key => $book) {
+
+
+            $getDepartDate = Payment::find($book->payment_id)->customer_data['journey_date'];
+            $getDepartTime = Payment::find($book->payment_id)->customer_data['journey_time'];
+
+            $targetDate = Carbon::parse($getDepartDate . ' ' . $getDepartTime)->format('Y-m-d H:i:s');
+            $currentDateTime = Carbon::now();
+
+            $minutesDifference = $currentDateTime->diffInMinutes($targetDate);
+            $secondsDifference = $currentDateTime->diffInSeconds($targetDate);
+
+            $this->bookings[] = [
+                'id' => $book->id,
+                'date' => $targetDate
+            ];
+            // if ($minutesDifference === 60) {
+            //     $title = 'Bus Departure';
+            //     $description = 'Your bus will leave in an hour!';
+            //     $link = route('customer-bookings');
+            //     Notification::send($user, new Reminder($title, $description, $link));
+
+
+
+            //     $user->notify(new Reminder($title, $description, $link));
+            // } else if ($minutesDifference === 10) {
+            //     $title = 'Bus Departure';
+            //     $description = 'Your bus will leave in 10 minutes!';
+            //     $link = route('customer-bookings');
+            //     Notification::send($user, new Reminder($title, $description, $link));
+
+            //     $user->notify(new Reminder($title, $description, $link));
+            // } else if ($minutesDifference === 5) {
+
+            //     $title = 'Bus Departure';
+            //     $description = 'Your bus will leave in 5 minutes!';
+            //     $link = route('customer-bookings');
+            //     Notification::send($user, new Reminder($title, $description, $link));
+
+            //     $user->notify(new Reminder($title, $description, $link));
+            // }
+
+
+            // if ($secondsDifference === 0) {
+
+            //     $title = 'Bus Departure';
+            //     $description = 'Your bus has departed!';
+            //     $link = route('customer-bookings');
+            //     Notification::send($user, new Reminder($title, $description, $link));
+
+            //     $user->notify(new Reminder($title, $description, $link));
+            // }
+
+
+
+            # code...
+        }
+
+        //  dd($this->bookings);
     }
+
+
 
     public function render()
     {
-        return view('livewire.customer.profile');
+        return view('livewire.customer.reminder-app');
     }
 }

@@ -79,9 +79,9 @@
                 <div class="card-header">
                     <b>Calendar</b>
                 </div>
-                <div class="card-body">
+                <div class="card-body" wire:ignore>
                     {{-- <div id="calendar" wire:ignore></div> --}}
-                    <x-countdown-timer wire:model="travelEvents" />
+                    <div id="calendar"></div>
                 </div>
 
 
@@ -176,15 +176,13 @@
                                 
                                 
                                     }
-                                }" x-init="calculateDateDifference();
-                                if (isExpired === true) {
-                                    updateTime();
-                                }
-                                status = setInterval(() => calculateDateDifference(), 1000);
-                                $watch('isExpired', value => {
-                                    if (value === true) updateTime();
-                                    clearInterval(status);
-                                });">
+                                }" x-init="status = setInterval(() => {
+                                    calculateDateDifference();
+                                    if (isExpired === true) {
+                                        updateTime();
+                                        clearInterval(status);
+                                    }
+                                }, 1000);">
 
                                     <input class="form-control d-none" x-model="dateDifference" />
                                     <p class="badge badge-phoenix fs--2 badge-phoenix-warning"
@@ -216,6 +214,7 @@
     <script>
         document.addEventListener('livewire:load', function() {
             let event = @this.travelEvents;
+
 
             function loadCalendar() {
                 var calendarEl = document.getElementById('calendar');

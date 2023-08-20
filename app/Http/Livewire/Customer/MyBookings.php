@@ -312,7 +312,7 @@ class MyBookings extends Component
             $events[] = [
                 'id' => 'event_' . $payment->transaction_id,
                 'title' => 'Travel from ' . $json->route_from . ' to ' . $json->route_to,
-                'start' => $json->journey_date,
+                'start' => Carbon::parse($json->journey_date)->format('Y-m-d'),
                 'className' => $givenDate == false ? 'text-success' :  'text-danger',
 
             ];

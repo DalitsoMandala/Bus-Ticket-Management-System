@@ -204,6 +204,9 @@
 
                 {{ $slot }}
 
+                @role('customer')
+                    <livewire:customer.reminder-app />
+                @endrole
                 <footer class="footer position-absolute">
                     <div class="row g-0 justify-content-between align-items-center h-100">
                         <div class="text-center col-12 col-sm-auto">
@@ -391,6 +394,7 @@
 
     <x-livewire-alert::scripts />
     <x-livewire-alert::flash />
+
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="{{ asset('assets/vendors/popper/popper.min.js') }}"></script>

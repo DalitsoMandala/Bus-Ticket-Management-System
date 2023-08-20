@@ -12,18 +12,19 @@
             }
         </style>
 
+
+
         <div class="mb-3 row">
             <div class="col-lg-3 col-md-5 col-sm-12">
                 <div class="mb-3 shadow card">
                     <div class="p-4 card-body">
                         <div class="text-center">
-
-                            <div class="mx-auto mb-4 profile-user position-relative d-inline-block">
-                                <img class="shadow rounded-circle avatar-xl img-thumbnail user-profile-image"
-                                    src="{{ asset('storage/profile_pictures/' . $image) }}" alt="user-profile-image"
-                                    style="height: 10rem; width: 10rem;">
-
+                            <div class="avatar avatar-xl " style="height: 10rem; width: 10rem;">
+                                <img class="shadow rounded-circle"
+                                    src="{{ asset('storage/profile_pictures/' . $image) }}" alt="user-profile-image" />
                             </div>
+
+
 
                             <x-file filesize="2MB" wire:model="profile_picture" />
 
@@ -42,7 +43,7 @@
                     class="shadow card {{ $twitter == null && $instagram == null && $facebook == null ? 'd-none' : '' }}">
                     <div class="card-body">
                         @if ($facebook != null)
-                            <div class=" py-1 d-flex align-items-center">
+                            <div class="py-1 d-flex align-items-center">
                                 <div class="avatar avatar-xl me-3 ">
                                     <div class="avatar-emoji rounded-circle text-light" style="background: #1778F2">
                                         <span class="fa-brands fa-facebook-f fs-1"></span>
@@ -299,7 +300,7 @@
                                     </div>
 
                                 </div>
-                                <div class="row justify-content-end my-2">
+                                <div class="my-2 row justify-content-end">
 
                                     <div class="col-auto">
 
@@ -350,7 +351,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row justify-content-between my-2">
+                                <div class="my-2 row justify-content-between">
                                     <div class="col-auto">
                                         <div class="mb-3">
                                             <a class="link-primary text-decoration-underline fs--1" href="#!"
