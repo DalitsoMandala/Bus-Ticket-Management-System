@@ -35,6 +35,7 @@ use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use App\Http\Livewire\Customer\BookBus as CustomerBookBus;
 use App\Http\Livewire\Customer\Profile as CustomerProfile;
 use  App\Http\Livewire\Customer\MyBookings as CustomerBookings;
+use App\Http\Livewire\Customer\NotificationHistory;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +94,7 @@ Route::middleware(['auth', 'role:customer'])->prefix('customer')->group(function
     Route::get('/book-a-bus', CustomerBookBus::class)->name('customer-book-a-bus');
     Route::get('/payments', Payments::class)->name('customer-payments');
     Route::get('/my-bookings', CustomerBookings::class)->name('customer-bookings');
+    Route::get('/notification-history', NotificationHistory::class)->name('customer-notification-history');
     Route::get('/cancel-booking', CancelBooking::class)->name('customer-cancel-booking');
     Route::get('/receipt', function () {
 

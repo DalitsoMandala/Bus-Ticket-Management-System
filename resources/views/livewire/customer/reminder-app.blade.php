@@ -9,8 +9,8 @@
             tenMinutesEmitted: false,
             fiveMinutesEmitted: false,
             cleared: false,
-            sendNotification(value) {
-                $wire.emitSelf('checkTime', value);
+            sendNotification(value, desc) {
+                $wire.emitSelf('checkTime', value, desc);
             },
         
             clearNotification() {
@@ -34,22 +34,22 @@
                     // if days 0 hours 0 ....
                     if ((days % 60 === 0 && hours % 60 === 0 && minutes % 60 === 30 && seconds % 60 === 0) && !this.thirtyMinutesEmitted) {
                         this.thirtyMinutesEmitted = true;
-                        this.sendNotification('30min');
+                        this.sendNotification('30min', '{{ $book['description'] }}');
         
         
                     }
                     if ((days % 60 === 0 && hours % 60 === 0 && minutes % 60 === 10 && seconds % 60 === 0) && !this.tenMinutesEmitted) {
                         this.tenMinutesEmitted = true;
-                        this.sendNotification('10min');
+                        this.sendNotification('10min', '{{ $book['description'] }}');
                     }
                     if ((days % 60 === 0 && hours % 60 === 0 && minutes % 60 === 5 && seconds % 60 === 0) && !this.fiveMinutesEmitted) {
                         this.fiveMinutesEmitted = true;
-                        this.sendNotification('5min');
+                        this.sendNotification('5min', '{{ $book['description'] }}');
                     }
         
                     if ((days % 60 === 0 && hours % 60 === 0 && minutes % 60 === 0 && seconds % 60 === 0) && !this.cleared) {
                         this.cleared = true;
-                        this.sendNotification('none');
+                        this.sendNotification('none', '{{ $book['description'] }}');
                         this.clearNotification();
                     }
         
@@ -64,16 +64,19 @@
             },
         
             init() {
+                this.calculateDateDifference();
         
+                if (this.dateDifference != 'Day has long passed') {
+                    status = setInterval(() => {
+                        this.calculateDateDifference();
+                        if (this.dateDifference === 'Day has long passed') {
         
+                            clearInterval(status);
+                        }
+                    }, 1000);
         
-                status = setInterval(() => {
-                    this.calculateDateDifference();
-                    if (this.dateDifference == 'Day has long passed') {
+                }
         
-                        clearInterval(status);
-                    }
-                }, 1000);
         
         
         

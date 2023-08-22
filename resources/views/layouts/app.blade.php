@@ -203,7 +203,7 @@
             <div class="content">
 
                 {{ $slot }}
-
+                <livewire:bus-departed />
                 @role('customer')
                     <livewire:customer.reminder-app />
                 @endrole

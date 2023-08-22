@@ -176,13 +176,19 @@
                                 
                                 
                                     }
-                                }" x-init="status = setInterval(() => {
-                                    calculateDateDifference();
-                                    if (isExpired === true) {
-                                        updateTime();
-                                        clearInterval(status);
-                                    }
-                                }, 1000);">
+                                }" x-init="calculateDateDifference();
+                                if (isExpired != true) {
+                                
+                                    status = setInterval(() => {
+                                        calculateDateDifference();
+                                        if (isExpired === true) {
+                                            updateTime();
+                                            clearInterval(status);
+                                        }
+                                    }, 1000);
+                                
+                                
+                                }">
 
                                     <input class="form-control d-none" x-model="dateDifference" />
                                     <p class="badge badge-phoenix fs--2 badge-phoenix-warning"

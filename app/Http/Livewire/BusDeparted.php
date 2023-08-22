@@ -1,19 +1,14 @@
 <?php
 
-namespace App\Http\Livewire\Customer;
+namespace App\Http\Livewire;
 
 use Carbon\Carbon;
-use App\Models\User;
-use App\Models\Booking;
-use App\Models\Payment;
+use App\Models\Bus;
 use Livewire\Component;
-use App\Notifications\Reminder;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Notification;
+use App\Models\Schedule;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
-class ReminderApp extends Component
+class BusDeparted extends Component
 {
 
     use LivewireAlert;
@@ -24,10 +19,10 @@ class ReminderApp extends Component
     # ---------------------------------------------------------------------------- #
     public $name;
     public $edit; // id of table
-    public $showingModalReminderApp;
+    public $showingModalBusDeparted;
     public $button = "SUBMIT";
     public $status;
-    public $bookings = [];
+
 
     # ---------------------------------------------------------------------------- #
     #                            Livewire listeners here                           #
@@ -50,8 +45,6 @@ class ReminderApp extends Component
         'deleteMultiple' => 'deleteMultiple',
         'changeMessage' => 'changeMessage',
         'confirm_request' => 'confirm_request',
-        'checkTime' => 'checkTime',
-        'clearTime' => 'clearTime',
     ];
 
     # ---------------------------------------------------------------------------- #
@@ -86,7 +79,7 @@ class ReminderApp extends Component
     public function showModal()
     {
 
-        $this->showingModalReminderApp = true;
+        $this->showingModalBusDeparted = true;
         if ($this->edit) {
             $this->button = 'UPDATE';
         } else {
@@ -98,7 +91,7 @@ class ReminderApp extends Component
 
     public function hideModal()
     {
-        $this->showingModalReminderApp = false;
+        $this->showingModalBusDeparted = false;
     }
 
     # ---------------------------------------------------------------------------- #
@@ -292,143 +285,37 @@ class ReminderApp extends Component
 
 */
 
-    public function clearTime($booking_id)
-    {
-
-
-        $find = Booking::find($booking_id);
-
-        if ($find->is_notified == false) {
-
-            Booking::find($booking_id)->update([
-                'is_notified' => true,
-                'is_completed' => true
-            ]);
-        }
-    }
-
-    public function checkTime($value, $desc)
-    {
-
-
-
-        if ($value == '30min') {
-            $user = User::find(auth()->user()->id);
-            $title = 'Bus Departure';
-            $description = 'Your bus will leave in 30 minutes! You have a ' . $desc;
-            $link = route('customer-bookings');
-            $user->notify(new Reminder($title, $description, $link));
-        }
-
-        if ($value == '10min') {
-            $user = User::find(auth()->user()->id);
-            $title = 'Bus Departure';
-            $description = 'Your bus will leave in 10 minutes! You have a ' . $desc;
-            $link = route('customer-bookings');
-            $user->notify(new Reminder($title, $description, $link));
-        }
-
-        if ($value == '5min') {
-            $user = User::find(auth()->user()->id);
-            $title = 'Bus Departure';
-            $description = 'Your bus will leave in 5 minutes! You have a ' . $desc;
-            $link = route('customer-bookings');
-            $user->notify(new Reminder($title, $description, $link));
-        }
-
-        if ($value == 'none') {
-
-            $user = User::find(auth()->user()->id);
-            $title = 'Bus Departure';
-            $description = 'Your bus has departed! ';
-            $link = route('customer-bookings');
-            $user->notify(new Reminder($title, $description, $link));
-        }
-        //dd($value);
-    }
-
     # ---------------------------------------------------------------------------- #
     #                             Livewire Render here                             #
     # ---------------------------------------------------------------------------- #
+
     public function mount()
     {
-        $user = User::find(auth()->user()->id); // Assuming the user is authenticated
 
 
 
-        $customer = User::find(auth()->user()->id)->customers->first(); // Assuming the user is authenticated
-        $booking  = Booking::where('customer_id', $customer->id)->get();
+        $buses = Bus::where('date_departing', '!=', null)->get();
 
-
-
-        foreach ($booking as $key => $book) {
-
-
-            $getDepartDate = Payment::find($book->payment_id)->customer_data['journey_date'];
-            $getDepartTime = Payment::find($book->payment_id)->customer_data['journey_time'];
-            $desc =  Payment::find($book->payment_id)->customer_data['description'];
-            $targetDate = Carbon::parse($getDepartDate . ' ' . $getDepartTime)->format('Y-m-d H:i:s');
-            $currentDateTime = Carbon::now();
-
-            $minutesDifference = $currentDateTime->diffInMinutes($targetDate);
-            $secondsDifference = $currentDateTime->diffInSeconds($targetDate);
-
-            $this->bookings[] = [
-                'id' => $book->id,
-                'date' => $targetDate,
-                'description' => $desc,
-            ];
-            // if ($minutesDifference === 60) {
-            //     $title = 'Bus Departure';
-            //     $description = 'Your bus will leave in an hour!';
-            //     $link = route('customer-bookings');
-            //     Notification::send($user, new Reminder($title, $description, $link));
-
-
-
-            //     $user->notify(new Reminder($title, $description, $link));
-            // } else if ($minutesDifference === 10) {
-            //     $title = 'Bus Departure';
-            //     $description = 'Your bus will leave in 10 minutes!';
-            //     $link = route('customer-bookings');
-            //     Notification::send($user, new Reminder($title, $description, $link));
-
-            //     $user->notify(new Reminder($title, $description, $link));
-            // } else if ($minutesDifference === 5) {
-
-            //     $title = 'Bus Departure';
-            //     $description = 'Your bus will leave in 5 minutes!';
-            //     $link = route('customer-bookings');
-            //     Notification::send($user, new Reminder($title, $description, $link));
-
-            //     $user->notify(new Reminder($title, $description, $link));
-            // }
-
-
-            // if ($secondsDifference === 0) {
-
-            //     $title = 'Bus Departure';
-            //     $description = 'Your bus has departed!';
-            //     $link = route('customer-bookings');
-            //     Notification::send($user, new Reminder($title, $description, $link));
-
-            //     $user->notify(new Reminder($title, $description, $link));
-            // }
-
-
-
+        foreach ($buses as $bus) {
             # code...
+            $todayDate = Carbon::now();
+            $time = Schedule::find($bus->schedule_id)->depart_time;
+            $date_depart = $bus->date_departing;
+            $fullDate = $date_depart . ' ' . $time;
+
+            $ifDatePassed = Carbon::parse($fullDate);
+            if ($ifDatePassed->isPast()) {
+                Bus::find($bus->id)->update([
+                    'schedule_id' => null,
+                    'route_id' => null,
+                    'date_departing' => null,
+                    'is_full' => false
+                ]);
+            }
         }
-
-
-
-        //  dd($this->bookings);
     }
-
-
-
     public function render()
     {
-        return view('livewire.customer.reminder-app');
+        return view('livewire.bus-departed');
     }
 }
