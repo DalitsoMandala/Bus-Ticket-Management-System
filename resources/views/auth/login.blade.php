@@ -6,7 +6,7 @@
         </a>
     </div>
 
-    <div class="text-center mb-7">
+    <div class="text-center mb-7 mt-2">
         <h3 class="text-1000">Sign In</h3>
         <p class="text-700">Get access to your account</p>
     </div>
@@ -52,7 +52,7 @@
             </div>
             <div class="col-auto">
                 <a class="fs--1 fw-semi-bold" href="{{ route('register') }}">
-                    {{ __('Create a student account?') }}</a>
+                    {{ __('Create an account?') }}</a>
             </div>
         </div>
 

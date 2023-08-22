@@ -85,7 +85,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 
 
 
-Route::middleware(['auth', 'role:customer'])->prefix('customer')->group(function () {
+Route::middleware(['auth', 'role:customer', 'verified'])->prefix('customer')->group(function () {
     Route::get('/dashboard', CustomerOverview::class)->name('customer-dashboard');
     Route::get('/profile', CustomerProfile::class)->name('customer-profile');
     Route::get('/schedules', Schedules::class)->name('customer-schedules');

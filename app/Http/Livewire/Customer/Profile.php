@@ -90,7 +90,6 @@ class Profile extends Component
 
     public function clearUp()
     {
-  
     }
 
     public function updatedTab($value)
@@ -142,7 +141,7 @@ class Profile extends Component
                 'instagram_link' => 'nullable|url',
                 'twitter_link' => 'nullable|url',
                 'birth_date' => 'nullable|date',
-                'home_address' => 'nullable',
+                'home_address' => 'nullable|max:255',
                 'phone_number' => 'nullable|string',
             ]);
             if ($validatedData) {

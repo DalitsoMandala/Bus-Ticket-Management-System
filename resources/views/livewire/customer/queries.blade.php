@@ -1,6 +1,6 @@
 <div>
     <div>
-        @section('title', ' | ')
+        @section('title', config('app.name') . ' | Queries')
 
         <div class="mb-3">
             <h2 class="mb-2 fs-2 fw-black">Submit your Queries</h2>
@@ -88,10 +88,15 @@
 
             </div>
             <div class="p-3 card-body  p-sm-4  scrollable-card" id="scrollable-card">
+                <div class="alert alert-soft-warning text-center" role="alert">
+                    <em>Feel free to send us your queries. You will be able to get back to you within 24hours.</em>
+                </div>
+
+
 
                 @foreach ($msg_data as $chat)
                     @if ($chat->user_id == auth()->user()->id)
-                        <div class="d-flex chat-message" :wire:key="'chat_sent'.$chat->id">
+                        <div class="d-flex chat-message" wire:key="'chat_sent'.$chat->id">
                             <div class="flex-1 mb-2 d-flex justify-content-end">
                                 <div class="w-100 w-xxl-75">
                                     <div class="d-flex flex-end-center hover-actions-trigger">

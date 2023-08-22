@@ -1,6 +1,6 @@
 <div>
     <div>
-        @section('title', ' | ')
+        @section('title', config('app.name') . ' | Profile')
 
         <div class="mb-3">
             <h2 class="mb-2 fs-2 fw-black"></h2>

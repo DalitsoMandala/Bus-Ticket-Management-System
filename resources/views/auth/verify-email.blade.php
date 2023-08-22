@@ -9,12 +9,12 @@
         </div>
     @endif
 
-    <div class="mt-4 flex items-center justify-between">
+    <div class="mt-4 d-flex align-items-center justify-content-between">
         <form method="POST" action="{{ route('verification.send') }}">
             @csrf
 
             <div>
-                <x-primary-button>
+                <x-primary-button class="fs--2">
                     {{ __('Resend Verification Email') }}
                 </x-primary-button>
             </div>
@@ -23,9 +23,9 @@
         <form method="POST" action="{{ route('logout') }}">
             @csrf
 
-            <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <x-primary-button class="fs--2 btn-danger">
                 {{ __('Log Out') }}
-            </button>
+            </x-primary-button>
         </form>
     </div>
 </x-guest-layout>
