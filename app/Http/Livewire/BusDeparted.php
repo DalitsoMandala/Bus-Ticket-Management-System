@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Bus;
 use Livewire\Component;
 use App\Models\Schedule;
+use Illuminate\Support\Facades\Artisan;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class BusDeparted extends Component

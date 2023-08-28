@@ -108,7 +108,7 @@
     @section('title', config('app.name') . ' | Book a bus')
 
     <div class="row ">
-        <div class="mb-3 p-0">
+        <div class="p-0 mb-3">
             <h2 class="mb-2 fs-2 fw-black">Book a bus</h2>
             <h5 class="text-700 fw-semi-bold">Use the available information to get your ticket</h5>
         </div>
@@ -140,7 +140,7 @@
         </div>
     </div>
 
-    <div class=" mb-5 row  ">
+    <div class="mb-5 row">
         @if (session()->has('mailable'))
             <div class="alert alert-soft-success alert-dismissible fade show" role="alert">
                 <button class="btn-close" data-bs-dismiss="alert" type="button" aria-label="Close"></button>
@@ -174,7 +174,7 @@
                 <div x-show="currentStep === 1">
 
                     <div class="mt-4 row ">
-                        <div class="mb-3 pl-0 col-lg-6 col-sm-12 d-flex align-items-stretch">
+                        <div class="pl-0 mb-3 col-lg-6 col-sm-12 d-flex align-items-stretch">
                             <div class="border border-dashed card card-body">
                                 <h2 class="mt-4 mb-2 fs-2 fw-black">Booking Details</h2>
                                 <div class="col-md-12 d-none">
@@ -1010,94 +1010,128 @@
     <script>
         document.addEventListener('livewire:load', function() {
 
-            paypal.Buttons({
 
-                style: {
+            $.ajax({
+                url: 'https://www.paypal.com/sdk/js?client-id=AaYXQcPNRcEjWkntqfGBJ6JHFkZyUWYr3I4r2edWm2Cr6wbgoQG8hOZ9NQ4yep_yZ-rCWF0vA2cEjCK8&currency=USD',
+                method: 'GET',
+                success: function(response, textStatus, xhr) {
+                    if (xhr.status === 200) {
+                        // Handle 200 OK response
 
-                    layout: 'horizontal',
 
-                    color: 'silver',
+                        paypal.Buttons({
 
-                    shape: 'rect',
+                            style: {
 
-                    label: 'pay',
+                                layout: 'horizontal',
 
-                    size: '55',
-                    tagline: 'false'
+                                color: 'silver',
 
-                },
-                createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: {
-                                value: @this.total
+                                shape: 'rect',
+
+                                label: 'pay',
+
+                                size: '55',
+                                tagline: 'false'
+
+                            },
+                            createOrder: function(data, actions) {
+                                return actions.order.create({
+                                    purchase_units: [{
+                                        amount: {
+                                            value: @this.total
+                                        },
+
+                                    }]
+                                });
+
+
                             },
 
-                        }]
-                    });
+                            onApprove: function(data, actions) {
+                                return actions.order.capture().then(function(details) {
+                                    Livewire.emitTo('customer.book-bus', 'payment',
+                                        [details.id, 'success',
+                                            details.purchase_units[
+                                                0]
+                                        ]);
+                                });
+                            },
+                            onError: function(err) {
+                                Livewire.emitTo('customer.book-bus', 'payment', [details.id,
+                                    'failure', details
+                                    .purchase_units[0]
+                                ]);
 
 
-                },
-
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
-                        Livewire.emit('payment', [details.id, 'success', details.purchase_units[
-                            0]]);
-                    });
-                },
-                onError: function(err) {
-                    Livewire.emit('payment', [details.id, 'failure', details.purchase_units[0]]);
+                            }
+                        }).render('#paypal-button-container');
 
 
-                }
-            }).render('#paypal-button-container');
+                        paypal.Buttons({
+
+                            style: {
+
+                                layout: 'horizontal',
+
+                                color: 'silver',
+
+                                shape: 'rect',
+
+                                label: 'pay',
+
+                                size: '55',
+                                tagline: 'false'
+
+                            },
+                            createOrder: function(data, actions) {
+                                return actions.order.create({
+                                    purchase_units: [{
+                                        amount: {
+                                            value: @this.total,
+                                        },
+
+                                    }]
+                                });
 
 
-            paypal.Buttons({
-
-                style: {
-
-                    layout: 'horizontal',
-
-                    color: 'silver',
-
-                    shape: 'rect',
-
-                    label: 'pay',
-
-                    size: '55',
-                    tagline: 'false'
-
-                },
-                createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: {
-                                value: @this.total,
                             },
 
-                        }]
-                    });
+                            onApprove: function(data, actions) {
+                                return actions.order.capture().then(function(details) {
+                                    Livewire.emitTo('customer.book-bus', 'payment',
+                                        [details.id, 'success',
+                                            details.purchase_units[
+                                                0]
+                                        ]);
+                                });
 
 
+                            },
+                            onError: function(err) {
+
+                                Livewire.emitTo('customer.book-bus', 'payment', [err
+                                    .message, 'failure', 0.0
+                                ]);
+
+
+
+                            }
+                        }).render('#paypal-button-container-lg');
+                    }
                 },
-
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
-                        Livewire.emit('payment', [details.id, 'success', details.purchase_units[
-                            0]]);
-                    });
-
-
-                },
-                onError: function(err) {
-
-                    Livewire.emit('payment', [err.message, 'failure', 0.0]);
-
-
-
+                error: function(xhr, textStatus, errorThrown) {
+                    if (xhr.status === 500) {
+                        // Handle 500 Internal Server Error response
+                        console.log('Error message:', xhr.responseText);
+                        Livewire.emitTo('customer.book-bus', 'Error');
+                        // ...
+                    }
                 }
-            }).render('#paypal-button-container-lg');
+            });
+
+
+
         })
 
 
@@ -1152,6 +1186,13 @@
             $('#invoice').printThis({
                 debug: false,
             });
+
+        });
+
+
+        document.addEventListener('go_back', function() {
+
+            window.history.back();
 
         });
     </script>

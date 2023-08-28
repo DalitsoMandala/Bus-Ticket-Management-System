@@ -15,16 +15,18 @@
     <a class="nav-link position-relative" data-bs-toggle="dropdown" data-bs-auto-close="outside" href="#"
         role="button" aria-haspopup="true" aria-expanded="false">
 
-        <span class="fa-regular @if (count($notifications) === 0) fa-bell-slash @else fa-bell @endif "
-            style="height:20px;width:20px;">{{ count($notifications) }}</span>
+        <div wire:poll.15s>
 
 
-        <span
-            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger @if (count($notifications) === 0) d-none @endif">{{ count($notifications) }}</span>
+            <span class="fa-regular @if (count($notifications) === 0) fa-bell-slash @else fa-bell @endif "
+                style="height:20px;width:20px;">{{ count($notifications) }}</span>
 
 
+            <span
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger @if (count($notifications) === 0) d-none @endif">{{ count($notifications) }}</span>
 
 
+        </div>
 
 
     </a>
@@ -33,7 +35,7 @@
         id="navbarDropdownNotfication" aria-labelledby="navbarDropdownNotfication" wire:ignore.self>
         <div class="border-0 card position-relative">
             <div class="p-2 card-header">
-                <div class="d-flex justify-content-between py-1 mx-2">
+                <div class="py-1 mx-2 d-flex justify-content-between">
                     <h5 class="mb-0 text-black">Notifications
                     </h5>
                 </div>
@@ -47,14 +49,14 @@
 
                         <div class="border-300">
 
-                            @if (count($notifications) > 0)
-                                @foreach ($notifications as $notification)
+                            @if (count($notifications_data) > 0)
+                                @foreach ($notifications_data as $notification)
                                     <div
                                         class="px-2 py-3 px-sm-3 border-300 notification-card position-relative read border-bottom">
                                         <div
                                             class="d-flex align-items-center justify-content-between position-relative">
                                             <div class="d-flex">
-                                                <div class="avatar-xl me-3 flex-shrink-0">
+                                                <div class="flex-shrink-0 avatar-xl me-3">
                                                     <span
                                                         class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
                                                         <i class="fa-solid fa-circle-exclamation"
@@ -91,10 +93,10 @@
                                     </div>
                                 @endforeach
                             @else
-                                <div class="px-2 py-5 px-sm-3 border-300  position-relative  ">
+                                <div class="px-2 py-5 px-sm-3 border-300 position-relative ">
                                     <div class="d-flex align-items-center justify-content-center position-relative">
                                         <div class="d-flex align-items-center">
-                                            <div class="avatar-xl me-3 flex-shrink-0">
+                                            <div class="flex-shrink-0 avatar-xl me-3">
                                                 <span
                                                     class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
                                                     <i class="fa-solid fa-bell-slash" style="color:#e95555"></i>
@@ -117,7 +119,7 @@
             <div class="p-0 border-0 card-footer ">
                 <div class="my-2 text-center fw-bold fs--2 text-600"><a class="btn btn-phoenix-secondary "
                         href="{{ route('customer-notification-history') }}">Notification
-                        history <i class="fas fa-arrow-up    "></i></a>
+                        history <i class="fas fa-arrow-up "></i></a>
 
                     <a class="btn btn-soft-success fs--1 fw-normal" data-bs-toggle="button" href="#!"
                         role="button" wire:click="readAll"><i class="fa-solid fa-check-double"></i> Mark

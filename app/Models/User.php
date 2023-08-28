@@ -27,7 +27,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'email_verified_at',
-        'remember_token'
+        'remember_token',
+        'login_time',
+        'logout_time',
+        'logged_in'
     ];
 
     /**
@@ -68,5 +71,14 @@ class User extends Authenticatable implements MustVerifyEmail
     public function receivedMessages()
     {
         return $this->hasMany(Chat::class, 'recipient_id');
+    }
+
+    public function getUserRole($userId)
+    {
+        $user = User::findOrFail($userId);
+
+        $role = $user->roles->first(); // Get the first role (assuming a user has only one role)
+
+        return $role;
     }
 }

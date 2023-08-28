@@ -203,8 +203,9 @@
             <div class="content">
 
                 {{ $slot }}
-                <livewire:bus-departed />
+
                 @role('customer')
+                    <livewire:bus-departed />
                     <livewire:customer.reminder-app />
                 @endrole
                 <footer class="footer position-absolute">

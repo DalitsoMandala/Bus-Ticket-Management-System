@@ -21,6 +21,7 @@ class Notifications extends Component
     public $button = "SUBMIT";
     public $status;
     public $notifications;
+    public $count;
 
     # ---------------------------------------------------------------------------- #
     #                            Livewire listeners here                           #
@@ -294,6 +295,7 @@ class Notifications extends Component
             $notification->markAsRead();
             $this->notifications = $user->unreadNotifications;
         }
+        $this->count = count($this->notifications);
     }
 
     public function readAll()
@@ -306,6 +308,7 @@ class Notifications extends Component
             $notification->markAsRead();
         }
         $this->notifications = $user->unreadNotifications;
+        $this->count = count($this->notifications);
     }
     # ---------------------------------------------------------------------------- #
     #                             Livewire Render here                             #
@@ -313,13 +316,16 @@ class Notifications extends Component
 
     public function mount()
     {
+    }
+    public function render()
+    {
 
         $user = User::find(auth()->user()->id);
 
         $this->notifications = $user->unreadNotifications;
-    }
-    public function render()
-    {
-        return view('livewire.customer.notifications');
+        $this->count = count($this->notifications);
+        return view('livewire.customer.notifications', [
+            'notifications_data' => $this->notifications
+        ]);
     }
 }

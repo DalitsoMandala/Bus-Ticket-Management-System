@@ -9,6 +9,7 @@
             tenMinutesEmitted: false,
             fiveMinutesEmitted: false,
             cleared: false,
+            time: @entangle('time'),
             sendNotification(value, desc) {
                 $wire.emitSelf('checkTime', value, desc);
             },
@@ -31,26 +32,41 @@
                     const minutes = Math.floor(seconds / 60);
                     const hours = Math.floor(minutes / 60);
                     const days = Math.floor(hours / 24);
+        
+        
+        
                     // if days 0 hours 0 ....
                     if ((days % 60 === 0 && hours % 60 === 0 && minutes % 60 === 30 && seconds % 60 === 0) && !this.thirtyMinutesEmitted) {
-                        this.thirtyMinutesEmitted = true;
-                        this.sendNotification('30min', '{{ $book['description'] }}');
         
+                        setTimeout(() => {
+                            this.thirtyMinutesEmitted = true;
+                            this.sendNotification('30min', '{{ $book['description'] }}');
+                        }, 5000);
         
                     }
                     if ((days % 60 === 0 && hours % 60 === 0 && minutes % 60 === 10 && seconds % 60 === 0) && !this.tenMinutesEmitted) {
-                        this.tenMinutesEmitted = true;
-                        this.sendNotification('10min', '{{ $book['description'] }}');
+        
+        
+                        setTimeout(() => {
+                            this.tenMinutesEmitted = true;
+                            this.sendNotification('10min', '{{ $book['description'] }}');
+                        }, 5000);
                     }
                     if ((days % 60 === 0 && hours % 60 === 0 && minutes % 60 === 5 && seconds % 60 === 0) && !this.fiveMinutesEmitted) {
-                        this.fiveMinutesEmitted = true;
-                        this.sendNotification('5min', '{{ $book['description'] }}');
+        
+                        setTimeout(() => {
+                            this.fiveMinutesEmitted = true;
+                            this.sendNotification('5min', '{{ $book['description'] }}');
+                        }, 5000);
                     }
         
                     if ((days % 60 === 0 && hours % 60 === 0 && minutes % 60 === 0 && seconds % 60 === 0) && !this.cleared) {
-                        this.cleared = true;
-                        this.sendNotification('none', '{{ $book['description'] }}');
-                        this.clearNotification();
+        
+                        setTimeout(() => {
+                            this.cleared = true;
+                            this.sendNotification('none', '{{ $book['description'] }}');
+                            this.clearNotification();
+                        }, 5000);
                     }
         
         

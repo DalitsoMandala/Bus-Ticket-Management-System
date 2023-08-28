@@ -100,7 +100,8 @@ class BookBus extends Component
         'updateOptions' => 'updateOptions',
         'loadOptions' => 'loadOptions',
         'sendPdf' => 'sendPdf',
-        'checkAvailalableBuses' => 'checkAvailalableBuses'
+        'checkAvailalableBuses' => 'checkAvailalableBuses',
+        'Error' => 'Error',
     ];
 
 
@@ -761,8 +762,16 @@ class BookBus extends Component
         return $return;
     }
 
-    public function updated($propertyName)
+    public function Error()
     {
+
+        $alert =  $this->alert('info', 'Something went wrong  with your payment method. Please try again later', [
+            'toast' => false,
+            'position' => 'center'
+        ]);
+
+
+        $this->dispatchBrowserEvent('go_back');
     }
 
     /* -------------------------------------------------------------------------- */

@@ -308,8 +308,10 @@ class CustomerOverview extends Component
         $currentDate = Carbon::now();
 
         //get closest one first
-        $booking = Booking::where('customer_id', $customer)->where('date_departing', '>', now())->orderByRaw('ABS(DATEDIFF(date_departing, ?))', [$currentDate])
+        $booking = Booking::where('customer_id', $customer)->where('date_departing', '>=', $currentDate)->orderByRaw('ABS(DATEDIFF(date_departing, ?))', [$currentDate])
             ->first();
+
+
 
         if ($booking == null) {
             $this->nextDeparture = '';

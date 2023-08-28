@@ -28,7 +28,7 @@ class ReminderApp extends Component
     public $button = "SUBMIT";
     public $status;
     public $bookings = [];
-
+    public $time, $bk_id;
     # ---------------------------------------------------------------------------- #
     #                            Livewire listeners here                           #
     # ---------------------------------------------------------------------------- #
@@ -64,9 +64,8 @@ class ReminderApp extends Component
     ];
 
 
-    public function updated($fields)
+    public function updated($field)
     {
-        $this->validateOnly($fields);
     }
 
 
@@ -340,7 +339,7 @@ class ReminderApp extends Component
 
             $user = User::find(auth()->user()->id);
             $title = 'Bus Departure';
-            $description = 'Your bus has departed! ';
+            $description = 'Your bus has departed! It left at ' . Carbon::now()->format('d-m-Y H:i A');
             $link = route('customer-bookings');
             $user->notify(new Reminder($title, $description, $link));
         }
@@ -378,46 +377,6 @@ class ReminderApp extends Component
                 'date' => $targetDate,
                 'description' => $desc,
             ];
-            // if ($minutesDifference === 60) {
-            //     $title = 'Bus Departure';
-            //     $description = 'Your bus will leave in an hour!';
-            //     $link = route('customer-bookings');
-            //     Notification::send($user, new Reminder($title, $description, $link));
-
-
-
-            //     $user->notify(new Reminder($title, $description, $link));
-            // } else if ($minutesDifference === 10) {
-            //     $title = 'Bus Departure';
-            //     $description = 'Your bus will leave in 10 minutes!';
-            //     $link = route('customer-bookings');
-            //     Notification::send($user, new Reminder($title, $description, $link));
-
-            //     $user->notify(new Reminder($title, $description, $link));
-            // } else if ($minutesDifference === 5) {
-
-            //     $title = 'Bus Departure';
-            //     $description = 'Your bus will leave in 5 minutes!';
-            //     $link = route('customer-bookings');
-            //     Notification::send($user, new Reminder($title, $description, $link));
-
-            //     $user->notify(new Reminder($title, $description, $link));
-            // }
-
-
-            // if ($secondsDifference === 0) {
-
-            //     $title = 'Bus Departure';
-            //     $description = 'Your bus has departed!';
-            //     $link = route('customer-bookings');
-            //     Notification::send($user, new Reminder($title, $description, $link));
-
-            //     $user->notify(new Reminder($title, $description, $link));
-            // }
-
-
-
-            # code...
         }
 
 
