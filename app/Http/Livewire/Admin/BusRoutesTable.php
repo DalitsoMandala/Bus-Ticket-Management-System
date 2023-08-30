@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\admin;
 
+use App\Models\Company;
 use App\Models\BusRoute;
 use App\Models\Schedule;
 use Illuminate\Support\Carbon;
@@ -102,15 +103,15 @@ final class BusRoutesTable extends PowerGridComponent
             ->addColumn('price', function ($model) {
 
                 //    dd($model->price);
-                return 'MWK ' . number_format($model->price, 2);
+                return Company::find(1)->company_local_currency  . number_format($model->price, 2);
             })
             ->addColumn('schedule', function ($model) {
                 $schedule = Schedule::find($model->schedule_id);
 
                 return $schedule->title . ' (' .     Carbon::parse($schedule->depart_time)->format('H:i A') . ')';
             })
-            ->addColumn('created_at_formatted', fn (BusRoute $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
-            ->addColumn('updated_at_formatted', fn (BusRoute $model) => Carbon::parse($model->updated_at)->format('d/m/Y H:i:s'));
+            ->addColumn('created_at_formatted', fn ($model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
+            ->addColumn('updated_at_formatted', fn ($model) => Carbon::parse($model->updated_at)->format('d/m/Y H:i:s'));
     }
 
     /*

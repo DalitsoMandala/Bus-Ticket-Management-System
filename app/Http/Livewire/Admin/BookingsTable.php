@@ -5,8 +5,9 @@ namespace App\Http\Livewire\admin;
 use App\Models\Booking;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
-use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
+use PowerComponents\LivewirePowerGrid\Filters\Filter;
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
+use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
 final class BookingsTable extends PowerGridComponent
@@ -44,10 +45,10 @@ final class BookingsTable extends PowerGridComponent
     */
 
     /**
-    * PowerGrid datasource.
-    *
-    * @return Builder<\App\Models\Booking>
-    */
+     * PowerGrid datasource.
+     *
+     * @return Builder<\App\Models\Booking>
+     */
     public function datasource(): Builder
     {
         return Booking::query();
@@ -70,6 +71,15 @@ final class BookingsTable extends PowerGridComponent
     {
         return [];
     }
+
+    public function filters(): array
+    {
+        return [
+            Filter::datepicker('created_at_formatted', 'created_at'),
+            Filter::datepicker('updated_at_formatted', 'updated_at'),
+        ];
+    }
+
 
     /*
     |--------------------------------------------------------------------------
@@ -99,7 +109,7 @@ final class BookingsTable extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid Columns.
      *
      * @return array<int, Column>
@@ -107,21 +117,17 @@ final class BookingsTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('ID', 'id')
-                ->makeInputRange(),
+            Column::make('ID', 'id'),
 
             Column::make('CREATED AT', 'created_at_formatted', 'created_at')
                 ->searchable()
-                ->sortable()
-                ->makeInputDatePicker(),
+                ->sortable(),
 
             Column::make('UPDATED AT', 'updated_at_formatted', 'updated_at')
                 ->searchable()
-                ->sortable()
-                ->makeInputDatePicker(),
+                ->sortable(),
 
-        ]
-;
+        ];
     }
 
     /*
@@ -132,7 +138,7 @@ final class BookingsTable extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid Booking Action Buttons.
      *
      * @return array<int, Button>
@@ -162,7 +168,7 @@ final class BookingsTable extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid Booking Action Rules.
      *
      * @return array<int, RuleActions>

@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
         Role::create(['name' => 'customer']);
 
 
-        User::create([
+        $admin = User::create([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
@@ -59,6 +59,13 @@ class DatabaseSeeder extends Seeder
             'last_name' => $lastname,
             'phone_number' => $faker->phoneNumber(),
             'customer_uuid' => Str::upper(Str::random(6)) . $cus->id
+        ]);
+
+        $admin->admin()->create([
+            'first_name' => 'Dalitso',
+            'last_name' => 'Mandala',
+            'phone_number' => '+265997496637',
+            'admin_uuid' => Str::upper(Str::random(6)) . $admin->id
         ]);
 
 

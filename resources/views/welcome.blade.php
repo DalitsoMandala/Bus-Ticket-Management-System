@@ -218,26 +218,31 @@
 
             <header class="p-3 ">
                 <div class="container">
-                    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                        <a class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none"
+                    <div class="flex-wrap d-flex align-items-center justify-content-center justify-content-lg-start">
+                        <a class="mb-2 d-flex align-items-center mb-lg-0 link-body-emphasis text-decoration-none"
                             href="/">
                             <x-application-logo width="40px" />
                         </a>
 
                         <ul
-                            class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 text-uppercase">
-                            <li class="nav-item "><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3 active" href="#"
+                            class="mb-2 nav col-12 col-lg-auto me-lg-auto justify-content-center mb-md-0 text-uppercase">
+                            <li class="nav-item "><a class="py-0 py-3 nav-link lh-1 fs--1 fw-bold active" href="#"
                                     aria-current="page">Home</a></li>
-                            <li class="nav-item "><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3"
+                            <li class="nav-item "><a class="py-0 py-3 nav-link lh-1 fs--1 fw-bold"
                                     href="#about-us">About us</a></li>
-                            <li class="nav-item "><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3"
+                            <li class="nav-item "><a class="py-0 py-3 nav-link lh-1 fs--1 fw-bold"
                                     href="#services">Services</a></li>
-                            <li class="nav-item"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3"
+                            <li class="nav-item"><a class="py-0 py-3 nav-link lh-1 fs--1 fw-bold"
                                     href="#contact">Contact</a></li>
                         </ul>
                         @if (Auth::check())
                             <ul class="flex-row navbar-nav navbar-nav-icons">
-                                <livewire:customer.pic-component />
+                                @role('customer')
+                                    <livewire:customer.pic-component />
+                                @endrole
+                                @role('admin')
+                                    <livewire:admin.pic-component />
+                                @endrole
                             </ul>
                         @else
                             <div class="text-end d-sm-none d-lg-block">
@@ -258,8 +263,8 @@
             <div class="hero-header-container-alternate position-relative">
                 <div class="container-small px-lg-7 px-xxl-3">
                     <div class="row align-items-center">
-                        <div class="col-12 col-lg-8 pt-8 pb-6 position-relative z-index-5 text-center text-lg-start">
-                            <h1 class="fs-2 fs-md-4 fs-xl-5 fw-black text-white mb-4"><span class=" me-3"
+                        <div class="pt-8 pb-6 text-center col-12 col-lg-8 position-relative z-index-5 text-lg-start">
+                            <h1 class="mb-4 text-white fs-2 fs-md-4 fs-xl-5 fw-black"><span class=" me-3"
                                     style="color:#b1b9c2">Discover</span>the art<br />of Seamless Travel with
                                 Our Bus Booking Service</h1>
 
@@ -272,7 +277,7 @@
                                 class="btn btn-lg btn-secondary rounded-pill me-3"
                                 href="{{ route('customer-book-a-bus') }}" role="button">Book
                                 a Bus
-                            </a><a class="btn btn-link text-light me-2 fs-0 p-0 text-decoration-none"
+                            </a><a class="p-0 btn btn-link text-light me-2 fs-0 text-decoration-none"
                                 href="{{ route('login') }}" role="button">Sign In or Sign Up<span
                                     class="fa-solid fa-angle-right ms-2 fs--1"></span></a>
                         </div>
@@ -285,13 +290,13 @@
 
         <!-- ============================================-->
         <!-- <section> begin ============================-->
-        <section class="pt-13 pb-10" id="about-us">
+        <section class="pb-10 pt-13" id="about-us">
             <div class="container-small px-lg-7 px-xxl-3">
 
                 <div class="row">
                     <div class="col-lg-6 col-sm-12 ">
-                        <div class=" mb-10 mb-md-5">
-                            <h5 class="text-secondary mb-3">About Us</h5>
+                        <div class="mb-10 mb-md-5">
+                            <h5 class="mb-3 text-secondary">About Us</h5>
                             <h2 class="mb-3 lh-base">Why choose Us</h2>
                             <p class="mb-0 text-justify">Safety is our top priority, and we ensure that all our partner
                                 bus
@@ -317,19 +322,19 @@
 
         <!-- ============================================-->
         <!-- <section> begin ============================-->
-        <section class="pb-14 overflow-x-hidden" id="services">
+        <section class="overflow-x-hidden pb-14" id="services">
             <div class="container-small px-lg-7 px-xxl-3">
-                <div class="text-center mb-5 position-relative">
-                    <h5 class="text-secondary mb-3">Our Services</h5>
+                <div class="mb-5 text-center position-relative">
+                    <h5 class="mb-3 text-secondary">Our Services</h5>
                     <h2 class="mb-2 lh-base">What do we do</h2>
                 </div>
-                <div class="row  g-3">
+                <div class="row g-3">
                     <div class="col-lg-4 col-sm-12">
-                        <div class="card shadow-lg h-100">
-                            <div class="card-body text-center">
+                        <div class="shadow-lg card h-100">
+                            <div class="text-center card-body">
 
                                 <div class="d-flex justify-content-center">
-                                    <div class="card bg-800 text-white rounded-circle border-0"
+                                    <div class="text-white border-0 card bg-800 rounded-circle"
                                         style="width: 60px; height: 60px;">
                                         <div class="card-body d-flex align-items-center justify-content-center">
                                             <i class="fas fa-road" style="font-size: 20px;"></i>
@@ -337,8 +342,8 @@
                                     </div>
                                 </div>
 
-                                <h4 class="text-secondary mb-5 mt-3">Extensive Route Coverage</h4>
-                                <p class="text-justify mb-3">
+                                <h4 class="mt-3 mb-5 text-secondary">Extensive Route Coverage</h4>
+                                <p class="mb-3 text-justify">
                                     We offer an extensive network of bus routes, covering numerous cities, towns, and
                                     popular tourist destinations.
                                 </p>
@@ -347,18 +352,18 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <div class="card shadow-lg h-100">
-                            <div class="card-body text-center">
+                        <div class="shadow-lg card h-100">
+                            <div class="text-center card-body">
 
                                 <div class="d-flex justify-content-center">
-                                    <div class="card bg-800 text-white rounded-circle border-0"
+                                    <div class="text-white border-0 card bg-800 rounded-circle"
                                         style="width: 60px; height: 60px;">
                                         <div class="card-body d-flex align-items-center justify-content-center">
                                             <i class="fas fa-ticket" style="font-size: 20px;"></i>
                                         </div>
                                     </div>
                                 </div>
-                                <h4 class="text-secondary mb-5 mt-3">Flexible Booking Options</h4>
+                                <h4 class="mt-3 mb-5 text-secondary">Flexible Booking Options</h4>
                                 <p class="text-justify ">
                                     We understand that travel plans can change, and we provide flexible booking options
                                     to accommodate your needs.
@@ -368,19 +373,19 @@
                     </div>
 
                     <div class="col-lg-4 col-sm-12">
-                        <div class="card shadow-lg h-100">
+                        <div class="shadow-lg card h-100">
 
-                            <div class="card-body text-center">
+                            <div class="text-center card-body">
 
                                 <div class="d-flex justify-content-center">
-                                    <div class="card bg-800 text-white rounded-circle border-0"
+                                    <div class="text-white border-0 card bg-800 rounded-circle"
                                         style="width: 60px; height: 60px;">
                                         <div class="card-body d-flex align-items-center justify-content-center">
                                             <i class="fas fa-bus" style="font-size: 20px;"></i>
                                         </div>
                                     </div>
                                 </div>
-                                <h4 class="text-secondary mb-5 mt-3">Real-time Seat Availability</h4>
+                                <h4 class="mt-3 mb-5 text-secondary">Real-time Seat Availability</h4>
                                 <p class="text-justify">
                                     Checking seat availability is quick and easy with our real-time updates.
                                 </p>
@@ -397,10 +402,10 @@
         <section class="pb-10 pb-xl-14" id="contact">
             <div class="container-small px-lg-7 px-xxl-3">
                 <div class="text-center mb-7">
-                    <h5 class="text-secondary mb-3">Contact</h5>
+                    <h5 class="mb-3 text-secondary">Contact</h5>
                     <h2 class="mb-2">Connect with Us</h2>
                 </div>
-                <div class="row mb-3">
+                <div class="mb-3 row">
                     <div class="col">
 
                         <iframe
@@ -410,11 +415,11 @@
                     </div>
                 </div>
                 <div class="row g-5 g-lg-5">
-                    <div class="col-md-6 mb-5 mb-md-0 text-center text-md-start">
+                    <div class="mb-5 text-center col-md-6 mb-md-0 text-md-start">
                         <h3 class="mb-3">Stay connected</h3>
                         <p class="mb-5">Stay connected with our Help Center; We are always available for your
                             necessities at all times.</p>
-                        <div class="d-flex flex-column align-items-center align-items-md-start gap-3 gap-md-0">
+                        <div class="gap-3 d-flex flex-column align-items-center align-items-md-start gap-md-0">
                             <div class="d-md-flex align-items-center">
                                 <div class="shadow-info"><span
                                         class="fas fa-phone text-secondary light fs-2 z-index-1 ms-2"></span></div>
@@ -444,17 +449,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 text-center text-md-start">
+                    <div class="text-center col-md-6 text-md-start">
                         <h3 class="mb-3">Drop us a line</h3>
                         <p class="mb-7">If you have any query or suggestion , we are open to learn from you, Lets
                             talk, reach us anytime.</p>
                         <form class="row g-4">
-                            <div class="col-12"><input class="form-control bg-white" name="name" type="text"
+                            <div class="col-12"><input class="bg-white form-control" name="name" type="text"
                                     placeholder="Name" required="required" /></div>
-                            <div class="col-12"><input class="form-control bg-white" name="email" type="email"
+                            <div class="col-12"><input class="bg-white form-control" name="email" type="email"
                                     placeholder="Email" required="required" /></div>
                             <div class="col-12">
-                                <textarea class="form-control bg-white" name="message" rows="6" placeholder="Message" required="required"></textarea>
+                                <textarea class="bg-white form-control" name="message" rows="6" placeholder="Message" required="required"></textarea>
                             </div>
                             <div class="col-12 d-grid"><button class="btn btn-outline-secondary"
                                     type="submit">Submit</button></div>
@@ -470,13 +475,13 @@
         <!-- <section> begin ============================-->
         <section class="bg-1100 dark__bg-1000">
             <div class="container-small px-lg-7 px-xxl-3">
-                <div class="row gx-xxl-8 gy-5 align-items-center mb-5">
-                    <div class="col-xl-auto text-center"><a href="#"><img <x-application-logo height="48" />
+                <div class="mb-5 row gx-xxl-8 gy-5 align-items-center">
+                    <div class="text-center col-xl-auto"><a href="#"><img <x-application-logo height="48" />
 
                     </div>
-                    <div class="col-xl-auto flex-1">
+                    <div class="flex-1 col-xl-auto">
                         <ul
-                            class="list-unstyled d-flex justify-content-center flex-wrap mb-0 border-end-xl border-dashed border-800 gap-3 gap-xl-8 pe-xl-5 pe-xxl-8 w-75 w-md-100 mx-auto">
+                            class="flex-wrap gap-3 mx-auto mb-0 border-dashed list-unstyled d-flex justify-content-center border-end-xl border-800 gap-xl-8 pe-xl-5 pe-xxl-8 w-75 w-md-100">
                             <li><a class="text-300 dark__text-300" href="#home">Home</a></li>
                             <li><a class="text-300 dark__text-300" href="#about-us">About Us</a></li>
                             <li><a class="text-300 dark__text-300" href="#services">Services</a></li>
@@ -486,16 +491,16 @@
                         </ul>
                     </div>
                     <div class="col-xl-auto">
-                        <div class="d-flex align-items-center justify-content-center gap-8"><a
+                        <div class="gap-8 d-flex align-items-center justify-content-center"><a
                                 class="text-white dark__text-white" href="#!"> <span
                                     class="fa-brands fa-facebook"></span></a><a class="text-white dark__text-white"
                                 href="#!"> <span class="fa-brands fa-twitter"></span></a></div>
                     </div>
                 </div>
                 <hr class="text-800" />
-                <div class="d-sm-flex flex-between-center text-center">
-                    <p class="text-600 mb-0">Copyright © {{ config('app.name') }}</p>
-                    <p class="text-600 mb-0">Developed by Dalitso Mandala</p>
+                <div class="text-center d-sm-flex flex-between-center">
+                    <p class="mb-0 text-600">Copyright © {{ config('app.name') }}</p>
+                    <p class="mb-0 text-600">Developed by Dalitso Mandala</p>
                 </div>
             </div><!-- end of .container-->
         </section><!-- <section> close ============================-->

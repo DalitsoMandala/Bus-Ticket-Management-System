@@ -27,15 +27,16 @@ use App\Http\Livewire\Customer\Schedules;
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\Admin\ManageBookings;
 use App\Http\Livewire\Admin\ManagePayments;
+use App\Http\Livewire\Admin\SystemSettings;
 use App\Http\Livewire\Admin\ManageCustomers;
 use App\Http\Livewire\Admin\ManageSchedules;
 use App\Http\Livewire\Customer\CancelBooking;
 use App\Http\Livewire\Customer\CustomerOverview;
+use App\Http\Livewire\Customer\NotificationHistory;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use App\Http\Livewire\Customer\BookBus as CustomerBookBus;
 use App\Http\Livewire\Customer\Profile as CustomerProfile;
 use  App\Http\Livewire\Customer\MyBookings as CustomerBookings;
-use App\Http\Livewire\Customer\NotificationHistory;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +72,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', Overview::class)->name('admin-dashboard');
     Route::get('/profile', Profile::class)->name('admin-profile');
+    Route::get('/system-settings', SystemSettings::class)->name('admin-system-settings');
     Route::get('/routes', ManageRoutes::class)->name('admin-routes');
     Route::get('/buses', ManageBuses::class)->name('admin-buses');
     Route::get('/bookings', ManageBookings::class)->name('admin-bookings');
@@ -96,74 +98,74 @@ Route::middleware(['auth', 'role:customer', 'verified'])->prefix('customer')->gr
     Route::get('/my-bookings', CustomerBookings::class)->name('customer-bookings');
     Route::get('/notification-history', NotificationHistory::class)->name('customer-notification-history');
     Route::get('/cancel-booking', CancelBooking::class)->name('customer-cancel-booking');
-    Route::get('/receipt', function () {
+    // Route::get('/receipt', function () {
 
-        $data = [
-            'ticket_no' => 'WIOERF23344',
-            'seat_no' => 23,
-            'payment_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
-            'customer_name' => 'John Doe',
-            'payment_to' => config('app.name'),
-            'amount' => '45.00',
-            'sub_total' => '45.00',
-            'total' => '45.00',
-            'discount' => '45.00',
-            'tax' => '45.00',
-            'customer_phone_number' => '+26599339393',
-            'customer_email' => 'dalitso@gmail.com',
-            'company_email' => config('mail.from.address'),
-            'payment_currency' => 'USD',
-            'journey_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
-            'payment_method' => 'paypal',
-            'company_name' => config('app.name'),
-            'company_country' => 'Malwi',
-            'company_city' => 'Lilongwe',
-            'company_state' => 'Lilongwe',
-            'company_zip_code' => '265',
-            'company_street' => 'Area 49',
-            'inv_no' => '#00922',
-            'inv_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
-            'bus_type' => 'MXAO 222',
-            'bus_serial_no' => 'WICOWO@@@113',
-            'bus_max_seats' => '23',
-            'description' => 'wwwdwdwdwqdqcwdqwqwdqwdwd',
-        ];
+    //     $data = [
+    //         'ticket_no' => 'WIOERF23344',
+    //         'seat_no' => 23,
+    //         'payment_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
+    //         'customer_name' => 'John Doe',
+    //         'payment_to' => config('app.name'),
+    //         'amount' => '45.00',
+    //         'sub_total' => '45.00',
+    //         'total' => '45.00',
+    //         'discount' => '45.00',
+    //         'tax' => '45.00',
+    //         'customer_phone_number' => '+26599339393',
+    //         'customer_email' => 'dalitso@gmail.com',
+    //         'company_email' => config('mail.from.address'),
+    //         'payment_currency' => 'USD',
+    //         'journey_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
+    //         'payment_method' => 'paypal',
+    //         'company_name' => config('app.name'),
+    //         'company_country' => 'Malwi',
+    //         'company_city' => 'Lilongwe',
+    //         'company_state' => 'Lilongwe',
+    //         'company_zip_code' => '265',
+    //         'company_street' => 'Area 49',
+    //         'inv_no' => '#00922',
+    //         'inv_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
+    //         'bus_type' => 'MXAO 222',
+    //         'bus_serial_no' => 'WICOWO@@@113',
+    //         'bus_max_seats' => '23',
+    //         'description' => 'wwwdwdwdwqdqcwdqwqwdqwdwd',
+    //     ];
 
-        return view('mail.booking-receipt', [
-            'data' => [
-                'ticket_no' => 'WIOERF23344',
-                'seat_no' => 23,
-                'payment_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
-                'customer_name' => 'John Doe',
-                'payment_to' => config('app.name'),
-                'amount' => '45.00',
-                'sub_total' => '45.00',
-                'total' => '45.00',
-                'discount' => '45.00',
-                'tax' => '45.00',
-                'customer_phone_number' => '+26599339393',
-                'customer_email' => 'dalitso@gmail.com',
-                'company_email' => config('mail.from.address'),
-                'payment_currency' => 'USD',
-                'journey_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
-                'payment_method' => 'paypal',
-                'company_name' => config('app.name'),
-                'company_country' => 'Malwi',
-                'company_city' => 'Lilongwe',
-                'company_state' => 'Lilongwe',
-                'company_zip_code' => '265',
-                'company_street' => 'Area 49',
-                'inv_no' => '#00922',
-                'inv_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
-                'bus_type' => 'MXAO 222',
-                'bus_serial_no' => 'WICOWO@@@113',
-                'bus_max_seats' => '23',
-                'description' => 'wwwdwdwdwqdqcwdqwqwdqwdwd',
-                'route_from' =>  'amssas',
-                'route_to'  => 'asxaxs',
-            ]
-        ]);
-    })->name('mail');
+    //     return view('mail.booking-receipt', [
+    //         'data' => [
+    //             'ticket_no' => 'WIOERF23344',
+    //             'seat_no' => 23,
+    //             'payment_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
+    //             'customer_name' => 'John Doe',
+    //             'payment_to' => config('app.name'),
+    //             'amount' => '45.00',
+    //             'sub_total' => '45.00',
+    //             'total' => '45.00',
+    //             'discount' => '45.00',
+    //             'tax' => '45.00',
+    //             'customer_phone_number' => '+26599339393',
+    //             'customer_email' => 'dalitso@gmail.com',
+    //             'company_email' => config('mail.from.address'),
+    //             'payment_currency' => 'USD',
+    //             'journey_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
+    //             'payment_method' => 'paypal',
+    //             'company_name' => config('app.name'),
+    //             'company_country' => 'Malwi',
+    //             'company_city' => 'Lilongwe',
+    //             'company_state' => 'Lilongwe',
+    //             'company_zip_code' => '265',
+    //             'company_street' => 'Area 49',
+    //             'inv_no' => '#00922',
+    //             'inv_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
+    //             'bus_type' => 'MXAO 222',
+    //             'bus_serial_no' => 'WICOWO@@@113',
+    //             'bus_max_seats' => '23',
+    //             'description' => 'wwwdwdwdwqdqcwdqwqwdqwdwd',
+    //             'route_from' =>  'amssas',
+    //             'route_to'  => 'asxaxs',
+    //         ]
+    //     ]);
+    // })->name('mail');
 });
 
 require __DIR__ . '/auth.php';

@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('administrators', function (Blueprint $table) {
             $table->id();
-
             $table->foreignId('user_id')->constrained();
             $table->string('first_name');
             $table->string('last_name');
@@ -25,7 +24,7 @@ return new class extends Migration
             $table->string('instagram_link')->nullable();
             $table->string('twitter_link')->nullable();
             $table->text('profile_picture')->nullable();
-            $table->string('customer_uuid');
+            $table->string('admin_uuid');
             $table->timestamps();
         });
     }
@@ -35,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('administrators');
     }
 };

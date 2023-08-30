@@ -541,7 +541,7 @@ class BookBus extends Component
                 'tax_amount' => 0.00,
                 'is_complete' => false,
                 'error_message' => $data[0],
-                'currency' => $this->payment_method == 'paypal' ? 'USD' : 'MWK',
+                'currency' => $this->payment_method == 'paypal' ? 'USD' : Company::find(1)->company_local_currency,
                 'tax_amount' => $this->tax,
                 'local_currency' => Company::find(1)->company_local_currency,
                 'customer_data' => $cus_data
@@ -865,10 +865,10 @@ class BookBus extends Component
 
     public function fetchData()
     {
-        $response = Http::get('https://v6.exchangerate-api.com/v6/5fffc43b8a147396c7adb54d/latest/MWK');
+        $response = Http::get('https://v6.exchangerate-api.com/v6/5fffc43b8a147396c7adb54d/latest/' . Company::find(1)->company_local_currency);
         $this->data = $response->json();
         $status = $this->data['result'];
-        $from = 'MWK';
+        $from = Company::find(1)->company_local_currency;
         $to = 'USD';
         $rate = $this->data['conversion_rates']['USD'];
 

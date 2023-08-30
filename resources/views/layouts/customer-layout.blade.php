@@ -1060,7 +1060,11 @@
         <a class="navbar-brand me-1 me-sm-3" href="{{ route('home') }}">
             <div class="d-flex align-items-center">
                 <div class="d-flex align-items-center">
-                    <x-application-logo width="30" />
+                   <img src="@if (\App\Models\Company::find(1)->logo != null) {{ asset('storage/logo/' . \App\Models\Company::find(1)->logo) }}@else ' ' @endif"
+                            alt="site-logo" width="27" />
+                        <p class="logo-text ms-2 d-none d-sm-block fs--2">
+                            {{ \App\Models\Company::find(1)->company_name }}
+                        </p>
 
                 </div>
             </div>

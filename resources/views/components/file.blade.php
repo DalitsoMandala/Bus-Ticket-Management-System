@@ -70,8 +70,12 @@
 
 
 }">
+    <style>
+        .filepond--root .filepond--credits[style] {
+            display: none;
+        }
+    </style>
 
-    <small class="fs--2">change your profile picture</small>
     <input type="file" x-ref="input" {{ $attributes }} />
 
 </div>

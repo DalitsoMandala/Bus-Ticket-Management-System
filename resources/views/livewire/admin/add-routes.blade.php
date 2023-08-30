@@ -121,7 +121,8 @@
 
                     <div class="col-md-12">
                         <div>
-                            <x-input-label class="form-label" for="inputName">PRICE (MWK)</x-input-label>
+                            <x-input-label class="form-label" for="inputName">PRICE
+                                ({{ \App\Models\Company::find(1)->company_local_currency ?? '' }})</x-input-label>
 
                             <x-text-input type="text" placeholder="price" wire:model.defer="price" />
 

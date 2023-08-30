@@ -326,7 +326,8 @@
 
                                         <div class="col-md-12">
                                             <div>
-                                                <x-input-label class="form-label" for="inputName">Price (MWK)
+                                                <x-input-label class="form-label" for="inputName">Price
+                                                    ({{ \App\Models\Company::find(1)->company_local_currency ?? '' }})
                                                 </x-input-label>
                                                 <x-input-g wire:model="price" disabled placeholder="price" />
 
@@ -875,7 +876,7 @@
                                                                         @if ($data_raw['payment_currency'] === 'USD')
                                                                             $
                                                                         @else
-                                                                            MWK
+                                                                            {{ \App\Models\Company::find(1)->company_local_currency ?? '' }}
                                                                         @endif
                                                                         {{ $data_raw['amount'] }} <br>
 
@@ -893,28 +894,27 @@
                                                                         Subtotal: @if ($data_raw['payment_currency'] === 'USD')
                                                                             $
                                                                         @else
-                                                                            MWK
+                                                                            {{ \App\Models\Company::find(1)->company_local_currency ?? '' }}
                                                                         @endif
                                                                         {{ $data_raw['sub_total'] }} <br>
 
                                                                         Discount: @if ($data_raw['payment_currency'] === 'USD')
                                                                             $
                                                                         @else
-                                                                            MWK
+                                                                            {{ \App\Models\Company::find(1)->company_local_currency ?? '' }}
                                                                         @endif
                                                                         {{ $data_raw['discount'] }} <br>
-
                                                                         Tax: @if ($data_raw['payment_currency'] === 'USD')
                                                                             $
                                                                         @else
-                                                                            MWK
+                                                                            {{ \App\Models\Company::find(1)->company_local_currency ?? '' }}
                                                                         @endif
                                                                         {{ $data_raw['tax'] }} <br>
 
                                                                         <b>TOTAL: @if ($data_raw['payment_currency'] === 'USD')
                                                                                 $
                                                                             @else
-                                                                                MWK
+                                                                                {{ \App\Models\Company::find(1)->company_local_currency ?? '' }}
                                                                             @endif
                                                                             {{ $data_raw['total'] }}</b>
 

@@ -2,19 +2,16 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\User;
+use App\Models\Company;
 use Livewire\Component;
-use App\Models\Customer;
-use App\Models\Administrator;
 use Livewire\WithFileUploads;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
-class Profile extends Component
+class SystemSettings extends Component
 {
+
     use LivewireAlert;
     use WithFileUploads;
 
@@ -23,13 +20,21 @@ class Profile extends Component
     # ---------------------------------------------------------------------------- #
     public $name;
     public $edit; // id of table
-    public $showingModalProfile;
+    public $showingModalSystemSettings;
     public $button = "SUBMIT";
     public $status;
-    public $profile_picture, $first_name, $last_name, $phone_number, $email, $home_address, $birth_date, $gender, $facebook_link, $twitter_link, $instagram_link;
-    public $image;
-    public $tab = 1;
-    public $facebook, $instagram, $twitter, $new_password, $old_password, $new_password_confirmation;
+    public $company;
+    public $company_local_currency,
+        $company_name,
+        $company_country,
+        $company_city,
+        $company_state,
+        $company_zip_code,
+        $company_street,
+        $company_email,
+        $company_phone_number,
+        $tax_percentage, $logo, $image;
+
     # ---------------------------------------------------------------------------- #
     #                            Livewire listeners here                           #
     # ---------------------------------------------------------------------------- #
@@ -51,9 +56,6 @@ class Profile extends Component
         'deleteMultiple' => 'deleteMultiple',
         'changeMessage' => 'changeMessage',
         'confirm_request' => 'confirm_request',
-        'clearUp' => 'clearUp',
-        'refresh' => '$refresh',
-        'data' => 'data',
     ];
 
     # ---------------------------------------------------------------------------- #
@@ -61,40 +63,35 @@ class Profile extends Component
     # ---------------------------------------------------------------------------- #
 
 
-
-    public function updatedProfilePicture($value)
+    public function rules()
     {
 
-        $this->validate([
-            'profile_picture'  =>   'nullable|mimes:jpeg,jpg,png'
-        ]);
-        $cover_name = time() . '_' . $this->profile_picture->getClientOriginalName();
-
-        $this->profile_picture->storeAs('profile_pictures', $cover_name, 'public');
-
-        Administrator::find(auth()->user()->admin->first()->id)->update([
-            'profile_picture' => $cover_name
-        ]);
-
-        $this->image = $cover_name;
-
-        $this->emitTo('customer.pic-component', 'changeImage');
+        $user = Auth::user()->id;
+        return  [
+            'company_local_currency' => 'required',
+            'company_name' => 'required|max:255',
+            'company_country' => 'required|max:255',
+            'company_city' => 'nullable|max:255',
+            'company_state' => 'nullable|max:255',
+            'company_zip_code' => 'nullable|max:255',
+            'company_street' => 'nullable|max:255',
+            'company_email' => [
+                'required',
+                Rule::unique('company_details')->ignore($user),
+                'max:255'
+            ],
+            'company_phone_number' => 'nullable|max:255',
+            'tax_percentage' => 'required|numeric|gt:0',
+        ];
     }
+
     public function updated($fields)
     {
-        // $this->validateOnly($fields);
-
-
+        $this->validateOnly($fields);
     }
 
 
-    public function clearUp()
-    {
-    }
 
-    public function updatedTab($value)
-    {
-    }
 
     # ---------------------------------------------------------------------------- #
     #                       Livewire Modals & Reset Data here                      #
@@ -110,7 +107,7 @@ class Profile extends Component
     public function showModal()
     {
 
-        $this->showingModalProfile = true;
+        $this->showingModalSystemSettings = true;
         if ($this->edit) {
             $this->button = 'UPDATE';
         } else {
@@ -122,7 +119,7 @@ class Profile extends Component
 
     public function hideModal()
     {
-        $this->showingModalProfile = false;
+        $this->showingModalSystemSettings = false;
     }
 
     # ---------------------------------------------------------------------------- #
@@ -132,116 +129,53 @@ class Profile extends Component
     public function save()
     {
 
-        if ($this->tab == 1) {
-
-            $validatedData = $this->validate([
-                'first_name' => 'required',
-                'last_name' => 'required',
-                'facebook_link' => 'nullable|url',
-                'instagram_link' => 'nullable|url',
-                'twitter_link' => 'nullable|url',
-                'birth_date' => 'nullable|date',
-                'home_address' => 'nullable|max:255',
-                'phone_number' => 'nullable|string',
-            ]);
+        if ($this->edit == '') {
+            $validatedData = $this->validate();
             if ($validatedData) {
 
-                $customer = auth()->user()->admin->first()->id;
+                Company::find(1)->update($validatedData);
 
-                Administrator::find($customer)->update([
-                    'first_name' => $this->first_name,
-                    'last_name' => $this->last_name,
-                    'facebook_link' => $this->facebook_link,
-                    'instagram_link' => $this->instagram_link,
-                    'twitter_link' => $this->twitter_link,
-                    'birth_date' => $this->birth_date,
-                    'home_address' => $this->home_address,
-                    'phone_number' => $this->phone_number
-                ]);
+
+
+
 
                 $this->alert(
                     'success',
-                    'Profile updated successfully'
+                    'Created successfully'
                 );
 
-                $this->emitSelf('refresh');
+                $this->emitTo('component', 'refresh');
+                $this->emitSelf('hideModal');
+            }
+        } else {
+
+
+            $validatedData = $this->validate();
+
+
+            if ($validatedData) {
+
+
+
+
+
+
+
+
+
+                $this->alert(
+                    'success',
+                    'Updated successfully'
+                );
+
+                $this->emitTo('component', 'refresh');
+                $this->emitSelf('hideModal');
+                $this->emitSelf('resetdata');
             }
         }
     } // End SAVE
 
-    public function saveEmail()
-    {
-        $customer = auth()->user()->admin->first()->id;
-        $user = auth()->user()->id;
 
-        $this->validate([
-            'email' => [
-                'required',
-                Rule::unique('users')->ignore($user),
-                'email'
-            ],
-
-            'name' => [
-                'required',
-
-            ],
-
-        ]);
-
-
-        User::find($user)->update([
-            'name' => $this->name,
-            'email' => $this->email,
-        ]);
-
-
-        $this->alert(
-            'success',
-            'Username & email updated successfully'
-        );
-
-        $this->emitSelf('data');
-    }
-    public function savePassword()
-    {
-        $customer = auth()->user()->admin->first()->id;
-        $user = auth()->user()->id;
-        $this->validate([
-            'old_password' => [
-                'required',
-                Rules\Password::defaults(),
-                'current_password'
-
-            ],
-            'new_password' => [
-                'required',
-                Rules\Password::defaults(),
-                'confirmed'
-            ],
-            'new_password_confirmation' => [
-                'required',
-                Rules\Password::defaults(),
-                'same:new_password'
-            ],
-
-
-        ]);
-
-
-        User::find($user)->update([
-
-            'password' => Hash::make($this->new_password)
-        ]);
-
-        $this->alert(
-            'success',
-            'Password updated successfully'
-        );
-
-        $this->reset(['old_password', 'new_password', 'new_password_confirmation']);
-
-        $this->emitSelf('data');
-    }
     # ---------------------------------------------------------------------------- #
     #                         ALL OTHER LIVEWIRE FUNCTIONS                         #
     # ---------------------------------------------------------------------------- #
@@ -258,12 +192,7 @@ class Profile extends Component
         $this->emitSelf('showModal');
     }
 
-    public function forgot()
-    {
-        Auth::logout();
 
-        $this->redirect(route('password.request'));
-    }
 
 
     public function delete($data)
@@ -328,7 +257,24 @@ class Profile extends Component
         }
     }
 
+    public function updatedImage($value)
+    {
 
+        $this->validate([
+            'image'  =>   'nullable|mimes:jpeg,jpg,png'
+        ]);
+        $cover_name = time() . '_' . $this->image->getClientOriginalName();
+
+        $this->image->storeAs('logo', $cover_name, 'public');
+
+        Company::find(1)->update([
+            'logo' => $cover_name
+        ]);
+
+        $this->logo = $cover_name;
+
+        $this->emitTo('admin.system-settings', 'changeImage');
+    }
 
     # ---------------------------------------------------------------------------- #
     #                        Livewire Delete Functions here                        #
@@ -383,59 +329,31 @@ class Profile extends Component
 
 */
 
-    public function data()
-    {
-
-        $this->gender = 'male';
-        $check = Administrator::find(auth()->user()->admin->first()->id);
-        $user = Auth::user();
-        $this->image = $check->profile_picture;
-        $this->birth_date = $check->birth_date;
-        $this->first_name = $check->first_name;
-        $this->last_name = $check->last_name;
-        $this->phone_number = $check->phone_number;
-        $this->home_address = $check->home_address;
-        $this->facebook_link = $check->facebook_link;
-        $this->twitter_link = $check->twitter_link;
-        $this->instagram_link = $check->instagram_link;
-
-
-
-        function trimUser($username)
-        {
-            $url = $username;
-            $string = $username;
-            $wordToFind =   ["instagram", "facebook", "twitter"];
-
-            foreach ($wordToFind as $word) {
-                # code...
-
-                if (strpos($string, $word) !== false) {
-                    $parts = explode('/', rtrim($url, '/'));
-                    return end($parts);
-                }
-            }
-        }
-
-
-        $this->facebook = trimUser($check->facebook_link);
-        $this->instagram = trimUser($check->instagram_link);
-        $this->twitter = trimUser($check->twitter_link);
-        $this->email = $user->email;
-        $this->name = $user->name;
-    }
-
     # ---------------------------------------------------------------------------- #
     #                             Livewire Render here                             #
     # ---------------------------------------------------------------------------- #
 
     public function mount()
     {
-        $this->data();
-    }
 
+        $company = Company::first();
+
+        $this->company = $company;
+
+        $this->company_local_currency = $company->company_local_currency;
+        $this->company_name = $company->company_name;
+        $this->company_country = $company->company_country;
+        $this->company_city = $company->company_city;
+        $this->company_state = $company->company_state;
+        $this->company_zip_code = $company->company_zip_code;
+        $this->company_street = $company->company_street;
+        $this->company_email = $company->company_email;
+        $this->company_phone_number = $company->company_phone_number;
+        $this->tax_percentage = round($company->tax_percentage);
+        $this->logo = $company->logo;
+    }
     public function render()
     {
-        return view('livewire.admin.profile');
+        return view('livewire.admin.system-settings');
     }
 }

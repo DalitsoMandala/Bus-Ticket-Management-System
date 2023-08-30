@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -62,7 +63,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Customer::class, 'user_id');
     }
-
+    public function admin(): HasOne
+    {
+        return $this->hasOne(Administrator::class, 'user_id');
+    }
     public function sentMessages()
     {
         return $this->hasMany(Chat::class, 'user_id');
