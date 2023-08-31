@@ -408,8 +408,11 @@ class Queries extends Component
 
         $this->selectedUser = User::find($user_id)->customers->first()->first_name . ' ' . User::find($user_id)->customers->first()->last_name;
     }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 8a0f52d914dd1b773abd0c08053fc5af1165d51d
     public function mount()
     {
         $user = User::find(auth()->user()->id);

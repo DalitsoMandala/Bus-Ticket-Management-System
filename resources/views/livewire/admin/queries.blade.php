@@ -191,8 +191,7 @@
 
 
 
-
-
+                        <<<<<<< HEAD=======>>>>>>> 8a0f52d914dd1b773abd0c08053fc5af1165d51d
                     </div>
 
                     <div class="border-0 card-footer">
@@ -245,7 +244,8 @@
             }, 1000);
 
 
-        });
+        }); <<
+        << << < HEAD
 
 
         setInterval(() => {
@@ -256,6 +256,8 @@
                 Livewire.emitTo("admin.queries", "viewChat", id);
             }
 
-        }, 10000);
+        }, 10000); ===
+        === = >>>
+        >>> > 8 a0f52d914dd1b773abd0c08053fc5af1165d51d
     </script>
 @endpush
