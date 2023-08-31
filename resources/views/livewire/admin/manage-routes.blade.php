@@ -1,9 +1,9 @@
 <div>
     <div>
-        @section('title', 'Routes | ' . config('app.name'))
+        @section('title', config('app.name') . ' | Routes')
 
         <div class="mb-3">
-            <h2 class="fs-2 fw-black mb-2"></h2>
+            <h2 class="mb-2 fs-2 fw-black"></h2>
             <h5 class="text-700 fw-semi-bold"></h5>
         </div>
 

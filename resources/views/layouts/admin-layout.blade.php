@@ -385,7 +385,17 @@
                                 Manage Payments</span></div>
                     </a><!-- more inner pages-->
                 </li>
+                <li class="nav-item"><a class="nav-link {{ request()->routeIs('admin-queries') ? 'active' : '' }}"
+                        data-bs-toggle="" href="{{ route('admin-queries') }}" aria-expanded="false">
+                        <div class="d-flex align-items-center"><span class="nav-link-text"> <i
+                                    class="fa fa-message me-2" aria-hidden="true"></i>
+                                Customer Queries</span></div>
+                    </a><!-- more inner pages-->
+                </li>
+
             </ul>
+
+
         </div>
     </div>
     <div class="navbar-vertical-footer d-none"><button
@@ -1316,10 +1326,12 @@
                                     data-feather="clipboard"></span>Project management</div>
                         </a></li>
                     <li><a class="dropdown-item" href="https://prium.github.io/phoenix/v1.11.0/dashboard/crm.html">
-                            <div class="dropdown-item-wrapper"><span class="me-2 uil" data-feather="phone"></span>CRM
+                            <div class="dropdown-item-wrapper"><span class="me-2 uil"
+                                    data-feather="phone"></span>CRM
                             </div>
                         </a></li>
-                    <li><a class="dropdown-item" href="https://prium.github.io/phoenix/v1.11.0/apps/social/feed.html">
+                    <li><a class="dropdown-item"
+                            href="https://prium.github.io/phoenix/v1.11.0/apps/social/feed.html">
                             <div class="dropdown-item-wrapper"><span class="me-2 uil"
                                     data-feather="share-2"></span>Social feed</div>
                         </a></li>
