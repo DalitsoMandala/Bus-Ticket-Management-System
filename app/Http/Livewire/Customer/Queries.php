@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Customer;
 use App\Models\Chat;
 use App\Models\User;
 use Livewire\Component;
+use Spatie\Permission\Models\Role;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Queries extends Component
@@ -23,6 +24,7 @@ class Queries extends Component
     public $status;
     public $msg;
     public $msg_data;
+    public $admin;
     # ---------------------------------------------------------------------------- #
     #                            Livewire listeners here                           #
     # ---------------------------------------------------------------------------- #
@@ -44,6 +46,8 @@ class Queries extends Component
         'deleteMultiple' => 'deleteMultiple',
         'changeMessage' => 'changeMessage',
         'confirm_request' => 'confirm_request',
+        'sendData' => 'sendData',
+        'viewChat' => 'viewChat',
     ];
 
     # ---------------------------------------------------------------------------- #
@@ -99,6 +103,14 @@ class Queries extends Component
     #                              Livewire CRUD here                              #
     # ---------------------------------------------------------------------------- #
 
+
+    public function viewChat()
+    {
+
+        $user = User::find(auth()->user()->id);
+        $msgs =   Chat::where('user_id', $user->id)->orWhere('recipient_id', $user->id)->get();
+        $this->msg_data = $msgs;
+    }
     public function save()
     {
 
@@ -236,60 +248,17 @@ class Queries extends Component
         $user = User::find(auth()->user()->id);
         $msgs =   Chat::where('user_id', $user->id)->orWhere('recipient_id', $user->id)->get();
         $this->msg_data = $msgs;
-    }
 
-    # ---------------------------------------------------------------------------- #
-    #                        Livewire Delete Functions here                        #
-    # ---------------------------------------------------------------------------- #
+        $roles =   User::with('roles')->get();
+        $adminRole = Role::where('name', 'admin')->first();
+        $usersWithAdminRole = User::whereHas('roles', function ($query) use ($adminRole) {
+            $query->where('id', $adminRole->id);
+        })->first();
 
-    /*
- public $message = " Are you sure you want delete this programme?";
-    public $count = 0;
-    public $data = [];
-
-
-
-    public $showingModalDeleteProgram = false;
-    public function showModal()
-    {
-        $this->reset('message');
-        $this->showingModalDeleteProgram = true;
-
-        //    $this->counter++;
-    }
-
-    public function hideModal()
-    {
-        $this->showingModalDeleteProgram = false;
-    }
-
-    public function changeMessage($data)
-    {
-        $this->data = $data;
-        $valuesCount = count($data);
-
-        if ($valuesCount == 1) {
-            $this->message =  "Are you sure you want delete this programme?";
-            $this->showingModalDeleteProgram = true;
-            $this->count = 0; //0 means default value to hide the button
-
-
-        } else if ($valuesCount > 1) {
-            $this->message =  "Are you sure you want delete these programmes?";
-            $this->showingModalDeleteProgram = true;
-            $this->count = 1; // 1 means multiple data
-
-
-        }
-    }
-
-    public function delete()
-    {
-        $this->emitTo('admin.add-program', 'destroyAll', $this->data);
+        $this->admin = $usersWithAdminRole->admin;
     }
 
 
-*/
 
     # ---------------------------------------------------------------------------- #
     #                             Livewire Render here                             #
@@ -297,6 +266,8 @@ class Queries extends Component
 
     public function render()
     {
-        return view('livewire.customer.queries');
+        return view('livewire.customer.queries', [
+            'msg_data' => $this->msg_data
+        ]);
     }
 }
