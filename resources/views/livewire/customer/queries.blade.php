@@ -73,7 +73,7 @@
             }
         </style>
 
-        <div class="flex-1 card  my-4">
+        <div class="flex-1 my-4 card">
             <div class="p-3 card-header p-md-4 d-flex flex-between-center">
                 <div class="d-flex align-items-center">
                     <div class="d-flex flex-column flex-md-row align-items-md-center"><button
@@ -87,8 +87,8 @@
                 </div>
 
             </div>
-            <div class="p-3 card-body  p-sm-4  scrollable-card" id="scrollable-card">
-                <div class="alert alert-soft-warning text-center" role="alert">
+            <div class="p-3 card-body p-sm-4 scrollable-card" id="scrollable-card">
+                <div class="text-center alert alert-soft-warning" role="alert">
                     <em>Feel free to send us your queries. You will be able to get back to you within 24hours.</em>
                 </div>
 
@@ -148,16 +148,16 @@
 
             </div>
 
-            <div class="card-footer border-0">
+            <div class="border-0 card-footer">
                 <form action="" wire:submit.prevent='save'>
 
 
 
 
-                    <div class="d-flex align-items-center flex-1 gap-3  rounded-pill ">
+                    <div class="flex-1 gap-3 d-flex align-items-center rounded-pill ">
                         <div class="col">
                             <div class="mb-1 rounded chat-textarea">
-                                <textarea class=" p-3 rounded-pill form-control scrollbar "
+                                <textarea class="p-3 rounded-pill form-control scrollbar"
                                     style="@if ($errors->has('msg')) border: 1px solid red;  @else border: 1px solid #e3e6ed; @endif "
                                     rows="1" wire:model.defer="msg" autofocus placeholder="Type your message..."></textarea>
 
@@ -166,7 +166,7 @@
                         </div>
                         <div>
 
-                            <x-black-button class="rounded-circle p-3"> <span class="fa-solid fa-paper-plane "></span>
+                            <x-black-button class="p-3 rounded-circle"> <span class="fa-solid fa-paper-plane "></span>
                             </x-black-button>
                         </div>
                     </div>

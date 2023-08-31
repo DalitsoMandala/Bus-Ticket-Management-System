@@ -1,6 +1,6 @@
 <div>
     <div>
-        @section('title', ' | ')
+        @section('title', config('app.name') . ' | System settings ')
 
         <div class="mb-3">
             <h2 class="mb-2 fs-2 fw-black">System Settings</h2>
@@ -10,27 +10,33 @@
         <div class="mb-3 row">
 
             <div class="my-1 col-lg-4 col-md-5 col-sm-12">
+                <div class="mb-3 card">
 
-                <div class="card">
+                    <div class="card-body">
+                        <div class="p-4 text-center">
+                            <div class="mb-1 avatar avatar-xl" style="height: 10rem; width: 10rem;">
+                                <img class="shadow rounded-circle" src="{{ asset('storage/logo/' . $logo) }}"
+                                    alt="logo" />
+                            </div>
 
 
-                    <div class="p-4 text-center">
-                        <div class="mb-1 avatar avatar-xl" style="height: 10rem; width: 10rem;">
-                            <img class="shadow rounded-circle" src="{{ asset('storage/logo/' . $logo) }}"
-                                alt="logo" />
+
+                            <x-file filesize="2MB" wire:model="image" />
+
+
+                            @error('image')
+                                <x-alert>{{ $message }}</x-alert>
+                            @enderror
+
+
                         </div>
 
 
-
-                        <x-file filesize="2MB" wire:model="image" />
-
-
-                        @error('image')
-                            <x-alert>{{ $message }}</x-alert>
-                        @enderror
-
-
                     </div>
+
+                </div>
+                <div class="card">
+
 
 
 

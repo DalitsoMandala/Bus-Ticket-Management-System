@@ -16,11 +16,11 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id'); // Sender's user ID
             $table->unsignedBigInteger('recipient_id'); // Recipient's user ID
             $table->text('content');
-            $table->timestamps();
-
+            $table->timestamp('read_at')->nullable();
             // Define foreign key relationships
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('recipient_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
