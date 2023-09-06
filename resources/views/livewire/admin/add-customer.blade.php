@@ -1,5 +1,5 @@
 <div>
-    <x-black-button class="add-session" wire:click="showModal" wire:loading.attr="disabled">
+    <x-black-button class="add-session d-none" wire:click="showModal" wire:loading.attr="disabled">
         ADD CUSTOMER
     </x-black-button>
     <x-bootstrap-dialog-modal wire:model.defer="showingModalAddCustomer">

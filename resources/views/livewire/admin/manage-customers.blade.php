@@ -13,7 +13,7 @@
 
                 <h4>Customers table</h4>
 
-                {{-- <livewire:admin.add-customer /> --}}
+                <livewire:admin.add-customer />
                 <livewire:admin.delete-customer />
 
             </div>

@@ -38,6 +38,7 @@ use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use App\Http\Livewire\Customer\BookBus as CustomerBookBus;
 use App\Http\Livewire\Customer\Profile as CustomerProfile;
 use  App\Http\Livewire\Customer\MyBookings as CustomerBookings;
+use App\Models\BusRoute;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,7 +60,28 @@ Route::get('/payment', PaymentPage::class)->middleware(['auth'])->name('payment'
 
 
 Route::get('/test', function () {
-    return  Storage::url('bus_ticket_receipt_64a6910989b0b.pdf');
+    $customer = Customer::join('users', 'users.id', 'customers.user_id')->select([
+        'customers.id as id',
+        'customers.customer_uuid as customer_uuid',
+        'customers.first_name as first_name',
+        'customers.last_name as last_name',
+        'users.email as email',
+    ])->get();
+
+
+    $routes = BusRoute::join('schedules', 'schedules.id', 'routes.schedule_id')->select([
+        'routes.from_destination as depart_from',
+        'routes.to_destination as depart_to',
+        'schedules.title as time_of_day',
+        'schedules.check_in_time as check_in_time',
+        'schedules.depart_time as depart_time'
+    ])->get();
+
+    $array = array();
+
+    $array['customers'] = $customer->toArray();
+    $array['routes'] = $routes->toArray();
+
 });
 Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -82,7 +104,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/seats', ManageSeats::class)->name('admin-seats');
     Route::get('/payments', ManagePayments::class)->name('admin-payments');
     Route::get('/bus-schedule', ManageSchedules::class)->name('admin-schedules');
-    Route::get('/customers', ManageCustomers::class)->name('admin-customers');
+    Route::get('/customers/{id?}', ManageCustomers::class)->name('admin-customers');
     Route::get('/payment/{id}', Payment::class)->name('admin-payment');
 });
 

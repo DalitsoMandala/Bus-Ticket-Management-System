@@ -191,7 +191,7 @@
 
 
 
-                        <<<<<<< HEAD=======>>>>>>> 8a0f52d914dd1b773abd0c08053fc5af1165d51d
+
                     </div>
 
                     <div class="border-0 card-footer">
@@ -245,7 +245,8 @@
 
 
         }); <<
-        << << < HEAD
+        <<
+        << < HEAD
 
 
         setInterval(() => {
@@ -257,7 +258,9 @@
             }
 
         }, 10000); ===
-        === = >>>
-        >>> > 8 a0f52d914dd1b773abd0c08053fc5af1165d51d
+        ===
+        = >>>
+        >>>
+        > 8 a0f52d914dd1b773abd0c08053fc5af1165d51d
     </script>
 @endpush

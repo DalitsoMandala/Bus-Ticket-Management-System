@@ -127,7 +127,9 @@ final class CustomerTable extends PowerGridComponent
 
 
             Column::make('CUSTOMER ID', 'customer_uuid')
-                ->sortable(),
+                ->sortable()
+
+                ->searchable(),
             Column::make('ID', 'id')
                 ->hidden(),
 

@@ -2,7 +2,8 @@
     <li class="nav-item dropdown"><a class="nav-link lh-1 pe-0" id="navbarDropdownUser" data-bs-toggle="dropdown"
             data-bs-auto-close="outside" href="#!" role="button" aria-haspopup="true" aria-expanded="false">
             <div class="avatar avatar-l ">
-                <img class="rounded-circle " src="{{ asset('storage/profile_pictures/' . $image) }}"
+                <img class="rounded-circle "
+                    src="@if ($image != null) {{ asset('storage/profile_pictures/' . $image) }} @else {{ asset('assets/img/user.png') }} @endif"
                     alt="profile-image" />
             </div>
         </a>
@@ -12,7 +13,8 @@
                 <div class="p-0 card-body">
                     <div class="pt-4 pb-3 text-center">
                         <div class="avatar avatar-xl ">
-                            <img class="rounded-circle " src="{{ asset('storage/profile_pictures/' . $image) }}"
+                            <img class="rounded-circle "
+                                src="@if ($image != null) {{ asset('storage/profile_pictures/' . $image) }} @else {{ asset('assets/img/user.png') }} @endif"
                                 alt="profile-image" />
                         </div>
                         <h6 class="mt-2 text-black">{{ Auth::user()->name }}</h6>

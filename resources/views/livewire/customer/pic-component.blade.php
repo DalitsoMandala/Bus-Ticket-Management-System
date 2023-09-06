@@ -3,7 +3,9 @@
     <li class="nav-item dropdown"><a class="nav-link lh-1 pe-0" id="navbarDropdownUser" data-bs-toggle="dropdown"
             data-bs-auto-close="outside" href="#!" role="button" aria-haspopup="true" aria-expanded="false">
             <div class="avatar avatar-l ">
-                <img class="rounded-circle " src="{{ asset('storage/profile_pictures/' . $image) }}" alt="" />
+                <img class="rounded-circle "
+                    src="@if ($image != null) {{ asset('storage/profile_pictures/' . $image) }} @else {{ asset('assets/img/user.png') }} @endif"
+                    alt="" />
             </div>
         </a>
         <div class="py-0 border shadow dropdown-menu dropdown-menu-end navbar-dropdown-caret dropdown-profile border-300"
@@ -12,7 +14,8 @@
                 <div class="p-0 card-body">
                     <div class="pt-4 pb-3 text-center">
                         <div class="avatar avatar-xl ">
-                            <img class="rounded-circle" src="{{ asset('storage/profile_pictures/' . $image) }}"
+                            <img class="rounded-circle"
+                                src="@if ($image != null) {{ asset('storage/profile_pictures/' . $image) }} @else {{ asset('assets/img/user.png') }} @endif"
                                 alt="user-profile-image" width="32" height="32">
                         </div>
 
