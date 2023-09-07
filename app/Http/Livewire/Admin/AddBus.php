@@ -4,7 +4,9 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Bus;
 use App\Models\Seat;
+use App\Models\User;
 use Livewire\Component;
+use App\Notifications\AdminNotification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class AddBus extends Component
@@ -114,7 +116,7 @@ class AddBus extends Component
                     'serial_number' => $this->serial_number,
                     'seats' => $this->seats,
                     'condition' => $this->condition,
-                    'is_booked' => false,
+
                 ]);
                 for ($i = 1; $i <= $this->seats; $i++) {
                     $seats = [
@@ -124,6 +126,12 @@ class AddBus extends Component
 
                     $bus->number_of_seats()->saveMany($seats);
                 }
+
+
+                $user = User::find(auth()->user()->id);
+                $description = 'Added a bus | Brand: ' . $this->brand . ', Model: ' . $this->model . ', S/N: ' . $this->serial_number . '(' . $this->seats . ' seats)';
+
+                $user->notify(new AdminNotification('Bus added ', $description, route('admin-buses')));
 
 
 
@@ -158,7 +166,7 @@ class AddBus extends Component
                     'serial_number' => $this->serial_number,
                     'seats' => $this->seats,
                     'condition' => $this->condition,
-                    'is_booked' => false,
+
                 ]);
 
 

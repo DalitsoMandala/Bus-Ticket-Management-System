@@ -2,18 +2,11 @@
 
 namespace App\Http\Livewire\Admin;
 
-use Carbon\Carbon;
-use App\Models\Chat;
 use App\Models\User;
 use Livewire\Component;
-use App\Models\Customer;
-use App\Notifications\Reminder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-use App\Notifications\AdminNotification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
-class Queries extends Component
+class Notifications extends Component
 {
 
     use LivewireAlert;
@@ -24,14 +17,13 @@ class Queries extends Component
     # ---------------------------------------------------------------------------- #
     public $name;
     public $edit; // id of table
-    public $showingModalQueries;
+    public $showingModalNotifications;
     public $button = "SUBMIT";
     public $status;
-    public $msg;
-    public $msg_data;
-    public $people;
-    public $selected;
-    public $selectedUser, $search, $result;
+    public $notifications;
+    public $count;
+
+
     # ---------------------------------------------------------------------------- #
     #                            Livewire listeners here                           #
     # ---------------------------------------------------------------------------- #
@@ -53,20 +45,17 @@ class Queries extends Component
         'deleteMultiple' => 'deleteMultiple',
         'changeMessage' => 'changeMessage',
         'confirm_request' => 'confirm_request',
-        'viewChat' => 'viewChat',
+        'readAll' => 'readAll',
     ];
-
     # ---------------------------------------------------------------------------- #
     #                              Livewire rules here                             #
     # ---------------------------------------------------------------------------- #
 
 
     protected $rules = [
-        'msg' => 'required',
+        'name' => 'required',
     ];
-    protected $messages = [
-        'msg.required' => 'This field can not be empty.'
-    ];
+
 
     public function updated($fields)
     {
@@ -90,7 +79,7 @@ class Queries extends Component
     public function showModal()
     {
 
-        $this->showingModalQueries = true;
+        $this->showingModalNotifications = true;
         if ($this->edit) {
             $this->button = 'UPDATE';
         } else {
@@ -102,7 +91,7 @@ class Queries extends Component
 
     public function hideModal()
     {
-        $this->showingModalQueries = false;
+        $this->showingModalNotifications = false;
     }
 
     # ---------------------------------------------------------------------------- #
@@ -117,26 +106,19 @@ class Queries extends Component
             if ($validatedData) {
 
 
-                $sender = User::find(auth()->user()->id);
-                $recipient = User::find($this->selected);
-
-                $chat = new Chat();
-
-                $chat->content = $this->msg;
-                $chat->user_id = $sender->id;
-                $chat->recipient_id = $recipient->id;
-                $chat->save();
-
-                $user = User::find($chat->recipient_id);
-                $description = "Message(s) from " . User::find($chat->user_id)->admin->first()->first_name . ' ' . User::find($chat->user_id)->admin->first()->last_name;
-                $user->notify(new Reminder('New message', $description, route('customer-queries')));
 
 
-                $this->emitSelf('viewChat', $this->selected);
 
 
-                $this->reset('msg');
-                //dd($this->selected);
+
+                $this->alert(
+                    'success',
+                    'Created successfully'
+                );
+
+                $this->emitTo('component', 'refresh');
+                $this->emitSelf('hideModal');
+                $this->emitSelf('resetdata');
             }
         } else {
 
@@ -306,155 +288,43 @@ class Queries extends Component
     # ---------------------------------------------------------------------------- #
     #                             Livewire Render here                             #
     # ---------------------------------------------------------------------------- #
-
-    public function updatedSearch($value)
-    {
-        if ($value != null) {
-            $search = $value;
-            $data = Customer::where(function ($query) use ($search) {
-                $query->where('customers.customer_uuid', 'LIKE', '%' . $search . '%')
-                    ->Orwhere('customers.first_name', 'LIKE', '%' . $search . '%')
-                    ->Orwhere('customers.last_name', 'LIKE', '%' . $search . '%');
-            })
-
-                ->get();
-            $ids = array();
-            if (count($data) > 0) {
-
-                foreach ($data as $arrays) {
-
-                    $user = User::find($arrays->user_id);
-                    $messages = $user->sentMessages;
-                    if (count($messages) > 0) {
-                        $ids[] = $arrays->user_id;
-                    }
-                }
-
-                $msgs =   Chat::whereIn('user_id', $ids)
-                    ->select([
-                        'chat.*',
-                    ])
-                    ->orderBy('created_at', 'desc')->get();
-
-                $chat =  $msgs->groupBy('user_id');
-
-                $collection = collect();
-
-                foreach ($chat as $user_id => $content) {
-                    # code...
-                    $unred = 0;
-                    foreach ($content as $another_value) {
-
-                        if ($another_value->read_at == null) {
-                            $unred++;
-                        }
-                    }
-
-                    $collection->push([
-                        'user_id' => $user_id,
-                        'content' => $content,
-                        'unred' => $unred
-                    ]);
-                }
-
-                $this->people = $collection;
-            } else {
-                $this->people = [];
-            }
-        } else {
-            $user = User::find(auth()->user()->id);
-            $msgs =   Chat::where('user_id', $user->id)->OrWhere('recipient_id', $user->id)
-                ->select([
-                    'chat.*',
-                ])
-                ->orderBy('created_at', 'desc')->get();
-
-            $chat =  $msgs->groupBy('user_id');
-            $collection = collect();
-
-            foreach ($chat as $user_id => $content) {
-                # code...
-                $unred = 0;
-                foreach ($content as $another_value) {
-
-                    if ($another_value->read_at == null) {
-                        $unred++;
-                    }
-                }
-
-                $collection->push([
-                    'user_id' => $user_id,
-                    'content' => $content,
-                    'unred' => $unred
-                ]);
-            }
-
-            $this->people = $collection;
-        }
-    }
-    public function viewChat($user_id)
-    {
-
-
-        $senderId = Auth::user()->id;
-        $receiverId = $user_id;
-        $msgs =   Chat::where(function ($query) use ($senderId, $receiverId) {
-            $query->where('user_id', $senderId)
-                ->where('recipient_id', $receiverId);
-        })->orWhere(function ($query) use ($senderId, $receiverId) {
-            $query->where('user_id', $receiverId)
-                ->where('recipient_id', $senderId);
-        })->orderBy('created_at', 'asc')->get();
-
-        //Update
-        Chat::where('user_id', $user_id)->update([
-            'read_at' => Carbon::now()
-        ]);
-
-        $this->msg_data = $msgs;
-        $this->selected = $user_id;
-
-        $this->selectedUser = User::find($user_id)->customers->first()->first_name . ' ' . User::find($user_id)->customers->first()->last_name;
-    }
-
-
-    public function mount()
+    public function readData($id)
     {
         $user = User::find(auth()->user()->id);
-        $msgs =   Chat::where('user_id', $user->id)->OrWhere('recipient_id', $user->id)
-            ->select([
-                'chat.*',
-            ])
-            ->orderBy('created_at', 'desc')->get();
 
-        $chat =  $msgs->groupBy('user_id');
-        $collection = collect();
+        $notification = $user->notifications()->find($id);
 
-        foreach ($chat as $user_id => $content) {
-            # code...
-            $unred = 0;
-            foreach ($content as $another_value) {
-
-                if ($another_value->read_at == null) {
-                    $unred++;
-                }
-            }
-
-            $collection->push([
-                'user_id' => $user_id,
-                'content' => $content,
-                'unred' => $unred
-            ]);
+        if ($notification) {
+            $notification->markAsRead();
+            $this->notifications = $user->unreadNotifications;
         }
+        $this->count = count($this->notifications);
+    }
 
-        $this->people = $collection;
-        $this->msg_data = [];
+    public function readAll()
+    {
+
+        $user = User::find(auth()->user()->id);
+
+        $notifications = $user->notifications;
+        foreach ($notifications as $notification) {
+            $notification->markAsRead();
+        }
+        $this->notifications = $user->unreadNotifications;
+        $this->count = count($this->notifications);
+    }
+    public function mount()
+    {
     }
     public function render()
     {
-        return view('livewire.admin.queries', [
-            'msg_data' => $this->msg_data,
-            'people' => $this->people
+        $user = User::find(auth()->user()->id);
+
+        $this->notifications = $user->unreadNotifications;
+        $this->count = count($this->notifications);
+
+        return view('livewire.admin.notifications', [
+            'notifications_data' => $this->notifications
         ]);
     }
 }

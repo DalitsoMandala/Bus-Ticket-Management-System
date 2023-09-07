@@ -3,8 +3,11 @@
 namespace App\Http\Livewire\Admin;
 
 use Carbon\Carbon;
+use App\Models\User;
 use Livewire\Component;
 use App\Models\Schedule;
+use Illuminate\Support\Facades\Auth;
+use App\Notifications\AdminNotification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class AddSchedule extends Component
@@ -114,6 +117,10 @@ class AddSchedule extends Component
                     'check_in_time' => $this->check_in_time
                 ]);
 
+                $user = User::find(auth()->user()->id);
+                $description = 'Title: ' . $this->title . ', Departing time: ' . $this->depart_time . ', Check-in time: ' . $this->check_in_time;
+
+                $user->notify(new AdminNotification('Schedule added', $description, route('admin-schedules')));
 
 
 

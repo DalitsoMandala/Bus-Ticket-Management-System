@@ -30,6 +30,7 @@ use App\Http\Livewire\Admin\ManagePayments;
 use App\Http\Livewire\Admin\SystemSettings;
 use App\Http\Livewire\Admin\ManageCustomers;
 use App\Http\Livewire\Admin\ManageSchedules;
+use App\Http\Livewire\Admin\NotificationHistory as AdminNotificationHistory;
 use App\Http\Livewire\Admin\Queries as AdminQueries;
 use App\Http\Livewire\Customer\CancelBooking;
 use App\Http\Livewire\Customer\CustomerOverview;
@@ -81,7 +82,6 @@ Route::get('/test', function () {
 
     $array['customers'] = $customer->toArray();
     $array['routes'] = $routes->toArray();
-
 });
 Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -106,6 +106,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/bus-schedule', ManageSchedules::class)->name('admin-schedules');
     Route::get('/customers/{id?}', ManageCustomers::class)->name('admin-customers');
     Route::get('/payment/{id}', Payment::class)->name('admin-payment');
+    Route::get('/notification-history', AdminNotificationHistory::class)->name('admin-notification-history');
 });
 
 

@@ -6,6 +6,8 @@ use App\Models\Chat;
 use App\Models\User;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
+use App\Notifications\AdminNotification;
+use App\Notifications\Reminder;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Queries extends Component
@@ -127,6 +129,10 @@ class Queries extends Component
                 $chat->user_id = $sender->id;
                 $chat->recipient_id = $recipient->id;
                 $chat->save();
+                $user = User::find($chat->recipient_id);
+                $description = "Message(s) from " . User::find($chat->user_id)->customers->first()->first_name . ' ' . User::find($chat->user_id)->customers->first()->last_name;
+                $user->notify(new Reminder('New message', $description, route('admin-queries')));
+
 
                 $user = User::find(auth()->user()->id);
                 $msgs =   Chat::where('user_id', $user->id)->orWhere('recipient_id', $user->id)->get();

@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\Schedule;
+use App\Models\User;
 use Livewire\Component;
+use App\Models\Schedule;
+use App\Notifications\AdminNotification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class DeleteSchedule extends Component
@@ -182,9 +184,24 @@ class DeleteSchedule extends Component
 
     public function confirm_request()
     {
-
+        $schedule = Schedule::find($this->edit);
+        $description = 'Title: ' . $schedule->title . ', Departing time: ' . $schedule->depart_time . ', Check-in time: ' . $schedule->check_in_time;
+        $user = User::find(auth()->user()->id);
+        $user->notify(new AdminNotification('Schedule deleted', $description, route('admin-schedules')));
         Schedule::find($this->edit)->delete();
+
+
+
+
+
+
+
         $this->emitTo('admin.schedules-table', 'refresh');
+
+        $this->alert(
+            'success',
+            'Deleted successfully'
+        );
         $this->emitSelf('hideModal');
     }
     // Delete data here

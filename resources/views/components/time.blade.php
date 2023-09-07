@@ -7,6 +7,6 @@
         disableMobile: true
     });
 }">
-    <input type="time" {{ $attributes->merge(['class' => 'form-control datetimepicker']) }} x-ref="input" />
+    <input type="time" {{ $attributes->merge(['class' => 'form-control ']) }} x-ref="input" />
 
 </div>

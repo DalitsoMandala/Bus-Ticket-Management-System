@@ -105,8 +105,7 @@
             <div class="p-0 card-footer border-top">
                 <div
                     class="my-2 text-center fw-bold fs--2 text-600 d-flex justify-content-between align-items-center ms-2 me-2">
-                    <a class="btn btn-phoenix-secondary "
-                        href="{{ route('customer-notification-history') }}">Notification
+                    <a class="btn btn-phoenix-secondary " href="{{ route('admin-notification-history') }}">Notification
                         history <i class="fas fa-arrow-up "></i></a>
 
                     <a class="btn btn-soft-success fs--1 fw-normal" data-bs-toggle="button" href="#!"

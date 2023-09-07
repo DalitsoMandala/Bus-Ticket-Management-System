@@ -7,10 +7,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class Reminder extends Notification
+class AdminNotification extends Notification
 {
     use Queueable;
     public $title, $description, $link;
+
     /**
      * Create a new notification instance.
      */
@@ -53,7 +54,6 @@ class Reminder extends Notification
     {
         return [
             //
-
             'title' => $this->title,
             'description' => $this->description,
             'link' => $this->link

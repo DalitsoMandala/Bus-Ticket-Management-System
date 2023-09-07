@@ -3,7 +3,9 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Bus;
+use App\Models\User;
 use Livewire\Component;
+use App\Notifications\AdminNotification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class DeleteBus extends Component
@@ -178,6 +180,13 @@ class DeleteBus extends Component
     public function confirm_request()
     {
         $bus = Bus::find($this->edit);
+
+
+        $user = User::find(auth()->user()->id);
+        $description = 'Deleted bus information | Brand: ' . $bus->brand . ', Model: ' . $bus->model . ', S/N: ' . $bus->serial_number . '(' . $bus->seats . ' seats)';
+
+        $user->notify(new AdminNotification('Bus deleted ', $description, route('admin-buses')));
+
         $bus->number_of_seats()->delete();
         Bus::find($this->edit)->delete();
         $this->emitTo('admin.buses-table', 'refresh');

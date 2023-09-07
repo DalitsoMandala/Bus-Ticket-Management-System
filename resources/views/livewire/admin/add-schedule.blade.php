@@ -28,7 +28,7 @@
                         <div>
                             <x-input-label class="form-label" for="inputName">Check in Time</x-input-label>
 
-                            <x-time type="time" id="check_in" wire:model="check_in_time" />
+                            <x-time id="check_in" type="time" wire:model="check_in_time" />
 
 
                         </div>
@@ -46,7 +46,7 @@
 
 
 
-                            <x-time type="time" id="depart_time" wire:model="depart_time" />
+                            <x-time id="depart_time" type="time" wire:model="depart_time" />
                         </div>
                         <div>
                             @error('depart_time')

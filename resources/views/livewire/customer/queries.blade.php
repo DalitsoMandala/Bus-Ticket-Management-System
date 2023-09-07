@@ -16,6 +16,15 @@
 
             }
 
+            input[type="text"] {
+                white-space: pre-wrap;
+                /* This makes text wrap like in a textarea */
+                overflow-wrap: break-word;
+                /* This helps break long words */
+                width: 300px;
+                /* Adjust the width as needed */
+            }
+
             .chat-textarea textarea {
                 resize: none;
                 border: none;
@@ -91,11 +100,7 @@
 
             </div>
             <div class="p-3 card-body p-sm-4 scrollable-card" id="scrollable-card">
-<<<<<<< HEAD
                 <div class="text-center alert alert-soft-secondary fs--1" role="alert">
-=======
-                <div class="text-center alert alert-soft-warning" role="alert">
->>>>>>> 8a0f52d914dd1b773abd0c08053fc5af1165d51d
                     <em>Feel free to send us your queries. You will be able to get back to you within 24hours.</em>
                 </div>
 
@@ -223,6 +228,6 @@
             Livewire.emitTo("customer.queries", "viewChat");
 
 
-        }, 10000);
+        }, 30000);
     </script>
 @endpush

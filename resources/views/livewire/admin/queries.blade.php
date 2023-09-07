@@ -77,11 +77,21 @@
                 <div class="p-2 my-4 card scrollable-card">
 
                     <div class="mt-3 mb-4 form-icon-container d-sm-none d-xl-block"><input
-                            class="form-control form-icon-input" type="text" wire:model.debounce.1s="search"
-                            placeholder="Search name, customer id here..."><span
-                            class="fas fa-user text-900 fs--1 form-icon"></span><!--  Font Awesome fontawesome.com -->
+                            class="form-control search-input fuzzy-search rounded-pill form-control-smt" type="text"
+                            wire:model.debounce.1s="search"
+                            placeholder="Search name, customer id here..."><!--  Font Awesome fontawesome.com -->
                     </div>
+
+
+
                     <div class="list-group list-group-flush">
+
+                        @if (count($people) == 0)
+                            <div
+                                class="p-3 disabled list-group-item-action flex-column align-items-start p-sm-4 clickable-chat nav-link">
+                                No results found!
+                            </div>
+                        @endif
 
                         @foreach ($people as $key => $data)
                             @if ($data['user_id'] != Auth::user()->id)
@@ -244,10 +254,7 @@
             }, 1000);
 
 
-        }); <<
-        <<
-        << < HEAD
-
+        });
 
         setInterval(() => {
 
@@ -257,10 +264,6 @@
                 Livewire.emitTo("admin.queries", "viewChat", id);
             }
 
-        }, 10000); ===
-        ===
-        = >>>
-        >>>
-        > 8 a0f52d914dd1b773abd0c08053fc5af1165d51d
+        }, 30000);
     </script>
 @endpush
