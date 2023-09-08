@@ -2,12 +2,13 @@
 
 namespace App\Http\Livewire\Customer;
 
+use Carbon\Carbon;
 use App\Models\Chat;
 use App\Models\User;
 use Livewire\Component;
+use App\Notifications\Reminder;
 use Spatie\Permission\Models\Role;
 use App\Notifications\AdminNotification;
-use App\Notifications\Reminder;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Queries extends Component
@@ -129,9 +130,20 @@ class Queries extends Component
                 $chat->user_id = $sender->id;
                 $chat->recipient_id = $recipient->id;
                 $chat->save();
-                $user = User::find($chat->recipient_id);
-                $description = "Message(s) from " . User::find($chat->user_id)->customers->first()->first_name . ' ' . User::find($chat->user_id)->customers->first()->last_name;
-                $user->notify(new Reminder('New message', $description, route('admin-queries')));
+                $user = User::find($chat->recipient_id); // going to another user
+                $unreadMessages = Chat::where('user_id', $chat->user_id)->where('recipient_id', $chat->recipient_id)
+                    ->where('read_at', null)
+                    ->count();
+
+                if ($unreadMessages > 1) {
+                    $description = "You have got <b>" . $unreadMessages . "</b> messages from <b>" . User::find($chat->user_id)->customers->first()->first_name . ' ' . User::find($chat->user_id)->customers->first()->last_name . "</b>";
+                    $user->notify(new Reminder('New message', $description, route('admin-queries')));
+                } else {
+                    $description = "You have got a message from <b>" . User::find($chat->user_id)->customers->first()->first_name . ' ' . User::find($chat->user_id)->customers->first()->last_name . "</b><br/> " . $chat->content;
+                    $user->notify(new Reminder('New message', $description, route('admin-queries')));
+                }
+
+
 
 
                 $user = User::find(auth()->user()->id);
@@ -262,6 +274,9 @@ class Queries extends Component
         })->first();
 
         $this->admin = $usersWithAdminRole->admin;
+        Chat::where('recipient_id', auth()->user()->id)->update([
+            'read_at' => Carbon::now(),
+        ]);
     }
 
 

@@ -6,13 +6,30 @@ use App\Models\Bus;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
+
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
 use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
-use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
+use PowerComponents\LivewirePowerGrid\{
+    Button,
+    Column,
+    Exportable,
+    Footer,
+    Header,
+    PowerGrid,
+    PowerGridColumns,
+    PowerGridComponent,
+    Traits\WithExport
+};
+
 
 final class BusesTable extends PowerGridComponent
 {
     use ActionButton;
+    use WithExport;
+
+    public string $separator = ',';
+
+    public string $delimiter = '"';
 
     /*
     |--------------------------------------------------------------------------
@@ -28,6 +45,8 @@ final class BusesTable extends PowerGridComponent
         return [
             Exportable::make('export')
                 ->striped()
+                ->csvSeparator($this->separator)
+                ->csvDelimiter($this->delimiter)
                 ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
             Header::make()->showSearchInput(),
             Footer::make()
@@ -86,7 +105,8 @@ final class BusesTable extends PowerGridComponent
     |    the database using the `e()` Laravel Helper function.
     |
     */
-    public function addColumns(): PowerGridEloquent
+
+    public function addColumns(): PowerGridColumns
     {
         return PowerGrid::eloquent()
             ->addColumn('id')

@@ -128,8 +128,23 @@ class Queries extends Component
                 $chat->save();
 
                 $user = User::find($chat->recipient_id);
-                $description = "Message(s) from " . User::find($chat->user_id)->admin->first()->first_name . ' ' . User::find($chat->user_id)->admin->first()->last_name;
-                $user->notify(new Reminder('New message', $description, route('customer-queries')));
+
+                $unreadMessages = Chat::where('user_id', $chat->user_id)->where('recipient_id', $chat->recipient_id)
+                    ->where('read_at', null)
+                    ->count();
+
+
+                if ($unreadMessages > 1) {
+                    $description = "You have got <b>" . $unreadMessages . "</b> messages from <b>" . User::find($chat->user_id)->admin->first()->first_name . ' ' . User::find($chat->user_id)->admin->first()->last_name . "</b>";
+                    $user->notify(new Reminder('New message', $description, route('customer-queries')));
+                } else {
+                    $description = "You have got a message from <b>" . User::find($chat->user_id)->admin->first()->first_name . ' ' . User::find($chat->user_id)->admin->first()->last_name . "</b><br/> " . $chat->content;
+                    $user->notify(new Reminder('New message', $description, route('customer-queries')));
+                }
+
+
+
+
 
 
                 $this->emitSelf('viewChat', $this->selected);
@@ -449,6 +464,10 @@ class Queries extends Component
 
         $this->people = $collection;
         $this->msg_data = [];
+
+        Chat::where('recipient_id', auth()->user()->id)->update([
+            'read_at' => Carbon::now(),
+        ]);
     }
     public function render()
     {

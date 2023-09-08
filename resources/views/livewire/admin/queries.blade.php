@@ -73,10 +73,10 @@
         </div>
 
         <div class="row">
-            <div class="col-4">
+            <div class="col-lg-4 col-sm-12">
                 <div class="p-2 my-4 card scrollable-card">
 
-                    <div class="mt-3 mb-4 form-icon-container d-sm-none d-xl-block"><input
+                    <div class="mt-3 mb-4 form-icon-container d-xl-block"><input
                             class="form-control search-input fuzzy-search rounded-pill form-control-smt" type="text"
                             wire:model.debounce.1s="search"
                             placeholder="Search name, customer id here..."><!--  Font Awesome fontawesome.com -->
@@ -148,7 +148,7 @@
                 </div>
 
             </div>
-            <div class="col-8 ">
+            <div class="col-lg-8 col-sm-12 ">
                 <div class="flex-1 my-4 card ">
                     <div class="p-3 card-header p-md-4 d-flex flex-between-center">
                         <div class="d-flex align-items-center">
@@ -182,7 +182,7 @@
                                                 <div class="p-3 mb-1  sent-message-content light  @if ($chat->user_id === auth()->user()->id) text-white bg-700 @else bg-100 @endif"
                                                     style="border-radius: 20px 20px 20px 20px;">
 
-                                                    <p class="mb-0 fs--1">{{ $chat->content }}</p>
+                                                    <p class="mb-0 fs--1">{!! $chat->content !!}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -265,5 +265,23 @@
             }
 
         }, 30000);
+
+
+        const urlToCheck = 'http://ip-api.com/json'; // Replace with a valid URL
+
+        fetch(urlToCheck)
+            .then(response => {
+                if (response.ok) {
+                    // User has internet access
+                    console.log('User has internet access.');
+                } else {
+                    // User does not have internet access or the resource is unavailable
+                    console.log('User may not have internet access.');
+                }
+            })
+            .catch(error => {
+                // An error occurred, indicating that the user may not have internet access
+                console.log('An error occurred. User may not have internet access.');
+            });
     </script>
 @endpush

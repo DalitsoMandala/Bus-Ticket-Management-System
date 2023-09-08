@@ -3,21 +3,37 @@
         @section('title', ' | ')
 
         <div class="mb-3">
-            <h2 class="fs-2 fw-black mb-2">Notification History</h2>
+            <h2 class="mb-2 fs-2 fw-black">Notification History</h2>
             <h5 class="text-700 fw-semi-bold">Explore all your notifications</h5>
         </div>
 
-        <div class="mx-n4 mx-lg-n6 mb-5  border-300">
+        <div class="mb-5 mx-n4 mx-lg-n6 border-300">
 
             @if (count($notifications) > 0)
                 @foreach ($notifications as $notification)
                     <div class="px-2 py-3 px-sm-3 border-300 border-bottom notification-card position-relative read ">
                         <div class="d-flex align-items-center justify-content-between position-relative">
                             <div class="d-flex">
-                                <div class="avatar-xl me-3 flex-shrink-0">
-                                    <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
-                                        <i class="fa-solid fa-circle-exclamation" style="color:#ad81eb"></i>
-                                    </span>
+                                <div class="flex-shrink-0 avatar-xl me-3">
+                                    @if ($notification->data['link'] == route('customer-bookings'))
+                                        <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16"
+                                            style="background:#685089;">
+                                            <i class="fa-solid fa-business-time" style="color:#c49aff;"></i>
+
+                                        </span>
+                                    @elseif ($notification->data['link'] == route('customers-queries'))
+                                        <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16"
+                                            style="background:#713d63;">
+                                            <i class="fa-solid fa-comment" style="color:#ff8fe1;"></i>
+
+                                        </span>
+                                    @elseif ($notification->data['link'] == route('customer-payments'))
+                                        <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16"
+                                            style="background:#565330;">
+                                            <i class="fa-solid fa-money" style="color:#fff589;"></i>
+
+                                        </span>
+                                    @endif
                                 </div>
                                 <div class="flex-1 me-sm-3">
                                     <h4 class="text-black fs--1">{{ $notification->data['title'] }}</h4>

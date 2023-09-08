@@ -59,7 +59,7 @@ Route::get('/', function () {
 
 Route::get('/payment', PaymentPage::class)->middleware(['auth'])->name('payment');
 
-
+Route::view('/powergrid', 'powergrid-demo');
 Route::get('/test', function () {
     $customer = Customer::join('users', 'users.id', 'customers.user_id')->select([
         'customers.id as id',

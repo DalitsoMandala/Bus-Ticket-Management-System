@@ -20,8 +20,8 @@
 
 
     <a class="nav-link lh-1 pe-0 show" id="navbarDropdownUser" data-bs-toggle="dropdown" data-bs-auto-close="outside"
-        href="#!" role="button" aria-haspopup="true" aria-expanded="true">
-        <div wire:poll.30s>
+        href="#!" role="button" aria-haspopup="true" aria-expanded="true" wire:click="readAll">
+        <div>
 
             <span class="fa-regular @if (count($notifications) === 0) fa-bell-slash @else fa-bell @endif "
                 style="height:20px;width:20px;">{{ count($notifications) }}</span>
@@ -41,7 +41,7 @@
                 <h5 class="fs-1">Notifications</h5>
             </div>
             <div class="overflow-auto scrollbar" style="height: 15rem; width:400px;">
-                <ul class="pb-1 mb-2 nav d-flex flex-column">
+                <ul class="pb-1 mb-2 nav d-flex flex-column" wire:ignore>
 
                     @if (count($notifications_data) > 0)
                         @foreach ($notifications_data as $notification)
@@ -57,10 +57,11 @@
                                         </a>
                                         <a class="flex-1 me-sm-3" href="{{ $notification->data['link'] }}"
                                             style="text-decoration: none">
+
                                             <h4 class="text-black fs--1">{{ $notification->data['title'] }}</h4>
                                             <p
-                                                class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal text-break line-clamp-1 lead">
-                                                {{ $notification->data['description'] }} <br><span
+                                                class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal text-break line-clamp-2 lead">
+                                                {!! $notification->data['description'] !!} <br><span
                                                     class=" text-400 fw-bold fs--2">{{ \Carbon\Carbon::parse($notification->updated_at)->diffForHumans() }}</span>
                                             </p>
                                             <p class="mb-0 text-800 fs--2"><span class="me-1 fas fa-clock"></span><span
@@ -69,7 +70,7 @@
                                             </p>
                                         </a>
                                     </div>
-                                    <div class="font-sans-serif d-none d-sm-block"><button
+                                    <div class="font-sans-serif d-none"><button
                                             class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                             data-stop-propagation="data-stop-propagation" data-bs-toggle="dropdown"
                                             data-boundary="window" data-bs-reference="parent" type="button"

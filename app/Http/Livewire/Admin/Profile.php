@@ -78,7 +78,7 @@ class Profile extends Component
 
         $this->image = $cover_name;
 
-        $this->emitTo('customer.pic-component', 'changeImage');
+        $this->emitTo('admin.pic-component', 'changeImage');
     }
     public function updated($fields)
     {
