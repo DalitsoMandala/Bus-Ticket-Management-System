@@ -88,8 +88,8 @@
 
                         @if (count($people) == 0)
                             <div
-                                class="p-3 disabled list-group-item-action flex-column align-items-start p-sm-4 clickable-chat nav-link">
-                                No results found!
+                                class="p-3 text-center disabled list-group-item-action flex-column align-items-start p-sm-4 clickable-chat nav-link">
+                                <i class="fas fa-exclamation-circle text-danger "></i> No customer messages found!
                             </div>
                         @endif
 

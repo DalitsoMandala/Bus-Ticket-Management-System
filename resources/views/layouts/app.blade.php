@@ -25,7 +25,7 @@
     <script src="{{ asset('assets/vendors/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/simplebar/simplebar.min.js') }}"></script>
     <script src="{{ asset('assets/js/config.js') }}"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     <!-- ===============================================-->
     <!--    Stylesheets-->
     <!-- ===============================================-->
@@ -227,78 +227,78 @@
     <!--    End of Main Content-->
     <!-- ===============================================-->
 
+    <livewire:check-session>
+
+        <!-- ===============================================-->
+        <!--    JavaScripts-->
+        <!-- ===============================================-->
+        @livewireScripts
 
 
-    <!-- ===============================================-->
-    <!--    JavaScripts-->
-    <!-- ===============================================-->
-    @livewireScripts
+        <x-livewire-alert::scripts />
+        <x-livewire-alert::flash />
 
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        <script src="{{ asset('assets/vendors/popper/popper.min.js') }}"></script>
+        <script src="{{ asset('assets/vendors/bootstrap/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('assets/vendors/anchorjs/anchor.min.js') }}"></script>
+        <script src="{{ asset('assets/vendors/is/is.min.js') }}"></script>
+        <script src="{{ asset('assets/vendors/fontawesome/all.min.js') }}"></script>
+        <script src="{{ asset('assets/vendors/lodash/lodash.min.js') }}"></script>
+        <script src="{{ asset('assets/vendors/polyfill.io/v3/polyfill.min58be.js') }}"></script>
+        <script src="{{ asset('assets/vendors/list.js/list.min.js') }}"></script>
+        <script src="{{ asset('assets/vendors/feather-icons/feather.min.js') }}"></script>
+        <script src="{{ asset('assets/vendors/dayjs/dayjs.min.js') }}"></script>
+        <script src="{{ asset('assets/vendors/prism/prism.js') }}"></script>
+        <script src="{{ asset('assets/js/phoenix.js') }}"></script>
 
-    <x-livewire-alert::scripts />
-    <x-livewire-alert::flash />
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
-        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script src="{{ asset('assets/vendors/popper/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/bootstrap/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/anchorjs/anchor.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/is/is.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/fontawesome/all.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/lodash/lodash.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/polyfill.io/v3/polyfill.min58be.js') }}"></script>
-    <script src="{{ asset('assets/vendors/list.js/list.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/feather-icons/feather.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/dayjs/dayjs.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/prism/prism.js') }}"></script>
-    <script src="{{ asset('assets/js/phoenix.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.18/js/intlTelInput.min.js"
+            integrity="sha512-hpJ6J4jGqnovQ5g1J39VtNq1/UPsaFjjR6tuCVVkKtFIx8Uy4GeixgIxHPSG72lRUYx1xg/Em+dsqxvKNwyrSg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+        <script src="{{ asset('assets/vendors/filepond/filepond-plugin-file-validate-size.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.min.js"
+            integrity="sha512-d5Jr3NflEZmFDdFHZtxeJtBzk0eB+kkRXWFQqEc1EKmolXjHm2IKCA7kTvXBNjIYzjXfD5XzIjaaErpkZHCkBg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+        <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js">
+        </script>
+        <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js"></script>
+        <script>
+            FilePond.registerPlugin(FilePondPluginImagePreview);
+            FilePond.registerPlugin(FilePondPluginFileValidateSize);
+            FilePond.registerPlugin(FilePondPluginImageExifOrientation);
+            FilePond.registerPlugin(FilePondPluginImageResize);
+            FilePond.registerPlugin(FilePondPluginFileEncode);
+            FilePond.registerPlugin(FilePondPluginImageTransform);
+            FilePond.registerPlugin(FilePondPluginImageEdit);
+            $(function() {
+                $('#loader').fadeOut();
+            });
 
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.18/js/intlTelInput.min.js"
-        integrity="sha512-hpJ6J4jGqnovQ5g1J39VtNq1/UPsaFjjR6tuCVVkKtFIx8Uy4GeixgIxHPSG72lRUYx1xg/Em+dsqxvKNwyrSg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-    <script src="{{ asset('assets/vendors/filepond/filepond-plugin-file-validate-size.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.min.js"
-        integrity="sha512-d5Jr3NflEZmFDdFHZtxeJtBzk0eB+kkRXWFQqEc1EKmolXjHm2IKCA7kTvXBNjIYzjXfD5XzIjaaErpkZHCkBg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js">
-    </script>
-    <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js"></script>
-    <script>
-        FilePond.registerPlugin(FilePondPluginImagePreview);
-        FilePond.registerPlugin(FilePondPluginFileValidateSize);
-        FilePond.registerPlugin(FilePondPluginImageExifOrientation);
-        FilePond.registerPlugin(FilePondPluginImageResize);
-        FilePond.registerPlugin(FilePondPluginFileEncode);
-        FilePond.registerPlugin(FilePondPluginImageTransform);
-        FilePond.registerPlugin(FilePondPluginImageEdit);
-        $(function() {
-            $('#loader').fadeOut();
-        });
-
-        const tooltipTriggerList = document.querySelectorAll('[title]')
-        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-
-
-        setInterval(() => {
             const tooltipTriggerList = document.querySelectorAll('[title]')
-            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(
-                tooltipTriggerEl))
-        }, 2000);
-    </script>
-    <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    @stack('scripts')
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+
+            setInterval(() => {
+                const tooltipTriggerList = document.querySelectorAll('[title]')
+                const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(
+                    tooltipTriggerEl))
+            }, 2000);
+        </script>
+        <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        @stack('scripts')
 </body>
 
 <!-- Mirrored from prium.github.io/phoenix/v1.11.0/documentation/getting-started.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 12 May 2023 11:35:52 GMT -->

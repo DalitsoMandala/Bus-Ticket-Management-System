@@ -2,17 +2,19 @@
 
 namespace App\Http\Livewire\admin;
 
-use App\Models\Booking;
+use App\Models\Seat;
 use Illuminate\Support\Carbon;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Query\Builder;
 use PowerComponents\LivewirePowerGrid\Filters\Filter;
-use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
 use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
-use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
+use PowerComponents\LivewirePowerGrid\Traits\{ActionButton, WithExport};
+use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridColumns};
 
 final class BookingsTable extends PowerGridComponent
 {
     use ActionButton;
+    use WithExport;
 
     /*
     |--------------------------------------------------------------------------
@@ -24,11 +26,12 @@ final class BookingsTable extends PowerGridComponent
     public function setUp(): array
     {
         $this->showCheckBox();
-
+        $name = $this->getName();
+        $withoutLocation = str_replace(['admin.', 'customer.'], '', $name);
         return [
-            Exportable::make('export')
+            Exportable::make($withoutLocation . Carbon::now()->format('_Y-m-d_H_i'))
                 ->striped()
-                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
+                ->type(Exportable::TYPE_CSV),
             Header::make()->showSearchInput(),
             Footer::make()
                 ->showPerPage()
@@ -40,18 +43,28 @@ final class BookingsTable extends PowerGridComponent
     |--------------------------------------------------------------------------
     |  Datasource
     |--------------------------------------------------------------------------
-    | Provides data to your Table using a Model or Collection
+    | Provides data to your Table using a Eloquent, Query Builder or Collection
     |
     */
 
     /**
      * PowerGrid datasource.
      *
-     * @return Builder<\App\Models\Booking>
+     * @return Builder
      */
     public function datasource(): Builder
     {
-        return Booking::query();
+        return DB::table('bookings')->leftJoin('customers', 'customers.id', 'bookings.customer_id')
+            ->leftJoin('payments', 'bookings.payment_id', 'payments.id')
+            ->leftJoin('buses', 'buses.id', 'bookings.bus_id')
+            ->select([
+                'bookings.*',
+                'customers.first_name as customer_first_name',
+                'customers.last_name as customer_last_name',
+                'buses.model as bus_model',
+
+                DB::Raw('ROW_NUMBER() OVER (ORDER BY bookings.id) AS rn'),
+            ]);
     }
 
     /*
@@ -72,15 +85,6 @@ final class BookingsTable extends PowerGridComponent
         return [];
     }
 
-    public function filters(): array
-    {
-        return [
-            Filter::datepicker('created_at_formatted', 'created_at'),
-            Filter::datepicker('updated_at_formatted', 'updated_at'),
-        ];
-    }
-
-
     /*
     |--------------------------------------------------------------------------
     |  Add Column
@@ -92,12 +96,29 @@ final class BookingsTable extends PowerGridComponent
     |    the database using the `e()` Laravel Helper function.
     |
     */
-    public function addColumns(): PowerGridEloquent
+    public function addColumns(): PowerGridColumns
     {
-        return PowerGrid::eloquent()
+        return PowerGrid::columns()
+            ->addColumn('rn')
             ->addColumn('id')
-            ->addColumn('created_at_formatted', fn (Booking $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
-            ->addColumn('updated_at_formatted', fn (Booking $model) => Carbon::parse($model->updated_at)->format('d/m/Y H:i:s'));
+            ->addColumn('payment_id')
+            ->addColumn('customer_id')
+            ->addColumn('customer_full_name', function ($model) {
+                return $model->customer_first_name . ' ' . $model->customer_last_name;
+            })
+            ->addColumn('bus_model')
+            ->addColumn('customer_first_name')
+            ->addColumn('customer_last_name')
+
+            ->addColumn('seat_id')
+            ->addColumn('seat_no', function ($model) {
+                return Seat::find($model->seat_id)->seat_no;
+            })
+            ->addColumn('date_departing_formatted', fn ($model) => Carbon::parse($model->date_departing)->format('d/m/Y'))
+            ->addColumn('is_completed', fn ($model) => $model->is_completed == true ? '<span class="badge badge-phoenix fs--2 badge-phoenix-success"><span class="badge-label">YES</span><span class="ms-1 fa-solid fa-check" ></span></span>' : '')
+            ->addColumn('is_notified')
+            ->addColumn('created_at_formatted', fn ($model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
+            ->addColumn('updated_at_formatted', fn ($model) => Carbon::parse($model->updated_at)->format('d/m/Y H:i:s'));
     }
 
     /*
@@ -117,16 +138,44 @@ final class BookingsTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('ID', 'id'),
+            Column::make('Id', 'rn'),
 
-            Column::make('CREATED AT', 'created_at_formatted', 'created_at')
-                ->searchable()
+            Column::make('first name', 'customer_first_name', 'customers.first_name')
+                ->sortable()
+                ->searchableRaw('customers.first_name'),
+
+            Column::make('last name', 'customer_last_name', 'customers.last_name')->sortable()
+                ->searchableRaw('customers.last_name'),
+            Column::make('Bus', 'bus_model')->sortable(),
+            Column::make('Seat No.', 'seat_no'),
+            Column::make('Date departing', 'date_departing_formatted', 'bookings.date_departing')
                 ->sortable(),
 
-            Column::make('UPDATED AT', 'updated_at_formatted', 'updated_at')
-                ->searchable()
+            Column::make('Is completed', 'is_completed')
                 ->sortable(),
 
+            Column::make('Created at', 'created_at_formatted', 'bookings.created_at')
+                ->sortable(),
+
+            Column::make('Updated at', 'updated_at_formatted', 'bookings.updated_at')
+                ->sortable(),
+
+        ];
+    }
+
+    /**
+     * PowerGrid Filters.
+     *
+     * @return array<int, Filter>
+     */
+    public function filters(): array
+    {
+        return [
+            Filter::datepicker('date_departing'),
+            Filter::boolean('is_completed'),
+            Filter::boolean('is_notified'),
+            Filter::datetimepicker('created_at'),
+            Filter::datetimepicker('updated_at'),
         ];
     }
 
@@ -138,28 +187,6 @@ final class BookingsTable extends PowerGridComponent
     |
     */
 
-    /**
-     * PowerGrid Booking Action Buttons.
-     *
-     * @return array<int, Button>
-     */
-
-    /*
-    public function actions(): array
-    {
-       return [
-           Button::make('edit', 'Edit')
-               ->class('bg-indigo-500 cursor-pointer text-white px-3 py-2.5 m-1 rounded text-sm')
-               ->route('booking.edit', ['booking' => 'id']),
-
-           Button::make('destroy', 'Delete')
-               ->class('bg-red-500 cursor-pointer text-white px-3 py-2 m-1 rounded text-sm')
-               ->route('booking.destroy', ['booking' => 'id'])
-               ->method('delete')
-        ];
-    }
-    */
-
     /*
     |--------------------------------------------------------------------------
     | Actions Rules
@@ -169,7 +196,7 @@ final class BookingsTable extends PowerGridComponent
     */
 
     /**
-     * PowerGrid Booking Action Rules.
+     * PowerGrid Action Rules.
      *
      * @return array<int, RuleActions>
      */
@@ -181,7 +208,7 @@ final class BookingsTable extends PowerGridComponent
 
            //Hide button edit for ID 1
             Rule::button('edit')
-                ->when(fn($booking) => $booking->id === 1)
+                ->when(fn($row) => $row->id === 1)
                 ->hide(),
         ];
     }

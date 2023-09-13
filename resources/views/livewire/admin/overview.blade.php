@@ -6,7 +6,7 @@
             <h2 class="fs-2 fw-black mb-2"></h2>
             <h5 class="text-700 fw-semi-bold"></h5>
         </div>
-        <livewire:user-table />
+
 
     </div>
 

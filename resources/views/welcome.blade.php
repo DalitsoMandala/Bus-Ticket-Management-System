@@ -9,7 +9,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>@yield('title')</title>
+    <title>{{ config('app.name') }} | Welcome</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -246,8 +246,8 @@
                             </ul>
                         @else
                             <div class="text-end d-sm-none d-lg-block">
-                                <a class="btn btn-secondary text-uppercase" href="{{ route('login') }}"> <span
-                                        data-feather="user"></span> Login</a>
+                                <a class="btn btn-outline-secondary text-uppercase" href="{{ route('login') }}">
+                                    Login</a>
                             </div>
                         @endif
 

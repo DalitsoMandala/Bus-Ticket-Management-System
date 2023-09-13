@@ -4,14 +4,17 @@ namespace App\Http\Livewire\admin;
 
 use App\Models\Payment;
 use Illuminate\Support\Carbon;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Query\Builder;
+use PowerComponents\LivewirePowerGrid\Filters\Filter;
 use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
-use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
-use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
+use PowerComponents\LivewirePowerGrid\Traits\{ActionButton, WithExport};
+use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridColumns};
 
 final class PaymentsTable extends PowerGridComponent
 {
     use ActionButton;
+    use WithExport;
 
     /*
     |--------------------------------------------------------------------------
@@ -24,8 +27,10 @@ final class PaymentsTable extends PowerGridComponent
     {
         $this->showCheckBox();
 
+        $name = $this->getName();
+        $withoutLocation = str_replace(['admin.', 'customer.'], '', $name);
         return [
-            Exportable::make('export')
+            Exportable::make($withoutLocation . Carbon::now()->format('_Y-m-d_H_i'))
                 ->striped()
                 ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
             Header::make()->showSearchInput(),
@@ -39,18 +44,41 @@ final class PaymentsTable extends PowerGridComponent
     |--------------------------------------------------------------------------
     |  Datasource
     |--------------------------------------------------------------------------
-    | Provides data to your Table using a Model or Collection
+    | Provides data to your Table using a Eloquent, Query Builder or Collection
     |
     */
 
     /**
-    * PowerGrid datasource.
-    *
-    * @return Builder<\App\Models\Payment>
-    */
-    public function datasource(): Builder
+     * PowerGrid datasource.
+     *
+     *
+     */
+    public function datasource(): array
     {
-        return Payment::query();
+        $data = Payment::query()->select([
+            'payments.*',
+            DB::Raw('ROW_NUMBER() OVER (ORDER BY payments.id) AS rn'),
+        ])->get();
+
+
+        $dataArray = [];
+        foreach ($data as $payment_data) {
+            $paymentData = $payment_data->toArray();
+
+            $paymentData['payment_date'] = Carbon::parse($paymentData['customer_data']['payment_date'])->format('d/m/Y');
+            $paymentData['journey_date'] = $paymentData['customer_data']['journey_date'];
+            $paymentData['journey_time'] = $paymentData['customer_data']['journey_time'];
+            $paymentData['route_from'] = $paymentData['customer_data']['route_from'];
+            $paymentData['route_to'] = $paymentData['customer_data']['route_to'];
+            $paymentData['seat_no'] = $paymentData['customer_data']['seat_no'];
+            $paymentData['journey_date'] = $paymentData['customer_data']['journey_date'];
+            $paymentData['customer_name'] = $paymentData['customer_data']['customer_name'];
+            $paymentData['payment_status'] = $paymentData['payment_status'] == 1 ? 'successful' : 'failed';
+            $dataArray[] = $paymentData;
+        }
+
+
+        return $dataArray;
     }
 
     /*
@@ -82,12 +110,100 @@ final class PaymentsTable extends PowerGridComponent
     |    the database using the `e()` Laravel Helper function.
     |
     */
-    public function addColumns(): PowerGridEloquent
+    public function addColumns(): PowerGridColumns
     {
-        return PowerGrid::eloquent()
+        return PowerGrid::columns()
             ->addColumn('id')
-            ->addColumn('created_at_formatted', fn (Payment $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
-            ->addColumn('updated_at_formatted', fn (Payment $model) => Carbon::parse($model->updated_at)->format('d/m/Y H:i:s'));
+            ->addColumn('rn')
+            ->addColumn('transaction_id')
+            ->addColumn('amount_paid')
+            ->addColumn('currency')
+            ->addColumn('local_currency')
+            ->addColumn('amt_paid', function ($model) {
+                //    dd($model->local_currency);
+                $data = $model->amount_paid;
+
+                return $model->currency . ' ' . $data;
+            })
+            ->addColumn('tax_amount')
+            ->addColumn('tax', function ($model) {
+                $data = $model->tax_amount;
+                return $model->currency . ' ' . $data;
+            })
+
+            ->addColumn('payment_status')
+            ->addColumn('status', function ($model) {
+                $data = $model->payment_status;
+
+                if ($data == 'successful') {
+                    return '<span class="badge badge-phoenix fs--1 badge-phoenix-success">successful</span>';
+                } else {
+                    return '<span class="badge badge-phoenix fs--1 badge-phoenix-danger">failed</span>';
+                }
+            })
+
+            ->addColumn('customer_name')
+            ->addColumn('journey_date')
+            ->addColumn('jrn_date', function ($model) {
+                // $data = json_decode($model->customer_data);
+                return Carbon::parse($model->journey_date)->format('d/m/Y');
+            })
+            ->addColumn('journey_time')
+
+            ->addColumn('jrn_time', function ($model) {
+
+                return $model->journey_time;
+            })
+
+
+            ->addColumn('payment_date')
+
+
+
+            ->addColumn('route_from')
+
+            ->addColumn('route_to')
+
+            ->addColumn('seat_no')
+            ->addColumn('payment_method')
+
+            ->addColumn('rt_from', function ($model) {
+                return $model->route_from;
+            })
+
+            ->addColumn('rt_to', function ($model) {
+                return $model->route_to;
+            })
+
+            ->addColumn('st_no', function ($model) {
+                return $model->seat_no;
+            })
+
+            ->addColumn('payment_date_formatted', fn ($model) => Carbon::parse($model->payment_date)->format('d/m/Y H:i:s'))
+
+            ->addColumn('trans_method', function ($model) {
+                $method =  $model->payment_method;
+
+
+                switch ($method) {
+                    case 'airtel':
+                        # code...
+
+                        return '<i class="fa-solid fa-signal text-danger"></i> <span class="text-uppercase fw-bold">' . $method . '</span>';
+                        break;
+
+                    case 'mpamba':
+                        # code...
+
+                        return
+                            '<i class="fa-solid fa-signal text-success"></i> <span class="text-uppercase fw-bold">' . $method . '</span>';
+                        break;
+                    default:
+                        # code...
+                        return '<span class="badge fs--1 bg-secondary text-uppercase"> <i class="fa-solid fa-credit-card"></i> ' . $method . '</span>';
+                        break;
+                }
+            });
     }
 
     /*
@@ -99,7 +215,7 @@ final class PaymentsTable extends PowerGridComponent
     |
     */
 
-     /**
+    /**
      * PowerGrid Columns.
      *
      * @return array<int, Column>
@@ -107,21 +223,55 @@ final class PaymentsTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('ID', 'id')
-                ->makeInputRange(),
 
-            Column::make('CREATED AT', 'created_at_formatted', 'created_at')
-                ->searchable()
+            Column::make('ID', 'id', 'rn')
+                ->searchable(),
+
+            Column::make('TRANSACTION ID', 'transaction_id', 'transaction_id')
                 ->sortable()
-                ->makeInputDatePicker(),
+                ->searchable(),
 
-            Column::make('UPDATED AT', 'updated_at_formatted', 'updated_at')
-                ->searchable()
+            Column::make('CUSTOMER NAME', 'customer_name', 'customer_name')
+                ->searchable(),
+            Column::make('PAID AMOUNT', 'amt_paid', 'amount_paid')
+                ->searchable(),
+
+            Column::make('TAX AMOUNT', 'tax', 'tax_amount')
+                ->searchable(),
+            Column::make('PAYMENT STATUS', 'status', 'payment_status')
+                ->sortable()->searchable(),
+
+
+            Column::make('TRANSACTION METHOD', 'trans_method', 'payment_method')
+                ->sortable()->searchable(),
+
+            Column::make('JOURNEY DATE', 'jrn_date', 'journey_date')
+                ->searchable(),
+
+
+
+            Column::make('JOURNEY TIME', 'jrn_time', 'journey_time')
+                ->searchable(),
+
+
+
+            Column::make('DEPART FROM', 'rt_from', 'route_from')
+                ->searchable(),
+
+
+
+            Column::make('DEPART FOR', 'rt_to', 'route_to')
+                ->searchable(),
+
+
+
+            Column::make('SEAT #', 'st_no', 'seat_no')
+                ->searchable(),
+
+            Column::make('PAYMENT DATE', 'payment_date')
                 ->sortable()
-                ->makeInputDatePicker(),
-
-        ]
-;
+                ->searchable(),
+        ];
     }
 
     /*
@@ -132,28 +282,6 @@ final class PaymentsTable extends PowerGridComponent
     |
     */
 
-     /**
-     * PowerGrid Payment Action Buttons.
-     *
-     * @return array<int, Button>
-     */
-
-    /*
-    public function actions(): array
-    {
-       return [
-           Button::make('edit', 'Edit')
-               ->class('bg-indigo-500 cursor-pointer text-white px-3 py-2.5 m-1 rounded text-sm')
-               ->route('payment.edit', ['payment' => 'id']),
-
-           Button::make('destroy', 'Delete')
-               ->class('bg-red-500 cursor-pointer text-white px-3 py-2 m-1 rounded text-sm')
-               ->route('payment.destroy', ['payment' => 'id'])
-               ->method('delete')
-        ];
-    }
-    */
-
     /*
     |--------------------------------------------------------------------------
     | Actions Rules
@@ -162,8 +290,8 @@ final class PaymentsTable extends PowerGridComponent
     |
     */
 
-     /**
-     * PowerGrid Payment Action Rules.
+    /**
+     * PowerGrid Action Rules.
      *
      * @return array<int, RuleActions>
      */
@@ -175,7 +303,7 @@ final class PaymentsTable extends PowerGridComponent
 
            //Hide button edit for ID 1
             Rule::button('edit')
-                ->when(fn($payment) => $payment->id === 1)
+                ->when(fn($row) => $row->id === 1)
                 ->hide(),
         ];
     }

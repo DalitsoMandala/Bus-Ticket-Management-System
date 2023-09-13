@@ -189,7 +189,7 @@
     <!--    Main Content-->
     <!-- ===============================================-->
     <main class="main" id="top">
-        <div class="container-fluid px-0" data-layout="container">
+        <div class="px-0 container-fluid" data-layout="container">
             <div class="row vh-100 g-0">
                 <div class="col-lg-6 position-relative d-none d-lg-block">
                     <div class="bg-holder" style="background-image:url('{{ asset('assets/img/public-bus.jpg') }}');">
@@ -197,7 +197,7 @@
                     <!--/.bg-holder-->
                 </div>
                 <div class="col-lg-6">
-                    <div class="row flex-center h-100 g-0 px-4 px-sm-0 py-5">
+                    <div class="px-4 py-5 row flex-center h-100 g-0 px-sm-0">
                         <div class="col col-sm-6 col-lg-7 col-xl-6">
                             {{ $slot }}
                         </div>
@@ -217,60 +217,60 @@
     <!-- ===============================================-->
     @livewireScripts
 
+    <livewire:check-login-session>
+        <x-livewire-alert::scripts />
+        <x-livewire-alert::flash />
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        <script src="{{ asset('assets/vendors/popper/popper.min.js') }}"></script>
+        <script src="{{ asset('assets/vendors/bootstrap/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('assets/vendors/anchorjs/anchor.min.js') }}"></script>
+        <script src="{{ asset('assets/vendors/is/is.min.js') }}"></script>
+        <script src="{{ asset('assets/vendors/fontawesome/all.min.js') }}"></script>
+        <script src="{{ asset('assets/vendors/lodash/lodash.min.js') }}"></script>
+        <script src="{{ asset('assets/vendors/polyfill.io/v3/polyfill.min58be.js') }}"></script>
+        <script src="{{ asset('assets/vendors/list.js/list.min.js') }}"></script>
+        <script src="{{ asset('assets/vendors/feather-icons/feather.min.js') }}"></script>
+        <script src="{{ asset('assets/vendors/dayjs/dayjs.min.js') }}"></script>
+        <script src="{{ asset('assets/vendors/prism/prism.js') }}"></script>
+        <script src="{{ asset('assets/js/phoenix.js') }}"></script>
 
-    <x-livewire-alert::scripts />
-    <x-livewire-alert::flash />
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
-        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script src="{{ asset('assets/vendors/popper/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/bootstrap/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/anchorjs/anchor.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/is/is.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/fontawesome/all.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/lodash/lodash.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/polyfill.io/v3/polyfill.min58be.js') }}"></script>
-    <script src="{{ asset('assets/vendors/list.js/list.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/feather-icons/feather.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/dayjs/dayjs.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/prism/prism.js') }}"></script>
-    <script src="{{ asset('assets/js/phoenix.js') }}"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.18/js/intlTelInput.min.js"
+            integrity="sha512-hpJ6J4jGqnovQ5g1J39VtNq1/UPsaFjjR6tuCVVkKtFIx8Uy4GeixgIxHPSG72lRUYx1xg/Em+dsqxvKNwyrSg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="{{ asset('assets/vendors/filepond/filepond.js') }}"></script>
+        <script src="{{ asset('assets/vendors/filepond/filepond-plugin-image-preview.js') }}"></script>
+        <script src="{{ asset('assets/vendors/filepond/filepond-plugin-file-validate-size.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.min.js"
+            integrity="sha512-d5Jr3NflEZmFDdFHZtxeJtBzk0eB+kkRXWFQqEc1EKmolXjHm2IKCA7kTvXBNjIYzjXfD5XzIjaaErpkZHCkBg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.0.3/index.global.min.js"
+            integrity="sha256-3ytVDiLNNR0KlhglNHqXDFL94uOszVxoQeU7AZEALYo=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
+        <script>
+            FilePond.registerPlugin(FilePondPluginImagePreview);
+            FilePond.registerPlugin(FilePondPluginFileValidateSize);
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.18/js/intlTelInput.min.js"
-        integrity="sha512-hpJ6J4jGqnovQ5g1J39VtNq1/UPsaFjjR6tuCVVkKtFIx8Uy4GeixgIxHPSG72lRUYx1xg/Em+dsqxvKNwyrSg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="{{ asset('assets/vendors/filepond/filepond.js') }}"></script>
-    <script src="{{ asset('assets/vendors/filepond/filepond-plugin-image-preview.js') }}"></script>
-    <script src="{{ asset('assets/vendors/filepond/filepond-plugin-file-validate-size.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.min.js"
-        integrity="sha512-d5Jr3NflEZmFDdFHZtxeJtBzk0eB+kkRXWFQqEc1EKmolXjHm2IKCA7kTvXBNjIYzjXfD5XzIjaaErpkZHCkBg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.0.3/index.global.min.js"
-        integrity="sha256-3ytVDiLNNR0KlhglNHqXDFL94uOszVxoQeU7AZEALYo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
-    <script>
-        FilePond.registerPlugin(FilePondPluginImagePreview);
-        FilePond.registerPlugin(FilePondPluginFileValidateSize);
+            $(function() {
+                $('#loader').fadeOut();
+            });
 
-        $(function() {
-            $('#loader').fadeOut();
-        });
-
-        const tooltipTriggerList = document.querySelectorAll('[title]')
-        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-
-
-        setInterval(() => {
             const tooltipTriggerList = document.querySelectorAll('[title]')
-            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(
-                tooltipTriggerEl))
-        }, 2000);
-    </script>
-    <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
-    @stack('scripts')
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+
+            setInterval(() => {
+                const tooltipTriggerList = document.querySelectorAll('[title]')
+                const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(
+                    tooltipTriggerEl))
+            }, 2000);
+        </script>
+        <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+        @stack('scripts')
 </body>
 
 <!-- Mirrored from prium.github.io/phoenix/v1.11.0/documentation/getting-started.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 12 May 2023 11:35:52 GMT -->
