@@ -39,8 +39,8 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
-    <link
-        crossorigin="anonymous"href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.18/css/intlTelInput.css"
+    <link crossorigin="anonymous"
+        href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.18/css/intlTelInput.css"
         integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw=="
         referrerpolicy="no-referrer" rel="stylesheet" />
     <script>
@@ -236,19 +236,19 @@
                                     href="#contact">Contact</a></li>
                         </ul>
                         @if (Auth::check())
-                            <ul class="flex-row navbar-nav navbar-nav-icons">
-                                @role('customer')
-                                    <livewire:customer.pic-component />
-                                @endrole
-                                @role('admin')
-                                    <livewire:admin.pic-component />
-                                @endrole
-                            </ul>
+                        <ul class="flex-row navbar-nav navbar-nav-icons">
+                            @role('customer')
+                            <livewire:customer.pic-component />
+                            @endrole
+                            @role('admin')
+                            <livewire:admin.pic-component />
+                            @endrole
+                        </ul>
                         @else
-                            <div class="text-end d-sm-none d-lg-block">
-                                <a class="btn btn-outline-secondary text-uppercase" href="{{ route('login') }}">
-                                    Login</a>
-                            </div>
+                        <div class="text-end d-sm-none d-lg-block">
+                            <a class="btn btn-outline-secondary text-uppercase" href="{{ route('login') }}">
+                                Login</a>
+                        </div>
                         @endif
 
                     </div>
@@ -423,8 +423,8 @@
                             <div class="d-md-flex align-items-center">
                                 <div class="shadow-info"><span
                                         class="fas fa-phone text-secondary light fs-2 z-index-1 ms-2"></span></div>
-                                <div class="flex-1 ms-3"><a class="link-900"
-                                        href="tel:+265997496637">(265)997496637</a></div>
+                                <div class="flex-1 ms-3"><a class="link-900" href="tel:+265997496637">(265)997496637</a>
+                                </div>
                             </div>
                             <div class="d-md-flex align-items-center">
                                 <div class=" shadow-info"><span
@@ -443,23 +443,55 @@
                             </div>
                             <div class="d-flex"><a href="#!"><span
                                         class="fa-brands fa-facebook fs-2 text-secondary me-3"></span></a><a
-                                    href="#!"><span
-                                        class="fa-brands fa-twitter fs-2 text-secondary me-3"></span></a>
+                                    href="#!"><span class="fa-brands fa-twitter fs-2 text-secondary me-3"></span></a>
 
                             </div>
                         </div>
                     </div>
+
+
                     <div class="text-center col-md-6 text-md-start">
                         <h3 class="mb-3">Drop us a line</h3>
-                        <p class="mb-7">If you have any query or suggestion , we are open to learn from you, Lets
+                        <p class="mb-3">If you have any query or suggestion , we are open to learn from you, Lets
                             talk, reach us anytime.</p>
-                        <form class="row g-4">
+
+                        <div class="my-5">
+                            @if(session()->has('form-success'))
+                            <div class="alert alert-soft-success" role="alert"> {{ session()->get('form-success') }}
+                            </div>
+                            @endif
+
+                        </div>
+                        <form class="row g-4" action="{{ route('contact-form') }}" method="POST">
+                            @csrf
                             <div class="col-12"><input class="bg-white form-control" name="name" type="text"
-                                    placeholder="Name" required="required" /></div>
-                            <div class="col-12"><input class="bg-white form-control" name="email" type="email"
-                                    placeholder="Email" required="required" /></div>
+                                    placeholder="Name" required="required" />
+                                <div class="my-1">
+                                    @error('name')
+                                    <x-alert> {{ $message }} </x-alert>
+                                    @enderror
+                                </div>
+
+                            </div>
                             <div class="col-12">
-                                <textarea class="bg-white form-control" name="message" rows="6" placeholder="Message" required="required"></textarea>
+                                <input class="bg-white form-control" name="email" type="email" placeholder="Email"
+                                    required="required" />
+
+                                <div class="my-1">
+                                    @error('email')
+                                    <x-alert> {{ $message }} </x-alert>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <textarea class="bg-white form-control" name="message" rows="6" placeholder="Message"
+                                    required="required"></textarea>
+
+                                <div class="my-1">
+                                    @error('message')
+                                    <x-alert> {{ $message }} </x-alert>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="col-12 d-grid"><button class="btn btn-outline-secondary"
                                     type="submit">Submit</button></div>

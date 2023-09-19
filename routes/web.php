@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FormController;
 use Carbon\Carbon;
 use App\Models\Bus;
 use App\Models\Seat;
@@ -39,6 +40,8 @@ use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use App\Http\Livewire\Customer\BookBus as CustomerBookBus;
 use App\Http\Livewire\Customer\Profile as CustomerProfile;
 use  App\Http\Livewire\Customer\MyBookings as CustomerBookings;
+use App\Mail\CustomNotificationMail;
+use App\Mail\OrderShipped;
 use App\Models\BusRoute;
 
 /*
@@ -57,31 +60,13 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+Route::post('/contact', [FormController::class, 'store'])->name('contact-form');
+
 Route::get('/payment', PaymentPage::class)->middleware(['auth'])->name('payment');
 
 Route::view('/powergrid', 'powergrid-demo');
 Route::get('/test', function () {
-    $customer = Customer::join('users', 'users.id', 'customers.user_id')->select([
-        'customers.id as id',
-        'customers.customer_uuid as customer_uuid',
-        'customers.first_name as first_name',
-        'customers.last_name as last_name',
-        'users.email as email',
-    ])->get();
-
-
-    $routes = BusRoute::join('schedules', 'schedules.id', 'routes.schedule_id')->select([
-        'routes.from_destination as depart_from',
-        'routes.to_destination as depart_to',
-        'schedules.title as time_of_day',
-        'schedules.check_in_time as check_in_time',
-        'schedules.depart_time as depart_time'
-    ])->get();
-
-    $array = array();
-
-    $array['customers'] = $customer->toArray();
-    $array['routes'] = $routes->toArray();
+    Mail::to(config('mail.from.address'))->send(new OrderShipped());
 });
 Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');

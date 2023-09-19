@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Booking;
 use Carbon\Carbon;
 use App\Models\Bus;
 use Livewire\Component;
@@ -311,6 +312,23 @@ class BusDeparted extends Component
                     'route_id' => null,
                     'date_departing' => null,
                     'is_full' => false
+                ]);
+            }
+        }
+
+
+        $bookings = Booking::all();
+
+        foreach ($bookings as $booking) {
+            $todayDate = Carbon::now();
+
+            $date_depart = $booking->date_departing;
+            $fullDate = $date_depart;
+
+            $ifDatePassed = Carbon::parse($fullDate);
+            if ($ifDatePassed->isPast()) {
+                Booking::find($booking->id)->update([
+                    'is_completed' => 1,
                 ]);
             }
         }

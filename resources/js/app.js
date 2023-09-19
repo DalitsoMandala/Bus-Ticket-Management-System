@@ -10,3 +10,4 @@ Alpine.start();
 
 import flatpickr from "flatpickr";
 
+import ApexCharts from 'apexcharts'

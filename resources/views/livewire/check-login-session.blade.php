@@ -8,6 +8,10 @@
 
             window.onmousemove = resetTimer;
             window.onkeydown = resetTimer;
+            if (document.hidden == false) {
+                resetTimer();
+            }
+
 
             function logout() {
                 window.location = '/';
@@ -18,7 +22,7 @@
 
             function resetTimer() {
                 clearTimeout(time);
-                time = setTimeout(logout, 600000); //10 min
+                time = setTimeout(logout, 300000); //10 min
             }
         };
 
