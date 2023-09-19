@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
         Role::create(['name' => 'customer']);
 
 
-        User::create([
+        $admin = User::create([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
@@ -61,12 +61,20 @@ class DatabaseSeeder extends Seeder
             'customer_uuid' => Str::upper(Str::random(6)) . $cus->id
         ]);
 
+        $admin->admin()->create([
+            'first_name' => 'Dalitso',
+            'last_name' => 'Mandala',
+            'phone_number' => '+265997496637',
+            'admin_uuid' => Str::upper(Str::random(6)) . $admin->id
+        ]);
+
 
         foreach (range(1, 10) as $index) {
             # code...
-
+            $firstname = $faker->firstName();
+            $lastname = $faker->lastName();
             $cus =  User::create([
-                'name' => 'customer' . $index,
+                'name' => $firstname . ' ' . $lastname,
                 'email' => 'customer' . $index . '@gmail.com',
                 'email_verified_at' => now(),
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -111,6 +119,36 @@ class DatabaseSeeder extends Seeder
 
 
         //create routes
+        $malawiDistricts = [
+            'Select District',
+            'Balaka',
+            'Blantyre',
+            'Chikwawa',
+            'Chiradzulu',
+            'Chitipa',
+            'Dedza',
+            'Dowa',
+            'Karonga',
+            'Kasungu',
+            'Likoma',
+            'Lilongwe',
+            'Machinga',
+            'Mangochi',
+            'Mchinji',
+            'Mulanje',
+            'Mwanza',
+            'Mzimba',
+            'Nkhata Bay',
+            'Nkhotakota',
+            'Nsanje',
+            'Ntcheu',
+            'Ntchisi',
+            'Phalombe',
+            'Rumphi',
+            'Salima',
+            'Thyolo',
+            'Zomba',
+        ];
 
 
         $range = 0;
@@ -121,9 +159,9 @@ class DatabaseSeeder extends Seeder
             $route = new  BusRoute();
             $schedule = Schedule::find($range);
             $route->schedule()->associate($schedule);
-            $route->from_destination = $faker->city();
-            $route->to_destination = $faker->city();
-            $route->price =  $faker->randomNumber(5, true);
+            $route->from_destination = $malawiDistricts[array_rand($malawiDistricts)];
+            $route->to_destination = $malawiDistricts[array_rand($malawiDistricts)];
+            $route->price =  floor($faker->numberBetween(8000, 25000) / 1000) * 1000;
             $route->save();
         }
 

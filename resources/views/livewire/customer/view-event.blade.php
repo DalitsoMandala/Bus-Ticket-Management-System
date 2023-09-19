@@ -3,7 +3,7 @@
     <x-bootstrap-dialog-modal wire:model.defer="showingModalViewEvent">
 
         <x-slot name="title">
-            Event for {{ $customer_name }}
+           
         </x-slot>
 
         <x-slot name="content">
@@ -92,7 +92,12 @@
                         {!! $payment_method !!}
                     </p>
                 </div>
+                <div class="d-flex justify-content-center">
 
+                    <a class="btn btn-secondary" href="{{ asset('storage/invoices/' . $file_name) }}">Download Bus
+                        Ticket Receipt</a>
+
+                </div>
 
             </form>
 

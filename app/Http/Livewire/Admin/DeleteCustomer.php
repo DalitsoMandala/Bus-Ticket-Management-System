@@ -183,6 +183,7 @@ class DeleteCustomer extends Component
 
         Customer::find($this->edit)->delete();
         $this->emitTo('admin.customer-table', 'refresh');
+        $this->alert('success', 'Deleted successfully');
         $this->emitSelf('hideModal');
     }
 

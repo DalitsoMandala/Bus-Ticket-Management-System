@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\User;
+use Livewire\Component;
 use App\Models\BusRoute;
 use App\Models\Schedule;
-use Livewire\Component;
+use App\Notifications\AdminNotification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class AddRoutes extends Component
@@ -116,6 +118,11 @@ class AddRoutes extends Component
                 $route->to_destination = $this->depart_for;
                 $route->price = $this->price;
                 $route->save();
+
+                $user = User::find(auth()->user()->id);
+                $description = ' Trip will be taking place from ' .  $this->depart_from . ' to ' . $this->depart_for;
+
+                $user->notify(new AdminNotification('Route/destination added', $description, route('admin-routes')));
 
 
 

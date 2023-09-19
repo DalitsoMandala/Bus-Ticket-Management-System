@@ -20,7 +20,7 @@ class ViewEvent extends Component
     public $showingModalViewEvent;
     public $button = "SUBMIT";
     public $status;
-    public $title, $description, $date;
+    public $title, $description, $date, $file_name;
     public $ticket_no, $seat_no, $customer_name,
         $payment_method, $payment_currency,
         $ticket_price, $journey_time,
@@ -89,7 +89,7 @@ class ViewEvent extends Component
         }
 
         $getdata = Payment::where('transaction_id', $id)->first();
-        $json = json_decode($getdata->customer_data);
+        $json = json_decode(json_encode($getdata->customer_data));
         $this->title = $title;
         $this->ticket_no = $json->ticket_no;
         $this->seat_no = $json->seat_no;
@@ -103,6 +103,8 @@ class ViewEvent extends Component
         $this->customer_name = $json->customer_name;
         $this->local_currency = $json->company_local_currency;
         $this->check_in_time = $json->check_in_time;
+        $this->file_name = str_replace('public/invoices/', '', $getdata->file_name);
+
         if ($status == 'danger') {
             $this->status = false;
         } else {

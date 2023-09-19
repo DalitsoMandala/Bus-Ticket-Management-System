@@ -62,6 +62,11 @@
         .fc-theme-standard .fc-scrollgrid {
             border: none;
         }
+
+        .scroll {
+            max-height: 500px;
+            overflow: auto;
+        }
     </style>
     <div class="mb-3">
         <h2 class="mb-2 fs-2 fw-black">My Bookings</h2>
@@ -70,13 +75,13 @@
 
     <div class="py-3 row">
         <div class="col-lg-8 col-sm-12 ">
-            <div class="card">
+            <div class="card ">
                 <div class="card-header">
                     <b>Calendar</b>
                 </div>
-                <div class="card-body">
+                <div class="card-body" wire:ignore>
                     {{-- <div id="calendar" wire:ignore></div> --}}
-                    <x-countdown-timer wire:model="travelEvents" />
+                    <div id="calendar"></div>
                 </div>
 
 
@@ -86,11 +91,11 @@
         </div>
         <hr class="my-2 d-lg-none d-sm-block">
         <div class="col-lg-4 col-sm-12 d-flex align-items-stretch">
-            <div class="card col-12">
+            <div class="card col-12 scroll ">
                 <div class="card-header">
                     <b>Your upcoming travels</b>
                 </div>
-                <div class="p-1 card-body">
+                <div class="p-1 card-body ">
                     <div class="list-group ">
 
 
@@ -144,39 +149,46 @@
                                 <!-- resources/views/alpine/date-component.blade.php -->
 
                                 <div wire:ignore x-data="{
-                                    targetDate: '{{ $schedule['date'] }} {{ \Carbon\Carbon::parse($schedule['time'])->format('H:i') }}',
+                                    targetDate: '{{ \Carbon\Carbon::parse($schedule['date'])->format('Y-m-d') }} {{ \Carbon\Carbon::parse($schedule['time'])->format('H:i') }}',
                                     dateDifference: '',
                                     isExpired: false,
                                     updateTime() {
-
+                                
                                         $wire.emitSelf('updateDeparture', '{{ $schedule['id'] }}');
                                     },
                                     calculateDateDifference() {
                                         const targetTime = new Date(this.targetDate).getTime();
                                         const currentTime = new Date().getTime();
-
+                                
                                         const difference = targetTime - currentTime;
-
+                                
                                         if (difference < 0) {
                                             this.dateDifference = 'Day has long passed';
-                                            isExpired = true;
+                                            this.isExpired = true;
                                         } else {
                                             const seconds = Math.floor(difference / 1000);
                                             const minutes = Math.floor(seconds / 60);
                                             const hours = Math.floor(minutes / 60);
                                             const days = Math.floor(hours / 24);
-
+                                
                                             this.dateDifference = `${days} day(s), ${hours % 24} hour(s), ${minutes % 60} minute(s), ${seconds % 60} second(s) remaining`;
                                         }
-
-
+                                
+                                
                                     }
                                 }" x-init="calculateDateDifference();
-                                status = setInterval(() => calculateDateDifference(), 1000);
-                                $watch('isExpired', value => {
-                                    if (value === true) updateTime();
-                                    clearInterval(status);
-                                });">
+                                if (isExpired != true) {
+                                
+                                    status = setInterval(() => {
+                                        calculateDateDifference();
+                                        if (isExpired === true) {
+                                            updateTime();
+                                            clearInterval(status);
+                                        }
+                                    }, 1000);
+                                
+                                
+                                }">
 
                                     <input class="form-control d-none" x-model="dateDifference" />
                                     <p class="badge badge-phoenix fs--2 badge-phoenix-warning"
@@ -188,9 +200,10 @@
                                     <p class="badge badge-phoenix fs--2 badge-phoenix-success" x-show="isExpired">
                                         <i class="fa-regular fa-circle-check"></i> Departed
                                     </p>
+
+
                                 </div>
                             </a>
-                            <hr class="mt-0 mb-0">
                         @endforeach
 
                     </div>
@@ -207,6 +220,7 @@
     <script>
         document.addEventListener('livewire:load', function() {
             let event = @this.travelEvents;
+
 
             function loadCalendar() {
                 var calendarEl = document.getElementById('calendar');

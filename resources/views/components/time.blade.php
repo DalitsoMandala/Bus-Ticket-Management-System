@@ -4,9 +4,9 @@
         enableTime: true,
         noCalendar: true,
         dateFormat: 'H:i',
-
+        disableMobile: true
     });
 }">
-    <input type="time" {{ $attributes->merge(['class' => 'form-control']) }} x-ref="input" />
+    <input type="time" {{ $attributes->merge(['class' => 'form-control ']) }} x-ref="input" />
 
 </div>

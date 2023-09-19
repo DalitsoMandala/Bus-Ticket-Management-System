@@ -108,7 +108,7 @@
         </div>
     </div>
     <div class="navbar-vertical-footer d-none"><button
-            class="btn navbar-vertical-toggle border-0 fw-semi-bold w-100 white-space-nowrap d-flex align-items-center"><span
+            class="border-0 btn navbar-vertical-toggle fw-semi-bold w-100 white-space-nowrap d-flex align-items-center"><span
                 class="uil uil-left-arrow-to-left fs-0"></span><span
                 class="uil uil-arrow-from-right fs-0"></span><span class="navbar-vertical-footer-text ms-2">Collapsed
                 View</span></button></div>
@@ -122,7 +122,7 @@
                     class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
             <a class="navbar-brand me-1 me-sm-3" href="https://prium.github.io/phoenix/v1.11.0/index.html">
                 <div class="d-flex align-items-center">
-                    <div class="d-flex align-items-center"><img src="../assets/img/icons/logo.png" alt="phoenix"
+                    <div class="d-flex align-items-center"><img src="" alt="phoenix"
                             width="27" />
                         <p class="logo-text ms-2 d-none d-sm-block">phoenix</p>
                     </div>
@@ -136,15 +136,15 @@
                     aria-label="Search" placeholder="Search..." />
                 <span class="fas fa-search search-box-icon"></span>
             </form>
-            <div class="btn-close position-absolute end-0 top-50 translate-middle cursor-pointer shadow-none"
-                data-bs-dismiss="search"><button class="btn btn-link btn-close-falcon p-0"
+            <div class="shadow-none cursor-pointer btn-close position-absolute end-0 top-50 translate-middle"
+                data-bs-dismiss="search"><button class="p-0 btn btn-link btn-close-falcon"
                     aria-label="Close"></button></div>
-            <div class="dropdown-menu border border-300 font-base start-0 py-0 overflow-hidden w-100">
+            <div class="py-0 overflow-hidden border dropdown-menu border-300 font-base start-0 w-100">
                 <div class="scrollbar-overlay" style="max-height: 30rem;">
-                    <div class="list pb-3">
-                        <h6 class="dropdown-header text-1000 fs--2 py-2">24 <span class="text-500">results</span></h6>
-                        <hr class="text-200 my-0" />
-                        <h6 class="dropdown-header text-1000 fs--1 border-bottom border-200 py-2 lh-sm">
+                    <div class="pb-3 list">
+                        <h6 class="py-2 dropdown-header text-1000 fs--2">24 <span class="text-500">results</span></h6>
+                        <hr class="my-0 text-200" />
+                        <h6 class="py-2 dropdown-header text-1000 fs--1 border-bottom border-200 lh-sm">
                             Recently Searched </h6>
                         <div class="py-2"><a class="dropdown-item"
                                 href="https://prium.github.io/phoenix/v1.11.0/apps/e-commerce/landing/product-details.html">
@@ -162,33 +162,33 @@
                                 </div>
                             </a>
                         </div>
-                        <hr class="text-200 my-0" />
-                        <h6 class="dropdown-header text-1000 fs--1 border-bottom border-200 py-2 lh-sm">
+                        <hr class="my-0 text-200" />
+                        <h6 class="py-2 dropdown-header text-1000 fs--1 border-bottom border-200 lh-sm">
                             Products</h6>
-                        <div class="py-2"><a class="dropdown-item py-2 d-flex align-items-center"
+                        <div class="py-2"><a class="py-2 dropdown-item d-flex align-items-center"
                                 href="https://prium.github.io/phoenix/v1.11.0/apps/e-commerce/landing/product-details.html">
                                 <div class="file-thumbnail me-2"><img class="h-100 w-100 fit-cover rounded-3"
                                         src="../assets/img/products/60x60/3.png" alt="" /></div>
                                 <div class="flex-1">
                                     <h6 class="mb-0 text-1000 title">MacBook Air - 13″</h6>
-                                    <p class="fs--2 mb-0 d-flex text-700"><span class="fw-medium text-600">8GB
+                                    <p class="mb-0 fs--2 d-flex text-700"><span class="fw-medium text-600">8GB
                                             Memory - 1.6GHz - 128GB
                                             Storage</span></p>
                                 </div>
                             </a>
-                            <a class="dropdown-item py-2 d-flex align-items-center"
+                            <a class="py-2 dropdown-item d-flex align-items-center"
                                 href="https://prium.github.io/phoenix/v1.11.0/apps/e-commerce/landing/product-details.html">
                                 <div class="file-thumbnail me-2"><img class="img-fluid"
                                         src="../assets/img/products/60x60/3.png" alt="" /></div>
                                 <div class="flex-1">
                                     <h6 class="mb-0 text-1000 title">MacBook Pro - 13″</h6>
-                                    <p class="fs--2 mb-0 d-flex text-700"><span class="fw-medium text-600 ms-2">30 Sep
+                                    <p class="mb-0 fs--2 d-flex text-700"><span class="fw-medium text-600 ms-2">30 Sep
                                             at 12:30 PM</span></p>
                                 </div>
                             </a>
                         </div>
-                        <hr class="text-200 my-0" />
-                        <h6 class="dropdown-header text-1000 fs--1 border-bottom border-200 py-2 lh-sm">
+                        <hr class="my-0 text-200" />
+                        <h6 class="py-2 dropdown-header text-1000 fs--1 border-bottom border-200 lh-sm">
                             Quick Links</h6>
                         <div class="py-2"><a class="dropdown-item"
                                 href="https://prium.github.io/phoenix/v1.11.0/apps/e-commerce/landing/product-details.html">
@@ -206,8 +206,8 @@
                                 </div>
                             </a>
                         </div>
-                        <hr class="text-200 my-0" />
-                        <h6 class="dropdown-header text-1000 fs--1 border-bottom border-200 py-2 lh-sm">
+                        <hr class="my-0 text-200" />
+                        <h6 class="py-2 dropdown-header text-1000 fs--1 border-bottom border-200 lh-sm">
                             Files</h6>
                         <div class="py-2"><a class="dropdown-item"
                                 href="https://prium.github.io/phoenix/v1.11.0/apps/e-commerce/landing/product-details.html">
@@ -235,36 +235,36 @@
                                 </div>
                             </a>
                         </div>
-                        <hr class="text-200 my-0" />
-                        <h6 class="dropdown-header text-1000 fs--1 border-bottom border-200 py-2 lh-sm">
+                        <hr class="my-0 text-200" />
+                        <h6 class="py-2 dropdown-header text-1000 fs--1 border-bottom border-200 lh-sm">
                             Members</h6>
-                        <div class="py-2"><a class="dropdown-item py-2 d-flex align-items-center"
+                        <div class="py-2"><a class="py-2 dropdown-item d-flex align-items-center"
                                 href="https://prium.github.io/phoenix/v1.11.0/pages/members.html">
-                                <div class="avatar avatar-l status-online  me-2 text-900">
+                                <div class="avatar avatar-l status-online me-2 text-900">
                                     <img class="rounded-circle "
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/10.webp"
                                         alt="" />
                                 </div>
                                 <div class="flex-1">
                                     <h6 class="mb-0 text-1000 title">Carry Anna</h6>
-                                    <p class="fs--2 mb-0 d-flex text-700">anna@technext.it</p>
+                                    <p class="mb-0 fs--2 d-flex text-700">anna@technext.it</p>
                                 </div>
                             </a>
-                            <a class="dropdown-item py-2 d-flex align-items-center"
+                            <a class="py-2 dropdown-item d-flex align-items-center"
                                 href="https://prium.github.io/phoenix/v1.11.0/pages/members.html">
-                                <div class="avatar avatar-l  me-2 text-900">
+                                <div class="avatar avatar-l me-2 text-900">
                                     <img class="rounded-circle "
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/12.webp"
                                         alt="" />
                                 </div>
                                 <div class="flex-1">
                                     <h6 class="mb-0 text-1000 title">John Smith</h6>
-                                    <p class="fs--2 mb-0 d-flex text-700">smith@technext.it</p>
+                                    <p class="mb-0 fs--2 d-flex text-700">smith@technext.it</p>
                                 </div>
                             </a>
                         </div>
-                        <hr class="text-200 my-0" />
-                        <h6 class="dropdown-header text-1000 fs--1 border-bottom border-200 py-2 lh-sm">
+                        <hr class="my-0 text-200" />
+                        <h6 class="py-2 dropdown-header text-1000 fs--1 border-bottom border-200 lh-sm">
                             Related Searches</h6>
                         <div class="py-2"><a class="dropdown-item"
                                 href="https://prium.github.io/phoenix/v1.11.0/apps/e-commerce/landing/product-details.html">
@@ -290,27 +290,27 @@
                 </div>
             </div>
         </div>
-        <ul class="navbar-nav navbar-nav-icons flex-row">
+        <ul class="flex-row navbar-nav navbar-nav-icons">
 
             <li class="nav-item dropdown">
                 <a class="nav-link" data-bs-toggle="dropdown" data-bs-auto-close="outside" href="#"
                     role="button" aria-haspopup="true" aria-expanded="false"><span data-feather="bell"
                         style="height:20px;width:20px;"></span></a>
-                <div class="dropdown-menu dropdown-menu-end notification-dropdown-menu py-0 shadow border border-300 navbar-dropdown-caret"
+                <div class="py-0 border shadow dropdown-menu dropdown-menu-end notification-dropdown-menu border-300 navbar-dropdown-caret"
                     id="navbarDropdownNotfication" aria-labelledby="navbarDropdownNotfication">
-                    <div class="card position-relative border-0">
-                        <div class="card-header p-2">
+                    <div class="border-0 card position-relative">
+                        <div class="p-2 card-header">
                             <div class="d-flex justify-content-between">
-                                <h5 class="text-black mb-0">Notificatons</h5><button
-                                    class="btn btn-link p-0 fs--1 fw-normal" type="button">Mark all as
+                                <h5 class="mb-0 text-black">Notificatons</h5><button
+                                    class="p-0 btn btn-link fs--1 fw-normal" type="button">Mark all as
                                     read</button>
                             </div>
                         </div>
-                        <div class="card-body p-0">
+                        <div class="p-0 card-body">
                             <div class="scrollbar-overlay" style="height: 27rem;">
                                 <div class="border-300">
                                     <div
-                                        class="px-2 px-sm-3 py-3 border-300 notification-card position-relative read border-bottom">
+                                        class="px-2 py-3 px-sm-3 border-300 notification-card position-relative read border-bottom">
                                         <div
                                             class="d-flex align-items-center justify-content-between position-relative">
                                             <div class="d-flex">
@@ -319,32 +319,32 @@
                                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/30.webp"
                                                         alt="" /></div>
                                                 <div class="flex-1 me-sm-3">
-                                                    <h4 class="fs--1 text-black">Jessie Samson</h4>
-                                                    <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal">
+                                                    <h4 class="text-black fs--1">Jessie Samson</h4>
+                                                    <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal">
                                                         <span class='me-1 fs--2'>💬</span>Mentioned you in
                                                         a comment.<span class="ms-2 text-400 fw-bold fs--2">10m</span>
                                                     </p>
-                                                    <p class="text-800 fs--1 mb-0"><span
+                                                    <p class="mb-0 text-800 fs--1"><span
                                                             class="me-1 fas fa-clock"></span><span
                                                             class="fw-bold">10:41 AM </span>August 7,2021
                                                     </p>
                                                 </div>
                                             </div>
                                             <div class="font-sans-serif d-none d-sm-block"><button
-                                                    class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                    class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                     data-stop-propagation="data-stop-propagation"
                                                     data-bs-toggle="dropdown" data-boundary="window"
                                                     data-bs-reference="parent" type="button" aria-haspopup="true"
                                                     aria-expanded="false"><span
                                                         class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                                <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                         class="dropdown-item" href="#!">Mark as
                                                         unread</a></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div
-                                        class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
+                                        class="px-2 py-3 px-sm-3 border-300 notification-card position-relative unread border-bottom">
                                         <div
                                             class="d-flex align-items-center justify-content-between position-relative">
                                             <div class="d-flex">
@@ -353,32 +353,32 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex-1 me-sm-3">
-                                                    <h4 class="fs--1 text-black">Jane Foster</h4>
-                                                    <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal">
+                                                    <h4 class="text-black fs--1">Jane Foster</h4>
+                                                    <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal">
                                                         <span class='me-1 fs--2'>📅</span>Created an
                                                         event.<span class="ms-2 text-400 fw-bold fs--2">20m</span>
                                                     </p>
-                                                    <p class="text-800 fs--1 mb-0"><span
+                                                    <p class="mb-0 text-800 fs--1"><span
                                                             class="me-1 fas fa-clock"></span><span
                                                             class="fw-bold">10:20 AM </span>August 7,2021
                                                     </p>
                                                 </div>
                                             </div>
                                             <div class="font-sans-serif d-none d-sm-block"><button
-                                                    class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                    class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                     data-stop-propagation="data-stop-propagation"
                                                     data-bs-toggle="dropdown" data-boundary="window"
                                                     data-bs-reference="parent" type="button" aria-haspopup="true"
                                                     aria-expanded="false"><span
                                                         class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                                <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                         class="dropdown-item" href="#!">Mark as
                                                         unread</a></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div
-                                        class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
+                                        class="px-2 py-3 px-sm-3 border-300 notification-card position-relative unread border-bottom">
                                         <div
                                             class="d-flex align-items-center justify-content-between position-relative">
                                             <div class="d-flex">
@@ -387,25 +387,25 @@
                                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/avatar.webp"
                                                         alt="" /></div>
                                                 <div class="flex-1 me-sm-3">
-                                                    <h4 class="fs--1 text-black">Jessie Samson</h4>
-                                                    <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal">
+                                                    <h4 class="text-black fs--1">Jessie Samson</h4>
+                                                    <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal">
                                                         <span class='me-1 fs--2'>👍</span>Liked your
                                                         comment.<span class="ms-2 text-400 fw-bold fs--2">1h</span>
                                                     </p>
-                                                    <p class="text-800 fs--1 mb-0"><span
+                                                    <p class="mb-0 text-800 fs--1"><span
                                                             class="me-1 fas fa-clock"></span><span
                                                             class="fw-bold">9:30 AM </span>August 7,2021
                                                     </p>
                                                 </div>
                                             </div>
                                             <div class="font-sans-serif d-none d-sm-block"><button
-                                                    class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                    class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                     data-stop-propagation="data-stop-propagation"
                                                     data-bs-toggle="dropdown" data-boundary="window"
                                                     data-bs-reference="parent" type="button" aria-haspopup="true"
                                                     aria-expanded="false"><span
                                                         class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                                <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                         class="dropdown-item" href="#!">Mark as
                                                         unread</a></div>
                                             </div>
@@ -414,7 +414,7 @@
                                 </div>
                                 <div class="border-300">
                                     <div
-                                        class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
+                                        class="px-2 py-3 px-sm-3 border-300 notification-card position-relative unread border-bottom">
                                         <div
                                             class="d-flex align-items-center justify-content-between position-relative">
                                             <div class="d-flex">
@@ -423,32 +423,32 @@
                                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/57.webp"
                                                         alt="" /></div>
                                                 <div class="flex-1 me-sm-3">
-                                                    <h4 class="fs--1 text-black">Kiera Anderson</h4>
-                                                    <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal">
+                                                    <h4 class="text-black fs--1">Kiera Anderson</h4>
+                                                    <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal">
                                                         <span class='me-1 fs--2'>💬</span>Mentioned you in
                                                         a comment.<span class="ms-2 text-400 fw-bold fs--2"></span>
                                                     </p>
-                                                    <p class="text-800 fs--1 mb-0"><span
+                                                    <p class="mb-0 text-800 fs--1"><span
                                                             class="me-1 fas fa-clock"></span><span
                                                             class="fw-bold">9:11 AM </span>August 7,2021
                                                     </p>
                                                 </div>
                                             </div>
                                             <div class="font-sans-serif d-none d-sm-block"><button
-                                                    class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                    class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                     data-stop-propagation="data-stop-propagation"
                                                     data-bs-toggle="dropdown" data-boundary="window"
                                                     data-bs-reference="parent" type="button" aria-haspopup="true"
                                                     aria-expanded="false"><span
                                                         class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                                <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                         class="dropdown-item" href="#!">Mark as
                                                         unread</a></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div
-                                        class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
+                                        class="px-2 py-3 px-sm-3 border-300 notification-card position-relative unread border-bottom">
                                         <div
                                             class="d-flex align-items-center justify-content-between position-relative">
                                             <div class="d-flex">
@@ -457,32 +457,32 @@
                                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/59.webp"
                                                         alt="" /></div>
                                                 <div class="flex-1 me-sm-3">
-                                                    <h4 class="fs--1 text-black">Herman Carter</h4>
-                                                    <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal">
+                                                    <h4 class="text-black fs--1">Herman Carter</h4>
+                                                    <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal">
                                                         <span class='me-1 fs--2'>👤</span>Tagged you in a
                                                         comment.<span class="ms-2 text-400 fw-bold fs--2"></span>
                                                     </p>
-                                                    <p class="text-800 fs--1 mb-0"><span
+                                                    <p class="mb-0 text-800 fs--1"><span
                                                             class="me-1 fas fa-clock"></span><span
                                                             class="fw-bold">10:58 PM </span>August 7,2021
                                                     </p>
                                                 </div>
                                             </div>
                                             <div class="font-sans-serif d-none d-sm-block"><button
-                                                    class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                    class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                     data-stop-propagation="data-stop-propagation"
                                                     data-bs-toggle="dropdown" data-boundary="window"
                                                     data-bs-reference="parent" type="button" aria-haspopup="true"
                                                     aria-expanded="false"><span
                                                         class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                                <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                         class="dropdown-item" href="#!">Mark as
                                                         unread</a></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div
-                                        class="px-2 px-sm-3 py-3 border-300 notification-card position-relative read ">
+                                        class="px-2 py-3 px-sm-3 border-300 notification-card position-relative read ">
                                         <div
                                             class="d-flex align-items-center justify-content-between position-relative">
                                             <div class="d-flex">
@@ -491,25 +491,25 @@
                                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/58.webp"
                                                         alt="" /></div>
                                                 <div class="flex-1 me-sm-3">
-                                                    <h4 class="fs--1 text-black">Benjamin Button</h4>
-                                                    <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal">
+                                                    <h4 class="text-black fs--1">Benjamin Button</h4>
+                                                    <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal">
                                                         <span class='me-1 fs--2'>👍</span>Liked your
                                                         comment.<span class="ms-2 text-400 fw-bold fs--2"></span>
                                                     </p>
-                                                    <p class="text-800 fs--1 mb-0"><span
+                                                    <p class="mb-0 text-800 fs--1"><span
                                                             class="me-1 fas fa-clock"></span><span
                                                             class="fw-bold">10:18 AM </span>August 7,2021
                                                     </p>
                                                 </div>
                                             </div>
                                             <div class="font-sans-serif d-none d-sm-block"><button
-                                                    class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                    class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                     data-stop-propagation="data-stop-propagation"
                                                     data-bs-toggle="dropdown" data-boundary="window"
                                                     data-bs-reference="parent" type="button" aria-haspopup="true"
                                                     aria-expanded="false"><span
                                                         class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                                <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                         class="dropdown-item" href="#!">Mark as
                                                         unread</a></div>
                                             </div>
@@ -518,7 +518,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer p-0 border-top border-0">
+                        <div class="p-0 border-0 card-footer border-top">
                             <div class="my-2 text-center fw-bold fs--2 text-600"><a class="fw-bolder"
                                     href="https://prium.github.io/phoenix/v1.11.0/pages/notifications.html">Notification
                                     history</a></div>
@@ -536,11 +536,11 @@
                             alt="" />
                     </div>
                 </a>
-                <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-profile shadow border border-300"
+                <div class="py-0 border shadow dropdown-menu dropdown-menu-end navbar-dropdown-caret dropdown-profile border-300"
                     aria-labelledby="navbarDropdownUser">
-                    <div class="card position-relative border-0">
-                        <div class="card-body p-0">
-                            <div class="text-center pt-4 pb-3">
+                    <div class="border-0 card position-relative">
+                        <div class="p-0 card-body">
+                            <div class="pt-4 pb-3 text-center">
                                 <div class="avatar avatar-xl ">
                                     <img class="rounded-circle "
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/72x72/57.webp"
@@ -552,19 +552,19 @@
                         </div>
                         <hr />
                         <div class="overflow-auto scrollbar" style="height: 5rem;">
-                            <ul class="nav d-flex flex-column mb-2 pb-1">
-                                <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                            <ul class="pb-1 mb-2 nav d-flex flex-column">
+                                <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                             class="me-2 text-900" data-feather="user"></span><span>Profile</span></a>
                                 </li>
-                                <li class="nav-item"><a class="nav-link px-3" href="#!"><span
+                                <li class="nav-item"><a class="px-3 nav-link" href="#!"><span
                                             class="me-2 text-900" data-feather="pie-chart"></span>Dashboard</a>
                                 </li>
 
                             </ul>
                         </div>
-                        <div class="card-footer p-0 border-top">
-                            <ul class="nav d-flex flex-column my-3">
-                                <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                        <div class="p-0 card-footer border-top">
+                            <ul class="my-3 nav d-flex flex-column">
+                                <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                             class="me-2 text-900" data-feather="user-plus"></span>Add
                                         another customer</a></li>
                             </ul>
@@ -593,10 +593,10 @@
                 data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" type="button"
                 aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span
                     class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
-            <a class="navbar-brand navbar-brand" href="https://prium.github.io/phoenix/v1.11.0/index.html">phoenix
+            <a class="navbar-brand" href="https://prium.github.io/phoenix/v1.11.0/index.html">phoenix
                 <span class="text-1000 d-none d-sm-inline">slim</span></a>
         </div>
-        <ul class="navbar-nav navbar-nav-icons flex-row">
+        <ul class="flex-row navbar-nav navbar-nav-icons">
             {{-- <li class="nav-item">
                 <div class="theme-control-toggle fa-ion-wait pe-2 theme-control-toggle-slim"><input
                         class="form-check-input ms-0 theme-control-toggle-input" id="themeControlToggle"
@@ -611,27 +611,27 @@
                             class="fs--1 fw-bold">Light</span></label>
                 </div>
             </li> --}}
-            <li class="nav-item"> <a class="nav-link" data-bs-toggle="modal" data-bs-target="#searchBoxModal"
+            <li class="nav-item d-none"> <a class="nav-link" data-bs-toggle="modal" data-bs-target="#searchBoxModal"
                     href="#"><span data-feather="search" style="height:12px;width:12px;"></span></a></li>
             <li class="nav-item dropdown">
                 <a class="nav-link" id="navbarDropdownNotification" data-bs-toggle="dropdown"
                     data-bs-auto-close="outside" href="#" role="button" aria-haspopup="true"
                     aria-expanded="false"><span data-feather="bell" style="height:12px;width:12px;"></span></a>
-                <div class="dropdown-menu dropdown-menu-end notification-dropdown-menu py-0 shadow border border-300 navbar-dropdown-caret"
+                <div class="py-0 border shadow dropdown-menu dropdown-menu-end notification-dropdown-menu border-300 navbar-dropdown-caret"
                     id="navbarDropdownNotfication" aria-labelledby="navbarDropdownNotfication">
-                    <div class="card position-relative border-0">
-                        <div class="card-header p-2">
+                    <div class="border-0 card position-relative">
+                        <div class="p-2 card-header">
                             <div class="d-flex justify-content-between">
-                                <h5 class="text-black mb-0">Notificatons</h5><button
-                                    class="btn btn-link p-0 fs--1 fw-normal" type="button">Mark all as
+                                <h5 class="mb-0 text-black">Notificatons</h5><button
+                                    class="p-0 btn btn-link fs--1 fw-normal" type="button">Mark all as
                                     read</button>
                             </div>
                         </div>
-                        <div class="card-body p-0">
+                        <div class="p-0 card-body">
                             <div class="scrollbar-overlay" style="height: 27rem;">
                                 <div class="border-300">
                                     <div
-                                        class="px-2 px-sm-3 py-3 border-300 notification-card position-relative read border-bottom">
+                                        class="px-2 py-3 px-sm-3 border-300 notification-card position-relative read border-bottom">
                                         <div
                                             class="d-flex align-items-center justify-content-between position-relative">
                                             <div class="d-flex">
@@ -640,32 +640,32 @@
                                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/30.webp"
                                                         alt="" /></div>
                                                 <div class="flex-1 me-sm-3">
-                                                    <h4 class="fs--1 text-black">Jessie Samson</h4>
-                                                    <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal">
+                                                    <h4 class="text-black fs--1">Jessie Samson</h4>
+                                                    <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal">
                                                         <span class='me-1 fs--2'>💬</span>Mentioned you in
                                                         a comment.<span class="ms-2 text-400 fw-bold fs--2">10m</span>
                                                     </p>
-                                                    <p class="text-800 fs--1 mb-0"><span
+                                                    <p class="mb-0 text-800 fs--1"><span
                                                             class="me-1 fas fa-clock"></span><span
                                                             class="fw-bold">10:41 AM </span>August 7,2021
                                                     </p>
                                                 </div>
                                             </div>
                                             <div class="font-sans-serif d-none d-sm-block"><button
-                                                    class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                    class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                     data-stop-propagation="data-stop-propagation"
                                                     data-bs-toggle="dropdown" data-boundary="window"
                                                     data-bs-reference="parent" type="button" aria-haspopup="true"
                                                     aria-expanded="false"><span
                                                         class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                                <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                         class="dropdown-item" href="#!">Mark as
                                                         unread</a></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div
-                                        class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
+                                        class="px-2 py-3 px-sm-3 border-300 notification-card position-relative unread border-bottom">
                                         <div
                                             class="d-flex align-items-center justify-content-between position-relative">
                                             <div class="d-flex">
@@ -674,32 +674,32 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex-1 me-sm-3">
-                                                    <h4 class="fs--1 text-black">Jane Foster</h4>
-                                                    <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal">
+                                                    <h4 class="text-black fs--1">Jane Foster</h4>
+                                                    <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal">
                                                         <span class='me-1 fs--2'>📅</span>Created an
                                                         event.<span class="ms-2 text-400 fw-bold fs--2">20m</span>
                                                     </p>
-                                                    <p class="text-800 fs--1 mb-0"><span
+                                                    <p class="mb-0 text-800 fs--1"><span
                                                             class="me-1 fas fa-clock"></span><span
                                                             class="fw-bold">10:20 AM </span>August 7,2021
                                                     </p>
                                                 </div>
                                             </div>
                                             <div class="font-sans-serif d-none d-sm-block"><button
-                                                    class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                    class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                     data-stop-propagation="data-stop-propagation"
                                                     data-bs-toggle="dropdown" data-boundary="window"
                                                     data-bs-reference="parent" type="button" aria-haspopup="true"
                                                     aria-expanded="false"><span
                                                         class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                                <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                         class="dropdown-item" href="#!">Mark as
                                                         unread</a></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div
-                                        class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
+                                        class="px-2 py-3 px-sm-3 border-300 notification-card position-relative unread border-bottom">
                                         <div
                                             class="d-flex align-items-center justify-content-between position-relative">
                                             <div class="d-flex">
@@ -708,25 +708,25 @@
                                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/avatar.webp"
                                                         alt="" /></div>
                                                 <div class="flex-1 me-sm-3">
-                                                    <h4 class="fs--1 text-black">Jessie Samson</h4>
-                                                    <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal">
+                                                    <h4 class="text-black fs--1">Jessie Samson</h4>
+                                                    <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal">
                                                         <span class='me-1 fs--2'>👍</span>Liked your
                                                         comment.<span class="ms-2 text-400 fw-bold fs--2">1h</span>
                                                     </p>
-                                                    <p class="text-800 fs--1 mb-0"><span
+                                                    <p class="mb-0 text-800 fs--1"><span
                                                             class="me-1 fas fa-clock"></span><span
                                                             class="fw-bold">9:30 AM </span>August 7,2021
                                                     </p>
                                                 </div>
                                             </div>
                                             <div class="font-sans-serif d-none d-sm-block"><button
-                                                    class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                    class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                     data-stop-propagation="data-stop-propagation"
                                                     data-bs-toggle="dropdown" data-boundary="window"
                                                     data-bs-reference="parent" type="button" aria-haspopup="true"
                                                     aria-expanded="false"><span
                                                         class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                                <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                         class="dropdown-item" href="#!">Mark as
                                                         unread</a></div>
                                             </div>
@@ -735,7 +735,7 @@
                                 </div>
                                 <div class="border-300">
                                     <div
-                                        class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
+                                        class="px-2 py-3 px-sm-3 border-300 notification-card position-relative unread border-bottom">
                                         <div
                                             class="d-flex align-items-center justify-content-between position-relative">
                                             <div class="d-flex">
@@ -744,32 +744,32 @@
                                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/57.webp"
                                                         alt="" /></div>
                                                 <div class="flex-1 me-sm-3">
-                                                    <h4 class="fs--1 text-black">Kiera Anderson</h4>
-                                                    <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal">
+                                                    <h4 class="text-black fs--1">Kiera Anderson</h4>
+                                                    <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal">
                                                         <span class='me-1 fs--2'>💬</span>Mentioned you in
                                                         a comment.<span class="ms-2 text-400 fw-bold fs--2"></span>
                                                     </p>
-                                                    <p class="text-800 fs--1 mb-0"><span
+                                                    <p class="mb-0 text-800 fs--1"><span
                                                             class="me-1 fas fa-clock"></span><span
                                                             class="fw-bold">9:11 AM </span>August 7,2021
                                                     </p>
                                                 </div>
                                             </div>
                                             <div class="font-sans-serif d-none d-sm-block"><button
-                                                    class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                    class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                     data-stop-propagation="data-stop-propagation"
                                                     data-bs-toggle="dropdown" data-boundary="window"
                                                     data-bs-reference="parent" type="button" aria-haspopup="true"
                                                     aria-expanded="false"><span
                                                         class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                                <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                         class="dropdown-item" href="#!">Mark as
                                                         unread</a></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div
-                                        class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
+                                        class="px-2 py-3 px-sm-3 border-300 notification-card position-relative unread border-bottom">
                                         <div
                                             class="d-flex align-items-center justify-content-between position-relative">
                                             <div class="d-flex">
@@ -778,32 +778,32 @@
                                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/59.webp"
                                                         alt="" /></div>
                                                 <div class="flex-1 me-sm-3">
-                                                    <h4 class="fs--1 text-black">Herman Carter</h4>
-                                                    <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal">
+                                                    <h4 class="text-black fs--1">Herman Carter</h4>
+                                                    <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal">
                                                         <span class='me-1 fs--2'>👤</span>Tagged you in a
                                                         comment.<span class="ms-2 text-400 fw-bold fs--2"></span>
                                                     </p>
-                                                    <p class="text-800 fs--1 mb-0"><span
+                                                    <p class="mb-0 text-800 fs--1"><span
                                                             class="me-1 fas fa-clock"></span><span
                                                             class="fw-bold">10:58 PM </span>August 7,2021
                                                     </p>
                                                 </div>
                                             </div>
                                             <div class="font-sans-serif d-none d-sm-block"><button
-                                                    class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                    class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                     data-stop-propagation="data-stop-propagation"
                                                     data-bs-toggle="dropdown" data-boundary="window"
                                                     data-bs-reference="parent" type="button" aria-haspopup="true"
                                                     aria-expanded="false"><span
                                                         class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                                <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                         class="dropdown-item" href="#!">Mark as
                                                         unread</a></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div
-                                        class="px-2 px-sm-3 py-3 border-300 notification-card position-relative read ">
+                                        class="px-2 py-3 px-sm-3 border-300 notification-card position-relative read ">
                                         <div
                                             class="d-flex align-items-center justify-content-between position-relative">
                                             <div class="d-flex">
@@ -812,25 +812,25 @@
                                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/58.webp"
                                                         alt="" /></div>
                                                 <div class="flex-1 me-sm-3">
-                                                    <h4 class="fs--1 text-black">Benjamin Button</h4>
-                                                    <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal">
+                                                    <h4 class="text-black fs--1">Benjamin Button</h4>
+                                                    <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal">
                                                         <span class='me-1 fs--2'>👍</span>Liked your
                                                         comment.<span class="ms-2 text-400 fw-bold fs--2"></span>
                                                     </p>
-                                                    <p class="text-800 fs--1 mb-0"><span
+                                                    <p class="mb-0 text-800 fs--1"><span
                                                             class="me-1 fas fa-clock"></span><span
                                                             class="fw-bold">10:18 AM </span>August 7,2021
                                                     </p>
                                                 </div>
                                             </div>
                                             <div class="font-sans-serif d-none d-sm-block"><button
-                                                    class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                    class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                     data-stop-propagation="data-stop-propagation"
                                                     data-bs-toggle="dropdown" data-boundary="window"
                                                     data-bs-reference="parent" type="button" aria-haspopup="true"
                                                     aria-expanded="false"><span
                                                         class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                                <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                         class="dropdown-item" href="#!">Mark as
                                                         unread</a></div>
                                             </div>
@@ -839,7 +839,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer p-0 border-top border-0">
+                        <div class="p-0 border-0 card-footer border-top">
                             <div class="my-2 text-center fw-bold fs--2 text-600"><a class="fw-bolder"
                                     href="https://prium.github.io/phoenix/v1.11.0/pages/notifications.html">Notification
                                     history</a></div>
@@ -871,116 +871,116 @@
                         <circle cx="14" cy="2" r="2" fill="currentColor">
                         </circle>
                     </svg></a>
-                <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-nide-dots shadow border border-300"
+                <div class="py-0 border shadow dropdown-menu dropdown-menu-end navbar-dropdown-caret dropdown-nide-dots border-300"
                     aria-labelledby="navbarDropdownNindeDots">
-                    <div class="card bg-white position-relative border-0">
-                        <div class="card-body pt-3 px-3 pb-0 overflow-auto scrollbar" style="height: 20rem;">
-                            <div class="row text-center align-items-center gx-0 gy-0">
+                    <div class="bg-white border-0 card position-relative">
+                        <div class="px-3 pt-3 pb-0 overflow-auto card-body scrollbar" style="height: 20rem;">
+                            <div class="text-center row align-items-center gx-0 gy-0">
                                 <div class="col-4"><a
-                                        class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                        class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                         href="#!"><img
                                             src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/behance.webp"
                                             alt="" width="30" />
-                                        <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Behance
+                                        <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Behance
                                         </p>
                                     </a></div>
                                 <div class="col-4"><a
-                                        class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                        class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                         href="#!"><img
                                             src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-cloud.webp"
                                             alt="" width="30" />
-                                        <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Cloud</p>
+                                        <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Cloud</p>
                                     </a></div>
                                 <div class="col-4"><a
-                                        class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                        class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                         href="#!"><img
                                             src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/slack.webp"
                                             alt="" width="30" />
-                                        <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Slack</p>
+                                        <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Slack</p>
                                     </a></div>
                                 <div class="col-4"><a
-                                        class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                        class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                         href="#!"><img
                                             src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/gitlab.webp"
                                             alt="" width="30" />
-                                        <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Gitlab
+                                        <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Gitlab
                                         </p>
                                     </a></div>
                                 <div class="col-4"><a
-                                        class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                        class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                         href="#!"><img
                                             src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/bitbucket.webp"
                                             alt="" width="30" />
-                                        <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">BitBucket
+                                        <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">BitBucket
                                         </p>
                                     </a></div>
                                 <div class="col-4"><a
-                                        class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                        class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                         href="#!"><img
                                             src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-drive.webp"
                                             alt="" width="30" />
-                                        <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Drive</p>
+                                        <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Drive</p>
                                     </a></div>
                                 <div class="col-4"><a
-                                        class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                        class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                         href="#!"><img
                                             src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/trello.webp"
                                             alt="" width="30" />
-                                        <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Trello
+                                        <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Trello
                                         </p>
                                     </a></div>
                                 <div class="col-4"><a
-                                        class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                        class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                         href="#!"><img
                                             src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/figma.webp"
                                             alt="" width="20" />
-                                        <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Figma</p>
+                                        <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Figma</p>
                                     </a></div>
                                 <div class="col-4"><a
-                                        class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                        class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                         href="#!"><img
                                             src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/twitter.webp"
                                             alt="" width="30" />
-                                        <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Twitter
+                                        <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Twitter
                                         </p>
                                     </a></div>
                                 <div class="col-4"><a
-                                        class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                        class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                         href="#!"><img
                                             src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/pinterest.webp"
                                             alt="" width="30" />
-                                        <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Pinterest
+                                        <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Pinterest
                                         </p>
                                     </a></div>
                                 <div class="col-4"><a
-                                        class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                        class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                         href="#!"><img
                                             src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/ln.webp"
                                             alt="" width="30" />
-                                        <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Linkedin
+                                        <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Linkedin
                                         </p>
                                     </a></div>
                                 <div class="col-4"><a
-                                        class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                        class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                         href="#!"><img
                                             src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-maps.webp"
                                             alt="" width="30" />
-                                        <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Maps</p>
+                                        <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Maps</p>
                                     </a></div>
                                 <div class="col-4"><a
-                                        class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                        class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                         href="#!"><img
                                             src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-photos.webp"
                                             alt="" width="30" />
-                                        <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Photos
+                                        <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Photos
                                         </p>
                                     </a></div>
                                 <div class="col-4"><a
-                                        class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                        class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                         href="#!"><img
                                             src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/spotify.webp"
                                             alt="" width="30" />
-                                        <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Spotify
+                                        <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Spotify
                                         </p>
                                     </a></div>
                             </div>
@@ -992,11 +992,11 @@
                     data-bs-toggle="dropdown" data-bs-auto-close="outside" href="#!" role="button"
                     aria-haspopup="true" aria-expanded="false">Olivia
                     <span class="fa-solid fa-chevron-down fs--2"></span></a>
-                <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-profile shadow border border-300"
+                <div class="py-0 border shadow dropdown-menu dropdown-menu-end navbar-dropdown-caret dropdown-profile border-300"
                     aria-labelledby="navbarDropdownUser">
-                    <div class="card position-relative border-0">
-                        <div class="card-body p-0">
-                            <div class="text-center pt-4 pb-3">
+                    <div class="border-0 card position-relative">
+                        <div class="p-0 card-body">
+                            <div class="pt-4 pb-3 text-center">
                                 <div class="avatar avatar-xl ">
                                     <img class="rounded-circle "
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/72x72/57.webp"
@@ -1004,35 +1004,35 @@
                                 </div>
                                 <h6 class="mt-2 text-black">Jerry Seinfield</h6>
                             </div>
-                            <div class="mb-3 mx-3"><input class="form-control form-control-sm" id="statusUpdateInput"
+                            <div class="mx-3 mb-3"><input class="form-control form-control-sm" id="statusUpdateInput"
                                     type="text" placeholder="Update your status" />
                             </div>
                         </div>
                         <div class="overflow-auto scrollbar" style="height: 10rem;">
-                            <ul class="nav d-flex flex-column mb-2 pb-1">
-                                <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                            <ul class="pb-1 mb-2 nav d-flex flex-column">
+                                <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                             class="me-2 text-900" data-feather="user"></span><span>Profile</span></a>
                                 </li>
-                                <li class="nav-item"><a class="nav-link px-3" href="#!"><span
+                                <li class="nav-item"><a class="px-3 nav-link" href="#!"><span
                                             class="me-2 text-900" data-feather="pie-chart"></span>Dashboard</a>
                                 </li>
-                                <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                                <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                             class="me-2 text-900" data-feather="lock"></span>Posts &amp;
                                         Activity</a></li>
-                                <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                                <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                             class="me-2 text-900" data-feather="settings"></span>Settings &amp;
                                         Privacy </a>
                                 </li>
-                                <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                                <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                             class="me-2 text-900" data-feather="help-circle"></span>Help
                                         Center</a></li>
-                                <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                                <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                             class="me-2 text-900" data-feather="globe"></span>Language</a></li>
                             </ul>
                         </div>
-                        <div class="card-footer p-0 border-top">
-                            <ul class="nav d-flex flex-column my-3">
-                                <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                        <div class="p-0 card-footer border-top">
+                            <ul class="my-3 nav d-flex flex-column">
+                                <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                             class="me-2 text-900" data-feather="user-plus"></span>Add
                                         another account</a></li>
                             </ul>
@@ -1041,7 +1041,7 @@
                                     href="#!"> <span class="me-2" data-feather="log-out">
                                     </span>Sign out</a></div>
                             <div class="my-2 text-center fw-bold fs--2 text-600"><a class="text-600 me-1"
-                                    href="#!">Privacy policy</a>&bull;<a class="text-600 mx-1"
+                                    href="#!">Privacy policy</a>&bull;<a class="mx-1 text-600"
                                     href="#!">Terms</a>&bull;<a class="text-600 ms-1" href="#!">Cookies</a>
                             </div>
                         </div>
@@ -1060,13 +1060,17 @@
         <a class="navbar-brand me-1 me-sm-3" href="{{ route('home') }}">
             <div class="d-flex align-items-center">
                 <div class="d-flex align-items-center">
-                    <x-application-logo width="30" />
+                   <img src="@if (\App\Models\Company::find(1)->logo != null) {{ asset('storage/logo/' . \App\Models\Company::find(1)->logo) }}@else ' ' @endif"
+                            alt="site-logo" width="27" />
+                        <p class="logo-text ms-2 d-none d-sm-block fs--2">
+                            {{ \App\Models\Company::find(1)->company_name }}
+                        </p>
 
                 </div>
             </div>
         </a>
     </div>
-    <div class="collapse navbar-collapse navbar-top-collapse order-1 order-lg-0 justify-content-center"
+    <div class="order-1 collapse navbar-collapse navbar-top-collapse order-lg-0 justify-content-center"
         id="navbarTopCollapse">
         <ul class="navbar-nav navbar-nav-top" data-dropdown-on-hover="data-dropdown-on-hover">
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" data-bs-toggle="dropdown"
@@ -1113,16 +1117,11 @@
                         </ul>
                     </li>
 
-                    <li><a class="dropdown-item"
-                            href="https://prium.github.io/phoenix/v1.11.0/pages/notifications.html">
+                    <li><a class="dropdown-item" href="{{ route('customer-payments') }}">
                             <div class="dropdown-item-wrapper"><span class="me-2 uil"
                                     data-feather="credit-card"></span>Payments</div>
                         </a></li>
-                    <li><a class="dropdown-item" href="https://prium.github.io/phoenix/v1.11.0/pages/members.html">
-                            <div class="dropdown-item-wrapper"><span class="me-2 uil"
-                                    data-feather="corner-up-left"></span>Refunds</div>
-                        </a></li>
-                    <li><a class="dropdown-item" href="https://prium.github.io/phoenix/v1.11.0/pages/timeline.html">
+                    <li><a class="dropdown-item" href="{{ route('customer-queries') }}">
                             <div class="dropdown-item-wrapper"><span class="me-2 uil"
                                     data-feather="alert-circle"></span>Queries</div>
                         </a></li>
@@ -1132,9 +1131,9 @@
 
         </ul>
     </div>
-    <ul class="navbar-nav navbar-nav-icons flex-row">
+    <ul class="flex-row navbar-nav navbar-nav-icons">
         {{-- <li class="nav-item">
-            <div class="theme-control-toggle fa-icon-wait px-2"><input
+            <div class="px-2 theme-control-toggle fa-icon-wait"><input
                     class="form-check-input ms-0 theme-control-toggle-input" id="themeControlToggle"
                     data-theme-control="phoenixTheme" type="checkbox" value="dark" /><label
                     class="mb-0 theme-control-toggle-label theme-control-toggle-light" data-bs-toggle="tooltip"
@@ -1144,409 +1143,14 @@
                     data-bs-placement="left" for="themeControlToggle" title="Switch theme"><span class="icon"
                         data-feather="sun"></span></label></div>
         </li> --}}
-        <li class="nav-item"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#searchBoxModal"
+        <li class="nav-item d-none"><a class="nav-link" data-bs-toggle="modal" data-bs-target="#searchBoxModal"
                 href="#"><span data-feather="search"
                     style="height:19px;width:19px;margin-bottom: 2px;"></span></a></li>
         <li class="nav-item dropdown">
-            <a class="nav-link" data-bs-toggle="dropdown" data-bs-auto-close="outside" href="#"
-                role="button" aria-haspopup="true" aria-expanded="false"><span data-feather="bell"
-                    style="height:20px;width:20px;"></span></a>
-            <div class="dropdown-menu dropdown-menu-end notification-dropdown-menu py-0 shadow border border-300 navbar-dropdown-caret"
-                id="navbarDropdownNotfication" aria-labelledby="navbarDropdownNotfication">
-                <div class="card position-relative border-0">
-                    <div class="card-header p-2">
-                        <div class="d-flex justify-content-between">
-                            <h5 class="text-black mb-0">Notificatons</h5><button
-                                class="btn btn-link p-0 fs--1 fw-normal" type="button">Mark all as
-                                read</button>
-                        </div>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="scrollbar-overlay" style="height: 27rem;">
-                            <div class="border-300">
-                                <div
-                                    class="px-2 px-sm-3 py-3 border-300 notification-card position-relative read border-bottom">
-                                    <div class="d-flex align-items-center justify-content-between position-relative">
-                                        <div class="d-flex">
-                                            <div class="avatar avatar-m status-online me-3"><img
-                                                    class="rounded-circle"
-                                                    src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/30.webp"
-                                                    alt="" /></div>
-                                            <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Jessie Samson</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
-                                                        class='me-1 fs--2'>💬</span>Mentioned you in a
-                                                    comment.<span class="ms-2 text-400 fw-bold fs--2">10m</span>
-                                                </p>
-                                                <p class="text-800 fs--1 mb-0"><span
-                                                        class="me-1 fas fa-clock"></span><span class="fw-bold">10:41
-                                                        AM </span>August 7,2021</p>
-                                            </div>
-                                        </div>
-                                        <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
-                                                data-stop-propagation="data-stop-propagation"
-                                                data-bs-toggle="dropdown" data-boundary="window"
-                                                data-bs-reference="parent" type="button" aria-haspopup="true"
-                                                aria-expanded="false"><span
-                                                    class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
-                                                    class="dropdown-item" href="#!">Mark as
-                                                    unread</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div
-                                    class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
-                                    <div class="d-flex align-items-center justify-content-between position-relative">
-                                        <div class="d-flex">
-                                            <div class="avatar avatar-m status-online me-3">
-                                                <div class="avatar-name rounded-circle"><span>J</span>
-                                                </div>
-                                            </div>
-                                            <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Jane Foster</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
-                                                        class='me-1 fs--2'>📅</span>Created an event.<span
-                                                        class="ms-2 text-400 fw-bold fs--2">20m</span></p>
-                                                <p class="text-800 fs--1 mb-0"><span
-                                                        class="me-1 fas fa-clock"></span><span class="fw-bold">10:20
-                                                        AM </span>August 7,2021</p>
-                                            </div>
-                                        </div>
-                                        <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
-                                                data-stop-propagation="data-stop-propagation"
-                                                data-bs-toggle="dropdown" data-boundary="window"
-                                                data-bs-reference="parent" type="button" aria-haspopup="true"
-                                                aria-expanded="false"><span
-                                                    class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
-                                                    class="dropdown-item" href="#!">Mark as
-                                                    unread</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div
-                                    class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
-                                    <div class="d-flex align-items-center justify-content-between position-relative">
-                                        <div class="d-flex">
-                                            <div class="avatar avatar-m status-online me-3"><img
-                                                    class="rounded-circle avatar-placeholder"
-                                                    src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/avatar.webp"
-                                                    alt="" /></div>
-                                            <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Jessie Samson</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
-                                                        class='me-1 fs--2'>👍</span>Liked your
-                                                    comment.<span class="ms-2 text-400 fw-bold fs--2">1h</span>
-                                                </p>
-                                                <p class="text-800 fs--1 mb-0"><span
-                                                        class="me-1 fas fa-clock"></span><span class="fw-bold">9:30
-                                                        AM </span>August 7,2021</p>
-                                            </div>
-                                        </div>
-                                        <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
-                                                data-stop-propagation="data-stop-propagation"
-                                                data-bs-toggle="dropdown" data-boundary="window"
-                                                data-bs-reference="parent" type="button" aria-haspopup="true"
-                                                aria-expanded="false"><span
-                                                    class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
-                                                    class="dropdown-item" href="#!">Mark as
-                                                    unread</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="border-300">
-                                <div
-                                    class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
-                                    <div class="d-flex align-items-center justify-content-between position-relative">
-                                        <div class="d-flex">
-                                            <div class="avatar avatar-m status-online me-3"><img
-                                                    class="rounded-circle"
-                                                    src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/57.webp"
-                                                    alt="" /></div>
-                                            <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Kiera Anderson</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
-                                                        class='me-1 fs--2'>💬</span>Mentioned you in a
-                                                    comment.<span class="ms-2 text-400 fw-bold fs--2"></span></p>
-                                                <p class="text-800 fs--1 mb-0"><span
-                                                        class="me-1 fas fa-clock"></span><span class="fw-bold">9:11
-                                                        AM </span>August 7,2021</p>
-                                            </div>
-                                        </div>
-                                        <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
-                                                data-stop-propagation="data-stop-propagation"
-                                                data-bs-toggle="dropdown" data-boundary="window"
-                                                data-bs-reference="parent" type="button" aria-haspopup="true"
-                                                aria-expanded="false"><span
-                                                    class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
-                                                    class="dropdown-item" href="#!">Mark as
-                                                    unread</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div
-                                    class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
-                                    <div class="d-flex align-items-center justify-content-between position-relative">
-                                        <div class="d-flex">
-                                            <div class="avatar avatar-m status-online me-3"><img
-                                                    class="rounded-circle"
-                                                    src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/59.webp"
-                                                    alt="" /></div>
-                                            <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Herman Carter</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
-                                                        class='me-1 fs--2'>👤</span>Tagged you in a
-                                                    comment.<span class="ms-2 text-400 fw-bold fs--2"></span></p>
-                                                <p class="text-800 fs--1 mb-0"><span
-                                                        class="me-1 fas fa-clock"></span><span class="fw-bold">10:58
-                                                        PM </span>August 7,2021</p>
-                                            </div>
-                                        </div>
-                                        <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
-                                                data-stop-propagation="data-stop-propagation"
-                                                data-bs-toggle="dropdown" data-boundary="window"
-                                                data-bs-reference="parent" type="button" aria-haspopup="true"
-                                                aria-expanded="false"><span
-                                                    class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
-                                                    class="dropdown-item" href="#!">Mark as
-                                                    unread</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="px-2 px-sm-3 py-3 border-300 notification-card position-relative read ">
-                                    <div class="d-flex align-items-center justify-content-between position-relative">
-                                        <div class="d-flex">
-                                            <div class="avatar avatar-m status-online me-3"><img
-                                                    class="rounded-circle"
-                                                    src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/58.webp"
-                                                    alt="" /></div>
-                                            <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Benjamin Button</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
-                                                        class='me-1 fs--2'>👍</span>Liked your
-                                                    comment.<span class="ms-2 text-400 fw-bold fs--2"></span></p>
-                                                <p class="text-800 fs--1 mb-0"><span
-                                                        class="me-1 fas fa-clock"></span><span class="fw-bold">10:18
-                                                        AM </span>August 7,2021</p>
-                                            </div>
-                                        </div>
-                                        <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
-                                                data-stop-propagation="data-stop-propagation"
-                                                data-bs-toggle="dropdown" data-boundary="window"
-                                                data-bs-reference="parent" type="button" aria-haspopup="true"
-                                                aria-expanded="false"><span
-                                                    class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
-                                                    class="dropdown-item" href="#!">Mark as
-                                                    unread</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer p-0 border-top border-0">
-                        <div class="my-2 text-center fw-bold fs--2 text-600"><a class="fw-bolder"
-                                href="https://prium.github.io/phoenix/v1.11.0/pages/notifications.html">Notification
-                                history</a></div>
-                    </div>
-                </div>
-            </div>
+            <livewire:customer.notifications />
         </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link" id="navbarDropdownNindeDots" data-bs-toggle="dropdown"
-                data-bs-auto-close="outside" href="#" role="button" aria-haspopup="true"
-                aria-expanded="false"><svg width="16" height="16" viewbox="0 0 16 16" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="2" cy="2" r="2" fill="currentColor">
-                    </circle>
-                    <circle cx="2" cy="8" r="2" fill="currentColor">
-                    </circle>
-                    <circle cx="2" cy="14" r="2" fill="currentColor">
-                    </circle>
-                    <circle cx="8" cy="8" r="2" fill="currentColor">
-                    </circle>
-                    <circle cx="8" cy="14" r="2" fill="currentColor">
-                    </circle>
-                    <circle cx="14" cy="8" r="2" fill="currentColor">
-                    </circle>
-                    <circle cx="14" cy="14" r="2" fill="currentColor">
-                    </circle>
-                    <circle cx="8" cy="2" r="2" fill="currentColor">
-                    </circle>
-                    <circle cx="14" cy="2" r="2" fill="currentColor">
-                    </circle>
-                </svg></a>
-            <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-nide-dots shadow border border-300"
-                aria-labelledby="navbarDropdownNindeDots">
-                <div class="card bg-white position-relative border-0">
-                    <div class="card-body pt-3 px-3 pb-0 overflow-auto scrollbar" style="height: 20rem;">
-                        <div class="row text-center align-items-center gx-0 gy-0">
-                            <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/behance.webp"
-                                        alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Behance</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-cloud.webp"
-                                        alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Cloud</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/slack.webp"
-                                        alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Slack</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/gitlab.webp"
-                                        alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Gitlab</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/bitbucket.webp"
-                                        alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">BitBucket</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-drive.webp"
-                                        alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Drive</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/trello.webp"
-                                        alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Trello</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/figma.webp"
-                                        alt="" width="20" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Figma</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/twitter.webp"
-                                        alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Twitter</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/pinterest.webp"
-                                        alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Pinterest</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/ln.webp"
-                                        alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Linkedin</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-maps.webp"
-                                        alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Maps</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-photos.webp"
-                                        alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Photos</p>
-                                </a></div>
-                            <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
-                                    href="#!"><img
-                                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/spotify.webp"
-                                        alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Spotify</p>
-                                </a></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </li>
-        <li class="nav-item dropdown"><a class="nav-link lh-1 pe-0" id="navbarDropdownUser"
-                data-bs-toggle="dropdown" data-bs-auto-close="outside" href="#!" role="button"
-                aria-haspopup="true" aria-expanded="false">
-                <div class="avatar avatar-l ">
-                    <img class="rounded-circle "
-                        src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/57.webp"
-                        alt="" />
-                </div>
-            </a>
-            <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-profile shadow border border-300"
-                aria-labelledby="navbarDropdownUser">
-                <div class="card position-relative border-0">
-                    <div class="card-body p-0">
-                        <div class="text-center pt-4 pb-3">
-                            <div class="avatar avatar-xl ">
-                                <img class="rounded-circle" src="https://github.com/mdo.png" alt="mdo"
-                                    width="32" height="32">
-                            </div>
-                            <h6 class="mt-2 text-black">{{ Auth::user()->name }}</h6>
-                        </div>
+        <livewire:customer.pic-component />
 
-                    </div>
-                    <hr />
-                    <div class="overflow-auto scrollbar" style="height: 5rem;">
-                        <ul class="nav d-flex flex-column mb-2 pb-1">
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
-                                        class="me-2 text-900" data-feather="user"></span><span>Profile</span></a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"><span
-                                        class="me-2 text-900" data-feather="pie-chart"></span>Dashboard</a>
-                            </li>
-
-                        </ul>
-                    </div>
-                    <div class="card-footer p-0 border-top">
-
-                        <div class="px-3 py-3"> <a class="btn btn-phoenix-secondary d-flex flex-center w-100"
-                                href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                                   document.getElementById('logout-form').submit();">
-                                <span class="me-2" data-feather="log-out"> </span>Sign out</a>
-                        </div>
-
-                        <form class="d-none" id="logout-form" action="{{ route('logout') }}" method="POST">
-                            @csrf
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-        </li>
     </ul>
 </nav>
 <nav class="navbar navbar-top navbar-slim justify-content-between fixed-top navbar-expand-lg" id="navbarTopSlim"
@@ -1556,10 +1160,10 @@
             data-bs-toggle="collapse" data-bs-target="#navbarTopCollapse" type="button"
             aria-controls="navbarTopCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span
                 class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
-        <a class="navbar-brand navbar-brand" href="https://prium.github.io/phoenix/v1.11.0/index.html">phoenix
+        <a class="navbar-brand" href="https://prium.github.io/phoenix/v1.11.0/index.html">phoenix
             <span class="text-1000 d-none d-sm-inline">slim</span></a>
     </div>
-    <div class="collapse navbar-collapse navbar-top-collapse order-1 order-lg-0 justify-content-center"
+    <div class="order-1 collapse navbar-collapse navbar-top-collapse order-lg-0 justify-content-center"
         id="navbarTopCollapse">
         <ul class="navbar-nav navbar-nav-top" data-dropdown-on-hover="data-dropdown-on-hover">
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" data-bs-toggle="dropdown"
@@ -2163,7 +1767,7 @@
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" data-bs-toggle="dropdown"
                     data-bs-auto-close="outside" href="#!" role="button" aria-haspopup="true"
                     aria-expanded="false"><span class="uil fs-0 me-2 uil-puzzle-piece"></span>Modules</a>
-                <ul class="dropdown-menu navbar-dropdown-caret dropdown-menu-card py-0">
+                <ul class="py-0 dropdown-menu navbar-dropdown-caret dropdown-menu-card">
                     <div class="border-0 scrollbar" style="max-height: 60vh;">
                         <div class="px-3 pt-4 pb-3 img-dropdown">
                             <div class="row gx-4 gy-5">
@@ -2201,7 +1805,7 @@
                                         href="https://prium.github.io/phoenix/v1.11.0/modules/forms/validation.html">Validation</a><a
                                         class="dropdown-link"
                                         href="https://prium.github.io/phoenix/v1.11.0/modules/forms/wizard.html">Wizard</a>
-                                    <div class="dropdown-item-group mt-5"><span class="me-2" data-feather="grid"
+                                    <div class="mt-5 dropdown-item-group"><span class="me-2" data-feather="grid"
                                             style="stroke-width:2;"></span>
                                         <h6 class="dropdown-item-title">Icons</h6>
                                     </div><a class="dropdown-link"
@@ -2210,7 +1814,7 @@
                                         href="https://prium.github.io/phoenix/v1.11.0/modules/icons/font-awesome.html">Font
                                         awesome</a><a class="dropdown-link"
                                         href="https://prium.github.io/phoenix/v1.11.0/modules/icons/unicons.html">Unicons</a>
-                                    <div class="dropdown-item-group mt-5"><span class="me-2"
+                                    <div class="mt-5 dropdown-item-group"><span class="me-2"
                                             data-feather="bar-chart-2" style="stroke-width:2;"></span>
                                         <h6 class="dropdown-item-title">ECharts</h6>
                                     </div><a class="dropdown-link"
@@ -2306,7 +1910,7 @@
                                         tables</a><a class="dropdown-link"
                                         href="https://prium.github.io/phoenix/v1.11.0/modules/tables/bulk-select.html">Bulk
                                         Select</a>
-                                    <div class="dropdown-item-group mt-5"><span class="me-2" data-feather="tool"
+                                    <div class="mt-5 dropdown-item-group"><span class="me-2" data-feather="tool"
                                             style="stroke-width:2;"></span>
                                         <h6 class="dropdown-item-title">Utilities</h6>
                                     </div><a class="dropdown-link"
@@ -2429,7 +2033,7 @@
             </li>
         </ul>
     </div>
-    <ul class="navbar-nav navbar-nav-icons flex-row">
+    <ul class="flex-row navbar-nav navbar-nav-icons">
         {{-- <li class="nav-item d-none">
             <div class="theme-control-toggle fa-ion-wait pe-2 theme-control-toggle-slim"><input
                     class="form-check-input ms-0 theme-control-toggle-input" id="themeControlToggle"
@@ -2443,27 +2047,27 @@
                         class="icon me-1 d-none d-sm-block" data-feather="sun"></span><span
                         class="fs--1 fw-bold">Light</span></label></div>
         </li> --}}
-        <li class="nav-item"> <a class="nav-link" data-bs-toggle="modal" data-bs-target="#searchBoxModal"
+        <li class="nav-item d-none"> <a class="nav-link" data-bs-toggle="modal" data-bs-target="#searchBoxModal"
                 href="#"><span data-feather="search" style="height:12px;width:12px;"></span></a></li>
         <li class="nav-item dropdown">
             <a class="nav-link" id="navbarDropdownNotification" data-bs-toggle="dropdown"
                 data-bs-auto-close="outside" href="#" role="button" aria-haspopup="true"
                 aria-expanded="false"><span data-feather="bell" style="height:12px;width:12px;"></span></a>
-            <div class="dropdown-menu dropdown-menu-end notification-dropdown-menu py-0 shadow border border-300 navbar-dropdown-caret"
+            <div class="py-0 border shadow dropdown-menu dropdown-menu-end notification-dropdown-menu border-300 navbar-dropdown-caret"
                 id="navbarDropdownNotfication" aria-labelledby="navbarDropdownNotfication">
-                <div class="card position-relative border-0">
-                    <div class="card-header p-2">
+                <div class="border-0 card position-relative">
+                    <div class="p-2 card-header">
                         <div class="d-flex justify-content-between">
-                            <h5 class="text-black mb-0">Notificatons</h5><button
-                                class="btn btn-link p-0 fs--1 fw-normal" type="button">Mark all as
+                            <h5 class="mb-0 text-black">Notificatons</h5><button
+                                class="p-0 btn btn-link fs--1 fw-normal" type="button">Mark all as
                                 read</button>
                         </div>
                     </div>
-                    <div class="card-body p-0">
+                    <div class="p-0 card-body">
                         <div class="scrollbar-overlay" style="height: 27rem;">
                             <div class="border-300">
                                 <div
-                                    class="px-2 px-sm-3 py-3 border-300 notification-card position-relative read border-bottom">
+                                    class="px-2 py-3 px-sm-3 border-300 notification-card position-relative read border-bottom">
                                     <div class="d-flex align-items-center justify-content-between position-relative">
                                         <div class="d-flex">
                                             <div class="avatar avatar-m status-online me-3"><img
@@ -2471,31 +2075,31 @@
                                                     src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/30.webp"
                                                     alt="" /></div>
                                             <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Jessie Samson</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
+                                                <h4 class="text-black fs--1">Jessie Samson</h4>
+                                                <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal"><span
                                                         class='me-1 fs--2'>💬</span>Mentioned you in a
                                                     comment.<span class="ms-2 text-400 fw-bold fs--2">10m</span>
                                                 </p>
-                                                <p class="text-800 fs--1 mb-0"><span
+                                                <p class="mb-0 text-800 fs--1"><span
                                                         class="me-1 fas fa-clock"></span><span class="fw-bold">10:41
                                                         AM </span>August 7,2021</p>
                                             </div>
                                         </div>
                                         <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                 data-stop-propagation="data-stop-propagation"
                                                 data-bs-toggle="dropdown" data-boundary="window"
                                                 data-bs-reference="parent" type="button" aria-haspopup="true"
                                                 aria-expanded="false"><span
                                                     class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                            <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                     class="dropdown-item" href="#!">Mark as
                                                     unread</a></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div
-                                    class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
+                                    class="px-2 py-3 px-sm-3 border-300 notification-card position-relative unread border-bottom">
                                     <div class="d-flex align-items-center justify-content-between position-relative">
                                         <div class="d-flex">
                                             <div class="avatar avatar-m status-online me-3">
@@ -2503,30 +2107,30 @@
                                                 </div>
                                             </div>
                                             <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Jane Foster</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
+                                                <h4 class="text-black fs--1">Jane Foster</h4>
+                                                <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal"><span
                                                         class='me-1 fs--2'>📅</span>Created an event.<span
                                                         class="ms-2 text-400 fw-bold fs--2">20m</span></p>
-                                                <p class="text-800 fs--1 mb-0"><span
+                                                <p class="mb-0 text-800 fs--1"><span
                                                         class="me-1 fas fa-clock"></span><span class="fw-bold">10:20
                                                         AM </span>August 7,2021</p>
                                             </div>
                                         </div>
                                         <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                 data-stop-propagation="data-stop-propagation"
                                                 data-bs-toggle="dropdown" data-boundary="window"
                                                 data-bs-reference="parent" type="button" aria-haspopup="true"
                                                 aria-expanded="false"><span
                                                     class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                            <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                     class="dropdown-item" href="#!">Mark as
                                                     unread</a></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div
-                                    class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
+                                    class="px-2 py-3 px-sm-3 border-300 notification-card position-relative unread border-bottom">
                                     <div class="d-flex align-items-center justify-content-between position-relative">
                                         <div class="d-flex">
                                             <div class="avatar avatar-m status-online me-3"><img
@@ -2534,24 +2138,24 @@
                                                     src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/avatar.webp"
                                                     alt="" /></div>
                                             <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Jessie Samson</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
+                                                <h4 class="text-black fs--1">Jessie Samson</h4>
+                                                <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal"><span
                                                         class='me-1 fs--2'>👍</span>Liked your
                                                     comment.<span class="ms-2 text-400 fw-bold fs--2">1h</span>
                                                 </p>
-                                                <p class="text-800 fs--1 mb-0"><span
+                                                <p class="mb-0 text-800 fs--1"><span
                                                         class="me-1 fas fa-clock"></span><span class="fw-bold">9:30
                                                         AM </span>August 7,2021</p>
                                             </div>
                                         </div>
                                         <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                 data-stop-propagation="data-stop-propagation"
                                                 data-bs-toggle="dropdown" data-boundary="window"
                                                 data-bs-reference="parent" type="button" aria-haspopup="true"
                                                 aria-expanded="false"><span
                                                     class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                            <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                     class="dropdown-item" href="#!">Mark as
                                                     unread</a></div>
                                         </div>
@@ -2560,7 +2164,7 @@
                             </div>
                             <div class="border-300">
                                 <div
-                                    class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
+                                    class="px-2 py-3 px-sm-3 border-300 notification-card position-relative unread border-bottom">
                                     <div class="d-flex align-items-center justify-content-between position-relative">
                                         <div class="d-flex">
                                             <div class="avatar avatar-m status-online me-3"><img
@@ -2568,30 +2172,30 @@
                                                     src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/57.webp"
                                                     alt="" /></div>
                                             <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Kiera Anderson</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
+                                                <h4 class="text-black fs--1">Kiera Anderson</h4>
+                                                <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal"><span
                                                         class='me-1 fs--2'>💬</span>Mentioned you in a
                                                     comment.<span class="ms-2 text-400 fw-bold fs--2"></span></p>
-                                                <p class="text-800 fs--1 mb-0"><span
+                                                <p class="mb-0 text-800 fs--1"><span
                                                         class="me-1 fas fa-clock"></span><span class="fw-bold">9:11
                                                         AM </span>August 7,2021</p>
                                             </div>
                                         </div>
                                         <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                 data-stop-propagation="data-stop-propagation"
                                                 data-bs-toggle="dropdown" data-boundary="window"
                                                 data-bs-reference="parent" type="button" aria-haspopup="true"
                                                 aria-expanded="false"><span
                                                     class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                            <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                     class="dropdown-item" href="#!">Mark as
                                                     unread</a></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div
-                                    class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
+                                    class="px-2 py-3 px-sm-3 border-300 notification-card position-relative unread border-bottom">
                                     <div class="d-flex align-items-center justify-content-between position-relative">
                                         <div class="d-flex">
                                             <div class="avatar avatar-m status-online me-3"><img
@@ -2599,29 +2203,29 @@
                                                     src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/59.webp"
                                                     alt="" /></div>
                                             <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Herman Carter</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
+                                                <h4 class="text-black fs--1">Herman Carter</h4>
+                                                <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal"><span
                                                         class='me-1 fs--2'>👤</span>Tagged you in a
                                                     comment.<span class="ms-2 text-400 fw-bold fs--2"></span></p>
-                                                <p class="text-800 fs--1 mb-0"><span
+                                                <p class="mb-0 text-800 fs--1"><span
                                                         class="me-1 fas fa-clock"></span><span class="fw-bold">10:58
                                                         PM </span>August 7,2021</p>
                                             </div>
                                         </div>
                                         <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                 data-stop-propagation="data-stop-propagation"
                                                 data-bs-toggle="dropdown" data-boundary="window"
                                                 data-bs-reference="parent" type="button" aria-haspopup="true"
                                                 aria-expanded="false"><span
                                                     class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                            <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                     class="dropdown-item" href="#!">Mark as
                                                     unread</a></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="px-2 px-sm-3 py-3 border-300 notification-card position-relative read ">
+                                <div class="px-2 py-3 px-sm-3 border-300 notification-card position-relative read ">
                                     <div class="d-flex align-items-center justify-content-between position-relative">
                                         <div class="d-flex">
                                             <div class="avatar avatar-m status-online me-3"><img
@@ -2629,23 +2233,23 @@
                                                     src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/58.webp"
                                                     alt="" /></div>
                                             <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Benjamin Button</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
+                                                <h4 class="text-black fs--1">Benjamin Button</h4>
+                                                <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal"><span
                                                         class='me-1 fs--2'>👍</span>Liked your
                                                     comment.<span class="ms-2 text-400 fw-bold fs--2"></span></p>
-                                                <p class="text-800 fs--1 mb-0"><span
+                                                <p class="mb-0 text-800 fs--1"><span
                                                         class="me-1 fas fa-clock"></span><span class="fw-bold">10:18
                                                         AM </span>August 7,2021</p>
                                             </div>
                                         </div>
                                         <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                 data-stop-propagation="data-stop-propagation"
                                                 data-bs-toggle="dropdown" data-boundary="window"
                                                 data-bs-reference="parent" type="button" aria-haspopup="true"
                                                 aria-expanded="false"><span
                                                     class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                            <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                     class="dropdown-item" href="#!">Mark as
                                                     unread</a></div>
                                         </div>
@@ -2654,7 +2258,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer p-0 border-top border-0">
+                    <div class="p-0 border-0 card-footer border-top">
                         <div class="my-2 text-center fw-bold fs--2 text-600"><a class="fw-bolder"
                                 href="https://prium.github.io/phoenix/v1.11.0/pages/notifications.html">Notification
                                 history</a></div>
@@ -2686,108 +2290,108 @@
                     <circle cx="14" cy="2" r="2" fill="currentColor">
                     </circle>
                 </svg></a>
-            <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-nide-dots shadow border border-300"
+            <div class="py-0 border shadow dropdown-menu dropdown-menu-end navbar-dropdown-caret dropdown-nide-dots border-300"
                 aria-labelledby="navbarDropdownNindeDots">
-                <div class="card bg-white position-relative border-0">
-                    <div class="card-body pt-3 px-3 pb-0 overflow-auto scrollbar" style="height: 20rem;">
-                        <div class="row text-center align-items-center gx-0 gy-0">
+                <div class="bg-white border-0 card position-relative">
+                    <div class="px-3 pt-3 pb-0 overflow-auto card-body scrollbar" style="height: 20rem;">
+                        <div class="text-center row align-items-center gx-0 gy-0">
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/behance.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Behance</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Behance</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-cloud.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Cloud</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Cloud</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/slack.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Slack</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Slack</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/gitlab.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Gitlab</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Gitlab</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/bitbucket.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">BitBucket</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">BitBucket</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-drive.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Drive</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Drive</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/trello.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Trello</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Trello</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/figma.webp"
                                         alt="" width="20" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Figma</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Figma</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/twitter.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Twitter</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Twitter</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/pinterest.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Pinterest</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Pinterest</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/ln.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Linkedin</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Linkedin</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-maps.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Maps</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Maps</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-photos.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Photos</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Photos</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/spotify.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Spotify</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Spotify</p>
                                 </a></div>
                         </div>
                     </div>
@@ -2798,11 +2402,11 @@
                 data-bs-toggle="dropdown" data-bs-auto-close="outside" href="#!" role="button"
                 aria-haspopup="true" aria-expanded="false">Olivia <span
                     class="fa-solid fa-chevron-down fs--2"></span></a>
-            <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-profile shadow border border-300"
+            <div class="py-0 border shadow dropdown-menu dropdown-menu-end navbar-dropdown-caret dropdown-profile border-300"
                 aria-labelledby="navbarDropdownUser">
-                <div class="card position-relative border-0">
-                    <div class="card-body p-0">
-                        <div class="text-center pt-4 pb-3">
+                <div class="border-0 card position-relative">
+                    <div class="p-0 card-body">
+                        <div class="pt-4 pb-3 text-center">
                             <div class="avatar avatar-xl ">
                                 <img class="rounded-circle "
                                     src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/72x72/57.webp"
@@ -2810,34 +2414,34 @@
                             </div>
                             <h6 class="mt-2 text-black">Jerry Seinfield</h6>
                         </div>
-                        <div class="mb-3 mx-3"><input class="form-control form-control-sm" id="statusUpdateInput"
+                        <div class="mx-3 mb-3"><input class="form-control form-control-sm" id="statusUpdateInput"
                                 type="text" placeholder="Update your status" />
                         </div>
                     </div>
                     <div class="overflow-auto scrollbar" style="height: 10rem;">
-                        <ul class="nav d-flex flex-column mb-2 pb-1">
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                        <ul class="pb-1 mb-2 nav d-flex flex-column">
+                            <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                         class="me-2 text-900" data-feather="user"></span><span>Profile</span></a>
                             </li>
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"><span
+                            <li class="nav-item"><a class="px-3 nav-link" href="#!"><span
                                         class="me-2 text-900" data-feather="pie-chart"></span>Dashboard</a></li>
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                            <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                         class="me-2 text-900" data-feather="lock"></span>Posts &amp;
                                     Activity</a></li>
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                            <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                         class="me-2 text-900" data-feather="settings"></span>Settings
                                     &amp; Privacy </a></li>
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                            <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                         class="me-2 text-900" data-feather="help-circle"></span>Help
                                     Center</a></li>
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                            <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                         class="me-2 text-900" data-feather="globe"></span>Language</a>
                             </li>
                         </ul>
                     </div>
-                    <div class="card-footer p-0 border-top">
-                        <ul class="nav d-flex flex-column my-3">
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                    <div class="p-0 card-footer border-top">
+                        <ul class="my-3 nav d-flex flex-column">
+                            <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                         class="me-2 text-900" data-feather="user-plus"></span>Add
                                     another account</a></li>
                         </ul>
@@ -2846,7 +2450,7 @@
                                 href="#!"> <span class="me-2" data-feather="log-out">
                                 </span>Sign out</a></div>
                         <div class="my-2 text-center fw-bold fs--2 text-600"><a class="text-600 me-1"
-                                href="#!">Privacy policy</a>&bull;<a class="text-600 mx-1"
+                                href="#!">Privacy policy</a>&bull;<a class="mx-1 text-600"
                                 href="#!">Terms</a>&bull;<a class="text-600 ms-1" href="#!">Cookies</a>
                         </div>
                     </div>
@@ -2864,14 +2468,14 @@
                 class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
         <a class="navbar-brand me-1 me-sm-3" href="https://prium.github.io/phoenix/v1.11.0/index.html">
             <div class="d-flex align-items-center">
-                <div class="d-flex align-items-center"><img src="../assets/img/icons/logo.png" alt="phoenix"
+                <div class="d-flex align-items-center"><img src="" alt="phoenix"
                         width="27" />
                     <p class="logo-text ms-2 d-none d-sm-block">phoenix</p>
                 </div>
             </div>
         </a>
     </div>
-    <div class="collapse navbar-collapse navbar-top-collapse order-1 order-lg-0 justify-content-center"
+    <div class="order-1 collapse navbar-collapse navbar-top-collapse order-lg-0 justify-content-center"
         id="navbarTopCollapse">
         {{-- <ul class="navbar-nav navbar-nav-top" data-dropdown-on-hover="data-dropdown-on-hover">
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" data-bs-toggle="dropdown"
@@ -3475,7 +3079,7 @@
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" data-bs-toggle="dropdown"
                     data-bs-auto-close="outside" href="#!" role="button" aria-haspopup="true"
                     aria-expanded="false"><span class="uil fs-0 me-2 uil-puzzle-piece"></span>Modules</a>
-                <ul class="dropdown-menu navbar-dropdown-caret dropdown-menu-card py-0">
+                <ul class="py-0 dropdown-menu navbar-dropdown-caret dropdown-menu-card">
                     <div class="border-0 scrollbar" style="max-height: 60vh;">
                         <div class="px-3 pt-4 pb-3 img-dropdown">
                             <div class="row gx-4 gy-5">
@@ -3513,7 +3117,7 @@
                                         href="https://prium.github.io/phoenix/v1.11.0/modules/forms/validation.html">Validation</a><a
                                         class="dropdown-link"
                                         href="https://prium.github.io/phoenix/v1.11.0/modules/forms/wizard.html">Wizard</a>
-                                    <div class="dropdown-item-group mt-5"><span class="me-2" data-feather="grid"
+                                    <div class="mt-5 dropdown-item-group"><span class="me-2" data-feather="grid"
                                             style="stroke-width:2;"></span>
                                         <h6 class="dropdown-item-title">Icons</h6>
                                     </div><a class="dropdown-link"
@@ -3522,7 +3126,7 @@
                                         href="https://prium.github.io/phoenix/v1.11.0/modules/icons/font-awesome.html">Font
                                         awesome</a><a class="dropdown-link"
                                         href="https://prium.github.io/phoenix/v1.11.0/modules/icons/unicons.html">Unicons</a>
-                                    <div class="dropdown-item-group mt-5"><span class="me-2"
+                                    <div class="mt-5 dropdown-item-group"><span class="me-2"
                                             data-feather="bar-chart-2" style="stroke-width:2;"></span>
                                         <h6 class="dropdown-item-title">ECharts</h6>
                                     </div><a class="dropdown-link"
@@ -3618,7 +3222,7 @@
                                         tables</a><a class="dropdown-link"
                                         href="https://prium.github.io/phoenix/v1.11.0/modules/tables/bulk-select.html">Bulk
                                         Select</a>
-                                    <div class="dropdown-item-group mt-5"><span class="me-2" data-feather="tool"
+                                    <div class="mt-5 dropdown-item-group"><span class="me-2" data-feather="tool"
                                             style="stroke-width:2;"></span>
                                         <h6 class="dropdown-item-title">Utilities</h6>
                                     </div><a class="dropdown-link"
@@ -3741,9 +3345,9 @@
             </li>
         </ul> --}}
     </div>
-    <ul class="navbar-nav navbar-nav-icons flex-row">
+    <ul class="flex-row navbar-nav navbar-nav-icons">
         {{-- <li class="nav-item">
-            <div class="theme-control-toggle fa-icon-wait px-2"><input
+            <div class="px-2 theme-control-toggle fa-icon-wait"><input
                     class="form-check-input ms-0 theme-control-toggle-input" id="themeControlToggle"
                     data-theme-control="phoenixTheme" type="checkbox" value="dark" /><label
                     class="mb-0 theme-control-toggle-label theme-control-toggle-light" data-bs-toggle="tooltip"
@@ -3760,21 +3364,21 @@
             <a class="nav-link" data-bs-toggle="dropdown" data-bs-auto-close="outside" href="#"
                 role="button" aria-haspopup="true" aria-expanded="false"><span data-feather="bell"
                     style="height:20px;width:20px;"></span></a>
-            <div class="dropdown-menu dropdown-menu-end notification-dropdown-menu py-0 shadow border border-300 navbar-dropdown-caret"
+            <div class="py-0 border shadow dropdown-menu dropdown-menu-end notification-dropdown-menu border-300 navbar-dropdown-caret"
                 id="navbarDropdownNotfication" aria-labelledby="navbarDropdownNotfication">
-                <div class="card position-relative border-0">
-                    <div class="card-header p-2">
+                <div class="border-0 card position-relative">
+                    <div class="p-2 card-header">
                         <div class="d-flex justify-content-between">
-                            <h5 class="text-black mb-0">Notificatons</h5><button
-                                class="btn btn-link p-0 fs--1 fw-normal" type="button">Mark all as
+                            <h5 class="mb-0 text-black">Notificatons</h5><button
+                                class="p-0 btn btn-link fs--1 fw-normal" type="button">Mark all as
                                 read</button>
                         </div>
                     </div>
-                    <div class="card-body p-0">
+                    <div class="p-0 card-body">
                         <div class="scrollbar-overlay" style="height: 27rem;">
                             <div class="border-300">
                                 <div
-                                    class="px-2 px-sm-3 py-3 border-300 notification-card position-relative read border-bottom">
+                                    class="px-2 py-3 px-sm-3 border-300 notification-card position-relative read border-bottom">
                                     <div class="d-flex align-items-center justify-content-between position-relative">
                                         <div class="d-flex">
                                             <div class="avatar avatar-m status-online me-3"><img
@@ -3782,31 +3386,31 @@
                                                     src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/30.webp"
                                                     alt="" /></div>
                                             <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Jessie Samson</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
+                                                <h4 class="text-black fs--1">Jessie Samson</h4>
+                                                <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal"><span
                                                         class='me-1 fs--2'>💬</span>Mentioned you in a
                                                     comment.<span class="ms-2 text-400 fw-bold fs--2">10m</span>
                                                 </p>
-                                                <p class="text-800 fs--1 mb-0"><span
+                                                <p class="mb-0 text-800 fs--1"><span
                                                         class="me-1 fas fa-clock"></span><span class="fw-bold">10:41
                                                         AM </span>August 7,2021</p>
                                             </div>
                                         </div>
                                         <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                 data-stop-propagation="data-stop-propagation"
                                                 data-bs-toggle="dropdown" data-boundary="window"
                                                 data-bs-reference="parent" type="button" aria-haspopup="true"
                                                 aria-expanded="false"><span
                                                     class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                            <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                     class="dropdown-item" href="#!">Mark as
                                                     unread</a></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div
-                                    class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
+                                    class="px-2 py-3 px-sm-3 border-300 notification-card position-relative unread border-bottom">
                                     <div class="d-flex align-items-center justify-content-between position-relative">
                                         <div class="d-flex">
                                             <div class="avatar avatar-m status-online me-3">
@@ -3814,30 +3418,30 @@
                                                 </div>
                                             </div>
                                             <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Jane Foster</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
+                                                <h4 class="text-black fs--1">Jane Foster</h4>
+                                                <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal"><span
                                                         class='me-1 fs--2'>📅</span>Created an event.<span
                                                         class="ms-2 text-400 fw-bold fs--2">20m</span></p>
-                                                <p class="text-800 fs--1 mb-0"><span
+                                                <p class="mb-0 text-800 fs--1"><span
                                                         class="me-1 fas fa-clock"></span><span class="fw-bold">10:20
                                                         AM </span>August 7,2021</p>
                                             </div>
                                         </div>
                                         <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                 data-stop-propagation="data-stop-propagation"
                                                 data-bs-toggle="dropdown" data-boundary="window"
                                                 data-bs-reference="parent" type="button" aria-haspopup="true"
                                                 aria-expanded="false"><span
                                                     class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                            <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                     class="dropdown-item" href="#!">Mark as
                                                     unread</a></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div
-                                    class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
+                                    class="px-2 py-3 px-sm-3 border-300 notification-card position-relative unread border-bottom">
                                     <div class="d-flex align-items-center justify-content-between position-relative">
                                         <div class="d-flex">
                                             <div class="avatar avatar-m status-online me-3"><img
@@ -3845,24 +3449,24 @@
                                                     src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/avatar.webp"
                                                     alt="" /></div>
                                             <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Jessie Samson</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
+                                                <h4 class="text-black fs--1">Jessie Samson</h4>
+                                                <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal"><span
                                                         class='me-1 fs--2'>👍</span>Liked your
                                                     comment.<span class="ms-2 text-400 fw-bold fs--2">1h</span>
                                                 </p>
-                                                <p class="text-800 fs--1 mb-0"><span
+                                                <p class="mb-0 text-800 fs--1"><span
                                                         class="me-1 fas fa-clock"></span><span class="fw-bold">9:30
                                                         AM </span>August 7,2021</p>
                                             </div>
                                         </div>
                                         <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                 data-stop-propagation="data-stop-propagation"
                                                 data-bs-toggle="dropdown" data-boundary="window"
                                                 data-bs-reference="parent" type="button" aria-haspopup="true"
                                                 aria-expanded="false"><span
                                                     class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                            <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                     class="dropdown-item" href="#!">Mark as
                                                     unread</a></div>
                                         </div>
@@ -3871,7 +3475,7 @@
                             </div>
                             <div class="border-300">
                                 <div
-                                    class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
+                                    class="px-2 py-3 px-sm-3 border-300 notification-card position-relative unread border-bottom">
                                     <div class="d-flex align-items-center justify-content-between position-relative">
                                         <div class="d-flex">
                                             <div class="avatar avatar-m status-online me-3"><img
@@ -3879,30 +3483,30 @@
                                                     src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/57.webp"
                                                     alt="" /></div>
                                             <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Kiera Anderson</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
+                                                <h4 class="text-black fs--1">Kiera Anderson</h4>
+                                                <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal"><span
                                                         class='me-1 fs--2'>💬</span>Mentioned you in a
                                                     comment.<span class="ms-2 text-400 fw-bold fs--2"></span></p>
-                                                <p class="text-800 fs--1 mb-0"><span
+                                                <p class="mb-0 text-800 fs--1"><span
                                                         class="me-1 fas fa-clock"></span><span class="fw-bold">9:11
                                                         AM </span>August 7,2021</p>
                                             </div>
                                         </div>
                                         <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                 data-stop-propagation="data-stop-propagation"
                                                 data-bs-toggle="dropdown" data-boundary="window"
                                                 data-bs-reference="parent" type="button" aria-haspopup="true"
                                                 aria-expanded="false"><span
                                                     class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                            <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                     class="dropdown-item" href="#!">Mark as
                                                     unread</a></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div
-                                    class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
+                                    class="px-2 py-3 px-sm-3 border-300 notification-card position-relative unread border-bottom">
                                     <div class="d-flex align-items-center justify-content-between position-relative">
                                         <div class="d-flex">
                                             <div class="avatar avatar-m status-online me-3"><img
@@ -3910,29 +3514,29 @@
                                                     src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/59.webp"
                                                     alt="" /></div>
                                             <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Herman Carter</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
+                                                <h4 class="text-black fs--1">Herman Carter</h4>
+                                                <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal"><span
                                                         class='me-1 fs--2'>👤</span>Tagged you in a
                                                     comment.<span class="ms-2 text-400 fw-bold fs--2"></span></p>
-                                                <p class="text-800 fs--1 mb-0"><span
+                                                <p class="mb-0 text-800 fs--1"><span
                                                         class="me-1 fas fa-clock"></span><span class="fw-bold">10:58
                                                         PM </span>August 7,2021</p>
                                             </div>
                                         </div>
                                         <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                 data-stop-propagation="data-stop-propagation"
                                                 data-bs-toggle="dropdown" data-boundary="window"
                                                 data-bs-reference="parent" type="button" aria-haspopup="true"
                                                 aria-expanded="false"><span
                                                     class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                            <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                     class="dropdown-item" href="#!">Mark as
                                                     unread</a></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="px-2 px-sm-3 py-3 border-300 notification-card position-relative read ">
+                                <div class="px-2 py-3 px-sm-3 border-300 notification-card position-relative read ">
                                     <div class="d-flex align-items-center justify-content-between position-relative">
                                         <div class="d-flex">
                                             <div class="avatar avatar-m status-online me-3"><img
@@ -3940,23 +3544,23 @@
                                                     src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/58.webp"
                                                     alt="" /></div>
                                             <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Benjamin Button</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
+                                                <h4 class="text-black fs--1">Benjamin Button</h4>
+                                                <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal"><span
                                                         class='me-1 fs--2'>👍</span>Liked your
                                                     comment.<span class="ms-2 text-400 fw-bold fs--2"></span></p>
-                                                <p class="text-800 fs--1 mb-0"><span
+                                                <p class="mb-0 text-800 fs--1"><span
                                                         class="me-1 fas fa-clock"></span><span class="fw-bold">10:18
                                                         AM </span>August 7,2021</p>
                                             </div>
                                         </div>
                                         <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                 data-stop-propagation="data-stop-propagation"
                                                 data-bs-toggle="dropdown" data-boundary="window"
                                                 data-bs-reference="parent" type="button" aria-haspopup="true"
                                                 aria-expanded="false"><span
                                                     class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                            <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                     class="dropdown-item" href="#!">Mark as
                                                     unread</a></div>
                                         </div>
@@ -3965,7 +3569,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer p-0 border-top border-0">
+                    <div class="p-0 border-0 card-footer border-top">
                         <div class="my-2 text-center fw-bold fs--2 text-600"><a class="fw-bolder"
                                 href="https://prium.github.io/phoenix/v1.11.0/pages/notifications.html">Notification
                                 history</a></div>
@@ -3997,108 +3601,108 @@
                     <circle cx="14" cy="2" r="2" fill="currentColor">
                     </circle>
                 </svg></a>
-            <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-nide-dots shadow border border-300"
+            <div class="py-0 border shadow dropdown-menu dropdown-menu-end navbar-dropdown-caret dropdown-nide-dots border-300"
                 aria-labelledby="navbarDropdownNindeDots">
-                <div class="card bg-white position-relative border-0">
-                    <div class="card-body pt-3 px-3 pb-0 overflow-auto scrollbar" style="height: 20rem;">
-                        <div class="row text-center align-items-center gx-0 gy-0">
+                <div class="bg-white border-0 card position-relative">
+                    <div class="px-3 pt-3 pb-0 overflow-auto card-body scrollbar" style="height: 20rem;">
+                        <div class="text-center row align-items-center gx-0 gy-0">
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/behance.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Behance</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Behance</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-cloud.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Cloud</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Cloud</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/slack.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Slack</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Slack</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/gitlab.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Gitlab</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Gitlab</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/bitbucket.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">BitBucket</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">BitBucket</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-drive.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Drive</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Drive</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/trello.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Trello</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Trello</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/figma.webp"
                                         alt="" width="20" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Figma</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Figma</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/twitter.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Twitter</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Twitter</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/pinterest.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Pinterest</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Pinterest</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/ln.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Linkedin</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Linkedin</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-maps.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Maps</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Maps</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-photos.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Photos</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Photos</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/spotify.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Spotify</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Spotify</p>
                                 </a></div>
                         </div>
                     </div>
@@ -4114,11 +3718,11 @@
                         alt="" />
                 </div>
             </a>
-            <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-profile shadow border border-300"
+            <div class="py-0 border shadow dropdown-menu dropdown-menu-end navbar-dropdown-caret dropdown-profile border-300"
                 aria-labelledby="navbarDropdownUser">
-                <div class="card position-relative border-0">
-                    <div class="card-body p-0">
-                        <div class="text-center pt-4 pb-3">
+                <div class="border-0 card position-relative">
+                    <div class="p-0 card-body">
+                        <div class="pt-4 pb-3 text-center">
                             <div class="avatar avatar-xl ">
                                 <img class="rounded-circle "
                                     src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/72x72/57.webp"
@@ -4126,34 +3730,34 @@
                             </div>
                             <h6 class="mt-2 text-black">Jerry Seinfield</h6>
                         </div>
-                        <div class="mb-3 mx-3"><input class="form-control form-control-sm" id="statusUpdateInput"
+                        <div class="mx-3 mb-3"><input class="form-control form-control-sm" id="statusUpdateInput"
                                 type="text" placeholder="Update your status" />
                         </div>
                     </div>
                     <div class="overflow-auto scrollbar" style="height: 10rem;">
-                        <ul class="nav d-flex flex-column mb-2 pb-1">
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                        <ul class="pb-1 mb-2 nav d-flex flex-column">
+                            <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                         class="me-2 text-900" data-feather="user"></span><span>Profile</span></a>
                             </li>
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"><span
+                            <li class="nav-item"><a class="px-3 nav-link" href="#!"><span
                                         class="me-2 text-900" data-feather="pie-chart"></span>Dashboard</a></li>
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                            <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                         class="me-2 text-900" data-feather="lock"></span>Posts &amp;
                                     Activity</a></li>
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                            <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                         class="me-2 text-900" data-feather="settings"></span>Settings
                                     &amp; Privacy </a></li>
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                            <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                         class="me-2 text-900" data-feather="help-circle"></span>Help
                                     Center</a></li>
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                            <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                         class="me-2 text-900" data-feather="globe"></span>Language</a>
                             </li>
                         </ul>
                     </div>
-                    <div class="card-footer p-0 border-top">
-                        <ul class="nav d-flex flex-column my-3">
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                    <div class="p-0 card-footer border-top">
+                        <ul class="my-3 nav d-flex flex-column">
+                            <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                         class="me-2 text-900" data-feather="user-plus"></span>Add
                                     another account</a></li>
                         </ul>
@@ -4162,7 +3766,7 @@
                                 href="#!"> <span class="me-2" data-feather="log-out">
                                 </span>Sign out</a></div>
                         <div class="my-2 text-center fw-bold fs--2 text-600"><a class="text-600 me-1"
-                                href="#!">Privacy policy</a>&bull;<a class="text-600 mx-1"
+                                href="#!">Privacy policy</a>&bull;<a class="mx-1 text-600"
                                 href="#!">Terms</a>&bull;<a class="text-600 ms-1" href="#!">Cookies</a>
                         </div>
                     </div>
@@ -4178,10 +3782,10 @@
             data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" type="button"
             aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span
                 class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
-        <a class="navbar-brand navbar-brand" href="https://prium.github.io/phoenix/v1.11.0/index.html">phoenix
+        <a class="navbar-brand" href="https://prium.github.io/phoenix/v1.11.0/index.html">phoenix
             <span class="text-1000 d-none d-sm-inline">slim</span></a>
     </div>
-    <div class="collapse navbar-collapse navbar-top-collapse order-1 order-lg-0 justify-content-center"
+    <div class="order-1 collapse navbar-collapse navbar-top-collapse order-lg-0 justify-content-center"
         id="navbarTopCollapse">
         <ul class="navbar-nav navbar-nav-top" data-dropdown-on-hover="data-dropdown-on-hover">
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" data-bs-toggle="dropdown"
@@ -4785,7 +4389,7 @@
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle lh-1" data-bs-toggle="dropdown"
                     data-bs-auto-close="outside" href="#!" role="button" aria-haspopup="true"
                     aria-expanded="false"><span class="uil fs-0 me-2 uil-puzzle-piece"></span>Modules</a>
-                <ul class="dropdown-menu navbar-dropdown-caret dropdown-menu-card py-0">
+                <ul class="py-0 dropdown-menu navbar-dropdown-caret dropdown-menu-card">
                     <div class="border-0 scrollbar" style="max-height: 60vh;">
                         <div class="px-3 pt-4 pb-3 img-dropdown">
                             <div class="row gx-4 gy-5">
@@ -4823,7 +4427,7 @@
                                         href="https://prium.github.io/phoenix/v1.11.0/modules/forms/validation.html">Validation</a><a
                                         class="dropdown-link"
                                         href="https://prium.github.io/phoenix/v1.11.0/modules/forms/wizard.html">Wizard</a>
-                                    <div class="dropdown-item-group mt-5"><span class="me-2" data-feather="grid"
+                                    <div class="mt-5 dropdown-item-group"><span class="me-2" data-feather="grid"
                                             style="stroke-width:2;"></span>
                                         <h6 class="dropdown-item-title">Icons</h6>
                                     </div><a class="dropdown-link"
@@ -4832,7 +4436,7 @@
                                         href="https://prium.github.io/phoenix/v1.11.0/modules/icons/font-awesome.html">Font
                                         awesome</a><a class="dropdown-link"
                                         href="https://prium.github.io/phoenix/v1.11.0/modules/icons/unicons.html">Unicons</a>
-                                    <div class="dropdown-item-group mt-5"><span class="me-2"
+                                    <div class="mt-5 dropdown-item-group"><span class="me-2"
                                             data-feather="bar-chart-2" style="stroke-width:2;"></span>
                                         <h6 class="dropdown-item-title">ECharts</h6>
                                     </div><a class="dropdown-link"
@@ -4928,7 +4532,7 @@
                                         tables</a><a class="dropdown-link"
                                         href="https://prium.github.io/phoenix/v1.11.0/modules/tables/bulk-select.html">Bulk
                                         Select</a>
-                                    <div class="dropdown-item-group mt-5"><span class="me-2" data-feather="tool"
+                                    <div class="mt-5 dropdown-item-group"><span class="me-2" data-feather="tool"
                                             style="stroke-width:2;"></span>
                                         <h6 class="dropdown-item-title">Utilities</h6>
                                     </div><a class="dropdown-link"
@@ -5051,7 +4655,7 @@
             </li>
         </ul>
     </div>
-    <ul class="navbar-nav navbar-nav-icons flex-row">
+    <ul class="flex-row navbar-nav navbar-nav-icons">
         {{-- <li class="nav-item d-none">
             <div class="theme-control-toggle fa-ion-wait pe-2 theme-control-toggle-slim"><input
                     class="form-check-input ms-0 theme-control-toggle-input" id="themeControlToggle"
@@ -5071,21 +4675,21 @@
             <a class="nav-link" id="navbarDropdownNotification" data-bs-toggle="dropdown"
                 data-bs-auto-close="outside" href="#" role="button" aria-haspopup="true"
                 aria-expanded="false"><span data-feather="bell" style="height:12px;width:12px;"></span></a>
-            <div class="dropdown-menu dropdown-menu-end notification-dropdown-menu py-0 shadow border border-300 navbar-dropdown-caret"
+            <div class="py-0 border shadow dropdown-menu dropdown-menu-end notification-dropdown-menu border-300 navbar-dropdown-caret"
                 id="navbarDropdownNotfication" aria-labelledby="navbarDropdownNotfication">
-                <div class="card position-relative border-0">
-                    <div class="card-header p-2">
+                <div class="border-0 card position-relative">
+                    <div class="p-2 card-header">
                         <div class="d-flex justify-content-between">
-                            <h5 class="text-black mb-0">Notificatons</h5><button
-                                class="btn btn-link p-0 fs--1 fw-normal" type="button">Mark all as
+                            <h5 class="mb-0 text-black">Notificatons</h5><button
+                                class="p-0 btn btn-link fs--1 fw-normal" type="button">Mark all as
                                 read</button>
                         </div>
                     </div>
-                    <div class="card-body p-0">
+                    <div class="p-0 card-body">
                         <div class="scrollbar-overlay" style="height: 27rem;">
                             <div class="border-300">
                                 <div
-                                    class="px-2 px-sm-3 py-3 border-300 notification-card position-relative read border-bottom">
+                                    class="px-2 py-3 px-sm-3 border-300 notification-card position-relative read border-bottom">
                                     <div class="d-flex align-items-center justify-content-between position-relative">
                                         <div class="d-flex">
                                             <div class="avatar avatar-m status-online me-3"><img
@@ -5093,31 +4697,31 @@
                                                     src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/30.webp"
                                                     alt="" /></div>
                                             <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Jessie Samson</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
+                                                <h4 class="text-black fs--1">Jessie Samson</h4>
+                                                <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal"><span
                                                         class='me-1 fs--2'>💬</span>Mentioned you in a
                                                     comment.<span class="ms-2 text-400 fw-bold fs--2">10m</span>
                                                 </p>
-                                                <p class="text-800 fs--1 mb-0"><span
+                                                <p class="mb-0 text-800 fs--1"><span
                                                         class="me-1 fas fa-clock"></span><span class="fw-bold">10:41
                                                         AM </span>August 7,2021</p>
                                             </div>
                                         </div>
                                         <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                 data-stop-propagation="data-stop-propagation"
                                                 data-bs-toggle="dropdown" data-boundary="window"
                                                 data-bs-reference="parent" type="button" aria-haspopup="true"
                                                 aria-expanded="false"><span
                                                     class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                            <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                     class="dropdown-item" href="#!">Mark as
                                                     unread</a></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div
-                                    class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
+                                    class="px-2 py-3 px-sm-3 border-300 notification-card position-relative unread border-bottom">
                                     <div class="d-flex align-items-center justify-content-between position-relative">
                                         <div class="d-flex">
                                             <div class="avatar avatar-m status-online me-3">
@@ -5125,30 +4729,30 @@
                                                 </div>
                                             </div>
                                             <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Jane Foster</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
+                                                <h4 class="text-black fs--1">Jane Foster</h4>
+                                                <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal"><span
                                                         class='me-1 fs--2'>📅</span>Created an event.<span
                                                         class="ms-2 text-400 fw-bold fs--2">20m</span></p>
-                                                <p class="text-800 fs--1 mb-0"><span
+                                                <p class="mb-0 text-800 fs--1"><span
                                                         class="me-1 fas fa-clock"></span><span class="fw-bold">10:20
                                                         AM </span>August 7,2021</p>
                                             </div>
                                         </div>
                                         <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                 data-stop-propagation="data-stop-propagation"
                                                 data-bs-toggle="dropdown" data-boundary="window"
                                                 data-bs-reference="parent" type="button" aria-haspopup="true"
                                                 aria-expanded="false"><span
                                                     class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                            <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                     class="dropdown-item" href="#!">Mark as
                                                     unread</a></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div
-                                    class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
+                                    class="px-2 py-3 px-sm-3 border-300 notification-card position-relative unread border-bottom">
                                     <div class="d-flex align-items-center justify-content-between position-relative">
                                         <div class="d-flex">
                                             <div class="avatar avatar-m status-online me-3"><img
@@ -5156,24 +4760,24 @@
                                                     src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/avatar.webp"
                                                     alt="" /></div>
                                             <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Jessie Samson</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
+                                                <h4 class="text-black fs--1">Jessie Samson</h4>
+                                                <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal"><span
                                                         class='me-1 fs--2'>👍</span>Liked your
                                                     comment.<span class="ms-2 text-400 fw-bold fs--2">1h</span>
                                                 </p>
-                                                <p class="text-800 fs--1 mb-0"><span
+                                                <p class="mb-0 text-800 fs--1"><span
                                                         class="me-1 fas fa-clock"></span><span class="fw-bold">9:30
                                                         AM </span>August 7,2021</p>
                                             </div>
                                         </div>
                                         <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                 data-stop-propagation="data-stop-propagation"
                                                 data-bs-toggle="dropdown" data-boundary="window"
                                                 data-bs-reference="parent" type="button" aria-haspopup="true"
                                                 aria-expanded="false"><span
                                                     class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                            <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                     class="dropdown-item" href="#!">Mark as
                                                     unread</a></div>
                                         </div>
@@ -5182,7 +4786,7 @@
                             </div>
                             <div class="border-300">
                                 <div
-                                    class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
+                                    class="px-2 py-3 px-sm-3 border-300 notification-card position-relative unread border-bottom">
                                     <div class="d-flex align-items-center justify-content-between position-relative">
                                         <div class="d-flex">
                                             <div class="avatar avatar-m status-online me-3"><img
@@ -5190,30 +4794,30 @@
                                                     src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/57.webp"
                                                     alt="" /></div>
                                             <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Kiera Anderson</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
+                                                <h4 class="text-black fs--1">Kiera Anderson</h4>
+                                                <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal"><span
                                                         class='me-1 fs--2'>💬</span>Mentioned you in a
                                                     comment.<span class="ms-2 text-400 fw-bold fs--2"></span></p>
-                                                <p class="text-800 fs--1 mb-0"><span
+                                                <p class="mb-0 text-800 fs--1"><span
                                                         class="me-1 fas fa-clock"></span><span class="fw-bold">9:11
                                                         AM </span>August 7,2021</p>
                                             </div>
                                         </div>
                                         <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                 data-stop-propagation="data-stop-propagation"
                                                 data-bs-toggle="dropdown" data-boundary="window"
                                                 data-bs-reference="parent" type="button" aria-haspopup="true"
                                                 aria-expanded="false"><span
                                                     class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                            <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                     class="dropdown-item" href="#!">Mark as
                                                     unread</a></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div
-                                    class="px-2 px-sm-3 py-3 border-300 notification-card position-relative unread border-bottom">
+                                    class="px-2 py-3 px-sm-3 border-300 notification-card position-relative unread border-bottom">
                                     <div class="d-flex align-items-center justify-content-between position-relative">
                                         <div class="d-flex">
                                             <div class="avatar avatar-m status-online me-3"><img
@@ -5221,29 +4825,29 @@
                                                     src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/59.webp"
                                                     alt="" /></div>
                                             <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Herman Carter</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
+                                                <h4 class="text-black fs--1">Herman Carter</h4>
+                                                <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal"><span
                                                         class='me-1 fs--2'>👤</span>Tagged you in a
                                                     comment.<span class="ms-2 text-400 fw-bold fs--2"></span></p>
-                                                <p class="text-800 fs--1 mb-0"><span
+                                                <p class="mb-0 text-800 fs--1"><span
                                                         class="me-1 fas fa-clock"></span><span class="fw-bold">10:58
                                                         PM </span>August 7,2021</p>
                                             </div>
                                         </div>
                                         <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                 data-stop-propagation="data-stop-propagation"
                                                 data-bs-toggle="dropdown" data-boundary="window"
                                                 data-bs-reference="parent" type="button" aria-haspopup="true"
                                                 aria-expanded="false"><span
                                                     class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                            <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                     class="dropdown-item" href="#!">Mark as
                                                     unread</a></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="px-2 px-sm-3 py-3 border-300 notification-card position-relative read ">
+                                <div class="px-2 py-3 px-sm-3 border-300 notification-card position-relative read ">
                                     <div class="d-flex align-items-center justify-content-between position-relative">
                                         <div class="d-flex">
                                             <div class="avatar avatar-m status-online me-3"><img
@@ -5251,23 +4855,23 @@
                                                     src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/58.webp"
                                                     alt="" /></div>
                                             <div class="flex-1 me-sm-3">
-                                                <h4 class="fs--1 text-black">Benjamin Button</h4>
-                                                <p class="fs--1 text-1000 mb-2 mb-sm-3 fw-normal"><span
+                                                <h4 class="text-black fs--1">Benjamin Button</h4>
+                                                <p class="mb-2 fs--1 text-1000 mb-sm-3 fw-normal"><span
                                                         class='me-1 fs--2'>👍</span>Liked your
                                                     comment.<span class="ms-2 text-400 fw-bold fs--2"></span></p>
-                                                <p class="text-800 fs--1 mb-0"><span
+                                                <p class="mb-0 text-800 fs--1"><span
                                                         class="me-1 fas fa-clock"></span><span class="fw-bold">10:18
                                                         AM </span>August 7,2021</p>
                                             </div>
                                         </div>
                                         <div class="font-sans-serif d-none d-sm-block"><button
-                                                class="btn fs--2 btn-sm dropdown-toggle dropdown-caret-none transition-none notification-dropdown-toggle"
+                                                class="transition-none btn fs--2 btn-sm dropdown-toggle dropdown-caret-none notification-dropdown-toggle"
                                                 data-stop-propagation="data-stop-propagation"
                                                 data-bs-toggle="dropdown" data-boundary="window"
                                                 data-bs-reference="parent" type="button" aria-haspopup="true"
                                                 aria-expanded="false"><span
                                                     class="fas fa-ellipsis-h fs--2 text-900"></span></button>
-                                            <div class="dropdown-menu dropdown-menu-end py-2"><a
+                                            <div class="py-2 dropdown-menu dropdown-menu-end"><a
                                                     class="dropdown-item" href="#!">Mark as
                                                     unread</a></div>
                                         </div>
@@ -5276,7 +4880,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer p-0 border-top border-0">
+                    <div class="p-0 border-0 card-footer border-top">
                         <div class="my-2 text-center fw-bold fs--2 text-600"><a class="fw-bolder"
                                 href="https://prium.github.io/phoenix/v1.11.0/pages/notifications.html">Notification
                                 history</a></div>
@@ -5308,108 +4912,108 @@
                     <circle cx="14" cy="2" r="2" fill="currentColor">
                     </circle>
                 </svg></a>
-            <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-nide-dots shadow border border-300"
+            <div class="py-0 border shadow dropdown-menu dropdown-menu-end navbar-dropdown-caret dropdown-nide-dots border-300"
                 aria-labelledby="navbarDropdownNindeDots">
-                <div class="card bg-white position-relative border-0">
-                    <div class="card-body pt-3 px-3 pb-0 overflow-auto scrollbar" style="height: 20rem;">
-                        <div class="row text-center align-items-center gx-0 gy-0">
+                <div class="bg-white border-0 card position-relative">
+                    <div class="px-3 pt-3 pb-0 overflow-auto card-body scrollbar" style="height: 20rem;">
+                        <div class="text-center row align-items-center gx-0 gy-0">
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/behance.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Behance</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Behance</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-cloud.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Cloud</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Cloud</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/slack.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Slack</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Slack</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/gitlab.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Gitlab</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Gitlab</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/bitbucket.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">BitBucket</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">BitBucket</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-drive.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Drive</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Drive</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/trello.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Trello</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Trello</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/figma.webp"
                                         alt="" width="20" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Figma</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Figma</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/twitter.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Twitter</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Twitter</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/pinterest.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Pinterest</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Pinterest</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/ln.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Linkedin</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Linkedin</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-maps.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Maps</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Maps</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/google-photos.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Photos</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Photos</p>
                                 </a></div>
                             <div class="col-4"><a
-                                    class="d-block hover-bg-200 p-2 rounded-3 text-center text-decoration-none mb-3"
+                                    class="p-2 mb-3 text-center d-block hover-bg-200 rounded-3 text-decoration-none"
                                     href="#!"><img
                                         src="https://prium.github.io/phoenix/v1.11.0/assets/img/nav-icons/spotify.webp"
                                         alt="" width="30" />
-                                    <p class="mb-0 text-black text-truncate fs--2 mt-1 pt-1">Spotify</p>
+                                    <p class="pt-1 mt-1 mb-0 text-black text-truncate fs--2">Spotify</p>
                                 </a></div>
                         </div>
                     </div>
@@ -5420,11 +5024,11 @@
                 data-bs-toggle="dropdown" data-bs-auto-close="outside" href="#!" role="button"
                 aria-haspopup="true" aria-expanded="false">Olivia <span
                     class="fa-solid fa-chevron-down fs--2"></span></a>
-            <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-profile shadow border border-300"
+            <div class="py-0 border shadow dropdown-menu dropdown-menu-end navbar-dropdown-caret dropdown-profile border-300"
                 aria-labelledby="navbarDropdownUser">
-                <div class="card position-relative border-0">
-                    <div class="card-body p-0">
-                        <div class="text-center pt-4 pb-3">
+                <div class="border-0 card position-relative">
+                    <div class="p-0 card-body">
+                        <div class="pt-4 pb-3 text-center">
                             <div class="avatar avatar-xl ">
                                 <img class="rounded-circle "
                                     src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/72x72/57.webp"
@@ -5432,34 +5036,34 @@
                             </div>
                             <h6 class="mt-2 text-black">Jerry Seinfield</h6>
                         </div>
-                        <div class="mb-3 mx-3"><input class="form-control form-control-sm" id="statusUpdateInput"
+                        <div class="mx-3 mb-3"><input class="form-control form-control-sm" id="statusUpdateInput"
                                 type="text" placeholder="Update your status" />
                         </div>
                     </div>
                     <div class="overflow-auto scrollbar" style="height: 10rem;">
-                        <ul class="nav d-flex flex-column mb-2 pb-1">
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                        <ul class="pb-1 mb-2 nav d-flex flex-column">
+                            <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                         class="me-2 text-900" data-feather="user"></span><span>Profile</span></a>
                             </li>
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"><span
+                            <li class="nav-item"><a class="px-3 nav-link" href="#!"><span
                                         class="me-2 text-900" data-feather="pie-chart"></span>Dashboard</a></li>
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                            <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                         class="me-2 text-900" data-feather="lock"></span>Posts &amp;
                                     Activity</a></li>
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                            <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                         class="me-2 text-900" data-feather="settings"></span>Settings
                                     &amp; Privacy </a></li>
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                            <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                         class="me-2 text-900" data-feather="help-circle"></span>Help
                                     Center</a></li>
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                            <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                         class="me-2 text-900" data-feather="globe"></span>Language</a>
                             </li>
                         </ul>
                     </div>
-                    <div class="card-footer p-0 border-top">
-                        <ul class="nav d-flex flex-column my-3">
-                            <li class="nav-item"><a class="nav-link px-3" href="#!"> <span
+                    <div class="p-0 card-footer border-top">
+                        <ul class="my-3 nav d-flex flex-column">
+                            <li class="nav-item"><a class="px-3 nav-link" href="#!"> <span
                                         class="me-2 text-900" data-feather="user-plus"></span>Add
                                     another account</a></li>
                         </ul>
@@ -5468,7 +5072,7 @@
                                 href="#!"> <span class="me-2" data-feather="log-out">
                                 </span>Sign out</a></div>
                         <div class="my-2 text-center fw-bold fs--2 text-600"><a class="text-600 me-1"
-                                href="#!">Privacy policy</a>&bull;<a class="text-600 mx-1"
+                                href="#!">Privacy policy</a>&bull;<a class="mx-1 text-600"
                                 href="#!">Terms</a>&bull;<a class="text-600 ms-1" href="#!">Cookies</a>
                         </div>
                     </div>
@@ -5477,11 +5081,14 @@
         </li>
     </ul>
 </nav>
+
+
+
 <div class="modal fade" id="searchBoxModal" data-bs-backdrop="true" data-phoenix-modal="data-phoenix-modal"
     aria-hidden="true" tabindex="-1" style="--phoenix-backdrop-opacity: 1;">
     <div class="modal-dialog">
         <div class="modal-content mt-15 rounded-pill">
-            <div class="modal-body p-0">
+            <div class="p-0 modal-body">
                 <div class="search-box navbar-top-search-box" data-list='{"valueNames":["title"]}'
                     style="width: auto;">
                     <form class="position-relative" data-bs-toggle="search" data-bs-display="static">
@@ -5489,16 +5096,16 @@
                             type="search" aria-label="Search" placeholder="Search..." />
                         <span class="fas fa-search search-box-icon"></span>
                     </form>
-                    <div class="btn-close position-absolute end-0 top-50 translate-middle cursor-pointer shadow-none"
-                        data-bs-dismiss="search"><button class="btn btn-link btn-close-falcon p-0"
+                    <div class="shadow-none cursor-pointer btn-close position-absolute end-0 top-50 translate-middle"
+                        data-bs-dismiss="search"><button class="p-0 btn btn-link btn-close-falcon"
                             aria-label="Close"></button></div>
-                    <div class="dropdown-menu border border-300 font-base start-0 py-0 overflow-hidden w-100">
+                    <div class="py-0 overflow-hidden border dropdown-menu border-300 font-base start-0 w-100">
                         <div class="scrollbar-overlay" style="max-height: 30rem;">
-                            <div class="list pb-3">
-                                <h6 class="dropdown-header text-1000 fs--2 py-2">24 <span
+                            <div class="pb-3 list">
+                                <h6 class="py-2 dropdown-header text-1000 fs--2">24 <span
                                         class="text-500">results</span></h6>
-                                <hr class="text-200 my-0" />
-                                <h6 class="dropdown-header text-1000 fs--1 border-bottom border-200 py-2 lh-sm">
+                                <hr class="my-0 text-200" />
+                                <h6 class="py-2 dropdown-header text-1000 fs--1 border-bottom border-200 lh-sm">
                                     Recently Searched </h6>
                                 <div class="py-2"><a class="dropdown-item"
                                         href="https://prium.github.io/phoenix/v1.11.0/apps/e-commerce/landing/product-details.html">
@@ -5519,35 +5126,35 @@
                                         </div>
                                     </a>
                                 </div>
-                                <hr class="text-200 my-0" />
-                                <h6 class="dropdown-header text-1000 fs--1 border-bottom border-200 py-2 lh-sm">
+                                <hr class="my-0 text-200" />
+                                <h6 class="py-2 dropdown-header text-1000 fs--1 border-bottom border-200 lh-sm">
                                     Products</h6>
-                                <div class="py-2"><a class="dropdown-item py-2 d-flex align-items-center"
+                                <div class="py-2"><a class="py-2 dropdown-item d-flex align-items-center"
                                         href="https://prium.github.io/phoenix/v1.11.0/apps/e-commerce/landing/product-details.html">
                                         <div class="file-thumbnail me-2"><img
                                                 class="h-100 w-100 fit-cover rounded-3"
                                                 src="../assets/img/products/60x60/3.png" alt="" /></div>
                                         <div class="flex-1">
                                             <h6 class="mb-0 text-1000 title">MacBook Air - 13″</h6>
-                                            <p class="fs--2 mb-0 d-flex text-700"><span
+                                            <p class="mb-0 fs--2 d-flex text-700"><span
                                                     class="fw-medium text-600">8GB Memory - 1.6GHz - 128GB
                                                     Storage</span></p>
                                         </div>
                                     </a>
-                                    <a class="dropdown-item py-2 d-flex align-items-center"
+                                    <a class="py-2 dropdown-item d-flex align-items-center"
                                         href="https://prium.github.io/phoenix/v1.11.0/apps/e-commerce/landing/product-details.html">
                                         <div class="file-thumbnail me-2"><img class="img-fluid"
                                                 src="../assets/img/products/60x60/3.png" alt="" /></div>
                                         <div class="flex-1">
                                             <h6 class="mb-0 text-1000 title">MacBook Pro - 13″</h6>
-                                            <p class="fs--2 mb-0 d-flex text-700"><span
+                                            <p class="mb-0 fs--2 d-flex text-700"><span
                                                     class="fw-medium text-600 ms-2">30 Sep at 12:30
                                                     PM</span></p>
                                         </div>
                                     </a>
                                 </div>
-                                <hr class="text-200 my-0" />
-                                <h6 class="dropdown-header text-1000 fs--1 border-bottom border-200 py-2 lh-sm">
+                                <hr class="my-0 text-200" />
+                                <h6 class="py-2 dropdown-header text-1000 fs--1 border-bottom border-200 lh-sm">
                                     Quick Links</h6>
                                 <div class="py-2"><a class="dropdown-item"
                                         href="https://prium.github.io/phoenix/v1.11.0/apps/e-commerce/landing/product-details.html">
@@ -5568,8 +5175,8 @@
                                         </div>
                                     </a>
                                 </div>
-                                <hr class="text-200 my-0" />
-                                <h6 class="dropdown-header text-1000 fs--1 border-bottom border-200 py-2 lh-sm">
+                                <hr class="my-0 text-200" />
+                                <h6 class="py-2 dropdown-header text-1000 fs--1 border-bottom border-200 lh-sm">
                                     Files</h6>
                                 <div class="py-2"><a class="dropdown-item"
                                         href="https://prium.github.io/phoenix/v1.11.0/apps/e-commerce/landing/product-details.html">
@@ -5599,36 +5206,36 @@
                                         </div>
                                     </a>
                                 </div>
-                                <hr class="text-200 my-0" />
-                                <h6 class="dropdown-header text-1000 fs--1 border-bottom border-200 py-2 lh-sm">
+                                <hr class="my-0 text-200" />
+                                <h6 class="py-2 dropdown-header text-1000 fs--1 border-bottom border-200 lh-sm">
                                     Members</h6>
-                                <div class="py-2"><a class="dropdown-item py-2 d-flex align-items-center"
+                                <div class="py-2"><a class="py-2 dropdown-item d-flex align-items-center"
                                         href="https://prium.github.io/phoenix/v1.11.0/pages/members.html">
-                                        <div class="avatar avatar-l status-online  me-2 text-900">
+                                        <div class="avatar avatar-l status-online me-2 text-900">
                                             <img class="rounded-circle "
                                                 src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/10.webp"
                                                 alt="" />
                                         </div>
                                         <div class="flex-1">
                                             <h6 class="mb-0 text-1000 title">Carry Anna</h6>
-                                            <p class="fs--2 mb-0 d-flex text-700">anna@technext.it</p>
+                                            <p class="mb-0 fs--2 d-flex text-700">anna@technext.it</p>
                                         </div>
                                     </a>
-                                    <a class="dropdown-item py-2 d-flex align-items-center"
+                                    <a class="py-2 dropdown-item d-flex align-items-center"
                                         href="https://prium.github.io/phoenix/v1.11.0/pages/members.html">
-                                        <div class="avatar avatar-l  me-2 text-900">
+                                        <div class="avatar avatar-l me-2 text-900">
                                             <img class="rounded-circle "
                                                 src="https://prium.github.io/phoenix/v1.11.0/assets/img/team/40x40/12.webp"
                                                 alt="" />
                                         </div>
                                         <div class="flex-1">
                                             <h6 class="mb-0 text-1000 title">John Smith</h6>
-                                            <p class="fs--2 mb-0 d-flex text-700">smith@technext.it</p>
+                                            <p class="mb-0 fs--2 d-flex text-700">smith@technext.it</p>
                                         </div>
                                     </a>
                                 </div>
-                                <hr class="text-200 my-0" />
-                                <h6 class="dropdown-header text-1000 fs--1 border-bottom border-200 py-2 lh-sm">
+                                <hr class="my-0 text-200" />
+                                <h6 class="py-2 dropdown-header text-1000 fs--1 border-bottom border-200 lh-sm">
                                     Related Searches</h6>
                                 <div class="py-2"><a class="dropdown-item"
                                         href="https://prium.github.io/phoenix/v1.11.0/apps/e-commerce/landing/product-details.html">

@@ -73,6 +73,7 @@ class BookBus extends Component
     public $payment_data = [];
     public $tax, $discount, $subtotal, $total;
     public $data_raw;
+    public $showloader = false;
     # ---------------------------------------------------------------------------- #
     #                            Livewire listeners here                           #
     # ---------------------------------------------------------------------------- #
@@ -99,7 +100,8 @@ class BookBus extends Component
         'updateOptions' => 'updateOptions',
         'loadOptions' => 'loadOptions',
         'sendPdf' => 'sendPdf',
-        'checkAvailalableBuses' => 'checkAvailalableBuses'
+        'checkAvailalableBuses' => 'checkAvailalableBuses',
+        'Error' => 'Error',
     ];
 
 
@@ -157,6 +159,34 @@ class BookBus extends Component
     }
 
 
+    public function calculateTax($percentage)
+    {
+        $amount = $this->collect['quantity'] * $this->collect['price'];
+        $getFinaltax = $amount * ($percentage / 100);
+        $this->collect['amount_raw'] =  $amount;
+        $this->collect['tax_raw'] = $getFinaltax;
+        $date = date('Y-m-d');
+        $check = ExchangeRate::where('fetch_date', $date)->get();
+        if ($check->count() == 0) {
+            $this->fetchData();
+        } else {
+            $this->exchange_rate = $check[0]->exchange_rate; // in usd
+        }
+
+        // calculations
+        $amount_in_usd = $this->collect['amount_raw'] * $this->exchange_rate;
+        $tax_in_usd = $this->collect['tax_raw'] * $this->exchange_rate;
+        $discount = $this->collect['discount_raw'] * $this->exchange_rate;
+        $subtotal = $amount_in_usd;
+        $total = $subtotal + $tax_in_usd + $discount;
+        $this->amount = $amount_in_usd;
+        $this->tax = $tax_in_usd;
+        $this->subtotal = number_format(round($subtotal, 2), 2);
+        $this->total = number_format(round($total, 2), 2);
+        $this->discount = $discount;
+    }
+
+
     public function validateData()
     {
 
@@ -197,31 +227,30 @@ class BookBus extends Component
                                     $fail("You already have an existing booking on this date/time.");
                                 } else {
 
+                                    $chosenDate = Carbon::parse($value)->format('Y-m-d');
+                                    $currentDate = Carbon::now()->format('Y-m-d H:i:s');
+                                    $time = Schedule::find($this->schedule)->check_in_time;
+                                    $scheduledDate = $chosenDate . ' ' . $time;
 
-                                    // $todayDate = Carbon::now();
-                                    // $currentDate = $todayDate->format('Y-m-d');
-                                    // if ($value == $currentDate) {
-
-                                    //     $scheduleTime = Carbon::parse(Schedule::find($this->schedule)->depart_time);
-                                    //     $currentDateTime = Carbon::now();
-
-
-                                    //     $schedules = Schedule::select('depart_time')->get();
-                                    //     $arr = $schedules->toArray();
+                                    $carbon = Carbon::parse($currentDate)->greaterThan(Carbon::parse($scheduledDate));
 
 
+                                    if (Carbon::parse($currentDate)->greaterThan(Carbon::parse($scheduledDate)) == true) {
+                                        $fail("Sorry, you can not book this bus right now. It is " . Carbon::now()->format('H:i A') . " now ");
+                                        //  dd("Current time is less than the given time");
 
+                                        $this->alert('warning', 'Sorry, you can not book this bus right now. It is ' . Carbon::now()->format('H:i A') . ' now');
+                                    }
 
-                                    //     if ($currentDateTime->greaterThan($scheduleTime) && $this->availability == true) {
-                                    //         $fail("Sorry, you can not book this bus right now. It is " . Carbon::now()->format('H:i A') . " now ");
-                                    //         //  dd("Current time is less than the given time");
-                                    //     }
-                                    // }
 
                                     $array =  $this->checkAvailalableBuses();
 
                                     if (empty($array)) {
                                         $fail("Bus not available, please try again later");
+
+                                        $this->alert('warning', 'Bus not available, please try again later', [
+                                            'timer' => 5000,
+                                        ]);
                                     } else {
                                         $this->resetErrorBag('date');
                                     }
@@ -249,7 +278,6 @@ class BookBus extends Component
             }
 
 
-
             ////////////////////////////////////////////////////////////////
 
             /* -------------------------------------------------------------------------- */
@@ -259,7 +287,7 @@ class BookBus extends Component
 
 
             if ($this->payment_method === 'paypal') {
-
+                // Collection of customer data
                 $this->collect = [
                     'full_name' => Customer::find($this->customer)->first_name . ' ' . Customer::find($this->customer)->last_name,
                     'email' => Customer::find($this->customer)->user->email,
@@ -281,29 +309,8 @@ class BookBus extends Component
 
                 // calculate price with tax
                 $tax = Company::find(1)->tax_percentage;
-                $amount = $this->collect['quantity'] * $this->collect['price'];
-                $getFinaltax = $amount * ($tax / 100);
-                $this->collect['amount_raw'] =  $amount;
-                $this->collect['tax_raw'] = $getFinaltax;
-                $date = date('Y-m-d');
-                $check = ExchangeRate::where('fetch_date', $date)->get();
-                if ($check->count() == 0) {
-                    $this->fetchData();
-                } else {
-                    $this->exchange_rate = $check[0]->exchange_rate; // in usd
-                }
+                $this->calculateTax($tax);
 
-                // calculations
-                $amount_in_usd = $this->collect['amount_raw'] * $this->exchange_rate;
-                $tax_in_usd = $this->collect['tax_raw'] * $this->exchange_rate;
-                $discount = $this->collect['discount_raw'] * $this->exchange_rate;
-                $subtotal = $amount_in_usd;
-                $total = $subtotal + $tax_in_usd + $discount;
-                $this->amount = $amount_in_usd;
-                $this->tax = $tax_in_usd;
-                $this->subtotal = number_format(round($subtotal, 2), 2);
-                $this->total = number_format(round($total, 2), 2);
-                $this->discount = $discount;
                 //push arrays together
                 $myArray = [
                     'customer_id' => $this->customer,
@@ -324,6 +331,8 @@ class BookBus extends Component
                 session()->put('booking', $myArray);
 
                 $this->collect =  session()->get('booking');
+
+                // Now we have the final collection
             }
         } else if ($this->currentStep == 2) {
             $this->validate([
@@ -343,10 +352,9 @@ class BookBus extends Component
     {
         // Handle form submission
 
-
         //
 
-        $amount = $data[2]['amount'];
+
 
         //   dd($amount);
 
@@ -355,11 +363,11 @@ class BookBus extends Component
 
 
         if ($data[1] === 'success') {
-
+            $amount = $data[2]['amount'];
             session()->put('payment_status', 'success');
             $this->paid = true;
             $this->resetValidation('paid');
-            $transactionId = $data[0];
+            $transactionId = $data[0]; // transaction
 
             $payment = new Payment([
                 'transaction_id' => $transactionId,
@@ -423,19 +431,19 @@ class BookBus extends Component
             session()->put('booking.tax_amount', $this->tax);
             session()->put('booking.payment_currency', $amount['currency_code']);
             session()->put('booking.transaction_id',  $data[0]);
-            session()->put('booking.payment_date', Carbon::parse($payment->updated_at)->format('d/m/Y'));
+            session()->put('booking.payment_date', Carbon::parse($this->collect['date'])->format('d-m-Y'));
             session()->put('booking.seat_no',  Seat::find($this->seatData['seat_id'])->seat_no);
             session()->put('booking.bus_id',  $this->seatData['bus_id']);
             // collection of all data
             $this->collect = session()->get('booking');
             //email data
-            $time = Carbon::parse($this->collect['depart_time'])->format('H:i A');
-            $desc = 'Bus ticket for ' . $this->collect['full_name'] . ', starting off from ' . $this->collect['route_from'] . ' going to ' . $this->collect['route_to'] . ' on ' . $this->collect['date'] . ' at ' . Carbon::parse($this->collect['depart_time'])->format('H:i A');
+            $time = Carbon::parse($this->collect['depart_time'])->format('H:i');
+            $desc = 'Bus ticket for ' . $this->collect['full_name'] . ', starting off from ' . $this->collect['route_from'] . ' going to ' . $this->collect['route_to'] . ' on ' . Carbon::parse($this->collect['date'])->format('d-m-Y') . ' at ' . Carbon::parse($this->collect['depart_time'])->format('H:i A');
 
             $this->data_raw = [
                 'ticket_no' => $this->collect['transaction_id'],
                 'seat_no' => $this->collect['seat_no'],
-                'payment_date' => $this->collect['payment_date'],
+                'payment_date' =>  Carbon::parse(Carbon::now())->format('d-m-Y'),
                 'customer_name' => $this->collect['full_name'],
                 'payment_to' => Company::find(1)->company_name,
                 'description' => htmlentities($desc),
@@ -448,7 +456,7 @@ class BookBus extends Component
                 'customer_email' =>  $this->collect['email'],
                 'company_email' => config('mail.from.address'),
                 'payment_currency' => $this->collect['payment_currency'],
-                'journey_date' => $this->collect['date'],
+                'journey_date' => Carbon::parse($this->collect['date'])->format('d-m-Y'),
                 'journey_time' => $time,
                 'payment_method' => $this->collect['payment_method'],
                 'company_name' => Company::find(1)->company_name,
@@ -458,8 +466,8 @@ class BookBus extends Component
                 'company_zip_code' => Company::find(1)->company_zip_code,
                 'company_street' => Company::find(1)->company_street,
                 'company_local_currency' => Company::find(1)->company_local_currency,
-                'inv_no' => Payment::max('id'),
-                'inv_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
+                'inv_no' => str_pad(Payment::max('id'), 5, "0", STR_PAD_LEFT),
+                'inv_date' => Carbon::parse(Carbon::now())->format('d-m-Y'),
                 'bus_type' => Bus::find($this->collect['bus_id'])->model,
                 'bus_serial_no' => Bus::find($this->collect['bus_id'])->serial_number,
                 'bus_max_seats' => Bus::find($this->collect['bus_id'])->seats,
@@ -475,25 +483,76 @@ class BookBus extends Component
                 'customer_data' => $this->data_raw
             ]);
 
-            $this->alert(
-                'success',
-                'Payment was successfull!'
-            );
+            $this->showloader = true;
+            $this->emitSelf('sendPdf');
         } else {
+
+
             session()->put('payment_status', 'failure');
 
             $this->paid = false;
             $this->resetValidation('paid');
 
-            $transactionId = $data[0];
-            $payment = Payment::create([
+            $transactionId = '';
+
+            $this->showloader = true;
+            $cus_data = [
+                'ticket_no' => '',
+                'seat_no' => '',
+                'payment_date' => '',
+                'customer_name' => '',
+                'payment_to' => '',
+                'description' => '',
+                'amount' =>  '',
+                'sub_total' =>  '',
+                'total' => '',
+                'discount' =>  '',
+                'tax' =>  '',
+                'customer_phone_number' => '',
+                'customer_email' =>  '',
+                'company_email' => '',
+                'payment_currency' => '',
+                'journey_date' => '',
+                'journey_time' => '',
+                'payment_method' => '',
+                'company_name' => '',
+                'company_country' => '',
+                'company_city' => '',
+                'company_state' => '',
+                'company_zip_code' => '',
+                'company_street' => '',
+                'company_local_currency' => '',
+                'inv_no' => '',
+                'inv_date' => '',
+                'bus_type' => '',
+                'bus_serial_no' => '',
+                'bus_max_seats' => '',
+                'route_from' =>  '',
+                'route_to'  => '',
+                'seat_id' => '',
+                'check_in_time' => ''
+            ];
+            $payment = new Payment([
                 'transaction_id' => $transactionId,
                 'price' => $this->price,
                 'amount_paid' =>  0.00,
                 'payment_method' => $this->payment_method,
                 'payment_status' => false,
-                'tax_amount' => $this->tax
+                'tax_amount' => 0.00,
+                'is_complete' => false,
+                'error_message' => $data[0],
+                'currency' => $this->payment_method == 'paypal' ? 'USD' : Company::find(1)->company_local_currency,
+                'tax_amount' => $this->tax,
+                'local_currency' => Company::find(1)->company_local_currency,
+                'customer_data' => $cus_data
             ]);
+
+            $paid =   Customer::find($this->customer)->payments()->save($payment);
+            $this->alert('warning', 'Payment failed', [
+                'timer' => 5000
+            ]);
+
+            $this->showloader = false;
         }
     }
 
@@ -507,12 +566,12 @@ class BookBus extends Component
     {
 
 
-        $time = Carbon::parse($this->collect['depart_time'])->format('H:i A');
-        $desc = 'Bus ticket for ' . $this->collect['full_name'] . ', starting off from ' . $this->collect['route_from'] . ' going to ' . $this->collect['route_to'] . ' on ' . $this->collect['date'] . ' at ' . Carbon::parse($this->collect['depart_time'])->format('H:i A');
+        $time = Carbon::parse($this->collect['depart_time'])->format('H:i');
+        $desc = 'Bus ticket for ' . $this->collect['full_name'] . ', starting off from ' . $this->collect['route_from'] . ' going to ' . $this->collect['route_to'] . ' on ' . Carbon::parse($this->collect['date'])->format('d-m-Y') . ' at ' . Carbon::parse($this->collect['depart_time'])->format('H:i A');
         $data = [
             'ticket_no' => $this->collect['transaction_id'],
             'seat_no' => $this->collect['seat_no'],
-            'payment_date' => $this->collect['payment_date'],
+            'payment_date' =>  Carbon::parse(Carbon::now())->format('d-m-Y'),
             'customer_name' => $this->collect['full_name'],
             'payment_to' => Company::find(1)->company_name,
             'description' => htmlentities($desc),
@@ -525,7 +584,7 @@ class BookBus extends Component
             'customer_email' =>  $this->collect['email'],
             'company_email' => config('mail.from.address'),
             'payment_currency' => $this->collect['payment_currency'],
-            'journey_date' => $this->collect['date'],
+            'journey_date' => Carbon::parse($this->collect['date'])->format('d-m-Y'),
             'journey_time' => $time,
             'payment_method' => $this->collect['payment_method'],
             'company_name' => Company::find(1)->company_name,
@@ -535,8 +594,8 @@ class BookBus extends Component
             'company_zip_code' => Company::find(1)->company_zip_code,
             'company_street' => Company::find(1)->company_street,
             'company_local_currency' => Company::find(1)->company_local_currency,
-            'inv_no' => Payment::max('id'),
-            'inv_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
+            'inv_no' => str_pad(Payment::max('id'), 5, "0", STR_PAD_LEFT),
+            'inv_date' =>  Carbon::parse(Carbon::now())->format('d-m-Y'),
             'bus_type' => Bus::find($this->collect['bus_id'])->model,
             'bus_serial_no' => Bus::find($this->collect['bus_id'])->serial_number,
             'bus_max_seats' => Bus::find($this->collect['bus_id'])->seats,
@@ -557,25 +616,22 @@ class BookBus extends Component
 
                 ->send(new BookingReceipt($data));
 
+            $this->alert(
+                'success',
+                'Payment was successfull!'
+            );
 
-            $this->loading = null;
-            $this->button = "SUBMIT";
-            Session::flash('mailable');
-            session()->forget(['booking', 'payment_status']);
-            $this->reset();
-            $this->redirect(url()->previous());
+            $this->showloader = false;
+            // $this->loading = null;
+            //   $this->button = "SUBMIT";
+
         } catch (\Exception $th) {
             //throw $th;
             $this->alert(
                 'warning',
-                'Something went wrong!'
+                'Something went wrong! We couldn\'t send you your receipt.'
             );
-
-            $this->redirect(url()->previous());
         }
-
-        // Mail sent successfully
-
     }
 
 
@@ -706,8 +762,16 @@ class BookBus extends Component
         return $return;
     }
 
-    public function updated($propertyName)
+    public function Error()
     {
+
+        $alert =  $this->alert('info', 'Something went wrong  with your payment method. Please try again later', [
+            'toast' => false,
+            'position' => 'center'
+        ]);
+
+
+        $this->dispatchBrowserEvent('go_back');
     }
 
     /* -------------------------------------------------------------------------- */
@@ -752,20 +816,11 @@ class BookBus extends Component
     public function save()
     {
 
-
-
-
         $this->loading = 'PLEASE WAIT...';
         $this->button = $this->loading;
-        $this->emitSelf('sendPdf');
-
-
-
-
-
-
-        //  $this->emitSelf('hideModal');
-        //  $this->emitSelf('resetdata');
+        session()->forget(['booking', 'payment_status']);
+        session()->flash('mailable');
+        $this->redirect(url()->previous());
     } // End SAVE
 
     public function saveCustomer()
@@ -810,10 +865,10 @@ class BookBus extends Component
 
     public function fetchData()
     {
-        $response = Http::get('https://v6.exchangerate-api.com/v6/fe9dad822a73f2a8da92adea/latest/MWK');
+        $response = Http::get('https://v6.exchangerate-api.com/v6/5fffc43b8a147396c7adb54d/latest/' . Company::find(1)->company_local_currency);
         $this->data = $response->json();
         $status = $this->data['result'];
-        $from = 'MWK';
+        $from = Company::find(1)->company_local_currency;
         $to = 'USD';
         $rate = $this->data['conversion_rates']['USD'];
 
@@ -884,6 +939,7 @@ class BookBus extends Component
             if (session()->get('payment_status') == 'success') {
                 $array = session()->get('booking');
                 $seatArray = session()->get('seat');
+                $seatArray = session()->get('seat');
 
                 if ($array['payment_method'] == 'paypal') {
                     $this->collect = $array;
@@ -896,6 +952,7 @@ class BookBus extends Component
                     $this->discount = $array['customer_discount'];
                     $this->subtotal = $array['customer_subtotal'];
                     $this->total = $array['customer_total'];
+                    $this->date = $array['date'];
                     $this->availability = $array['availability'];
                     $this->seatData = [
                         'bus_id' => $seatArray['bus_id'],
@@ -904,12 +961,12 @@ class BookBus extends Component
                 }
 
                 $this->currentStep = 3;
-                $time = Carbon::parse($this->collect['depart_time'])->format('H:i A');
+                $time = Carbon::parse($this->collect['depart_time'])->format('H:i');
                 $desc = 'Bus ticket for ' . $this->collect['full_name'] . ', starting off from ' . $this->collect['route_from'] . ' going to ' . $this->collect['route_to'] . ' on ' . $this->collect['date'] . ' at ' . Carbon::parse($this->collect['depart_time'])->format('H:i A');
                 $this->data_raw = [
                     'ticket_no' => $this->collect['transaction_id'],
                     'seat_no' => $this->collect['seat_no'],
-                    'payment_date' => $this->collect['payment_date'],
+                    'payment_date' =>  Carbon::parse(Carbon::now())->format('d-m-Y'),
                     'customer_name' => $this->collect['full_name'],
                     'payment_to' => Company::find(1)->company_name,
                     'description' => htmlentities($desc),
@@ -933,7 +990,7 @@ class BookBus extends Component
                     'company_street' => Company::find(1)->company_street,
                     'company_local_currency' => Company::find(1)->company_local_currency,
                     'inv_no' => Payment::max('id'),
-                    'inv_date' => Carbon::parse(date('Y-m-d'))->format('d-m-Y'),
+                    'inv_date' =>  Carbon::parse(Carbon::now())->format('d-m-Y'),
                     'bus_type' => Bus::find($this->collect['bus_id'])->model,
                     'bus_serial_no' => Bus::find($this->collect['bus_id'])->serial_number,
                     'bus_max_seats' => Bus::find($this->collect['bus_id'])->seats,
@@ -961,6 +1018,7 @@ class BookBus extends Component
                     $this->discount = $array['customer_discount'];
                     $this->subtotal = $array['customer_subtotal'];
                     $this->total = $array['customer_total'];
+                    $this->date = $array['date'];
                     $this->seatData = [
                         'bus_id' => $seatArray['bus_id'],
                         'seat_id' => $seatArray['seat_id']

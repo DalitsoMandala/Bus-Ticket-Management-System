@@ -18,6 +18,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->dateTime('login_time')->nullable();
+            $table->dateTime('logout_time')->nullable();
+            $table->boolean('logged_in')->default(false);
             $table->timestamps();
         });
     }

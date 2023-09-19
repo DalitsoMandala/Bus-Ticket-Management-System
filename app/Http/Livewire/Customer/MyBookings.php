@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Customer;
 
+use App\Models\Booking;
 use Carbon\Carbon;
 use App\Models\Payment;
 use Livewire\Component;
@@ -296,13 +297,14 @@ class MyBookings extends Component
         $mycustomerId =  auth()->user()->customers->first()->id;
 
 
-        $mypayments = Payment::where('customer_id', $mycustomerId)->get();
+
+        $mypayments = Payment::join('bookings', 'bookings.payment_id', 'payments.id')->where('payments.customer_id', $mycustomerId)->select(['payments.*'])->get();
 
         $events = array();
         $schedules = new Collection();
         foreach ($mypayments as $payment) {
             # code...
-            $json = json_decode($payment->customer_data);
+            $json = json_decode(json_encode($payment->customer_data));
             $getjourneyDate = $json->journey_date . ' ' . $json->journey_time;
 
             $givenDate  = Carbon::parse($getjourneyDate)->isPast();
@@ -310,7 +312,7 @@ class MyBookings extends Component
             $events[] = [
                 'id' => 'event_' . $payment->transaction_id,
                 'title' => 'Travel from ' . $json->route_from . ' to ' . $json->route_to,
-                'start' => $json->journey_date,
+                'start' => Carbon::parse($json->journey_date)->format('Y-m-d'),
                 'className' => $givenDate == false ? 'text-success' :  'text-danger',
 
             ];
@@ -352,13 +354,13 @@ class MyBookings extends Component
         $mycustomerId =  auth()->user()->customers->first()->id;
 
 
-        $mypayments = Payment::where('customer_id', $mycustomerId)->get();
+        $mypayments = Payment::join('bookings', 'bookings.payment_id', 'payments.id')->where('payments.customer_id', $mycustomerId)->select(['payments.*'])->get();
 
         $events = array();
         $schedules = new Collection();
         foreach ($mypayments as $payment) {
             # code...
-            $json = json_decode($payment->customer_data);
+            $json = json_decode(json_encode($payment->customer_data));
             $getjourneyDate = $json->journey_date . ' ' . $json->journey_time;
 
             $givenDate  = Carbon::parse($getjourneyDate)->isPast();
@@ -414,9 +416,13 @@ class MyBookings extends Component
 
 
         Payment::find($payment->id)->update([
-            'is_complete' => true,
+            'is_complete' => 1,
         ]);
 
+
+        Booking::where('payment_id', $payment->id)->first()->update([
+            'is_completed' => 1,
+        ]);
         $this->emitSelf('updateEvents');
     }
 

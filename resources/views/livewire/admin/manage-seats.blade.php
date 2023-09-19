@@ -200,7 +200,7 @@
                                 @foreach ($seats as $seat)
                                     @if ($buses->id == $seat->bus_id)
                                         @if ($seat->is_taken == 0)
-                                            <div class="col-2">
+                                            <div class="col-lg-2 col-sm-6">
                                                 <a data-bs-toggle="button" href="#" style="text-decoration: none"
                                                     wire:loading.attr="disabled">
                                                     <div class="card my-1">
@@ -218,7 +218,7 @@
 
                                             </div>
                                         @else
-                                            <div class="col-2" x-data="{
+                                            <div class="col-lg-2" x-data="{
                                                 updated(id) {
                                                     window.livewire.emitTo('admin.view-seat', 'showModal', '' + id);
                                                 }

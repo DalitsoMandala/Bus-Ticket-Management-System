@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\BusRoute;
+use App\Models\User;
 use Livewire\Component;
+use App\Models\BusRoute;
 use App\Models\Schedule;
+use App\Notifications\AdminNotification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class DeleteRoutes extends Component
@@ -182,7 +184,17 @@ class DeleteRoutes extends Component
     public function confirm_request()
     {
 
+        $route  =    BusRoute::find($this->edit);
+        $user = User::find(auth()->user()->id);
+        $description = 'Trip: ' . $route->from_destination . ' to ' . $route->to_destination;
+
+        $user->notify(new AdminNotification('Route/destination deleted', $description, route('admin-routes')));
+
         BusRoute::find($this->edit)->delete();
+        $this->alert(
+            'success',
+            'Deleted successfully'
+        );
         $this->emitTo('admin.bus-routes-table', 'refresh');
         $this->emitSelf('hideModal');
     }

@@ -62,12 +62,54 @@
         label.radio input:disabled+div {
             opacity: .5;
         }
+
+
+
+        .waitscreen {}
+
+        .loadersmall {
+            width: 48px;
+            height: 48px;
+            border: 3px solid #dddd;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 1;
+        }
+
+        .loadersmall::after {
+            content: '';
+            box-sizing: border-box;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-bottom-color: #31374a;
+        }
+
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
     @section('title', config('app.name') . ' | Book a bus')
 
-    <div class="row">
-        <div class="mb-3">
-            <h2 class="fs-2 fw-black mb-2">Book a bus</h2>
+    <div class="row ">
+        <div class="p-0 mb-3">
+            <h2 class="mb-2 fs-2 fw-black">Book a bus</h2>
             <h5 class="text-700 fw-semi-bold">Use the available information to get your ticket</h5>
         </div>
 
@@ -78,27 +120,27 @@
             })
         </script>
 
-        <div x-data="{
+        <div class="p-0" x-data="{
             currentStep: @entangle('currentStep'),
         
         
         }">
-            <nav class="breadcrumb" style="pointer-events: none">
+            <nav class="breadcrumb " style="pointer-events: none">
                 <a class="breadcrumb-item" href="#" aria-current="page"
                     x-bind:class="currentStep == 1 ? 'active' : ''">
-                    <span class="badge badge-phoenix  badge-phoenix-secondary rounded">1</span> Booking
+                    <span class="rounded badge badge-phoenix badge-phoenix-secondary">1</span> Booking
                     Details</a>
                 <a class="breadcrumb-item " href="#" x-bind:class="currentStep == 2 ? 'active' : ''"> <span
-                        class="badge badge-phoenix  badge-phoenix-secondary rounded">2</span> Payment
+                        class="rounded badge badge-phoenix badge-phoenix-secondary">2</span> Payment
                     Details</a>
                 <a class="breadcrumb-item" href="#" x-bind:class="currentStep == 3 ? 'active' : ''"> <span
-                        class="badge badge-phoenix  badge-phoenix-secondary rounded">3</span> Completion</a>
+                        class="rounded badge badge-phoenix badge-phoenix-secondary">3</span> Completion</a>
 
             </nav>
         </div>
     </div>
 
-    <div class="row card card-body mb-5 p-5 ">
+    <div class="mb-5 row">
         @if (session()->has('mailable'))
             <div class="alert alert-soft-success alert-dismissible fade show" role="alert">
                 <button class="btn-close" data-bs-dismiss="alert" type="button" aria-label="Close"></button>
@@ -116,6 +158,7 @@
                 available: @entangle('canShow'),
                 payment_data: @entangle('payment_data'),
                 loading: @entangle('loading'),
+                showloader: @entangle('showloader'),
                 reset() {
                     showCustomer = !showCustomer;
                     $wire.emit('resetCustomer');
@@ -124,276 +167,284 @@
                 chosenPaymentMethod: @entangle('payment_method')
             
             }">
+
+                <div class="waitscreen" id="waitscreen" x-show="showloader">
+                    <span class="loadersmall"></span>
+                </div>
                 <div x-show="currentStep === 1">
 
-                    <div class="row  mt-4 px-3 ">
-                        <div class="col-lg-6 h-100 card-body col-sm-12 mb-3 order-0 ">
+                    <div class="mt-4 row ">
+                        <div class="pl-0 mb-3 col-lg-6 col-sm-12 d-flex align-items-stretch">
+                            <div class="border border-dashed card card-body">
+                                <h2 class="mt-4 mb-2 fs-2 fw-black">Booking Details</h2>
+                                <div class="col-md-12 d-none">
 
-                            <h2 class="fs-2 fw-black mb-2 mt-4">Booking Details</h2>
-                            <div class="col-md-12 d-none">
+                                    <x-input-label class="form-label" for="inputName">Customer</x-input-label>
+                                    <div wire:ignore>
 
-                                <x-input-label class="form-label" for="inputName">Customer</x-input-label>
-                                <div wire:ignore>
+                                        <select id="select2" style="width: 100%" wire:model="customer"
+                                            x-bind:class="{ 'opacity-50': showCustomer }"
+                                            :disabled="showCustomer == true">
 
-                                    <select id="select2" style="width: 100%" wire:model="customer"
-                                        x-bind:class="{ 'opacity-50': showCustomer }" :disabled="showCustomer == true">
+                                            <option value="">choose customer</option>
+                                            @foreach ($customers as $customer)
+                                                <option value="{{ $customer->id }}">
+                                                    {{ $customer->first_name }}
+                                                    {{ $customer->last_name }} [{{ $customer->customer_uuid }}]
+                                                </option>
+                                            @endforeach
 
-                                        <option value="">choose customer</option>
-                                        @foreach ($customers as $customer)
-                                            <option value="{{ $customer->id }}">
-                                                {{ $customer->first_name }}
-                                                {{ $customer->last_name }} [{{ $customer->customer_uuid }}]
-                                            </option>
-                                        @endforeach
-
-                                    </select>
-                                </div>
-
-                                <div>
-                                    @error('customer')
-                                        <x-alert>{{ $message }}</x-alert>
-                                    @enderror
-                                </div>
-                                <div x-show="showCustomer == false">
-
-                                    <button class="btn btn-link  px-0 pb-0 text-uppercase" type="button"
-                                        @click="reset()">
-
-                                        + Add new customer
-
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
-
-                                <div class="row py-4" x-show="showCustomer">
-                                    <div class="col-md-6">
-                                        <div>
-                                            <x-input-label class="form-label" for="inputName">First Name
-                                            </x-input-label>
-
-                                            <x-text-input placeholder="first name" wire:model.defer="first_name" />
-                                        </div>
-                                        <div>
-                                            @error('first_name')
-                                                <x-alert>{{ $message }}</x-alert>
-                                            @enderror
-                                        </div>
+                                        </select>
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <div>
-                                            <x-input-label class="form-label" for="inputName">Last Name
-                                            </x-input-label>
-
-                                            <x-text-input placeholder="last name" wire:model.defer="last_name" />
-                                        </div>
-                                        <div>
-                                            @error('last_name')
-                                                <x-alert>{{ $message }}</x-alert>
-                                            @enderror
-                                        </div>
+                                    <div>
+                                        @error('customer')
+                                            <x-alert>{{ $message }}</x-alert>
+                                        @enderror
                                     </div>
+                                    <div x-show="showCustomer == false">
 
-                                    <div class="col-md-6">
-                                        <div>
-                                            <x-input-label class="form-label" for="inputName">Email
-                                            </x-input-label>
+                                        <button class="px-0 pb-0 btn btn-link text-uppercase" type="button"
+                                            @click="reset()">
 
-                                            <x-text-input type="email" placeholder="email"
-                                                wire:model.defer="customer_email" />
-                                        </div>
-                                        <div>
-                                            @error('customer_email')
-                                                <x-alert>{{ $message }}</x-alert>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div>
-                                            <x-input-label class="form-label" for="inputName">Phone Number
-                                            </x-input-label>
-
-                                            <x-phone placeholder="phone number" wire:model.defer="phone_number" />
-                                        </div>
-                                        <div>
-                                            @error('phone_number')
-                                                <x-alert>{{ $message }}</x-alert>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div x-show="showCustomer == true">
-                                    <div class="d-flex justify-content-end ">
-                                        <button class="btn btn-link text-danger px-0 py-0 text-uppercase me-2"
-                                            type="button" @click="showCustomer = !showCustomer">
-
-                                            Remove
+                                            + Add new customer
 
                                         </button>
-                                        <span class="px-2">/</span>
-                                        <button class="btn btn-link px-0 py-0 text-uppercase" type="button"
-                                            wire:click="saveCustomer">
-
-                                            SAVE CUSTOMER
-
-                                        </button>
-
-                                    </div>
-                                    <hr class="py-2">
-                                </div>
-
-                            </div>
-
-                            {{-- another line --}}
-                            <div class="col-md-12">
-                                <div class="row g-3">
-                                    <div class="col-md-12">
-                                        <div>
-                                            <x-input-label class="form-label" for="inputName">Route
-                                            </x-input-label>
-                                            <div wire:ignore>
-                                                <select class="form-select" id="customer-route" wire:model="route">
-                                                    <option value="">choose route</option>
-                                                    @foreach ($routes as $route)
-                                                        <option value="{{ $route->id }}">
-                                                            {{ $route->from_destination }}
-                                                            -
-                                                            {{ $route->to_destination }} </option>
-                                                    @endforeach
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            @error('route')
-                                                <x-alert>{{ $message }}</x-alert>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div>
-                                            <x-input-label class="form-label" for="inputName">Price (MWK)
-                                            </x-input-label>
-                                            <x-input-g wire:model="price" disabled placeholder="price" />
-
-                                        </div>
-
-                                        <div>
-                                            @error('price')
-                                                <x-alert>{{ $message }}</x-alert>
-                                            @enderror
-                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="row g-3">
+                                <div class="col-md-12">
 
-                                    <div class="col-md-12">
-                                        <div>
-                                            <x-input-label class="form-label" for="inputName">Schedule
-                                            </x-input-label>
-                                            <div wire:ignore>
-                                                <select class="form-select" id="customer-schedule"
-                                                    wire:model="schedule">
-                                                    <option value="">choose route</option>
-                                                    @foreach ($schedules as $schedule)
-                                                        <option value="{{ $schedule->id }}">
-                                                            {{ $schedule->title }}
-                                                            ({{ \Carbon\Carbon::parse($schedule->depart_time)->format('H:i A') }})
-                                                        </option>
-                                                    @endforeach
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            @error('schedule')
-                                                <x-alert>{{ $message }}</x-alert>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div>
-                                            <x-input-label class="form-label" for="inputName">Date of
-                                                departure
-                                            </x-input-label>
-
-                                            <x-date wire:model="date"></x-date>
-                                        </div>
-                                        <div>
-                                            @error('date')
-                                                <x-alert>{{ $message }}</x-alert>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    @if ($availability === true && !$errors->has('availability'))
-                                        <div class="col-md-12">
+                                    <div class="py-4 row" x-show="showCustomer">
+                                        <div class="col-md-6">
                                             <div>
-                                                <x-input-label class="form-label" for="inputName">Bus Availability
+                                                <x-input-label class="form-label" for="inputName">First Name
                                                 </x-input-label>
 
-                                                <x-text-input class="d-none" disabled wire:model="availability" />
+                                                <x-text-input placeholder="first name" wire:model.defer="first_name" />
                                             </div>
-
                                             <div>
-
-                                                <span class="badge badge-phoenix fs--2 badge-phoenix-success"><span
-                                                        class="badge-label">AVAILABLE</span><span class="ms-1"
-                                                        data-feather="check"
-                                                        style="height:12.8px;width:12.8px;"></span></span>
-
-                                            </div>
-
-                                            <div>
-                                                @error('availability')
+                                                @error('first_name')
                                                     <x-alert>{{ $message }}</x-alert>
                                                 @enderror
                                             </div>
                                         </div>
-                                    @endif
 
-                                    @if ($errors->has('availability'))
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div>
-                                                <x-input-label class="form-label" for="inputName">Bus Availability
+                                                <x-input-label class="form-label" for="inputName">Last Name
                                                 </x-input-label>
 
-                                                <x-text-input class="d-none" disabled wire:model="availability" />
+                                                <x-text-input placeholder="last name" wire:model.defer="last_name" />
                                             </div>
-
                                             <div>
-                                                @error('availability')
+                                                @error('last_name')
                                                     <x-alert>{{ $message }}</x-alert>
                                                 @enderror
                                             </div>
                                         </div>
-                                    @endif
+
+                                        <div class="col-md-6">
+                                            <div>
+                                                <x-input-label class="form-label" for="inputName">Email
+                                                </x-input-label>
+
+                                                <x-text-input type="email" placeholder="email"
+                                                    wire:model.defer="customer_email" />
+                                            </div>
+                                            <div>
+                                                @error('customer_email')
+                                                    <x-alert>{{ $message }}</x-alert>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div>
+                                                <x-input-label class="form-label" for="inputName">Phone Number
+                                                </x-input-label>
+
+                                                <x-phone placeholder="phone number" wire:model.defer="phone_number" />
+                                            </div>
+                                            <div>
+                                                @error('phone_number')
+                                                    <x-alert>{{ $message }}</x-alert>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div x-show="showCustomer == true">
+                                        <div class="d-flex justify-content-end ">
+                                            <button class="px-0 py-0 btn btn-link text-danger text-uppercase me-2"
+                                                type="button" @click="showCustomer = !showCustomer">
+
+                                                Remove
+
+                                            </button>
+                                            <span class="px-2">/</span>
+                                            <button class="px-0 py-0 btn btn-link text-uppercase" type="button"
+                                                wire:click="saveCustomer">
+
+                                                SAVE CUSTOMER
+
+                                            </button>
+
+                                        </div>
+                                        <hr class="py-2">
+                                    </div>
+
+                                </div>
+
+                                {{-- another line --}}
+                                <div class="col-md-12">
+                                    <div class="row g-3">
+                                        <div class="col-md-12">
+                                            <div>
+                                                <x-input-label class="form-label" for="inputName">Route
+                                                </x-input-label>
+                                                <div wire:ignore>
+                                                    <select class="form-select" id="customer-route" wire:model="route">
+                                                        <option value="">choose route</option>
+                                                        @foreach ($routes as $route)
+                                                            <option value="{{ $route->id }}">
+                                                                {{ $route->from_destination }}
+                                                                -
+                                                                {{ $route->to_destination }} </option>
+                                                        @endforeach
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                @error('route')
+                                                    <x-alert>{{ $message }}</x-alert>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div>
+                                                <x-input-label class="form-label" for="inputName">Price
+                                                    ({{ \App\Models\Company::find(1)->company_local_currency ?? '' }})
+                                                </x-input-label>
+                                                <x-input-g wire:model="price" disabled placeholder="price" />
+
+                                            </div>
+
+                                            <div>
+                                                @error('price')
+                                                    <x-alert>{{ $message }}</x-alert>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row g-3">
+
+                                        <div class="col-md-12">
+                                            <div>
+                                                <x-input-label class="form-label" for="inputName">Schedule
+                                                </x-input-label>
+                                                <div wire:ignore>
+                                                    <select class="form-select" id="customer-schedule"
+                                                        wire:model="schedule">
+                                                        <option value="">choose route</option>
+                                                        @foreach ($schedules as $schedule)
+                                                            <option value="{{ $schedule->id }}">
+                                                                {{ $schedule->title }}
+                                                                ({{ \Carbon\Carbon::parse($schedule->depart_time)->format('H:i A') }})
+                                                            </option>
+                                                        @endforeach
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                @error('schedule')
+                                                    <x-alert>{{ $message }}</x-alert>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div>
+                                                <x-input-label class="form-label" for="inputName">Date of
+                                                    departure
+                                                </x-input-label>
+
+                                                <x-date wire:model="date"></x-date>
+                                            </div>
+                                            <div>
+                                                @error('date')
+                                                    <x-alert>{{ $message }}</x-alert>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        @if ($availability === true && !$errors->has('availability'))
+                                            <div class="col-md-12">
+                                                <div>
+                                                    <x-input-label class="form-label" for="inputName">Bus Availability
+                                                    </x-input-label>
+
+                                                    <x-text-input class="d-none" disabled wire:model="availability" />
+                                                </div>
+
+                                                <div>
+
+                                                    <span class="badge badge-phoenix fs--2 badge-phoenix-success"><span
+                                                            class="badge-label">AVAILABLE</span><span class="ms-1"
+                                                            data-feather="check"
+                                                            style="height:12.8px;width:12.8px;"></span></span>
+
+                                                </div>
+
+                                                <div>
+                                                    @error('availability')
+                                                        <x-alert>{{ $message }}</x-alert>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        @endif
+
+                                        @if ($errors->has('availability'))
+                                            <div class="col-md-12">
+                                                <div>
+                                                    <x-input-label class="form-label" for="inputName">Bus Availability
+                                                    </x-input-label>
+
+                                                    <x-text-input class="d-none" disabled wire:model="availability" />
+                                                </div>
+
+                                                <div>
+                                                    @error('availability')
+                                                        <x-alert>{{ $message }}</x-alert>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        @endif
+
+                                    </div>
 
                                 </div>
 
                             </div>
 
                         </div>
-                        <div class="col-lg-6  rounded-1   col-sm-12 d-lg-block d-sm-none mb-3 bg-100 bg-image-overlay  position-relative overflow-hidden auth-title-box"
+                        <div class="mb-3 overflow-hidden col-lg-6 rounded-1 col-sm-12 d-lg-block d-sm-none bg-100 bg-image-overlay position-relative auth-title-box d-flex align-items-stretch"
                             style="background-image: url('{{ asset('assets/img/happy.jpg') }}'); height:100%;">
 
                             <!--/.bg-holder-->
                             <div
-                                class="position-relative px-4 px-lg-7 pt-7 pb-7 pb-sm-5 text-center text-md-start pb-lg-7">
+                                class="px-4 text-center position-relative px-lg-7 pt-7 pb-7 pb-sm-5 text-md-start pb-lg-7">
                                 <h3 class="mb-3 text-white fs-1 text-capitalize">Book your bus with Us</h3>
                                 <p class="text-100"><i class="fa-solid fa-quote-left"></i> From
                                     booking your trip to
                                     arriving at your destination, we're here
                                     to provide you with the best possible customer service <i
                                         class="fa-solid fa-quote-right"></i></p>
-                                <ul class="list-unstyled mb-0 w-max-content w-md-auto mx-auto" style="color:#dddd">
+                                <ul class="mx-auto mb-0 list-unstyled w-max-content w-md-auto" style="color:#dddd">
                                     <li class="d-flex align-items-center">
                                         <i class="fa-solid fa-hand-point-right me-3"></i> <span
                                             class="text-100 fw-semi-bold">We are Fast</span>
@@ -409,22 +460,23 @@
                                 </ul>
                             </div>
                             <div
-                                class="position-relative  mb-6 d-none d-md-block text-center mt-md-15 border-top border-dashed text-uppercase">
+                                class="mb-6 text-center border-dashed position-relative d-none d-md-block mt-md-15 border-top text-uppercase">
 
-                                <h3 class="text-white mt-3">Get your ticket <i class="fa-solid fa-ticket"></i></h3>
+                                <h3 class="mt-3 text-white">Get your ticket <i class="fa-solid fa-ticket"></i></h3>
                             </div>
                         </div>
 
                     </div>
                 </div>
 
-                <div x-show="currentStep === 2">
+                <div x-show="currentStep === 2"
+                    x-bind:class="{ 'opacity-25': showloader === true, 'pe-none': showloader === true }">
                     <!-- Step 2 form -->
 
-                    <div class="row d-grid-3 my-2">
+                    <div class="my-2 row d-grid-3">
                         <div class="col-lg-6 col-sm-12">
 
-                            <div class=" align-items-end mb-4">
+                            <div class="mb-4 align-items-end">
                                 <h4 class="mb-2 me-3">Payment Method</h4>
                                 <h5 class="text-700 fw-semi-bold">Complete your purchase by providing your
                                     payment
@@ -461,7 +513,7 @@
                                 </div>
                             </label>
 
-                            {{-- <div class="d-flex mb-3">
+                            {{-- <div class="mb-3 d-flex">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" id="" type="radio" value="paypal"
                                         wire:model="payment_method" checked>
@@ -492,7 +544,7 @@
                                     @error('paid')
                                         <div class="alert alert-outline-danger d-flex align-items-center" role="alert">
                                             <span class="fas fa-times-circle text-danger fs-3 me-3"></span>
-                                            <p class="mb-0 flex-1"> <b>Payment required!</b> <br>You can't proceed without
+                                            <p class="flex-1 mb-0"> <b>Payment required!</b> <br>You can't proceed without
                                                 payment!</p>
 
                                         </div>
@@ -504,7 +556,7 @@
                                         <div class="alert alert-outline-success d-flex align-items-center "
                                             role="alert">
                                             <span class="fas fa-check-circle text-success fs-3 me-3"></span>
-                                            <p class="mb-0 flex-1"> <b>Payment successful!</b> <br>Thank you
+                                            <p class="flex-1 mb-0"> <b>Payment successful!</b> <br>Thank you
                                                 for
                                                 completing
                                                 your secure online payment. Please proceed to the next step to
@@ -516,7 +568,7 @@
                                         <div class="alert alert-outline-danger d-flex align-items-center"
                                             role="alert">
                                             <span class="fas fa-times-circle text-danger fs-3 me-3"></span>
-                                            <p class="mb-0 flex-1"> <b>Payment failed!</b> <br>Something went
+                                            <p class="flex-1 mb-0"> <b>Payment failed!</b> <br>Something went
                                                 wrong. Please
                                                 try again!</p>
 
@@ -527,8 +579,8 @@
                             </div>
 
                         </div>
-                        <div class="col-lg-6  col-sm-12">
-                            <div class="card text-start  rounded-0 my-3 border-0 border-sm-0 border-lg">
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="my-3 border-0 card text-start rounded-0 border-sm-0 border-lg">
 
                                 <div class="card-body">
                                     <div class="d-flex align-items-center justify-content-between">
@@ -569,12 +621,12 @@
                                         <h4 class="mb-3">Booking Summary</h4>
                                     </div>
 
-                                    <table class="table table-borderless  fs--1 mb-0">
+                                    <table class="table mb-0 table-borderless fs--1">
 
                                         <tbody>
-                                            <tr class=" align-items-center  ">
+                                            <tr class=" align-items-center">
 
-                                                <td class=" px-2 py-1 text-center"><img
+                                                <td class="px-2 py-1 text-center "><img
                                                         src="{{ asset('assets/img/ticket.png') }}" width="70px">
                                                 </td>
                                                 <td class="py-2 ps-2 " colspan="2">
@@ -598,7 +650,7 @@
 
                                                 </td>
                                                 @if (!session()->get('payment_status') == 'success')
-                                                    <td class=" py-5 px-2 text-center">
+                                                    <td class="px-2 py-5 text-center ">
                                                         <a class="btn btn-link btn-sm " href="#" title="Remove"
                                                             role="button" wire:click="clear">
                                                             <i class="fa-solid fa-trash-can text-secondary fs-0"></i>
@@ -608,7 +660,7 @@
                                                 @endif
                                             </tr>
 
-                                            <tr class="border-top border-dashed ">
+                                            <tr class="border-dashed border-top ">
                                                 <td>
                                                     <h5 class="mb-0 fw-normal">Subtotal :</h5>
                                                 </td>
@@ -623,7 +675,7 @@
                                                 </td>
                                             </tr>
 
-                                            <tr class="border-top border-dashed ">
+                                            <tr class="border-dashed border-top ">
                                                 <td>
                                                     <h5 class="mb-0 fw-normal">Discount :</h5>
                                                 </td>
@@ -637,7 +689,7 @@
 
                                                 </td>
                                             </tr>
-                                            <tr class="border-top border-dashed ">
+                                            <tr class="border-dashed border-top ">
                                                 <td>
                                                     <h5 class="mb-0 fw-normal">Tax :</h5>
                                                 </td>
@@ -652,7 +704,7 @@
                                                 </td>
                                             </tr>
 
-                                            <tr class="border-top border-dashed ">
+                                            <tr class="border-dashed border-top ">
                                                 <td>
                                                     <h4 class="mb-0 ">Total :</h4>
                                                 </td>
@@ -694,17 +746,17 @@
                     @if (session()->has('booking') && session()->has('payment_status') && session()->get('payment_status') === 'success')
                         @if ($collect && $collect['payment_method'] == 'paypal')
 
-                            <div class="container  mb-7 bg-200">
+                            <div class="container mb-7 bg-200">
                                 <div class="row">
                                     <div class="col-lg-12 col-xl-12">
-                                        <div class="row justify-content-center pt-2 pb-2"
+                                        <div class="pt-2 pb-2 row justify-content-center"
                                             style="background:#3E465B;  color:#fff">
                                             <div class="col-lg-7 px-7 ">
                                                 <div class="mb-2 text-center">
                                                     <span class="badge badge-phoenix badge-phoenix-secondary ">RECEIPT
                                                         PREVIEW</span>
                                                 </div>
-                                                <div class="d-flex inline-block border-bottom border-dashed pb-2 mb-2">
+                                                <div class="inline-block pb-2 mb-2 border-dashed d-flex border-bottom">
                                                     <img src="{{ asset('assets/img/bus.png') }}"
                                                         style="display: block; height: auto; border: 0; width: 100px; max-width: 100%;"
                                                         width="100">
@@ -730,9 +782,9 @@
                                         </div>
                                         @if ($data_raw != null)
                                             <div class="row justify-content-center">
-                                                <div class="col-lg-7  ">
+                                                <div class="col-lg-7 ">
                                                     <div class="card rounded-0" id="invoice">
-                                                        <div class="card-body p-5">
+                                                        <div class="p-5 card-body">
 
                                                             <div class="row" style="font-size: 12px">
                                                                 <div class="col">
@@ -824,7 +876,7 @@
                                                                         @if ($data_raw['payment_currency'] === 'USD')
                                                                             $
                                                                         @else
-                                                                            MWK
+                                                                            {{ \App\Models\Company::find(1)->company_local_currency ?? '' }}
                                                                         @endif
                                                                         {{ $data_raw['amount'] }} <br>
 
@@ -842,28 +894,27 @@
                                                                         Subtotal: @if ($data_raw['payment_currency'] === 'USD')
                                                                             $
                                                                         @else
-                                                                            MWK
+                                                                            {{ \App\Models\Company::find(1)->company_local_currency ?? '' }}
                                                                         @endif
                                                                         {{ $data_raw['sub_total'] }} <br>
 
                                                                         Discount: @if ($data_raw['payment_currency'] === 'USD')
                                                                             $
                                                                         @else
-                                                                            MWK
+                                                                            {{ \App\Models\Company::find(1)->company_local_currency ?? '' }}
                                                                         @endif
                                                                         {{ $data_raw['discount'] }} <br>
-
                                                                         Tax: @if ($data_raw['payment_currency'] === 'USD')
                                                                             $
                                                                         @else
-                                                                            MWK
+                                                                            {{ \App\Models\Company::find(1)->company_local_currency ?? '' }}
                                                                         @endif
                                                                         {{ $data_raw['tax'] }} <br>
 
                                                                         <b>TOTAL: @if ($data_raw['payment_currency'] === 'USD')
                                                                                 $
                                                                             @else
-                                                                                MWK
+                                                                                {{ \App\Models\Company::find(1)->company_local_currency ?? '' }}
                                                                             @endif
                                                                             {{ $data_raw['total'] }}</b>
 
@@ -878,7 +929,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="row justify-content-center pt-2 pb-2"
+                                            <div class="pt-2 pb-2 row justify-content-center"
                                                 style="background:#3E465B;  color:#fff">
                                                 <div class="col-lg-7 px-7 ">
                                                     <p style="margin: 0; margin-bottom: 16px;font-size:12px">If you
@@ -896,8 +947,8 @@
 
                                             </div>
                                         @endif
-                                        <div class="d-flex justify-content-center my-2 d-none">
-                                            <button class="btn btn-secondary btn-lg  px-4" wire:click="print">
+                                        <div class="my-2 d-flex justify-content-center d-none">
+                                            <button class="px-4 btn btn-secondary btn-lg" wire:click="print">
                                                 <span class="fa-solid fa-print">
 
                                                 </span>
@@ -913,11 +964,12 @@
                     @endif
                 </div>
 
-                <div class=" mt-10  ">
+                <div class="mt-4">
 
                     <div class="form-group">
 
-                        <div class="d-flex justify-content-between ">
+                        <div class="d-flex justify-content-between "
+                            x-bind:class="{ 'opacity-25': showloader === true, 'pe-none': showloader === true }">
 
                             <button class="btn btn-secondary " type="button"
                                 x-bind:disabled="(currentStep === 1) || (currentStep === 3) || (paid === true)"
@@ -956,102 +1008,130 @@
         src="https://www.paypal.com/sdk/js?client-id=AaYXQcPNRcEjWkntqfGBJ6JHFkZyUWYr3I4r2edWm2Cr6wbgoQG8hOZ9NQ4yep_yZ-rCWF0vA2cEjCK8&currency=USD">
     </script>
     <script>
-        $(window).on('showButton', function() {
-
-
-
-
-
-        });
-
-
-
         document.addEventListener('livewire:load', function() {
 
-            paypal.Buttons({
 
-                style: {
+            $.ajax({
+                url: 'https://www.paypal.com/sdk/js?client-id=AaYXQcPNRcEjWkntqfGBJ6JHFkZyUWYr3I4r2edWm2Cr6wbgoQG8hOZ9NQ4yep_yZ-rCWF0vA2cEjCK8&currency=USD',
+                method: 'GET',
+                success: function(response, textStatus, xhr) {
+                    if (xhr.status === 200) {
+                        // Handle 200 OK response
 
-                    layout: 'horizontal',
 
-                    color: 'silver',
+                        paypal.Buttons({
 
-                    shape: 'rect',
+                            style: {
 
-                    label: 'pay',
+                                layout: 'horizontal',
 
-                    size: '55',
-                    tagline: 'false'
+                                color: 'silver',
 
-                },
-                createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: {
-                                value: @this.total
+                                shape: 'rect',
+
+                                label: 'pay',
+
+                                size: '55',
+                                tagline: 'false'
+
+                            },
+                            createOrder: function(data, actions) {
+                                return actions.order.create({
+                                    purchase_units: [{
+                                        amount: {
+                                            value: @this.total
+                                        },
+
+                                    }]
+                                });
+
+
                             },
 
-                        }]
-                    });
+                            onApprove: function(data, actions) {
+                                return actions.order.capture().then(function(details) {
+                                    Livewire.emitTo('customer.book-bus', 'payment',
+                                        [details.id, 'success',
+                                            details.purchase_units[
+                                                0]
+                                        ]);
+                                });
+                            },
+                            onError: function(err) {
+                                Livewire.emitTo('customer.book-bus', 'payment', [details.id,
+                                    'failure', details
+                                    .purchase_units[0]
+                                ]);
 
 
-                },
-
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
-                        Livewire.emit('payment', [details.id, 'success', details.purchase_units[
-                            0]]);
-                    });
-                },
-                onError: function(err) {
-                    Livewire.emit('payment', [details.id, 'failure', details.purchase_units[0]]);
+                            }
+                        }).render('#paypal-button-container');
 
 
-                }
-            }).render('#paypal-button-container');
+                        paypal.Buttons({
+
+                            style: {
+
+                                layout: 'horizontal',
+
+                                color: 'silver',
+
+                                shape: 'rect',
+
+                                label: 'pay',
+
+                                size: '55',
+                                tagline: 'false'
+
+                            },
+                            createOrder: function(data, actions) {
+                                return actions.order.create({
+                                    purchase_units: [{
+                                        amount: {
+                                            value: @this.total,
+                                        },
+
+                                    }]
+                                });
 
 
-            paypal.Buttons({
-
-                style: {
-
-                    layout: 'horizontal',
-
-                    color: 'silver',
-
-                    shape: 'rect',
-
-                    label: 'pay',
-
-                    size: '55',
-                    tagline: 'false'
-
-                },
-                createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: {
-                                value: @this.total
                             },
 
-                        }]
-                    });
+                            onApprove: function(data, actions) {
+                                return actions.order.capture().then(function(details) {
+                                    Livewire.emitTo('customer.book-bus', 'payment',
+                                        [details.id, 'success',
+                                            details.purchase_units[
+                                                0]
+                                        ]);
+                                });
 
 
+                            },
+                            onError: function(err) {
+
+                                Livewire.emitTo('customer.book-bus', 'payment', [err
+                                    .message, 'failure', 0.0
+                                ]);
+
+
+
+                            }
+                        }).render('#paypal-button-container-lg');
+                    }
                 },
-
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
-                        Livewire.emit('payment', [details.id, 'success', details.purchase_units[
-                            0]]);
-                    });
-                },
-                onError: function(err) {
-                    Livewire.emit('payment', [details.id, 'failure', details.purchase_units[0]]);
-
-
+                error: function(xhr, textStatus, errorThrown) {
+                    if (xhr.status === 500) {
+                        // Handle 500 Internal Server Error response
+                        console.log('Error message:', xhr.responseText);
+                        Livewire.emitTo('customer.book-bus', 'Error');
+                        // ...
+                    }
                 }
-            }).render('#paypal-button-container-lg');
+            });
+
+
+
         })
 
 
@@ -1106,6 +1186,13 @@
             $('#invoice').printThis({
                 debug: false,
             });
+
+        });
+
+
+        document.addEventListener('go_back', function() {
+
+            window.history.back();
 
         });
     </script>

@@ -17,7 +17,14 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('phone_number');
+            $table->string('phone_number')->nullable();
+            $table->string('gender')->nullable();
+            $table->longText('home_address')->nullable();
+            $table->string('birth_date')->nullable();
+            $table->string('facebook_link')->nullable();
+            $table->string('instagram_link')->nullable();
+            $table->string('twitter_link')->nullable();
+            $table->text('profile_picture')->nullable();
             $table->string('customer_uuid');
             $table->timestamps();
         });
