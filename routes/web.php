@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\FormController;
 use Carbon\Carbon;
 use App\Models\Bus;
 use App\Models\Seat;
+use App\Models\BusRoute;
 use App\Models\Customer;
 use App\Models\BookedBus;
+use App\Mail\OrderShipped;
 use Illuminate\Support\Str;
 use App\Mail\BookingReceipt;
 use App\Http\Livewire\PaymentPage;
@@ -13,12 +14,15 @@ use Illuminate\Support\Facades\URL;
 use App\Http\Livewire\Admin\BookBus;
 use App\Http\Livewire\Admin\Payment;
 use App\Http\Livewire\Admin\Profile;
+use App\Mail\CustomNotificationMail;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Livewire\Admin\Overview;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Customer\Queries;
 use App\Http\Livewire\Customer\Refunds;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\TestController;
 use App\Http\Livewire\Admin\ManageBuses;
 use App\Http\Livewire\Admin\ManageSeats;
@@ -31,18 +35,16 @@ use App\Http\Livewire\Admin\ManagePayments;
 use App\Http\Livewire\Admin\SystemSettings;
 use App\Http\Livewire\Admin\ManageCustomers;
 use App\Http\Livewire\Admin\ManageSchedules;
-use App\Http\Livewire\Admin\NotificationHistory as AdminNotificationHistory;
-use App\Http\Livewire\Admin\Queries as AdminQueries;
 use App\Http\Livewire\Customer\CancelBooking;
 use App\Http\Livewire\Customer\CustomerOverview;
 use App\Http\Livewire\Customer\NotificationHistory;
+use App\Http\Livewire\Admin\Queries as AdminQueries;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use App\Http\Livewire\Customer\BookBus as CustomerBookBus;
 use App\Http\Livewire\Customer\Profile as CustomerProfile;
 use  App\Http\Livewire\Customer\MyBookings as CustomerBookings;
-use App\Mail\CustomNotificationMail;
-use App\Mail\OrderShipped;
-use App\Models\BusRoute;
+use App\Http\Livewire\Admin\NotificationHistory as AdminNotificationHistory;
+use PhpParser\Node\Stmt\TryCatch;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,8 +67,24 @@ Route::post('/contact', [FormController::class, 'store'])->name('contact-form');
 Route::get('/payment', PaymentPage::class)->middleware(['auth'])->name('payment');
 
 Route::view('/powergrid', 'powergrid-demo');
-Route::get('/test', function () {
-    Mail::to(config('mail.from.address'))->send(new OrderShipped());
+Route::get('/migrate/{id?}', function (?string $id = null) {
+    if ($id !== null) {
+        try {
+            Artisan::call('migrate:fresh --seed');
+            return response()->json(['successful']);
+        } catch (\Throwable $th) {
+            return response()->json(['failed']);
+        }
+    } else {
+
+
+        try {
+            Artisan::call('migrate');
+            return response()->json(['successful']);
+        } catch (\Throwable $th) {
+            return response()->json(['failed']);
+        }
+    }
 });
 Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
