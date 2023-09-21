@@ -33,7 +33,7 @@
     <link href="https://fonts.googleapis.com/" rel="preconnect">
     <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
-        rel="stylesheet">
+          rel="stylesheet">
     <link href="{{ asset('assets/vendors/simplebar/simplebar.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendors/unicons.iconscout.com/release/v4.0.0/css/line.css') }}" rel="stylesheet">
     <link id="style-rtl" type="text/css" href="{{ asset('assets/css/theme-rtl.min.css') }}" rel="stylesheet">
@@ -44,12 +44,12 @@
     <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
     <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
-        rel="stylesheet" />
+          rel="stylesheet" />
     <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
     <link
-        crossorigin="anonymous"href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.18/css/intlTelInput.css"
-        integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw=="
-        referrerpolicy="no-referrer" rel="stylesheet" />
+          crossorigin="anonymous"href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.18/css/intlTelInput.css"
+          integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw=="
+          referrerpolicy="no-referrer" rel="stylesheet" />
     <script>
         var phoenixIsRTL = window.config.config.phoenixIsRTL;
         if (phoenixIsRTL) {
@@ -209,7 +209,7 @@
                     <livewire:bus-departed />
                     <livewire:customer.reminder-app />
                 @endrole
-                <footer class="footer position-absolute">
+                <footer class="footer position-absolute ">
                     <div class="row g-0 justify-content-between align-items-center h-100">
                         <div class="text-center col-12 col-sm-auto">
                             <p class="mt-2 mb-0 mt-sm-0 text-900">Developed by Dalitso Mandala &copy; 2023</p>
@@ -239,7 +239,7 @@
         <x-livewire-alert::flash />
 
         <script src="https://code.jquery.com/jquery-3.6.1.min.js"
-            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+                integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
         <script src="{{ asset('assets/vendors/popper/popper.min.js') }}"></script>
         <script src="{{ asset('assets/vendors/bootstrap/bootstrap.min.js') }}"></script>
         <script src="{{ asset('assets/vendors/anchorjs/anchor.min.js') }}"></script>
@@ -256,15 +256,15 @@
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.18/js/intlTelInput.min.js"
-            integrity="sha512-hpJ6J4jGqnovQ5g1J39VtNq1/UPsaFjjR6tuCVVkKtFIx8Uy4GeixgIxHPSG72lRUYx1xg/Em+dsqxvKNwyrSg=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                integrity="sha512-hpJ6J4jGqnovQ5g1J39VtNq1/UPsaFjjR6tuCVVkKtFIx8Uy4GeixgIxHPSG72lRUYx1xg/Em+dsqxvKNwyrSg=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
         <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
         <script src="{{ asset('assets/vendors/filepond/filepond-plugin-file-validate-size.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.min.js"
-            integrity="sha512-d5Jr3NflEZmFDdFHZtxeJtBzk0eB+kkRXWFQqEc1EKmolXjHm2IKCA7kTvXBNjIYzjXfD5XzIjaaErpkZHCkBg=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                integrity="sha512-d5Jr3NflEZmFDdFHZtxeJtBzk0eB+kkRXWFQqEc1EKmolXjHm2IKCA7kTvXBNjIYzjXfD5XzIjaaErpkZHCkBg=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
         <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
         <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
