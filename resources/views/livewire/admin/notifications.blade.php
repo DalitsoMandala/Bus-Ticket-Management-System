@@ -128,7 +128,7 @@
                 <div
                      class="my-2 text-center fw-bold fs--2 text-600 d-flex justify-content-center align-items-center ms-2 me-2">
                     <a class="btn btn-phoenix-secondary " href="{{ route('admin-notification-history') }}"><i
-                           class="fa-solid fa-clock-rotate-left"></i>History </a>
+                           class="fa-solid fa-clock-rotate-left"></i> History </a>
 
 
                 </div>

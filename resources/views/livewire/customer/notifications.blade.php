@@ -107,12 +107,8 @@
                 <div
                      class="my-2 text-center fw-bold fs--2 text-600 d-flex justify-content-between align-items-center ms-2 me-2">
                     <a class="btn btn-phoenix-secondary "
-                       href="{{ route('customer-notification-history') }}">History <i class="fas fa-arrow-up "></i></a>
-
-                    <a class="btn btn-soft-success fs--1 fw-normal" data-bs-toggle="button" href="#!"
-                       role="button" wire:click="readAll"><i class="fa-solid fa-check-double"></i> Mark
-                        all as
-                        read</a>
+                       href="{{ route('customer-notification-history') }}"><i
+                           class="fa-solid fa-clock-rotate-left"></i> History </a>
                 </div>
 
             </div>
