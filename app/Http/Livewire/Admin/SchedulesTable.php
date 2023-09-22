@@ -55,7 +55,7 @@ final class SchedulesTable extends PowerGridComponent
     {
         return DB::table('schedules')->select([
             'schedules.*',
-            DB::Raw('ROW_NUMBER() OVER (ORDER BY schedules.id) AS rn'),
+            //   DB::Raw('ROW_NUMBER() OVER (ORDER BY schedules.id) AS rn'),
         ]);
     }
 
@@ -120,7 +120,9 @@ final class SchedulesTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('ID', 'rn')->sortable()
+
+            Column::make('ID', 'id', 'id')
+                ->sortable()
                 ->searchable(),
             Column::make('TITLE', 'title')
                 ->sortable()

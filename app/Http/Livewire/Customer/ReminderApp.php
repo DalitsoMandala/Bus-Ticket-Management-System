@@ -314,7 +314,7 @@ class ReminderApp extends Component
         if ($value == '30min') {
             $user = User::find(auth()->user()->id);
             $title = 'Bus Departure';
-            $description = 'Your bus will leave in 30 minutes! You have a ' . $desc;
+            $description = 'Your bus will leave in 30 minutes! ' . $desc;
             $link = route('customer-bookings');
             $user->notify(new Reminder($title, $description, $link));
         }
@@ -322,7 +322,7 @@ class ReminderApp extends Component
         if ($value == '10min') {
             $user = User::find(auth()->user()->id);
             $title = 'Bus Departure';
-            $description = 'Your bus will leave in 10 minutes! You have a ' . $desc;
+            $description = 'Your bus will leave in 10 minutes! ' . $desc;
             $link = route('customer-bookings');
             $user->notify(new Reminder($title, $description, $link));
         }
@@ -330,7 +330,7 @@ class ReminderApp extends Component
         if ($value == '5min') {
             $user = User::find(auth()->user()->id);
             $title = 'Bus Departure';
-            $description = 'Your bus will leave in 5 minutes! You have a ' . $desc;
+            $description = 'Your bus will leave in 5 minutes! ' . $desc;
             $link = route('customer-bookings');
             $user->notify(new Reminder($title, $description, $link));
         }

@@ -64,7 +64,7 @@ final class BusRoutesTable extends PowerGridComponent
         return BusRoute::query()->join('schedules', 'schedules.id', 'routes.schedule_id')->select([
             'routes.*',
             'schedules.title as schedule_title',
-            DB::Raw('ROW_NUMBER() OVER (ORDER BY routes.id) AS rn'),
+            //   DB::Raw('ROW_NUMBER() OVER (ORDER BY routes.id) AS rn'),
         ])->get()->toArray();
     }
 
@@ -147,7 +147,9 @@ final class BusRoutesTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('Id', 'rn')->sortable()
+
+            Column::make('ID', 'id', 'id')
+                ->sortable()
                 ->searchable(),
             Column::make('DEPART FROM', 'from_destination')
                 ->sortable()

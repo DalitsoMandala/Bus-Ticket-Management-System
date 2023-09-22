@@ -63,7 +63,7 @@ final class BusesTable extends PowerGridComponent
                 'schedules.title as schedule_title',
                 'schedules.check_in_time as schedule_check_in_time',
                 'schedules.depart_time as schedule_depart_time',
-                DB::Raw('ROW_NUMBER() OVER (ORDER BY buses.id) AS rn'),
+                // DB::Raw('ROW_NUMBER() OVER (ORDER BY buses.id) AS rn'),
             ])->get()->toArray();
     }
 
@@ -145,7 +145,9 @@ final class BusesTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('Id', 'rn')->sortable()
+
+            Column::make('ID', 'id', 'id')
+                ->sortable()
                 ->searchable(),
             Column::make('Model', 'model')
                 ->sortable()

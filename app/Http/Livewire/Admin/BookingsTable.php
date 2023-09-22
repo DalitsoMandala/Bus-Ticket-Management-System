@@ -62,8 +62,6 @@ final class BookingsTable extends PowerGridComponent
                 'customers.first_name as customer_first_name',
                 'customers.last_name as customer_last_name',
                 'buses.model as bus_model',
-
-                DB::Raw('ROW_NUMBER() OVER (ORDER BY bookings.id) AS rn'),
             ]);
     }
 
@@ -138,7 +136,10 @@ final class BookingsTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('Id', 'rn'),
+
+            Column::make('ID', 'id', 'id')
+                ->sortable()
+                ->searchable(),
 
             Column::make('first name', 'customer_first_name', 'customers.first_name')
                 ->sortable()

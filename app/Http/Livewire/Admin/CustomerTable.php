@@ -56,7 +56,7 @@ final class CustomerTable extends PowerGridComponent
     {
         return DB::table('customers')->select([
             'customers.*',
-            DB::Raw('ROW_NUMBER() OVER (ORDER BY customers.id) AS rn'),
+            //        DB::Raw('ROW_NUMBER() OVER (ORDER BY customers.id) AS rn'),
         ]);
     }
 
@@ -162,8 +162,10 @@ final class CustomerTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('Id', 'id'),
 
+            Column::make('ID', 'id', 'id')
+                ->sortable()
+                ->searchable(),
             Column::make('First name', 'first_name')
                 ->sortable()
                 ->searchable(),

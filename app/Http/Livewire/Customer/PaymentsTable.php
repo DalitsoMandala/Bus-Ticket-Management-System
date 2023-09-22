@@ -65,11 +65,10 @@ final class PaymentsTable extends PowerGridComponent
 
 
 
-        $data = DB::table('payments')->where('customer_id', auth()->user()->customers->first()->id)->select([
+        $data = Payment::query()->where('customer_id', auth()->user()->customers->first()->id)->select([
             'payments.*',
-            DB::Raw('ROW_NUMBER() OVER (ORDER BY payments.id) AS rn'),
+
         ])
-            ->orderBy('payments.id')
             ->get();
 
         foreach ($data as $key => $paymentvalues) {
@@ -246,7 +245,8 @@ final class PaymentsTable extends PowerGridComponent
         return [
 
 
-            Column::make('ID', 'id', 'rn')
+            Column::make('ID', 'id', 'id')
+                ->sortable()
                 ->searchable(),
 
             Column::make('TRANSACTION METHOD', 'trans_method', 'payment_method')
