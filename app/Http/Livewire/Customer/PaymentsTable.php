@@ -61,12 +61,20 @@ final class PaymentsTable extends PowerGridComponent
         //         DB::Raw('ROW_NUMBER() OVER (ORDER BY payments.id) AS rn'),
         //     ])->get();
 
-        $data = Payment::query()->where('customer_id', auth()->user()->customers->first()->id)->select([
-            'payments.*',
-            DB::Raw('ROW_NUMBER() OVER (ORDER BY payments.id) AS rn'),
-        ])
-            ->orderBy('payments.id')
-            ->get();
+        $customerId = auth()->user()->customers->first()->id;
+
+        $data = DB::table('payments')
+        ->selectRaw('*, @row_number := @row_number + 1 AS rn')
+        ->where('customer_id', $customerId)
+        ->crossJoin(DB::raw('(SELECT @row_number := 0) AS row_num'))
+        ->orderBy('payments.id')
+        ->get();
+        // $data = Payment::query()->where('customer_id', auth()->user()->customers->first()->id)->select([
+        //     'payments.*',
+        //     DB::Raw('ROW_NUMBER() OVER (ORDER BY payments.id) AS rn'),
+        // ])
+        //     ->orderBy('payments.id')
+        //     ->get();
 
         foreach ($data as $key => $paymentvalues) {
             # code...
