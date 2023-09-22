@@ -179,7 +179,7 @@ final class PaymentsTable extends PowerGridComponent
                 return $model->seat_no;
             })
 
-            ->addColumn('payment_date_formatted', fn ($model) => Carbon::parse($model->payment_date)->format('d/m/Y H:i:s'))
+            //  ->addColumn('payment_date_formatted', fn ($model) => Carbon::parse($model->payment_date)->format('d/m/Y H:i:s'))
 
             ->addColumn('trans_method', function ($model) {
                 $method =  $model->payment_method;
