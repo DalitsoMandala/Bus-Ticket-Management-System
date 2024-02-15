@@ -214,18 +214,7 @@ class DatabaseSeeder extends Seeder
 
 
 
-            $payment = new Payment([
-                'transaction_id' => 'WIOERF23344',
-                'price' => '50.00',
-                'amount_paid' =>   '50.00',
-                'payment_method' => 'paypal',
-                'payment_status' => true,
-                'currency' => 'USD',
-                'tax_amount' => '45.00',
-                'local_currency' => 'MWK',
-            ]);
 
-            $paid =   Customer::find(1)->payments()->save($payment);
 
             // payment
             // $customer_with_payment = Customer::find(1);
@@ -274,5 +263,17 @@ class DatabaseSeeder extends Seeder
 
             // $customer_with_payment->payments()->save($payment);
         }
+        $payment = new Payment([
+            'transaction_id' => 'WIOERF23344',
+            'price' => '50.00',
+            'amount_paid' =>   '50.00',
+            'payment_method' => 'paypal',
+            'payment_status' => true,
+            'currency' => 'USD',
+            'tax_amount' => '45.00',
+            'local_currency' => 'MWK',
+        ]);
+
+        $paid =   Customer::find(1)->payments()->save($payment);
     }
 }

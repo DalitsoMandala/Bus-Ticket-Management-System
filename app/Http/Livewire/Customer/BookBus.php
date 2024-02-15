@@ -612,7 +612,7 @@ class BookBus extends Component
 
 
 
-            Mail::to($data['customer_email'])
+            Mail::to(auth()->user()->email)
 
                 ->send(new BookingReceipt($data));
 
