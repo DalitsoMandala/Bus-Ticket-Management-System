@@ -111,6 +111,11 @@
 
 
 
+                                @if (count($income) === 0)
+                                    <h4 class=" fs-1 fw-semibold ff-secondary line-clamp-1 text-danger">Not Available
+                                    </h4>
+                                @endif
+
 
                             </div>
 
